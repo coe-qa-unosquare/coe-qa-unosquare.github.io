@@ -1117,17 +1117,7 @@
         .module-card .items {
             list-style: none;
             margin-top: 0.4rem;
-            margin-left: 0.8rem;
-            padding-left: 0.8rem;
-            border-left: 2px solid rgba(34,197,94,0.3);
-        }
-
-        .level-section.intermediate .module-card .items {
-            border-left-color: rgba(234,179,8,0.3);
-        }
-
-        .level-section.senior .module-card .items {
-            border-left-color: rgba(220,38,38,0.3);
+            margin-left: 0.4rem;
         }
 
         .module-card .items > li {
@@ -1143,17 +1133,18 @@
             position: absolute;
             left: 0;
             top: 50%;
-            width: 6px;
-            height: 2px;
-            background: rgba(34,197,94,0.6);
+            transform: translateY(-50%);
+            width: 4px;
+            height: 4px;
+            background: var(--green);
         }
 
         .level-section.intermediate .module-card .items > li::before {
-            background: rgba(234,179,8,0.6);
+            background: var(--yellow);
         }
 
         .level-section.senior .module-card .items > li::before {
-            background: rgba(220,38,38,0.6);
+            background: var(--red);
         }
 
         .module-card .subtopic {
@@ -1186,17 +1177,7 @@
         .module-card .subtopic-children {
             list-style: none;
             margin-left: 0.8rem;
-            padding-left: 0.8rem;
-            border-left: 2px solid rgba(34,197,94,0.3);
             margin-bottom: 0.4rem;
-        }
-
-        .level-section.intermediate .module-card .subtopic-children {
-            border-left-color: rgba(234,179,8,0.3);
-        }
-
-        .level-section.senior .module-card .subtopic-children {
-            border-left-color: rgba(220,38,38,0.3);
         }
 
         .module-card .subtopic-children li {
@@ -1212,17 +1193,18 @@
             position: absolute;
             left: 0;
             top: 50%;
-            width: 6px;
-            height: 2px;
-            background: rgba(34,197,94,0.6);
+            transform: translateY(-50%);
+            width: 4px;
+            height: 4px;
+            background: rgba(34,197,94,0.5);
         }
 
         .level-section.intermediate .module-card .subtopic-children li::before {
-            background: rgba(234,179,8,0.6);
+            background: rgba(234,179,8,0.5);
         }
 
         .level-section.senior .module-card .subtopic-children li::before {
-            background: rgba(220,38,38,0.6);
+            background: rgba(220,38,38,0.5);
         }
 
         /* ===== RESPONSIVE ===== */
