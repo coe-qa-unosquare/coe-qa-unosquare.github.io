@@ -1114,104 +1114,84 @@
             letter-spacing: 0.3px;
         }
 
-        /* Items: Direct children of module (top-level items) */
+        /* Items: Direct children of module (same style as subtopic-title) */
         .module-card .items {
             list-style: none;
             margin-top: 0.5rem;
         }
 
         .module-card .items > li {
-            padding: 0.3rem 0;
-            padding-left: 1.2rem;
-            position: relative;
+            padding: 0.25rem 0.5rem;
+            margin: 0.2rem 0;
             color: var(--text);
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 500;
+            border-left: 3px solid var(--green);
+            background: rgba(34,197,94,0.05);
         }
 
-        .module-card .items > li::before {
-            content: '›';
-            position: absolute;
-            left: 0.2rem;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--green);
+        .level-section.intermediate .module-card .items > li {
+            border-left-color: var(--yellow);
+            background: rgba(234,179,8,0.05);
         }
 
-        .level-section.intermediate .module-card .items > li::before {
-            color: var(--yellow);
+        .level-section.senior .module-card .items > li {
+            border-left-color: var(--red);
+            background: rgba(220,38,38,0.05);
         }
 
-        .level-section.senior .module-card .items > li::before {
-            color: var(--red);
-        }
-
-        /* Subtopic: Named group within module */
+        /* Subtopic: Named group within module (same style as items) */
         .module-card .subtopic {
-            margin-top: 0.6rem;
-            margin-left: 0.2rem;
+            margin-top: 0.5rem;
         }
 
         .module-card .subtopic-title {
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 600;
-            padding: 0.25rem 0.6rem;
-            border-radius: 3px;
-            display: inline-block;
-            margin-bottom: 0.3rem;
-            background: var(--bg-elevated);
+            padding: 0.25rem 0.5rem;
+            display: block;
             color: var(--text);
-        }
-
-        .level-section.junior .module-card .subtopic-title {
             border-left: 3px solid var(--green);
+            background: rgba(34,197,94,0.05);
         }
 
         .level-section.intermediate .module-card .subtopic-title {
-            border-left: 3px solid var(--yellow);
+            border-left-color: var(--yellow);
+            background: rgba(234,179,8,0.05);
         }
 
         .level-section.senior .module-card .subtopic-title {
-            border-left: 3px solid var(--red);
+            border-left-color: var(--red);
+            background: rgba(220,38,38,0.05);
         }
 
         /* Subtopic children: Items under a subtopic */
         .module-card .subtopic-children {
             list-style: none;
-            margin-left: 1rem;
-            margin-bottom: 0.4rem;
-            padding-left: 0.8rem;
+            margin-left: 0.75rem;
+            margin-bottom: 0.3rem;
+            padding-left: 0.75rem;
             border-left: 1px solid rgba(255,255,255,0.1);
         }
 
         .module-card .subtopic-children li {
-            padding: 0.2rem 0;
-            padding-left: 0.8rem;
-            position: relative;
+            padding: 0.15rem 0;
             color: var(--text-muted);
-            font-size: 0.78rem;
+            font-size: 0.75rem;
         }
 
         .module-card .subtopic-children li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            background: rgba(34,197,94,0.6);
+            content: '–';
+            margin-right: 0.4rem;
+            color: rgba(34,197,94,0.5);
         }
 
         .level-section.intermediate .module-card .subtopic-children li::before {
-            background: rgba(234,179,8,0.6);
+            color: rgba(234,179,8,0.5);
         }
 
         .level-section.senior .module-card .subtopic-children li::before {
-            background: rgba(220,38,38,0.6);
+            color: rgba(220,38,38,0.5);
         }
 
         /* ===== RESPONSIVE ===== */
