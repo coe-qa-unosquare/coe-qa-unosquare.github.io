@@ -348,13 +348,13 @@
 ## Junior
 
 ### Front-end Automation Fundamentals
-- Selenium
+- Selenium / Playwright
   - Handling Web Elements
-  - Locators
   - Advantages and Limitations
-  - Selenium Exceptions
+  - Exceptions
   - Synchronization
   - Debugging Techniques
+  - Assertions
 
 ### Programming Fundamentals
 - OOP In Practice 
