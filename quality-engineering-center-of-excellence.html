@@ -772,6 +772,116 @@
         .sn-yellow { background: var(--yellow-dim); border: 1px solid var(--yellow-border); color: var(--yellow-light); }
         .sn-red { background: var(--red-dim); border: 1px solid var(--red-border); color: var(--red-light); }
 
+        /* 3-Level Hierarchy: Sub-groups with children */
+        .sub-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        .branch-left .sub-group {
+            align-items: flex-end;
+        }
+
+        .branch-right .sub-group {
+            align-items: flex-start;
+        }
+
+        .sub-node.parent {
+            font-weight: 700;
+            position: relative;
+            border-width: 2px;
+            z-index: 2;
+        }
+
+        .sub-children {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding-top: 10px;
+            position: relative;
+        }
+
+        .branch-left .sub-children {
+            align-items: flex-end;
+            margin-right: 8px;
+            padding-right: 25px;
+            border-right: 2px solid var(--yellow-border);
+        }
+
+        .branch-right .sub-children {
+            align-items: flex-start;
+            margin-left: 8px;
+            padding-left: 25px;
+            border-left: 2px solid var(--yellow-border);
+        }
+
+        /* Color variants for the vertical tree line */
+        .sub-group:has(.cn-green) .sub-children { border-color: var(--green-border); }
+        .sub-group:has(.cn-yellow) .sub-children { border-color: var(--yellow-border); }
+        .sub-group:has(.cn-red) .sub-children { border-color: var(--red-border); }
+
+        .child-node {
+            border-radius: 5px;
+            padding: 6px 14px;
+            font-size: 11px;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: all 0.15s;
+            position: relative;
+            opacity: 0.9;
+        }
+
+        /* Horizontal connector line from vertical line to each child */
+        .branch-right .child-node::before {
+            content: '';
+            position: absolute;
+            left: -25px;
+            top: 50%;
+            width: 23px;
+            height: 2px;
+            transform: translateY(-50%);
+        }
+
+        .branch-left .child-node::before {
+            content: '';
+            position: absolute;
+            right: -25px;
+            top: 50%;
+            width: 23px;
+            height: 2px;
+            transform: translateY(-50%);
+        }
+
+        .child-node:hover {
+            filter: brightness(1.25);
+            opacity: 1;
+        }
+
+        /* Child node colors with matching connector colors */
+        .cn-green {
+            background: var(--green-dim);
+            border: 1px solid var(--green-border);
+            color: var(--green-light);
+        }
+        .cn-green::before { background: var(--green-border); }
+
+        .cn-yellow {
+            background: var(--yellow-dim);
+            border: 1px solid var(--yellow-border);
+            color: var(--yellow-light);
+        }
+        .cn-yellow::before { background: var(--yellow-border); }
+
+        .cn-red {
+            background: var(--red-dim);
+            border: 1px solid var(--red-border);
+            color: var(--red-light);
+        }
+        .cn-red::before { background: var(--red-border); }
+
         svg.connectors {
             position: absolute;
             top: 0; left: 0;
@@ -816,8 +926,8 @@
 <!-- TAB BAR -->
 <div class="tab-bar">
     <button class="tab-btn active" data-tab="guide">Quality Engineering AI Guide</button>
-    <button class="tab-btn" data-tab="qe">Quality Engineer</button>
-    <button class="tab-btn" data-tab="sdet">SDET</button>
+    <button class="tab-btn" data-tab="qe">Quality Engineer Roadmap</button>
+    <button class="tab-btn" data-tab="sdet">SDET Roadmap</button>
 </div>
 
 <!-- ============================================================ -->
@@ -825,7 +935,7 @@
 <!-- ============================================================ -->
 <div class="tab-content active" id="tab-guide">
     <div class="hero">
-        <h1><span class="grad">Center of Excellence</span><br>Best Practices</h1>
+        <h1><span class="grad">Quality Engineering Center of Excellence</span><br>AI Best Practices</h1>
         <p class="sub">Prompt engineering frameworks, techniques, and best practices for AI-augmented Quality Assurance.</p>
     </div>
 
@@ -1869,6 +1979,14 @@ Business Rules: Minimum order $10, Max 50 items
                         <div class="main-node mn-yellow" id="qe-acc">Accessibility<br>Testing</div>
                     </div>
                     <div class="branch branch-right">
+                        <div class="sub-group">
+                            <div class="sub-node sn-yellow parent" data-connect="qe-acc">WCAG Principles</div>
+                            <div class="sub-children">
+                                <div class="child-node cn-yellow">Level A</div>
+                                <div class="child-node cn-yellow">Level AA</div>
+                                <div class="child-node cn-yellow">Level AAA</div>
+                            </div>
+                        </div>
                         <div class="sub-node sn-yellow" data-connect="qe-acc">Color Contrast</div>
                         <div class="sub-node sn-yellow" data-connect="qe-acc">Text Alternatives</div>
                         <div class="sub-node sn-yellow" data-connect="qe-acc">ARIA Testing</div>
@@ -1878,99 +1996,80 @@ Business Rules: Minimum order $10, Max 50 items
 
                 <div class="row">
                     <div class="branch branch-left">
-                        <div class="sub-node sn-yellow" data-connect="qe-wcag">Level A</div>
-                        <div class="sub-node sn-yellow" data-connect="qe-wcag">Level AA</div>
-                        <div class="sub-node sn-yellow" data-connect="qe-wcag">Level AAA</div>
-                    </div>
-                    <div class="center-col">
-                        <div class="main-node mn-yellow" id="qe-wcag">WCAG Principles</div>
-                        <div class="main-node mn-yellow" id="qe-aif">AI Fundamentals</div>
-                    </div>
-                    <div class="branch branch-right">
                         <div class="sub-node sn-yellow" data-connect="qe-aif">Gen AI vs ML</div>
                         <div class="sub-node sn-yellow" data-connect="qe-aif">LLMs</div>
                         <div class="sub-node sn-yellow" data-connect="qe-aif">Tokens and Context Windows</div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-node sn-yellow" data-connect="qe-aitools">Copilot</div>
-                        <div class="sub-node sn-yellow" data-connect="qe-aitools">Claude Code</div>
+                        <div class="sub-group">
+                            <div class="sub-node sn-yellow parent" data-connect="qe-aif">Hands-on Tool Experience</div>
+                            <div class="sub-children">
+                                <div class="child-node cn-yellow">Copilot</div>
+                                <div class="child-node cn-yellow">Claude Code</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="center-col">
-                        <div class="main-node mn-yellow" id="qe-aitools">Hands-on Tool<br>Experience</div>
+                        <div class="main-node mn-yellow" id="qe-aif">AI Fundamentals</div>
                         <div class="main-node mn-yellow" id="qe-mob">Mobile Testing</div>
                     </div>
                     <div class="branch branch-right">
-                        <div class="sub-node sn-yellow" data-connect="qe-mob">Mobile Testing Techniques</div>
-                        <div class="sub-node sn-yellow" data-connect="qe-mob">Mobile Cloud</div>
-                        <div class="sub-node sn-yellow" data-connect="qe-mob">Platforms</div>
+                        <div class="sub-group">
+                            <div class="sub-node sn-yellow parent" data-connect="qe-mob">Mobile Testing Techniques</div>
+                            <div class="sub-children">
+                                <div class="child-node cn-yellow">Interruption</div>
+                                <div class="child-node cn-yellow">Localization</div>
+                                <div class="child-node cn-yellow">Performance</div>
+                                <div class="child-node cn-yellow">Network Testing</div>
+                            </div>
+                        </div>
+                        <div class="sub-group">
+                            <div class="sub-node sn-yellow parent" data-connect="qe-mob">Mobile Cloud</div>
+                            <div class="sub-children">
+                                <div class="child-node cn-yellow">Testflight</div>
+                                <div class="child-node cn-yellow">Simulators</div>
+                            </div>
+                        </div>
+                        <div class="sub-group">
+                            <div class="sub-node sn-yellow parent" data-connect="qe-mob">Platforms</div>
+                            <div class="sub-children">
+                                <div class="child-node cn-yellow">Native/Hybrid/Responsive</div>
+                                <div class="child-node cn-yellow">Real Devices</div>
+                                <div class="child-node cn-yellow">Emulators</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="branch branch-left">
-                        <div class="sub-node sn-yellow" data-connect="qe-mtt">Interruption</div>
-                        <div class="sub-node sn-yellow" data-connect="qe-mtt">Localization</div>
-                        <div class="sub-node sn-yellow" data-connect="qe-mtt">Performance</div>
-                        <div class="sub-node sn-yellow" data-connect="qe-mtt">Network Testing</div>
-                    </div>
-                    <div class="center-col">
-                        <div class="main-node mn-yellow" id="qe-mtt">Mobile Testing<br>Techniques</div>
-                        <div class="main-node mn-yellow" id="qe-mc">Mobile Cloud</div>
-                    </div>
-                    <div class="branch branch-right">
-                        <div class="sub-node sn-yellow" data-connect="qe-mc">Testflight</div>
-                        <div class="sub-node sn-yellow" data-connect="qe-mc">Simulators</div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-node sn-yellow" data-connect="qe-plat">Native/Hybrid/Responsive Apps</div>
-                        <div class="sub-node sn-yellow" data-connect="qe-plat">Real Devices</div>
-                        <div class="sub-node sn-yellow" data-connect="qe-plat">Emulators</div>
-                    </div>
-                    <div class="center-col">
-                        <div class="main-node mn-yellow" id="qe-plat">Platforms</div>
-                        <div class="main-node mn-yellow" id="qe-prog">Programming</div>
-                    </div>
-                    <div class="branch branch-right">
+                        <div class="sub-group">
+                            <div class="sub-node sn-yellow parent" data-connect="qe-prog">OOP Concepts</div>
+                            <div class="sub-children">
+                                <div class="child-node cn-yellow">Abstraction</div>
+                                <div class="child-node cn-yellow">Encapsulation</div>
+                                <div class="child-node cn-yellow">Inheritance</div>
+                                <div class="child-node cn-yellow">Polymorphism</div>
+                            </div>
+                        </div>
                         <div class="sub-node sn-yellow" data-connect="qe-prog">Hands-On Experience</div>
-                        <div class="sub-node sn-yellow" data-connect="qe-prog">Design and Creation of Simple Algorithms</div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-node sn-yellow" data-connect="qe-hoe">Abstraction</div>
-                        <div class="sub-node sn-yellow" data-connect="qe-hoe">Encapsulation</div>
-                        <div class="sub-node sn-yellow" data-connect="qe-hoe">Inheritance</div>
-                        <div class="sub-node sn-yellow" data-connect="qe-hoe">Polymorphism</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-prog">Design Simple Algorithms</div>
                     </div>
                     <div class="center-col">
-                        <div class="main-node mn-yellow" id="qe-hoe">Hands-On<br>Experience</div>
-                        <div class="main-node mn-yellow" id="qe-sqli">SQL Intermediate<br>Concepts</div>
+                        <div class="main-node mn-yellow" id="qe-prog">Programming</div>
+                        <div class="main-node mn-yellow" id="qe-sqli">SQL Intermediate</div>
                     </div>
                     <div class="branch branch-right">
-                        <div class="sub-node sn-yellow" data-connect="qe-sqli">Advanced Joins</div>
+                        <div class="sub-group">
+                            <div class="sub-node sn-yellow parent" data-connect="qe-sqli">Advanced Joins</div>
+                            <div class="sub-children">
+                                <div class="child-node cn-yellow">Right Join</div>
+                                <div class="child-node cn-yellow">Full-outer Join</div>
+                                <div class="child-node cn-yellow">Self Join</div>
+                            </div>
+                        </div>
                         <div class="sub-node sn-yellow" data-connect="qe-sqli">Aggregations</div>
                         <div class="sub-node sn-yellow" data-connect="qe-sqli">Subqueries</div>
                         <div class="sub-node sn-yellow" data-connect="qe-sqli">Constraints</div>
                     </div>
-                </div>
-
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-node sn-yellow" data-connect="qe-advj">Right Join</div>
-                        <div class="sub-node sn-yellow" data-connect="qe-advj">Full-outer Join</div>
-                        <div class="sub-node sn-yellow" data-connect="qe-advj">Self Join</div>
-                    </div>
-                    <div class="center-col">
-                        <div class="main-node mn-yellow" id="qe-advj">Advanced Joins</div>
-                    </div>
-                    <div class="branch branch-right"></div>
                 </div>
 
                 <!-- SENIOR - RED -->
@@ -2328,23 +2427,20 @@ Business Rules: Minimum order $10, Max 50 items
                         <div class="main-node mn-red" id="s-ssk">Secondary Skillset<br>Experience</div>
                     </div>
                     <div class="branch branch-right">
-                        <div class="sub-node sn-red" data-connect="s-ssk">JavaScript</div>
-                        <div class="sub-node sn-red" data-connect="s-ssk">Python</div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-node sn-red" data-connect="s-js">Cypress</div>
-                        <div class="sub-node sn-red" data-connect="s-js">Playwright</div>
-                    </div>
-                    <div class="center-col">
-                        <div class="main-node mn-red" id="s-js">JavaScript</div>
-                        <div class="main-node mn-red" id="s-py">Python</div>
-                    </div>
-                    <div class="branch branch-right">
-                        <div class="sub-node sn-red" data-connect="s-py">Pycharm</div>
-                        <div class="sub-node sn-red" data-connect="s-py">RPA</div>
+                        <div class="sub-group">
+                            <div class="sub-node sn-red parent" data-connect="s-ssk">JavaScript</div>
+                            <div class="sub-children">
+                                <div class="child-node cn-red">Cypress</div>
+                                <div class="child-node cn-red">Playwright</div>
+                            </div>
+                        </div>
+                        <div class="sub-group">
+                            <div class="sub-node sn-red parent" data-connect="s-ssk">Python</div>
+                            <div class="sub-children">
+                                <div class="child-node cn-red">PyCharm</div>
+                                <div class="child-node cn-red">RPA</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
