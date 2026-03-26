@@ -7,11 +7,41 @@
 
 ## Junior
 
-### Black Box Techniques
+### Module: Black Box Techniques
+
 - Equivalence Partition
+  - Divide inputs into valid and invalid partitions
+  - Write one test case per partition to avoid redundancy
+  - Apply partitioning to ranges, strings, dropdowns and combined fields
 - Boundary Value Analysis
+  - Test min, min+1, max-1 and max values for every input range
+  - Test just below and just above valid boundaries
+  - Combine with equivalence partitioning for full coverage
 - Decision Table
+  - Identify conditions and actions from business requirements
+  - Build a table mapping all condition combinations to expected outcomes
+  - Eliminate impossible combinations and derive one test case per column
+  - Spot missing or contradictory rules in requirements
 - State Transition
+  - Identify all possible states and map valid and invalid transitions
+  - Draw a state transition diagram from requirements
+  - Write test cases covering every state, valid transition and rejection
+  - Apply to real flows such as login, order status and user roles
+- Error Guessing
+  - Anticipate common mistakes based on experience and intuition
+  - Write test cases targeting empty fields, nulls and special characters
+  - Test common edge cases like zero, negative numbers and max length
+  - Challenge assumptions in requirements by asking "what if"
+- Use Case Testing
+  - Derive test cases from user stories and acceptance criteria
+  - Cover the main success flow and all alternative flows
+  - Identify and test exception flows and error scenarios
+  - Map test cases back to requirements for traceability
+- Exploratory Testing
+  - Design and execute tests simultaneously without a script
+  - Use time-boxed sessions with a defined charter and scope
+  - Document findings, observations and bugs during the session
+  - Combine with other techniques to investigate suspicious areas
 
 ### API Fundamentals
 - REST Architecture
@@ -34,12 +64,18 @@
 ### SQL Fundamentals
 - SELECT statement
 - COUNT keyword
-- WHERE Clause Operators - AND, OR, IN, BETWEEN, LIKE
-- Basic Joins Explained - INNER JOIN, LEFT JOIN (visual understanding)
-- ORDER BY & LIMIT - Sorting and pagination
-- Aliases - Table and column aliases
-- NULL Values - Understanding NULL behavior
-- Aggregate Functions Intro - COUNT, SUM, AVG, MIN, MAX
+- WHERE Clause Operators 
+  - AND, OR, IN, BETWEEN, LIKE
+- Basic Joins Explained 
+  - INNER JOIN, LEFT JOIN (visual understanding)
+- ORDER BY & LIMIT 
+  - Sorting and pagination
+- Aliases 
+  - Table and column aliases
+- NULL Values 
+  - Understanding NULL behavior
+- Aggregate Functions Intro 
+  - COUNT, SUM, AVG, MIN, MAX
 
 
 ### API Testing Fundamentals
@@ -241,45 +277,88 @@
 
 ## Senior 1-2
 
-### Software Automation
-- Front-end Automation
-  - Low Code
-  - Testim
-  - Mabl
-  - Cypress Prompt
+### Module: Software Automation
+- Automation Strategy
+  - Define what should and should not be automated
+  - Identify the right automation level (UI, API, unit) per scenario
+  - Evaluate and recommend tools based on project needs
+  - Estimate automation effort and maintain coverage metrics
+- Low Code Tools
+  - Testim — create and maintain AI-assisted scripts using smart locators
+  - Mabl — record, maintain journeys and analyze auto-detected regressions
 - Selenium / Playwright
-  - XPaths
-  - Script Maintenance
-  - Test Frameworks
-    - TestNG
-    - NUnit
-    - Cucumber
+  - Write stable locators that survive UI changes (id, css, xpath, accessibility)
+  - Write scripts covering happy path and edge cases
+  - Refactor and update scripts after UI changes
+  - Apply basic POM structure to organize scripts
+  - Use explicit waits and fix flaky tests caused by timing issues
+  - Catch common exceptions and add meaningful error messages
+- Test Frameworks (Conceptual Awareness)
+  - TestNG / JUnit / NUnit — suites, annotations, parallel execution
+  - Cucumber — feature files, step definitions and Gherkin scenarios
+- Automation in the QE Process
+  - Triage failures and distinguish flaky tests from real bugs
+  - Report automation coverage and results to the team
+  - Integrate suites into CI/CD for smoke, sanity and regression runs
 
 ### Performance Testing (Conceptual)
-- Testing Types
-  - Load Testing
-  - Stress Testing
-  - Volume Testing
-  - Soak Testing
-  - Scalability Testing
-- Performance Testing Tools
-    - JMeter
-    - Load Runner
-    - Blaze Meter
+- Core Concepts
+  - Differentiate Load, Stress, Volume, Soak and Scalability testing
+  - Define performance acceptance criteria and SLAs with the team
+  - Recognize common issues such as memory leaks, bottlenecks and timeouts
+
+- Test Design and Planning
+  - Identify critical user journeys worth performance testing
+  - Define realistic load patterns based on real usage data
+  - Document entry and exit criteria for performance test runs
+- Tools
+  - JMeter — execute existing scripts, adjust thread count and interpret reports
+  - BlazeMeter — run cloud-based tests and share results with stakeholders
+  - LoadRunner — interpret results generated by the performance engineering team
+- Results Analysis
+  - Identify response time degradation and error rate spikes
+  - Distinguish between frontend, backend and network bottlenecks
+  - Correlate results with infrastructure metrics (CPU, memory)
+  - Track performance trends across builds and releases
+- Collaboration and Process
+  - Coordinate with developers and DevOps to resolve bottlenecks
+  - Advocate for performance testing as part of the definition of done
+  - Raise performance risks early based on architecture and load expectations
 
 ### Advanced Testing
-- DoD & DoR Analysis
-- Release Management
-- Advanced Test Techniques
-  - Risk-Based Testing
-  - Dynamic Test Selection
+- Risk-Based Testing
+  - Prioritize coverage using likelihood and impact per feature
+  - Adjust depth and scope based on risk level
+  - Document and communicate risk decisions to stakeholders
+- Dynamic Test Selection
+  - Select regression tests based on scope of change
+  - Reduce execution time without sacrificing meaningful coverage
 - Estimations
-  - Algorithmic & Probabilistic Forecasting
-- Reporting
-  - Defect Leakage
-  - Defect-Reopen Rate
-  - Test Coverage
-  - Story Coverage
+  - Break down effort by complexity and risk
+  - Apply algorithmic forecasting for predictable work
+  - Apply probabilistic forecasting for ambiguous features
+  - Communicate estimates with confidence ranges not single numbers
+- Shift-Left Testing
+  - Involve QE from requirements and design phases
+  - Challenge acceptance criteria before development starts
+  - Identify testability issues early to reduce cost of defects
+- Continuous Testing
+  - Define quality gates that block pipeline progression on failure
+  - Monitor test results across builds and flag coverage gaps
+  - Balance fast feedback with meaningful test depth
+- Feature Flags and Progressive Delivery
+  - Validate behavior when features are toggled on and off
+  - Test flag combinations and coordinate scope with canary releases
+- Observability and Monitoring as Testing
+  - Use logs, traces and metrics to validate system behavior
+  - Correlate production incidents with gaps in test coverage
+  - Treat production monitoring as an extension of the test strategy
+- Reporting and Metrics
+  - Defect Leakage, Defect-Reopen Rate, Test Coverage, DoR and DoD
+  - Present metrics as quality signals not just numbers
+- Release Management
+  - Define testing scope, sign-off criteria and go/no-go recommendations
+  - Assess readiness based on metrics, risk and open defects
 
 ### Advanced SQL
 - Views
@@ -358,38 +437,57 @@
 
 ## Junior
 
-### Front-end Automation Fundamentals
-- Selenium / Playwright
-  - Handling Web Elements
-  - Advantages and Limitations
-  - Exceptions
-  - Synchronization
-  - Debugging Techniques
-  - Assertions
+### Module: Front-end Automation Fundamentals
 
-### Programming Fundamentals
-- OOP In Practice 
-  - Classes, objects, constructors, access modifiers
-- Inheritance & Polymorphism 
-  - Abstract classes, interfaces, method overriding
-- Error Handling Patterns 
-  - Try/catch/finally, custom exceptions, throwing exceptions
-- Data Structures Implementation 
-  - Arrays, Lists, Maps/Dictionaries, Sets, Queues, Stacks
-- Algorithms Basics 
-  - Searching, sorting, iteration vs recursion
-- Working with Libraries/Packages 
-  - Package managers (npm, Maven, NuGet, pip)
-- Unit Testing 
-  - Writing testable code, assertions, mocking basics
-- Code Organization 
-  - Namespaces, modules, project structure
-- SOLID Principles Introduction 
-  - Single Responsibility, Open/Closed basics
-- Generics/Templates 
-  - Type-safe collections and methods
-- Lambda Expressions 
-  - Anonymous functions, functional basics
+- Framework Awareness
+  - Understand differences between Selenium and Playwright conceptually
+  - Set up and run your first automated test in both frameworks
+- Handling Web Elements
+  - Locate elements using id, name, css and xpath
+  - Interact with inputs, buttons, dropdowns, checkboxes and alerts
+  - Extract and validate text, attributes, visibility and state
+- Synchronization
+  - Understand why timing issues cause test failures
+  - Apply explicit waits for dynamic and conditional elements
+  - Replace hardcoded sleeps with proper wait strategies
+- Exceptions and Debugging
+  - Recognize and handle common exceptions (NoSuchElement, StaleElement, Timeout)
+  - Read stack traces and use DevTools to locate failure root cause
+  - Capture screenshots on failure for reporting
+- Assertions
+  - Assert element presence, text, attributes and navigation outcomes
+  - Write meaningful assertion messages for faster failure diagnosis
+- Script Organization
+  - Separate locators, actions and assertions
+  - Apply basic POM structure to organize scripts by page
+  - Write reusable methods for repeated interactions
+
+
+### Module: Programming Fundamentals
+- OOP Basics
+  - Create classes and objects to represent test components
+  - Use constructors to initialize test objects with required data
+  - Apply access modifiers to protect class members
+- Inheritance and Polymorphism
+  - Extend a base class to share common test behavior
+  - Override methods to customize behavior per page or component
+  - Understand when to use abstract classes vs interfaces
+- Error Handling
+  - Use try/catch/finally to handle failures gracefully
+  - Throw meaningful exceptions with descriptive messages
+  - Distinguish between expected and unexpected exceptions in tests
+- Data Structures
+  - Use lists and arrays to manage collections of test data
+  - Use maps to store key-value test configurations
+  - Choose the right structure for the task
+- Working with Libraries and Packages
+  - Add and manage dependencies using npm, Maven, NuGet or pip
+  - Import and use external libraries in automation code
+  - Understand versioning and why it matters in shared projects
+- Code Organization
+  - Structure a project into logical folders and modules
+  - Write readable and self-documenting code from the start
+  - Break repeated logic into reusable helper methods
 
 ### API Automation Basics
 - Bridge: Postman to Code
@@ -712,23 +810,59 @@
 
 ## Senior 1-2
 
-### Programming Advanced / Best Practices
-- Data Structures and Algorithms
-- Design Patterns
-  - SOLID
-  - Behavioral Patterns
-  - Structural Patterns
-- Interfaces and Abstract Classes
-- Functional Programming
-- Clean Code Principles
-- Test Driven Development - Hands-on experience
+### Module: Programming Advanced / Best Practices
 
-### Automation Design Pattern Development
-- Framework Development & Implementation
+- Data Structures and Algorithms
+  - Choose the right structure for test data management
+  - Optimize framework code using efficient algorithms
+  - Identify and resolve performance bottlenecks in automation code
+- Design Patterns
+  - SOLID — apply across page objects, helpers and framework layers
+  - Behavioral — Strategy, Observer, Command applied to test flows
+  - Structural — Decorator, Adapter, Facade applied to framework layers
+  - Creational — Factory, Builder, Singleton for object management
+- Interfaces and Abstract Classes
+  - Define contracts between framework layers using interfaces
+  - Decouple test logic from implementation using abstraction
+- Functional Programming
+  - Use lambdas and streams to process test data collections
+  - Apply immutability to avoid shared state issues in parallel runs
+- Clean Code Principles
+  - Write self-documenting code with consistent naming conventions
+  - Refactor complex methods into small single-purpose functions
+  - Lead code reviews focused on maintainability
+- Test Driven Development
+  - Write failing tests before implementing automation helpers
+  - Apply TDD to framework utilities and shared components
+
+### Module: Automation Design Pattern Development
+
+- Framework Development and Implementation
+  - Design architecture that scales across projects and teams
+  - Separate concerns into layers (drivers, pages, tests, utilities, config)
+  - Build onboarding documentation and contribution guidelines
+  - Evaluate and evolve the framework as product and team grow
 - POM / Page Factory
-- Screen Play Pattern / Screenplay BDD
-- Singleton Design Pattern
+  - Implement POM with inheritance for shared page components
+  - Use Page Factory for element initialization and lazy loading
+  - Manage complex page hierarchies without duplication
+- Screenplay Pattern / BDD
+  - Implement actor, task and interaction layers from scratch
+  - Integrate Screenplay with Cucumber for full BDD coverage
+- Design Patterns in Frameworks
+  - Singleton — manage driver and config instances safely
+  - Factory — create driver and browser instances dynamically
+  - Builder — construct complex test data objects fluently
+  - Strategy — swap execution strategies without changing test code
+  - Observer — implement event-based reporting and logging
 - Parallel Execution
+  - Design thread-safe page objects and shared utilities
+  - Manage test data isolation to prevent cross-thread conflicts
+  - Optimize suite distribution for fastest possible feedback
+- Framework Governance
+  - Define coding standards and enforce via linting and review
+  - Maintain versioned framework releases with changelogs
+  - Lead framework adoption across QE and SDET team members
 
 ### Module: GIT Advanced
 
@@ -869,18 +1003,34 @@
   - Agent Frameworks (LangChain, etc.)
 
 ### Module: Prompt Engineering Advanced
+
 - Complex Automation Prompts
-  - Full Framework Generation
-  - Migration Prompts (Selenium to Playwright)
-  - Architecture Design Prompts
+  - Generate framework scaffolding, architecture and helper classes from specs
+  - Migrate test suites between frameworks (Selenium to Playwright)
+- Meta Prompting
+  - Write prompts that generate and improve other prompts
+  - Build self-refining loops that validate their own output
+  - Use LLMs to evaluate and score prompt effectiveness
+- Prompt Patterns
+  - Chain of thought — step by step reasoning
+  - Few-shot — examples to shape output structure
+  - Role prompting — expert personas for domain-specific output
+  - Self-correcting — model reviews and fixes its own output
+  - Validation chains — output of one prompt feeds the next
+  - Tree of thought — explore multiple paths before committing
+- Multi-Model Orchestration
+  - Combine models for generation, validation and critique roles
+  - Build pipelines where models check each other's outputs
+  - Integrate into CI/CD for autonomous test generation
 - Prompt Management
-  - Prompt Version Control
-  - Team Prompt Libraries
-  - A/B Testing Prompts
-- Advanced Patterns
-  - Self-Correcting Prompts
-  - Validation Chains
-  - Multi-Model Orchestration
+  - Version control prompts alongside automation code
+  - Maintain team prompt libraries and A/B test variations
+- AI Agent Design
+  - Design agents that autonomously explore and test features
+  - Define goals, constraints and human-in-the-loop validation steps
+- Evaluation and Quality Control
+  - Detect hallucinations and invalid outputs in generated test code
+  - Build automated evaluators that score generated test cases
 
 ### Module: Context Engineering Advanced
 - System Prompt Design

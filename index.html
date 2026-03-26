@@ -2950,13 +2950,49 @@ Business Rules: Minimum order $10, Max 50 items
                     <div class="module-card left">
                         <h3 class="module-title">Front-end Automation Fundamentals</h3>
                         <div class="subtopic">
-                            <div class="subtopic-title">Selenium / Playwright</div>
+                            <div class="subtopic-title">Framework Awareness</div>
                             <ul class="subtopic-children">
-                                <li>Handling Web Elements</li>
-                                <li>Advantages &amp; Limitations</li>
-                                <li>Exceptions &amp; Synchronization</li>
-                                <li>Debugging Techniques</li>
-                                <li>Assertions</li>
+                                <li>Understand Selenium vs Playwright differences</li>
+                                <li>Set up and run first automated test in both</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Handling Web Elements</div>
+                            <ul class="subtopic-children">
+                                <li>Locate using id, name, css, xpath</li>
+                                <li>Interact with inputs, buttons, dropdowns, alerts</li>
+                                <li>Extract/validate text, attributes, visibility</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Synchronization</div>
+                            <ul class="subtopic-children">
+                                <li>Why timing issues cause failures</li>
+                                <li>Apply explicit waits for dynamic elements</li>
+                                <li>Replace hardcoded sleeps with wait strategies</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Exceptions and Debugging</div>
+                            <ul class="subtopic-children">
+                                <li>Handle NoSuchElement, StaleElement, Timeout</li>
+                                <li>Read stack traces, use DevTools</li>
+                                <li>Capture screenshots on failure</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Assertions</div>
+                            <ul class="subtopic-children">
+                                <li>Assert presence, text, attributes, navigation</li>
+                                <li>Write meaningful assertion messages</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Script Organization</div>
+                            <ul class="subtopic-children">
+                                <li>Separate locators, actions, assertions</li>
+                                <li>Apply basic POM structure</li>
+                                <li>Write reusable methods</li>
                             </ul>
                         </div>
                     </div>
@@ -2965,63 +3001,89 @@ Business Rules: Minimum order $10, Max 50 items
                     <div class="module-card right">
                         <h3 class="module-title">Programming Fundamentals</h3>
                         <div class="subtopic">
-                            <div class="subtopic-title">OOP In Practice</div>
+                            <div class="subtopic-title">OOP Basics</div>
                             <ul class="subtopic-children">
-                                <li>Classes, objects, constructors</li>
-                                <li>Access modifiers</li>
+                                <li>Create classes/objects for test components</li>
+                                <li>Use constructors to initialize test objects</li>
+                                <li>Apply access modifiers to protect members</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Inheritance &amp; Polymorphism</div>
+                            <div class="subtopic-title">Inheritance and Polymorphism</div>
                             <ul class="subtopic-children">
-                                <li>Abstract classes, interfaces</li>
+                                <li>Extend base class to share common behavior</li>
+                                <li>Override methods per page/component</li>
+                                <li>Abstract classes vs interfaces</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Error Handling</div>
+                            <ul class="subtopic-children">
+                                <li>Try/catch/finally for graceful failures</li>
+                                <li>Throw meaningful exceptions</li>
+                                <li>Expected vs unexpected exceptions</li>
                             </ul>
                         </div>
                         <div class="subtopic">
                             <div class="subtopic-title">Data Structures</div>
                             <ul class="subtopic-children">
-                                <li>Arrays, Lists, Maps, Sets</li>
-                                <li>Queues, Stacks</li>
+                                <li>Lists and arrays for test data collections</li>
+                                <li>Maps for key-value configurations</li>
+                                <li>Choose right structure for the task</li>
                             </ul>
                         </div>
-                        <ul class="items">
-                            <li>Error Handling Patterns</li>
-                            <li>Algorithms Basics</li>
-                            <li>Unit Testing</li>
-                            <li>SOLID Principles Intro</li>
-                            <li>Generics / Lambda</li>
-                        </ul>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Working with Libraries and Packages</div>
+                            <ul class="subtopic-children">
+                                <li>Manage dependencies (npm, Maven, NuGet, pip)</li>
+                                <li>Import and use external libraries</li>
+                                <li>Understand versioning in shared projects</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Code Organization</div>
+                            <ul class="subtopic-children">
+                                <li>Structure into logical folders/modules</li>
+                                <li>Write readable, self-documenting code</li>
+                                <li>Break logic into reusable helper methods</li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <!-- API Automation -->
+                    <!-- API Automation Basics -->
                     <div class="module-card left">
-                        <h3 class="module-title">API Automation</h3>
+                        <h3 class="module-title">API Automation Basics</h3>
                         <div class="subtopic">
                             <div class="subtopic-title">Bridge: Postman to Code</div>
                             <ul class="subtopic-children">
-                                <li>Reproduce Postman requests</li>
-                                <li>Read/navigate JSON</li>
+                                <li>Reproduce Postman request in code</li>
+                                <li>Read/navigate JSON response</li>
+                                <li>Print/filter response fields</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Writing First API Test</div>
+                            <div class="subtopic-title">Writing Your First API Test</div>
                             <ul class="subtopic-children">
-                                <li>GET/POST requests</li>
-                                <li>Validate response fields</li>
-                                <li>Chain requests</li>
+                                <li>GET request &amp; assert status</li>
+                                <li>POST request with JSON body</li>
+                                <li>Validate response field</li>
+                                <li>Chain two requests</li>
                             </ul>
                         </div>
                         <div class="subtopic">
                             <div class="subtopic-title">Making Tests Reusable</div>
                             <ul class="subtopic-children">
-                                <li>Config files, headers</li>
-                                <li>Data from JSON/CSV</li>
+                                <li>Extract base URL to config</li>
+                                <li>Reuse headers across tests</li>
+                                <li>Read body from JSON file</li>
+                                <li>Read data from CSV file</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Working Without Backend</div>
+                            <div class="subtopic-title">Working Without a Backend</div>
                             <ul class="subtopic-children">
-                                <li>Postman mock server</li>
+                                <li>Set up Postman mock server</li>
+                                <li>Write tests against mock</li>
                                 <li>Simulate error responses</li>
                             </ul>
                         </div>
@@ -3031,23 +3093,71 @@ Business Rules: Minimum order $10, Max 50 items
                     <div class="module-card right">
                         <h3 class="module-title">SQL Fundamentals</h3>
                         <div class="subtopic">
-                            <div class="subtopic-title">DDL &amp; Schema</div>
+                            <div class="subtopic-title">DDL &amp; Schema Understanding</div>
                             <ul class="subtopic-children">
                                 <li>CREATE, ALTER, DROP</li>
-                                <li>Table design understanding</li>
+                                <li>Understanding table design</li>
                             </ul>
                         </div>
-                        <ul class="items">
-                            <li>All JOIN Types</li>
-                            <li>Complex WHERE Clauses</li>
-                            <li>Aggregate Functions &amp; GROUP BY</li>
-                            <li>Database Connectivity from Code</li>
-                            <li>Parameterized Queries</li>
-                            <li>Transaction Basics</li>
-                            <li>Result Set Handling</li>
-                            <li>Schema Navigation (ERDs)</li>
-                            <li>Indexes Awareness</li>
-                        </ul>
+                        <div class="subtopic">
+                            <div class="subtopic-title">All JOIN Types</div>
+                            <ul class="subtopic-children">
+                                <li>INNER, LEFT, RIGHT, FULL OUTER</li>
+                                <li>CROSS, SELF</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Complex WHERE Clauses</div>
+                            <ul class="subtopic-children">
+                                <li>Compound conditions</li>
+                                <li>Subqueries in WHERE</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Aggregate Functions &amp; GROUP BY</div>
+                            <ul class="subtopic-children">
+                                <li>COUNT, SUM, AVG with grouping</li>
+                                <li>HAVING clause</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Database Connectivity from Code</div>
+                            <ul class="subtopic-children">
+                                <li>JDBC, ADO.NET, database drivers</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Parameterized Queries</div>
+                            <ul class="subtopic-children">
+                                <li>Preventing SQL injection</li>
+                                <li>Prepared statements</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Transaction Basics</div>
+                            <ul class="subtopic-children">
+                                <li>BEGIN, COMMIT, ROLLBACK from code</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Result Set Handling</div>
+                            <ul class="subtopic-children">
+                                <li>Mapping query results to objects</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Database Schema Navigation</div>
+                            <ul class="subtopic-children">
+                                <li>Understanding ERDs</li>
+                                <li>Foreign keys, relationships</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Indexes Awareness</div>
+                            <ul class="subtopic-children">
+                                <li>What they are, why they matter</li>
+                            </ul>
+                        </div>
                     </div>
 
                     <!-- Code Versioning Fundamentals -->
@@ -3455,35 +3565,107 @@ Business Rules: Minimum order $10, Max 50 items
                 <div class="modules-grid">
                     <!-- Programming Advanced / Best Practices -->
                     <div class="module-card left">
-                        <h3 class="module-title">Programming Advanced</h3>
-                        <ul class="items">
-                            <li>Data Structures &amp; Algorithms</li>
-                        </ul>
+                        <h3 class="module-title">Programming Advanced / Best Practices</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Data Structures and Algorithms</div>
+                            <ul class="subtopic-children">
+                                <li>Choose the right structure for test data management</li>
+                                <li>Optimize framework code using efficient algorithms</li>
+                                <li>Identify and resolve performance bottlenecks</li>
+                            </ul>
+                        </div>
                         <div class="subtopic">
                             <div class="subtopic-title">Design Patterns</div>
                             <ul class="subtopic-children">
-                                <li>SOLID</li>
-                                <li>Behavioral / Structural</li>
+                                <li>SOLID — apply across page objects, helpers, layers</li>
+                                <li>Behavioral — Strategy, Observer, Command</li>
+                                <li>Structural — Decorator, Adapter, Facade</li>
+                                <li>Creational — Factory, Builder, Singleton</li>
                             </ul>
                         </div>
-                        <ul class="items">
-                            <li>Interfaces &amp; Abstract Classes</li>
-                            <li>Functional Programming</li>
-                            <li>Clean Code Principles</li>
-                            <li>TDD Hands-on</li>
-                        </ul>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Interfaces and Abstract Classes</div>
+                            <ul class="subtopic-children">
+                                <li>Define contracts between framework layers</li>
+                                <li>Decouple test logic from implementation</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Functional Programming</div>
+                            <ul class="subtopic-children">
+                                <li>Lambdas and streams for test data</li>
+                                <li>Immutability for parallel run safety</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Clean Code Principles</div>
+                            <ul class="subtopic-children">
+                                <li>Self-documenting code, consistent naming</li>
+                                <li>Refactor into single-purpose functions</li>
+                                <li>Lead maintainability-focused code reviews</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Test Driven Development</div>
+                            <ul class="subtopic-children">
+                                <li>Write failing tests before implementing helpers</li>
+                                <li>Apply TDD to framework utilities</li>
+                            </ul>
+                        </div>
                     </div>
 
                     <!-- Automation Design Pattern Development -->
                     <div class="module-card right">
-                        <h3 class="module-title">Automation Design Patterns</h3>
-                        <ul class="items">
-                            <li>Framework Development</li>
-                            <li>POM / Page Factory</li>
-                            <li>Screen Play Pattern / BDD</li>
-                            <li>Singleton Design Pattern</li>
-                            <li>Parallel Execution</li>
-                        </ul>
+                        <h3 class="module-title">Automation Design Pattern Development</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Framework Development</div>
+                            <ul class="subtopic-children">
+                                <li>Design scalable architecture across projects</li>
+                                <li>Separate layers (drivers, pages, tests, utils)</li>
+                                <li>Build onboarding docs and contribution guides</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">POM / Page Factory</div>
+                            <ul class="subtopic-children">
+                                <li>Implement POM with inheritance for shared components</li>
+                                <li>Page Factory for lazy element loading</li>
+                                <li>Manage complex page hierarchies</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Screenplay Pattern / BDD</div>
+                            <ul class="subtopic-children">
+                                <li>Implement actor, task, interaction layers</li>
+                                <li>Integrate Screenplay with Cucumber</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Design Patterns in Frameworks</div>
+                            <ul class="subtopic-children">
+                                <li>Singleton — driver and config management</li>
+                                <li>Factory — dynamic driver/browser instances</li>
+                                <li>Builder — fluent test data construction</li>
+                                <li>Strategy — swap execution strategies</li>
+                                <li>Observer — event-based reporting/logging</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Parallel Execution</div>
+                            <ul class="subtopic-children">
+                                <li>Thread-safe page objects and utilities</li>
+                                <li>Test data isolation across threads</li>
+                                <li>Optimize suite distribution for fast feedback</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Framework Governance</div>
+                            <ul class="subtopic-children">
+                                <li>Define coding standards, enforce via linting</li>
+                                <li>Versioned releases with changelogs</li>
+                                <li>Lead framework adoption across teams</li>
+                            </ul>
+                        </div>
                     </div>
 
                     <!-- GIT Advanced -->
@@ -3651,23 +3833,56 @@ Business Rules: Minimum order $10, Max 50 items
                         <div class="subtopic">
                             <div class="subtopic-title">Complex Automation Prompts</div>
                             <ul class="subtopic-children">
-                                <li>Full Framework Generation</li>
-                                <li>Migration Prompts</li>
-                                <li>Architecture Design</li>
+                                <li>Generate framework scaffolding from specs</li>
+                                <li>Migrate test suites between frameworks</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Meta Prompting</div>
+                            <ul class="subtopic-children">
+                                <li>Prompts that generate/improve other prompts</li>
+                                <li>Self-refining loops with validation</li>
+                                <li>LLMs to evaluate prompt effectiveness</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Prompt Patterns</div>
+                            <ul class="subtopic-children">
+                                <li>Chain of thought — step by step reasoning</li>
+                                <li>Few-shot — examples to shape output</li>
+                                <li>Role prompting — expert personas</li>
+                                <li>Self-correcting — model fixes its output</li>
+                                <li>Validation chains — output feeds next prompt</li>
+                                <li>Tree of thought — explore multiple paths</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Multi-Model Orchestration</div>
+                            <ul class="subtopic-children">
+                                <li>Combine models for generation/validation</li>
+                                <li>Pipelines where models check each other</li>
+                                <li>Integrate into CI/CD for test generation</li>
                             </ul>
                         </div>
                         <div class="subtopic">
                             <div class="subtopic-title">Prompt Management</div>
                             <ul class="subtopic-children">
-                                <li>Version Control for Prompts</li>
-                                <li>Team Prompt Libraries</li>
+                                <li>Version control prompts with automation code</li>
+                                <li>Team prompt libraries and A/B testing</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Advanced Patterns</div>
+                            <div class="subtopic-title">AI Agent Design</div>
                             <ul class="subtopic-children">
-                                <li>Self-Correcting Prompts</li>
-                                <li>Validation Chains</li>
+                                <li>Autonomous agents that explore/test features</li>
+                                <li>Goals, constraints, human-in-the-loop steps</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Evaluation and Quality Control</div>
+                            <ul class="subtopic-children">
+                                <li>Detect hallucinations in generated code</li>
+                                <li>Automated evaluators for test cases</li>
                             </ul>
                         </div>
                     </div>
