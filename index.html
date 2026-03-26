@@ -1194,6 +1194,32 @@
             color: rgba(220,38,38,0.5);
         }
 
+        /* Nested subtopic group (for 3-level hierarchy) */
+        .module-card .subtopic-group {
+            margin-left: 1rem;
+            padding-left: 0.5rem;
+            border-left: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 0.3rem;
+        }
+
+        .module-card .subtopic-group .subtopic {
+            margin-top: 0.3rem;
+        }
+
+        .module-card .subtopic-group .subtopic-title {
+            font-size: 0.78rem;
+            padding: 0.2rem 0.4rem;
+        }
+
+        .module-card .subtopic-group .subtopic-children {
+            margin-left: 0.5rem;
+            padding-left: 0.5rem;
+        }
+
+        .module-card .subtopic-group .subtopic-children li {
+            font-size: 0.72rem;
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 900px) {
             .pillars { grid-template-columns: repeat(3, 1fr); }
@@ -2597,62 +2623,66 @@ Business Rules: Minimum order $10, Max 50 items
                         </div>
                         <div class="subtopic">
                             <div class="subtopic-title">Low Code Tools</div>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Testim</div>
-                            <ul class="subtopic-children">
-                                <li>Create and maintain stable AI-assisted test scripts</li>
-                                <li>Handle dynamic elements using smart locators</li>
-                                <li>Organize and run tests across environments</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Mabl</div>
-                            <ul class="subtopic-children">
-                                <li>Record, edit and maintain end-to-end journeys</li>
-                                <li>Analyze auto-detected visual and functional regressions</li>
-                                <li>Integrate runs into CI/CD pipeline</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Cypress</div>
-                            <ul class="subtopic-children">
-                                <li>Write and maintain component and E2E tests</li>
-                                <li>Debug failing tests using Cypress test runner</li>
-                                <li>Configure runs for multiple environments</li>
-                            </ul>
+                            <div class="subtopic-group">
+                                <div class="subtopic">
+                                    <div class="subtopic-title">Testim</div>
+                                    <ul class="subtopic-children">
+                                        <li>Create and maintain stable AI-assisted test scripts</li>
+                                        <li>Handle dynamic elements using smart locators</li>
+                                        <li>Organize and run tests across environments</li>
+                                    </ul>
+                                </div>
+                                <div class="subtopic">
+                                    <div class="subtopic-title">Mabl</div>
+                                    <ul class="subtopic-children">
+                                        <li>Record, edit and maintain end-to-end journeys</li>
+                                        <li>Analyze auto-detected visual and functional regressions</li>
+                                        <li>Integrate runs into CI/CD pipeline</li>
+                                    </ul>
+                                </div>
+                                <div class="subtopic">
+                                    <div class="subtopic-title">Cypress</div>
+                                    <ul class="subtopic-children">
+                                        <li>Write and maintain component and E2E tests</li>
+                                        <li>Debug failing tests using Cypress test runner</li>
+                                        <li>Configure runs for multiple environments</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                         <div class="subtopic">
                             <div class="subtopic-title">Selenium / Playwright</div>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">XPath and Locator Strategy</div>
-                            <ul class="subtopic-children">
-                                <li>Write stable locators that survive UI changes</li>
-                                <li>Choose between id, css, xpath and accessibility locators</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Script Creation and Maintenance</div>
-                            <ul class="subtopic-children">
-                                <li>Write scripts that cover happy path and edge cases</li>
-                                <li>Refactor and update scripts after UI changes</li>
-                                <li>Apply basic POM structure to organize scripts</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Synchronization and Stability</div>
-                            <ul class="subtopic-children">
-                                <li>Use explicit waits to handle dynamic content</li>
-                                <li>Identify and fix flaky tests caused by timing issues</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Exception Handling</div>
-                            <ul class="subtopic-children">
-                                <li>Catch and handle common automation exceptions</li>
-                                <li>Add meaningful error messages for faster debugging</li>
-                            </ul>
+                            <div class="subtopic-group">
+                                <div class="subtopic">
+                                    <div class="subtopic-title">XPath and Locator Strategy</div>
+                                    <ul class="subtopic-children">
+                                        <li>Write stable locators that survive UI changes</li>
+                                        <li>Choose between id, css, xpath and accessibility locators</li>
+                                    </ul>
+                                </div>
+                                <div class="subtopic">
+                                    <div class="subtopic-title">Script Creation and Maintenance</div>
+                                    <ul class="subtopic-children">
+                                        <li>Write scripts that cover happy path and edge cases</li>
+                                        <li>Refactor and update scripts after UI changes</li>
+                                        <li>Apply basic POM structure to organize scripts</li>
+                                    </ul>
+                                </div>
+                                <div class="subtopic">
+                                    <div class="subtopic-title">Synchronization and Stability</div>
+                                    <ul class="subtopic-children">
+                                        <li>Use explicit waits to handle dynamic content</li>
+                                        <li>Identify and fix flaky tests caused by timing issues</li>
+                                    </ul>
+                                </div>
+                                <div class="subtopic">
+                                    <div class="subtopic-title">Exception Handling</div>
+                                    <ul class="subtopic-children">
+                                        <li>Catch and handle common automation exceptions</li>
+                                        <li>Add meaningful error messages for faster debugging</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                         <div class="subtopic">
                             <div class="subtopic-title">Test Frameworks (Conceptually)</div>
@@ -2660,14 +2690,16 @@ Business Rules: Minimum order $10, Max 50 items
                                 <li>TestNG / JUnit / NUnit</li>
                                 <li>Annotations</li>
                             </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Cucumber</div>
-                            <ul class="subtopic-children">
-                                <li>Feature Files</li>
-                                <li>Step Definitions</li>
-                                <li>Gherkin Scenarios</li>
-                            </ul>
+                            <div class="subtopic-group">
+                                <div class="subtopic">
+                                    <div class="subtopic-title">Cucumber</div>
+                                    <ul class="subtopic-children">
+                                        <li>Feature Files</li>
+                                        <li>Step Definitions</li>
+                                        <li>Gherkin Scenarios</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                         <div class="subtopic">
                             <div class="subtopic-title">Automation in the QE Process</div>
