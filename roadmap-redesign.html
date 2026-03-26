@@ -259,6 +259,57 @@
             height: calc(50% + 1px);
         }
 
+        /* Level 2: Sub-topics (parent items with children) */
+        .module-children .subtopic {
+            font-weight: 600;
+            color: var(--text);
+            font-size: 0.68rem;
+            padding: 0.25rem 0;
+            padding-left: 0.9rem;
+            margin-top: 0.15rem;
+        }
+
+        .level.junior .module-children .subtopic {
+            color: #86efac;
+        }
+        .level.intermediate .module-children .subtopic {
+            color: #fef08a;
+        }
+        .level.senior .module-children .subtopic {
+            color: #fca5a5;
+        }
+
+        /* Level 3: Children of sub-topics */
+        .module-children .subtopic-children {
+            list-style: none;
+            margin-left: 0.9rem;
+            padding-left: 0.6rem;
+            border-left: 1px solid var(--connector-color);
+            margin-bottom: 0.2rem;
+        }
+
+        .module-children .subtopic-children li {
+            padding: 0.1rem 0;
+            padding-left: 0.6rem;
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            position: relative;
+        }
+
+        .module-children .subtopic-children li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 4px;
+            height: 1px;
+            background: var(--connector-color);
+        }
+
+        .module-children .subtopic-children li::after {
+            display: none;
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             .modules-grid {
@@ -382,12 +433,14 @@
                 <div class="module right">
                     <h3 class="module-title">API Testing Fundamentals</h3>
                     <ul class="module-children">
-                        <li>Postman Collections</li>
-                        <li>Postman Requests</li>
-                        <li>Variables</li>
+                        <li class="subtopic">Postman</li>
+                        <ul class="subtopic-children">
+                            <li>Collections</li>
+                            <li>Requests</li>
+                            <li>Variables</li>
+                        </ul>
                         <li>Status Code Validation</li>
-                        <li>Payload Validation</li>
-                        <li>Schema Validation</li>
+                        <li>Payload & Schema Validation</li>
                         <li>Header Verification</li>
                     </ul>
                 </div>
@@ -397,11 +450,17 @@
                     <h3 class="module-title">Software Testing Fundamentals</h3>
                     <ul class="module-children">
                         <li>Software Testing Lifecycle</li>
-                        <li>Dynamic Testing</li>
-                        <li>Static Testing</li>
+                        <li class="subtopic">Testing Approaches</li>
+                        <ul class="subtopic-children">
+                            <li>Dynamic Testing</li>
+                            <li>Static Testing</li>
+                        </ul>
                         <li>Bug Lifecycle</li>
-                        <li>Psychology of Testing</li>
-                        <li>Types of Testing</li>
+                        <li class="subtopic">Types of Testing</li>
+                        <ul class="subtopic-children">
+                            <li>Regression / Smoke / E2E</li>
+                            <li>Functional / Integration</li>
+                        </ul>
                         <li>Test Case Design</li>
                         <li>Principles of Testing</li>
                     </ul>
