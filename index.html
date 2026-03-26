@@ -2468,6 +2468,7 @@ Business Rules: Minimum order $10, Max 50 items
                     </div>
                 </div>
 
+                <!-- Row: API Automation -->
                 <div class="row">
                     <div class="branch branch-left">
                         <div class="sub-group">
@@ -2475,7 +2476,6 @@ Business Rules: Minimum order $10, Max 50 items
                             <div class="sub-children">
                                 <div class="child-node cn-green">Reproduce Postman request in code</div>
                                 <div class="child-node cn-green">Read/navigate JSON response</div>
-                                <div class="child-node cn-green">Print/filter response fields</div>
                             </div>
                         </div>
                         <div class="sub-group">
@@ -2483,85 +2483,90 @@ Business Rules: Minimum order $10, Max 50 items
                             <div class="sub-children">
                                 <div class="child-node cn-green">GET request &amp; assert status</div>
                                 <div class="child-node cn-green">POST request with JSON body</div>
-                                <div class="child-node cn-green">Validate response field</div>
-                                <div class="child-node cn-green">Chain two requests</div>
                             </div>
                         </div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-green" id="s-api">API Automation</div>
+                    </div>
+                    <div class="branch branch-right">
                         <div class="sub-group">
                             <div class="sub-node sn-green parent" data-connect="s-api">Making Tests Reusable</div>
                             <div class="sub-children">
                                 <div class="child-node cn-green">Extract base URL to config</div>
                                 <div class="child-node cn-green">Reuse headers across tests</div>
-                                <div class="child-node cn-green">Read body from JSON file</div>
-                                <div class="child-node cn-green">Read data from CSV file</div>
                             </div>
                         </div>
                         <div class="sub-group">
                             <div class="sub-node sn-green parent" data-connect="s-api">Working Without a Backend</div>
                             <div class="sub-children">
                                 <div class="child-node cn-green">Set up Postman mock server</div>
-                                <div class="child-node cn-green">Write tests against mock</div>
                                 <div class="child-node cn-green">Simulate error responses</div>
                             </div>
                         </div>
                     </div>
-                    <div class="center-col">
-                        <div class="main-node mn-green" id="s-api">API Automation</div>
-                        <div class="main-node mn-green" id="s-sqlf">SQL Fundamentals</div>
-                    </div>
-                    <div class="branch branch-right">
+                </div>
+
+                <!-- Row: SQL Fundamentals -->
+                <div class="row">
+                    <div class="branch branch-left">
                         <div class="sub-group">
                             <div class="sub-node sn-green parent" data-connect="s-sqlf">DDL &amp; Schema Understanding</div>
                             <div class="sub-children">
-                                <div class="child-node cn-green">CREATE, ALTER, DROP, understanding table design</div>
+                                <div class="child-node cn-green">CREATE, ALTER, DROP, table design</div>
                             </div>
                         </div>
                         <div class="sub-group">
                             <div class="sub-node sn-green parent" data-connect="s-sqlf">All JOIN Types</div>
                             <div class="sub-children">
-                                <div class="child-node cn-green">INNER, LEFT, RIGHT, FULL OUTER, CROSS, SELF</div>
+                                <div class="child-node cn-green">INNER, LEFT, RIGHT, FULL, CROSS, SELF</div>
                             </div>
                         </div>
                         <div class="sub-group">
                             <div class="sub-node sn-green parent" data-connect="s-sqlf">Complex WHERE Clauses</div>
                             <div class="sub-children">
-                                <div class="child-node cn-green">Compound conditions, subqueries in WHERE</div>
+                                <div class="child-node cn-green">Compound conditions, subqueries</div>
                             </div>
                         </div>
                         <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-sqlf">Aggregate Functions &amp; GROUP BY</div>
+                            <div class="sub-node sn-green parent" data-connect="s-sqlf">Aggregate Functions</div>
                             <div class="sub-children">
-                                <div class="child-node cn-green">COUNT, SUM, AVG with grouping and HAVING</div>
+                                <div class="child-node cn-green">COUNT, SUM, AVG, GROUP BY, HAVING</div>
                             </div>
                         </div>
                         <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-sqlf">Database Connectivity from Code</div>
+                            <div class="sub-node sn-green parent" data-connect="s-sqlf">Database Connectivity</div>
                             <div class="sub-children">
-                                <div class="child-node cn-green">JDBC, ADO.NET, database drivers</div>
+                                <div class="child-node cn-green">JDBC, ADO.NET, drivers</div>
                             </div>
                         </div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-green" id="s-sqlf">SQL Fundamentals</div>
+                    </div>
+                    <div class="branch branch-right">
                         <div class="sub-group">
                             <div class="sub-node sn-green parent" data-connect="s-sqlf">Parameterized Queries</div>
                             <div class="sub-children">
-                                <div class="child-node cn-green">Preventing SQL injection, prepared statements</div>
+                                <div class="child-node cn-green">Preventing SQL injection</div>
                             </div>
                         </div>
                         <div class="sub-group">
                             <div class="sub-node sn-green parent" data-connect="s-sqlf">Transaction Basics</div>
                             <div class="sub-children">
-                                <div class="child-node cn-green">BEGIN, COMMIT, ROLLBACK from code</div>
+                                <div class="child-node cn-green">BEGIN, COMMIT, ROLLBACK</div>
                             </div>
                         </div>
                         <div class="sub-group">
                             <div class="sub-node sn-green parent" data-connect="s-sqlf">Result Set Handling</div>
                             <div class="sub-children">
-                                <div class="child-node cn-green">Mapping query results to objects</div>
+                                <div class="child-node cn-green">Mapping results to objects</div>
                             </div>
                         </div>
                         <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-sqlf">Database Schema Navigation</div>
+                            <div class="sub-node sn-green parent" data-connect="s-sqlf">Schema Navigation</div>
                             <div class="sub-children">
-                                <div class="child-node cn-green">Understanding ERDs, foreign keys, relationships</div>
+                                <div class="child-node cn-green">ERDs, foreign keys, relationships</div>
                             </div>
                         </div>
                         <div class="sub-group">
@@ -2573,6 +2578,7 @@ Business Rules: Minimum order $10, Max 50 items
                     </div>
                 </div>
 
+                <!-- Row: Code Versioning -->
                 <div class="row">
                     <div class="branch branch-left">
                         <div class="sub-node sn-green" data-connect="s-cv">Type of Version Control Systems</div>
@@ -2581,6 +2587,14 @@ Business Rules: Minimum order $10, Max 50 items
                     </div>
                     <div class="center-col">
                         <div class="main-node mn-green" id="s-cv">Code Versioning</div>
+                    </div>
+                    <div class="branch branch-right"></div>
+                </div>
+
+                <!-- Row: CI/CD -->
+                <div class="row">
+                    <div class="branch branch-left"></div>
+                    <div class="center-col">
                         <div class="main-node mn-green" id="s-cicd">CI / CD</div>
                     </div>
                     <div class="branch branch-right">
@@ -2590,51 +2604,57 @@ Business Rules: Minimum order $10, Max 50 items
                     </div>
                 </div>
 
+                <!-- Row: AI for Developers -->
                 <div class="row">
                     <div class="branch branch-left">
                         <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-aifd">What is Artificial Intelligence</div>
+                            <div class="sub-node sn-green parent" data-connect="s-aifd">What is AI</div>
                             <div class="sub-children">
-                                <div class="child-node cn-green">Machine Learning vs Deep Learning</div>
-                                <div class="child-node cn-green">What are LLMs (Large Language Models)</div>
-                                <div class="child-node cn-green">How Code Generation Works</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-aifd">AI Coding Assistants</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">GitHub Copilot Setup</div>
-                                <div class="child-node cn-green">VS Code AI Extensions</div>
-                                <div class="child-node cn-green">Reading AI Suggestions</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-aifd">AI Safety &amp; Limitations</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Reviewing AI-Generated Code</div>
-                                <div class="child-node cn-green">Security Vulnerabilities</div>
-                                <div class="child-node cn-green">License Concerns</div>
+                                <div class="child-node cn-green">ML vs Deep Learning</div>
+                                <div class="child-node cn-green">LLMs Explained</div>
                             </div>
                         </div>
                     </div>
                     <div class="center-col">
                         <div class="main-node mn-green" id="s-aifd">AI for Developers</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-group">
+                            <div class="sub-node sn-green parent" data-connect="s-aifd">AI Coding Assistants</div>
+                            <div class="sub-children">
+                                <div class="child-node cn-green">GitHub Copilot</div>
+                                <div class="child-node cn-green">VS Code Extensions</div>
+                            </div>
+                        </div>
+                        <div class="sub-group">
+                            <div class="sub-node sn-green parent" data-connect="s-aifd">AI Safety</div>
+                            <div class="sub-children">
+                                <div class="child-node cn-green">Code Review</div>
+                                <div class="child-node cn-green">Security Risks</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row: Prompt Engineering Basics -->
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-group">
+                            <div class="sub-node sn-green parent" data-connect="s-peb">Writing Prompts</div>
+                            <div class="sub-children">
+                                <div class="child-node cn-green">Describe What You Need</div>
+                                <div class="child-node cn-green">Specify Language/Framework</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center-col">
                         <div class="main-node mn-green" id="s-peb">Prompt Engineering<br>Basics</div>
                     </div>
                     <div class="branch branch-right">
                         <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-peb">Writing Prompts for Code</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Describing What You Need</div>
-                                <div class="child-node cn-green">Specifying Language/Framework</div>
-                                <div class="child-node cn-green">Requesting Explanations</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
                             <div class="sub-node sn-green parent" data-connect="s-peb">Basic Patterns</div>
                             <div class="sub-children">
-                                <div class="child-node cn-green">"Write a function that..."</div>
-                                <div class="child-node cn-green">"Explain this code..."</div>
+                                <div class="child-node cn-green">"Write a function..."</div>
                                 <div class="child-node cn-green">"Fix this error..."</div>
                             </div>
                         </div>
