@@ -962,6 +962,269 @@
             color: var(--text-muted);
         }
 
+        /* ===== NEW ROADMAP DESIGN ===== */
+        .roadmap-new {
+            max-width: 550px;
+            margin: 0 auto;
+            position: relative;
+            padding: 0 1rem;
+        }
+
+        .roadmap-new::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--green);
+            transform: translateX(-50%);
+        }
+
+        .roadmap-new.sdet-roadmap::before {
+            background: var(--blue);
+        }
+
+        .level-section {
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .level-section .level-header {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            margin-bottom: 0.6rem;
+        }
+
+        .level-section .level-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            background: var(--bg);
+            border: 1px solid var(--green);
+            color: var(--green);
+        }
+
+        .level-section.intermediate .level-badge {
+            border-color: var(--yellow);
+            color: var(--yellow);
+        }
+
+        .level-section.senior .level-badge {
+            border-color: var(--red);
+            color: var(--red);
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.4rem 2rem;
+        }
+
+        .module-card {
+            background: var(--bg-card);
+            border-radius: 6px;
+            padding: 0.5rem 0.65rem;
+            position: relative;
+            border: 1px solid var(--green);
+            transition: all 0.2s;
+        }
+
+        .module-card:hover {
+            border-color: var(--green-light);
+            box-shadow: 0 2px 8px rgba(34, 197, 94, 0.15);
+        }
+
+        .level-section.intermediate .module-card {
+            border-color: var(--yellow);
+        }
+
+        .level-section.intermediate .module-card:hover {
+            border-color: var(--yellow-light);
+            box-shadow: 0 2px 8px rgba(234, 179, 8, 0.15);
+        }
+
+        .level-section.senior .module-card {
+            border-color: var(--red);
+        }
+
+        .level-section.senior .module-card:hover {
+            border-color: var(--red-light);
+            box-shadow: 0 2px 8px rgba(220, 38, 38, 0.15);
+        }
+
+        .module-card.left::after,
+        .module-card.right::after {
+            content: '';
+            position: absolute;
+            top: 0.6rem;
+            width: 6px;
+            height: 6px;
+            background: var(--green);
+            border-radius: 50%;
+        }
+
+        .module-card.left::before {
+            content: '';
+            position: absolute;
+            right: -1rem;
+            top: 0.6rem;
+            width: 1rem;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .module-card.left::after {
+            right: -1rem;
+            transform: translate(50%, -50%);
+        }
+
+        .module-card.right::before {
+            content: '';
+            position: absolute;
+            left: -1rem;
+            top: 0.6rem;
+            width: 1rem;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .module-card.right::after {
+            left: -1rem;
+            transform: translate(-50%, -50%);
+        }
+
+        .level-section.intermediate .module-card.left::after,
+        .level-section.intermediate .module-card.right::after {
+            background: var(--yellow);
+        }
+
+        .level-section.senior .module-card.left::after,
+        .level-section.senior .module-card.right::after {
+            background: var(--red);
+        }
+
+        .module-card .module-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 0.35rem;
+            color: var(--text);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .module-card .items {
+            list-style: none;
+        }
+
+        .module-card .items > li {
+            padding: 0.15rem 0;
+            padding-left: 0.8rem;
+            position: relative;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+        }
+
+        .module-card .items > li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 6px;
+            height: 2px;
+            background: var(--border);
+        }
+
+        .level-section.junior .module-card .items > li::before {
+            background: rgba(34,197,94,0.4);
+        }
+
+        .level-section.intermediate .module-card .items > li::before {
+            background: rgba(234,179,8,0.4);
+        }
+
+        .level-section.senior .module-card .items > li::before {
+            background: rgba(220,38,38,0.4);
+        }
+
+        .module-card .subtopic {
+            margin-top: 0.2rem;
+        }
+
+        .module-card .subtopic-title {
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.15rem 0.4rem;
+            border-radius: 3px;
+            display: inline-block;
+            margin-bottom: 0.15rem;
+        }
+
+        .level-section.junior .module-card .subtopic-title {
+            background: var(--green-dim);
+            color: var(--green-light);
+        }
+
+        .level-section.intermediate .module-card .subtopic-title {
+            background: var(--yellow-dim);
+            color: var(--yellow-light);
+        }
+
+        .level-section.senior .module-card .subtopic-title {
+            background: var(--red-dim);
+            color: var(--red-light);
+        }
+
+        .module-card .subtopic-children {
+            list-style: none;
+            margin-left: 0.5rem;
+            padding-left: 0.5rem;
+            border-left: 2px solid var(--green);
+            margin-bottom: 0.2rem;
+        }
+
+        .level-section.intermediate .module-card .subtopic-children {
+            border-left-color: var(--yellow);
+        }
+
+        .level-section.senior .module-card .subtopic-children {
+            border-left-color: var(--red);
+        }
+
+        .module-card .subtopic-children li {
+            padding: 0.1rem 0;
+            padding-left: 0.6rem;
+            position: relative;
+            color: var(--text-muted);
+            font-size: 0.65rem;
+        }
+
+        .module-card .subtopic-children li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 6px;
+            height: 2px;
+        }
+
+        .level-section.junior .module-card .subtopic-children li::before {
+            background: var(--green);
+        }
+
+        .level-section.intermediate .module-card .subtopic-children li::before {
+            background: var(--yellow);
+        }
+
+        .level-section.senior .module-card .subtopic-children li::before {
+            background: var(--red);
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 900px) {
             .pillars { grid-template-columns: repeat(3, 1fr); }
@@ -1925,427 +2188,626 @@ Business Rules: Minimum order $10, Max 50 items
             <div class="legend-item"><div class="legend-dot" style="background:var(--red);"></div> Senior 1-2</div>
         </div>
 
-        <div class="diagram-scroll">
-            <div class="diagram-wrapper" id="diagram-qe">
-                <div class="title-node title-qe">Quality Engineer</div>
-
-                <!-- JUNIOR - GREEN -->
-                <div class="level-divider"><span>Junior</span></div>
-
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-node sn-green" data-connect="qe-bbt">Equivalence Partition</div>
-                        <div class="sub-node sn-green" data-connect="qe-bbt">Boundary Value Analysis</div>
-                        <div class="sub-node sn-green" data-connect="qe-bbt">Decision Table</div>
-                        <div class="sub-node sn-green" data-connect="qe-bbt">State Transition</div>
+        <!-- NEW ROADMAP DESIGN -->
+        <div class="roadmap-new">
+            <!-- JUNIOR LEVEL -->
+            <div class="level-section junior">
+                <div class="level-header">
+                    <div class="level-badge">Junior</div>
+                </div>
+                <div class="modules-grid">
+                    <!-- Black Box Techniques -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Black Box Techniques</h3>
+                        <ul class="items">
+                            <li>Equivalence Partition</li>
+                            <li>Boundary Value Analysis</li>
+                            <li>Decision Table</li>
+                            <li>State Transition</li>
+                        </ul>
                     </div>
-                    <div class="center-col">
-                        <div class="main-node mn-green" id="qe-bbt">Black Box<br>Techniques</div>
-                        <div class="main-node mn-green" id="qe-apif">API Fundamentals</div>
+
+                    <!-- API Fundamentals -->
+                    <div class="module-card right">
+                        <h3 class="module-title">API Fundamentals</h3>
+                        <ul class="items">
+                            <li>REST Architecture</li>
+                            <li>HTTP Methods</li>
+                            <li>HTTP Status Codes</li>
+                            <li>Data Formats</li>
+                        </ul>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Request/Response Structure</div>
+                            <ul class="subtopic-children">
+                                <li>Headers, body, query params</li>
+                                <li>Path parameters</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">JSON Structure</div>
+                            <ul class="subtopic-children">
+                                <li>Objects, arrays, nesting</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Authentication Basics</div>
+                            <ul class="subtopic-children">
+                                <li>API Keys, Bearer tokens</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="branch branch-right">
-                        <div class="sub-node sn-green" data-connect="qe-apif">REST Architecture</div>
-                        <div class="sub-node sn-green" data-connect="qe-apif">HTTP Methods</div>
-                        <div class="sub-node sn-green" data-connect="qe-apif">HTTP Status Codes</div>
-                        <div class="sub-node sn-green" data-connect="qe-apif">Data Formats</div>
-                        <div class="sub-node sn-green" data-connect="qe-apif">JSON &amp; Headers</div>
-                        <div class="sub-node sn-green" data-connect="qe-apif">Authentication Basics</div>
+
+                    <!-- SQL Fundamentals -->
+                    <div class="module-card left">
+                        <h3 class="module-title">SQL Fundamentals</h3>
+                        <ul class="items">
+                            <li>SELECT statement</li>
+                            <li>COUNT keyword</li>
+                            <li>WHERE Clause Operators</li>
+                            <li>Basic Joins (INNER, LEFT)</li>
+                            <li>ORDER BY &amp; LIMIT</li>
+                            <li>Aliases</li>
+                            <li>NULL Values</li>
+                            <li>Aggregate Functions</li>
+                        </ul>
+                    </div>
+
+                    <!-- API Testing Fundamentals -->
+                    <div class="module-card right">
+                        <h3 class="module-title">API Testing Fundamentals</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Postman</div>
+                            <ul class="subtopic-children">
+                                <li>Collections</li>
+                                <li>Requests</li>
+                                <li>Variables</li>
+                            </ul>
+                        </div>
+                        <ul class="items">
+                            <li>Status Code Validation</li>
+                            <li>Payload &amp; Schema Validation</li>
+                            <li>Header Verification</li>
+                        </ul>
+                    </div>
+
+                    <!-- Software Testing Fundamentals -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Software Testing Fundamentals</h3>
+                        <ul class="items">
+                            <li>Software Testing Lifecycle</li>
+                        </ul>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Testing Approaches</div>
+                            <ul class="subtopic-children">
+                                <li>Dynamic Testing</li>
+                                <li>Static Testing</li>
+                            </ul>
+                        </div>
+                        <ul class="items">
+                            <li>Bug Lifecycle</li>
+                            <li>Psychology of Testing</li>
+                        </ul>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Types of Testing</div>
+                            <ul class="subtopic-children">
+                                <li>Regression / Smoke / E2E</li>
+                                <li>Sanity / Ad-hoc</li>
+                                <li>Functional / Integration</li>
+                            </ul>
+                        </div>
+                        <ul class="items">
+                            <li>Test Case Design</li>
+                            <li>Principles of Testing</li>
+                        </ul>
+                    </div>
+
+                    <!-- Programming Basics -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Programming Basics</h3>
+                        <ul class="items">
+                            <li>OOP Fundamentals</li>
+                            <li>Variables &amp; Constants</li>
+                            <li>Operators</li>
+                            <li>Functions/Methods</li>
+                            <li>Arrays &amp; Lists</li>
+                            <li>Loops</li>
+                            <li>Conditionals</li>
+                            <li>Basic Debugging</li>
+                        </ul>
+                    </div>
+
+                    <!-- AI Fundamentals -->
+                    <div class="module-card left">
+                        <h3 class="module-title">AI Fundamentals</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">What is AI</div>
+                            <ul class="subtopic-children">
+                                <li>ML vs Deep Learning</li>
+                                <li>What are LLMs</li>
+                                <li>How AI Models are Trained</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">AI Tools Overview</div>
+                            <ul class="subtopic-children">
+                                <li>ChatGPT / Claude / Gemini</li>
+                                <li>GitHub Copilot</li>
+                                <li>AI Testing Tools</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">AI Limitations</div>
+                            <ul class="subtopic-children">
+                                <li>Hallucinations</li>
+                                <li>Bias in AI</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Prompt Engineering Basics -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Prompt Engineering Basics</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Anatomy of a Good Prompt</div>
+                            <ul class="subtopic-children">
+                                <li>Clear Instructions</li>
+                                <li>Specific Requests</li>
+                                <li>Expected Output Format</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Basic Prompt Patterns</div>
+                            <ul class="subtopic-children">
+                                <li>Question Prompts</li>
+                                <li>Task Prompts</li>
+                                <li>Role Assignment</li>
+                            </ul>
+                        </div>
+                        <ul class="items">
+                            <li>Common Mistakes to Avoid</li>
+                        </ul>
+                    </div>
+
+                    <!-- Context Engineering Basics -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Context Engineering Basics</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">What is Context in AI</div>
+                            <ul class="subtopic-children">
+                                <li>Tokens Explained</li>
+                                <li>Context Window Limits</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Providing Effective Context</div>
+                            <ul class="subtopic-children">
+                                <li>Background Information</li>
+                                <li>Relevant Examples</li>
+                                <li>Constraints and Rules</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="module-card right" style="visibility: hidden;"></div>
+                </div>
+            </div>
+
+            <!-- INTERMEDIATE LEVEL -->
+            <div class="level-section intermediate">
+                <div class="level-header">
+                    <div class="level-badge">Intermediate 1-4</div>
+                </div>
+                <div class="modules-grid">
+                    <!-- Advanced API Testing -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Advanced API Testing</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Postman</div>
+                            <ul class="subtopic-children">
+                                <li>Newman CLI</li>
+                                <li>JavaScript Validations</li>
+                            </ul>
+                        </div>
+                        <ul class="items">
+                            <li>Swagger</li>
+                            <li>Data-Driven Testing</li>
+                            <li>Auth &amp; RBAC</li>
+                        </ul>
+                    </div>
+
+                    <!-- Accessibility Testing -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Accessibility Testing</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">WCAG Principles</div>
+                            <ul class="subtopic-children">
+                                <li>Level A / AA / AAA</li>
+                            </ul>
+                        </div>
+                        <ul class="items">
+                            <li>Color Contrast</li>
+                            <li>Text Alternatives</li>
+                            <li>ARIA Testing</li>
+                            <li>Keyboard Accessibility</li>
+                        </ul>
+                    </div>
+
+                    <!-- Mobile Testing -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Mobile Testing</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Testing Techniques</div>
+                            <ul class="subtopic-children">
+                                <li>Interruption / Localization</li>
+                                <li>Performance / Network</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Mobile Cloud</div>
+                            <ul class="subtopic-children">
+                                <li>Testflight / Simulators</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Platforms</div>
+                            <ul class="subtopic-children">
+                                <li>Native/Hybrid/Responsive</li>
+                                <li>Real Devices / Emulators</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Programming -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Programming</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">OOP Hands-On</div>
+                            <ul class="subtopic-children">
+                                <li>Abstraction / Encapsulation</li>
+                                <li>Inheritance / Polymorphism</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Collections &amp; Data Structures</div>
+                            <ul class="subtopic-children">
+                                <li>Lists, Maps, Sets, Arrays</li>
+                            </ul>
+                        </div>
+                        <ul class="items">
+                            <li>String Manipulation / Regex</li>
+                            <li>File I/O Operations</li>
+                            <li>Exception Handling</li>
+                            <li>Unit Testing Basics</li>
+                        </ul>
+                    </div>
+
+                    <!-- SQL Intermediate -->
+                    <div class="module-card left">
+                        <h3 class="module-title">SQL Intermediate</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Advanced Joins</div>
+                            <ul class="subtopic-children">
+                                <li>Right / Full-outer / Self Join</li>
+                            </ul>
+                        </div>
+                        <ul class="items">
+                            <li>Aggregations &amp; Subqueries</li>
+                            <li>Constraints</li>
+                            <li>GROUP BY &amp; HAVING</li>
+                            <li>CASE Statements</li>
+                            <li>UNION / INTERSECT / EXCEPT</li>
+                            <li>NULL Handling</li>
+                            <li>Date/Time Functions</li>
+                        </ul>
+                    </div>
+
+                    <!-- AI Deep Dive -->
+                    <div class="module-card right">
+                        <h3 class="module-title">AI Deep Dive</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">LLM Architecture</div>
+                            <ul class="subtopic-children">
+                                <li>Transformers / Token Prediction</li>
+                                <li>Temperature Settings</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Model Comparison</div>
+                            <ul class="subtopic-children">
+                                <li>GPT vs Claude vs Gemini</li>
+                                <li>Cost Considerations</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Hands-on Tools</div>
+                            <ul class="subtopic-children">
+                                <li>Copilot / Claude Code</li>
+                                <li>AI Browser Extensions</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Prompt Engineering Intermediate -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Prompt Engineering Intermediate</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Prompt Frameworks</div>
+                            <ul class="subtopic-children">
+                                <li>TRICE+ / RACE / CREATE</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Advanced Techniques</div>
+                            <ul class="subtopic-children">
+                                <li>Few-Shot Prompting</li>
+                                <li>Chain of Thought</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">QE-Specific Prompts</div>
+                            <ul class="subtopic-children">
+                                <li>Test Case Generation</li>
+                                <li>Bug Report Writing</li>
+                                <li>Test Data Creation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Context Engineering Intermediate -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Context Engineering Intermediate</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Context Optimization</div>
+                            <ul class="subtopic-children">
+                                <li>Prioritizing Information</li>
+                                <li>Structured Templates</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Multi-Turn Conversations</div>
+                            <ul class="subtopic-children">
+                                <li>Building on Responses</li>
+                                <li>When to Start Fresh</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Context for QE Tasks</div>
+                            <ul class="subtopic-children">
+                                <li>Requirements Context</li>
+                                <li>Test Scenarios / Error Logs</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-node sn-green" data-connect="qe-sqlf">SELECT Statement</div>
-                        <div class="sub-node sn-green" data-connect="qe-sqlf">WHERE &amp; Operators</div>
-                        <div class="sub-node sn-green" data-connect="qe-sqlf">Basic Joins</div>
-                        <div class="sub-node sn-green" data-connect="qe-sqlf">ORDER BY &amp; LIMIT</div>
-                        <div class="sub-node sn-green" data-connect="qe-sqlf">Aggregates Intro</div>
-                    </div>
-                    <div class="center-col">
-                        <div class="main-node mn-green" id="qe-sqlf">SQL Fundamentals</div>
-                        <div class="main-node mn-green" id="qe-apitf">API Testing<br>Fundamentals</div>
-                    </div>
-                    <div class="branch branch-right">
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="qe-apitf">Postman</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Collections</div>
-                                <div class="child-node cn-green">Requests</div>
-                                <div class="child-node cn-green">Variables</div>
-                            </div>
-                        </div>
-                        <div class="sub-node sn-green" data-connect="qe-apitf">Status Code Validation</div>
-                        <div class="sub-node sn-green" data-connect="qe-apitf">Payload &amp; Schema</div>
-                        <div class="sub-node sn-green" data-connect="qe-apitf">Header Verification</div>
-                    </div>
+            <!-- SENIOR LEVEL -->
+            <div class="level-section senior">
+                <div class="level-header">
+                    <div class="level-badge">Senior 1-2</div>
                 </div>
+                <div class="modules-grid">
+                    <!-- Software Automation -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Software Automation</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Front-end Automation</div>
+                            <ul class="subtopic-children">
+                                <li>Low Code (Testim, Mabl)</li>
+                                <li>Cypress Prompt</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Selenium / Playwright</div>
+                            <ul class="subtopic-children">
+                                <li>XPaths</li>
+                                <li>Script Maintenance</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Test Frameworks</div>
+                            <ul class="subtopic-children">
+                                <li>TestNG / NUnit / Cucumber</li>
+                            </ul>
+                        </div>
+                    </div>
 
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-node sn-green" data-connect="qe-stf">Testing Lifecycle</div>
-                        <div class="sub-node sn-green" data-connect="qe-stf">Bug Lifecycle</div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="qe-stf">Types of Testing</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Regression / Smoke / E2E</div>
-                                <div class="child-node cn-green">Functional / Integration</div>
-                            </div>
+                    <!-- Performance Testing -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Performance Testing</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Testing Types</div>
+                            <ul class="subtopic-children">
+                                <li>Load / Stress Testing</li>
+                                <li>Volume / Soak Testing</li>
+                                <li>Scalability Testing</li>
+                            </ul>
                         </div>
-                        <div class="sub-node sn-green" data-connect="qe-stf">Test Case Design</div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Tools</div>
+                            <ul class="subtopic-children">
+                                <li>JMeter</li>
+                                <li>Load Runner</li>
+                                <li>Blaze Meter</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="center-col">
-                        <div class="main-node mn-green" id="qe-stf">Software Testing<br>Fundamentals</div>
-                        <div class="main-node mn-green" id="qe-progb">Programming<br>Basics</div>
-                    </div>
-                    <div class="branch branch-right">
-                        <div class="sub-node sn-green" data-connect="qe-progb">OOP Fundamentals</div>
-                        <div class="sub-node sn-green" data-connect="qe-progb">Variables &amp; Constants</div>
-                        <div class="sub-node sn-green" data-connect="qe-progb">Functions/Methods</div>
-                        <div class="sub-node sn-green" data-connect="qe-progb">Arrays &amp; Lists</div>
-                        <div class="sub-node sn-green" data-connect="qe-progb">Loops &amp; Conditionals</div>
-                        <div class="sub-node sn-green" data-connect="qe-progb">Basic Debugging</div>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="qe-aifj">What is AI</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">ML vs Deep Learning</div>
-                                <div class="child-node cn-green">LLMs Explained</div>
-                            </div>
+                    <!-- Advanced Testing -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Advanced Testing</h3>
+                        <ul class="items">
+                            <li>DoD &amp; DoR Analysis</li>
+                            <li>Release Management</li>
+                        </ul>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Advanced Techniques</div>
+                            <ul class="subtopic-children">
+                                <li>Risk-Based Testing</li>
+                                <li>Dynamic Test Selection</li>
+                            </ul>
                         </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="qe-aifj">AI Tools Overview</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">ChatGPT / Claude / Gemini</div>
-                                <div class="child-node cn-green">GitHub Copilot</div>
-                            </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Estimations</div>
+                            <ul class="subtopic-children">
+                                <li>Algorithmic Forecasting</li>
+                                <li>Probabilistic Forecasting</li>
+                            </ul>
                         </div>
-                        <div class="sub-node sn-green" data-connect="qe-aifj">AI Limitations &amp; Risks</div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Reporting</div>
+                            <ul class="subtopic-children">
+                                <li>Defect Leakage / Reopen Rate</li>
+                                <li>Test / Story Coverage</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="center-col">
-                        <div class="main-node mn-green" id="qe-aifj">AI Fundamentals</div>
-                        <div class="main-node mn-green" id="qe-peb">Prompt Engineering<br>Basics</div>
-                    </div>
-                    <div class="branch branch-right">
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="qe-peb">Good Prompt Anatomy</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Clear Instructions</div>
-                                <div class="child-node cn-green">Expected Output Format</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="qe-peb">Basic Patterns</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Question / Task Prompts</div>
-                                <div class="child-node cn-green">Role Assignment</div>
-                            </div>
-                        </div>
-                        <div class="sub-node sn-green" data-connect="qe-peb">Common Mistakes</div>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="qe-ceb">What is Context</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Tokens Explained</div>
-                                <div class="child-node cn-green">Context Window Limits</div>
-                            </div>
+                    <!-- Advanced SQL -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Advanced SQL</h3>
+                        <ul class="items">
+                            <li>Views</li>
+                            <li>Stored Procedures</li>
+                            <li>SQL Injection</li>
+                            <li>Windows Functions</li>
+                        </ul>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Query Optimization</div>
+                            <ul class="subtopic-children">
+                                <li>EXPLAIN/ANALYZE</li>
+                                <li>Indexing Strategies</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Transactions &amp; Locking</div>
+                            <ul class="subtopic-children">
+                                <li>ACID, deadlocks, isolation</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Database Performance</div>
+                            <ul class="subtopic-children">
+                                <li>Bottleneck identification</li>
+                                <li>Data integrity validation</li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="center-col">
-                        <div class="main-node mn-green" id="qe-ceb">Context Engineering<br>Basics</div>
-                    </div>
-                    <div class="branch branch-right">
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="qe-ceb">Effective Context</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Background Info</div>
-                                <div class="child-node cn-green">Examples &amp; Rules</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- INTERMEDIATE 1-4 - YELLOW -->
-                <div class="level-divider"><span>Intermediate 1-4</span></div>
+                    <!-- AI Mastery -->
+                    <div class="module-card left">
+                        <h3 class="module-title">AI Mastery</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Advanced LLM Concepts</div>
+                            <ul class="subtopic-children">
+                                <li>Fine-Tuning vs Prompting</li>
+                                <li>RAG (Retrieval Augmented Gen)</li>
+                                <li>Embeddings &amp; Vector DBs</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">AI Integration</div>
+                            <ul class="subtopic-children">
+                                <li>API Access (OpenAI, Anthropic)</li>
+                                <li>AI in CI/CD Pipelines</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">AI Governance</div>
+                            <ul class="subtopic-children">
+                                <li>Security &amp; Privacy</li>
+                                <li>AI Ethics in Testing</li>
+                            </ul>
+                        </div>
+                    </div>
 
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="qe-aapi">Postman / Newman</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Executing Newman Locally</div>
-                                <div class="child-node cn-yellow">JavaScript Validations</div>
-                            </div>
+                    <!-- Prompt Engineering Advanced -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Prompt Engineering Advanced</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Complex Prompt Design</div>
+                            <ul class="subtopic-children">
+                                <li>Multi-Step Task Chains</li>
+                                <li>Self-Reflection Prompts</li>
+                                <li>Validation Prompts</li>
+                            </ul>
                         </div>
-                        <div class="sub-node sn-yellow" data-connect="qe-aapi">Swagger</div>
-                        <div class="sub-node sn-yellow" data-connect="qe-aapi">Data-Driven &amp; Parameterized</div>
-                        <div class="sub-node sn-yellow" data-connect="qe-aapi">Authentication &amp; RBAC</div>
-                    </div>
-                    <div class="center-col">
-                        <div class="main-node mn-yellow" id="qe-aapi">Advanced API<br>Testing</div>
-                        <div class="main-node mn-yellow" id="qe-acc">Accessibility<br>Testing</div>
-                    </div>
-                    <div class="branch branch-right">
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="qe-acc">WCAG Principles</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Level A / AA / AAA</div>
-                            </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Prompt Patterns Library</div>
+                            <ul class="subtopic-children">
+                                <li>Reusable Templates</li>
+                                <li>Version Control for Prompts</li>
+                            </ul>
                         </div>
-                        <div class="sub-node sn-yellow" data-connect="qe-acc">Color Contrast</div>
-                        <div class="sub-node sn-yellow" data-connect="qe-acc">ARIA Testing</div>
-                        <div class="sub-node sn-yellow" data-connect="qe-acc">Keyboard Accessibility</div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Advanced QE Applications</div>
+                            <ul class="subtopic-children">
+                                <li>AI-Powered Test Planning</li>
+                                <li>Predictive Quality Metrics</li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="qe-mob">Mobile Testing Techniques</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Interruption / Localization</div>
-                                <div class="child-node cn-yellow">Performance / Network</div>
-                            </div>
+                    <!-- Context Engineering Advanced -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Context Engineering Advanced</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">System Prompt Design</div>
+                            <ul class="subtopic-children">
+                                <li>Persona Configuration</li>
+                                <li>Behavioral Rules</li>
+                                <li>Output Formatting</li>
+                            </ul>
                         </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="qe-mob">Platforms</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Native/Hybrid/Responsive</div>
-                                <div class="child-node cn-yellow">Real Devices / Emulators</div>
-                            </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">RAG Implementation</div>
+                            <ul class="subtopic-children">
+                                <li>Document Retrieval</li>
+                                <li>Knowledge Base Integration</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Context for Complex QE</div>
+                            <ul class="subtopic-children">
+                                <li>Project Context Management</li>
+                                <li>AI Memory Strategies</li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="center-col">
-                        <div class="main-node mn-yellow" id="qe-mob">Mobile Testing</div>
-                        <div class="main-node mn-yellow" id="qe-prog">Programming</div>
-                    </div>
-                    <div class="branch branch-right">
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="qe-prog">OOP Hands-On</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Abstraction / Encapsulation</div>
-                                <div class="child-node cn-yellow">Inheritance / Polymorphism</div>
-                            </div>
-                        </div>
-                        <div class="sub-node sn-yellow" data-connect="qe-prog">Collections &amp; Data Structures</div>
-                        <div class="sub-node sn-yellow" data-connect="qe-prog">String Manipulation</div>
-                        <div class="sub-node sn-yellow" data-connect="qe-prog">File I/O &amp; Exception Handling</div>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="qe-sqli">Advanced Joins</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Right / Full-outer / Self Join</div>
-                            </div>
+                    <!-- Synthetic Data Generation -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Synthetic Data Generation</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">AI-Generated Test Data</div>
+                            <ul class="subtopic-children">
+                                <li>Realistic Data Patterns</li>
+                                <li>Edge Case Generation</li>
+                                <li>Boundary Value Data</li>
+                            </ul>
                         </div>
-                        <div class="sub-node sn-yellow" data-connect="qe-sqli">Aggregations &amp; Subqueries</div>
-                        <div class="sub-node sn-yellow" data-connect="qe-sqli">GROUP BY &amp; HAVING</div>
-                        <div class="sub-node sn-yellow" data-connect="qe-sqli">CASE / UNION / NULL Handling</div>
-                    </div>
-                    <div class="center-col">
-                        <div class="main-node mn-yellow" id="qe-sqli">SQL Intermediate</div>
-                        <div class="main-node mn-yellow" id="qe-aidd">AI Deep Dive</div>
-                    </div>
-                    <div class="branch branch-right">
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="qe-aidd">LLM Architecture</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Transformers / Token Prediction</div>
-                            </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Privacy-Safe Data</div>
+                            <ul class="subtopic-children">
+                                <li>PII Anonymization</li>
+                                <li>Compliant Test Data</li>
+                            </ul>
                         </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="qe-aidd">Model Comparison</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">GPT vs Claude vs Gemini</div>
-                            </div>
-                        </div>
-                        <div class="sub-node sn-yellow" data-connect="qe-aidd">Hands-on Tools (Copilot, Claude Code)</div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="qe-pei">Prompt Frameworks</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">TRICE+ / RACE / CREATE</div>
-                            </div>
-                        </div>
-                        <div class="sub-node sn-yellow" data-connect="qe-pei">Few-Shot / Chain of Thought</div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="qe-pei">QE-Specific Prompts</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Test Case / Bug Reports</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="center-col">
-                        <div class="main-node mn-yellow" id="qe-pei">Prompt Engineering<br>Intermediate</div>
-                        <div class="main-node mn-yellow" id="qe-cei">Context Engineering<br>Intermediate</div>
-                    </div>
-                    <div class="branch branch-right">
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="qe-cei">Context Optimization</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Prioritizing Information</div>
-                                <div class="child-node cn-yellow">Structured Templates</div>
-                            </div>
-                        </div>
-                        <div class="sub-node sn-yellow" data-connect="qe-cei">Multi-Turn Conversations</div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="qe-cei">Context for QE Tasks</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Requirements / Test Scenarios</div>
-                            </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Data Validation</div>
+                            <ul class="subtopic-children">
+                                <li>Verifying AI-Generated Data</li>
+                                <li>Quality Checks</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-
-                <!-- SENIOR 1-2 - RED -->
-                <div class="level-divider"><span>Senior 1-2</span></div>
-
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-group">
-                            <div class="sub-node sn-red parent" data-connect="qe-sa">Web Automation / Low Code</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-red">Testim / Mabl / JavaScript</div>
-                            </div>
-                        </div>
-                        <div class="sub-node sn-red" data-connect="qe-sa">Web Automation / Selenium</div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-red parent" data-connect="qe-sa">Test Frameworks</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-red">TestNG / NUnit / Cucumber</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="center-col">
-                        <div class="main-node mn-red" id="qe-sa">Software<br>Automation</div>
-                        <div class="main-node mn-red" id="qe-perf">Performance Testing<br>(Conceptual)</div>
-                    </div>
-                    <div class="branch branch-right">
-                        <div class="sub-group">
-                            <div class="sub-node sn-red parent" data-connect="qe-perf">Testing Types</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-red">Load / Stress / Volume</div>
-                                <div class="child-node cn-red">Soak / Scalability</div>
-                            </div>
-                        </div>
-                        <div class="sub-node sn-red" data-connect="qe-perf">JMeter</div>
-                        <div class="sub-node sn-red" data-connect="qe-perf">Load Runner / Blaze Meter</div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-node sn-red" data-connect="qe-advt">DoD &amp; DoR Analysis</div>
-                        <div class="sub-node sn-red" data-connect="qe-advt">Release Management</div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-red parent" data-connect="qe-advt">Advanced Test Techniques</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-red">Risk-Based / Dynamic Selection</div>
-                            </div>
-                        </div>
-                        <div class="sub-node sn-red" data-connect="qe-advt">Reporting &amp; Coverage</div>
-                    </div>
-                    <div class="center-col">
-                        <div class="main-node mn-red" id="qe-advt">Advanced Testing</div>
-                        <div class="main-node mn-red" id="qe-asql">Advanced SQL</div>
-                    </div>
-                    <div class="branch branch-right">
-                        <div class="sub-node sn-red" data-connect="qe-asql">Views / Stored Procedures</div>
-                        <div class="sub-node sn-red" data-connect="qe-asql">Windows Functions</div>
-                        <div class="sub-node sn-red" data-connect="qe-asql">Query Optimization &amp; Indexing</div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-red parent" data-connect="qe-asql">Transactions &amp; Locking</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-red">ACID / Deadlocks</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-group">
-                            <div class="sub-node sn-red parent" data-connect="qe-aim">Advanced LLM Concepts</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-red">Fine-Tuning vs Prompting</div>
-                                <div class="child-node cn-red">RAG / Embeddings</div>
-                            </div>
-                        </div>
-                        <div class="sub-node sn-red" data-connect="qe-aim">AI Integration (APIs / CI/CD)</div>
-                        <div class="sub-node sn-red" data-connect="qe-aim">AI Governance &amp; Ethics</div>
-                    </div>
-                    <div class="center-col">
-                        <div class="main-node mn-red" id="qe-aim">AI Mastery</div>
-                        <div class="main-node mn-red" id="qe-pea">Prompt Engineering<br>Advanced</div>
-                    </div>
-                    <div class="branch branch-right">
-                        <div class="sub-group">
-                            <div class="sub-node sn-red parent" data-connect="qe-pea">Complex Prompt Design</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-red">Multi-Step / Self-Reflection</div>
-                            </div>
-                        </div>
-                        <div class="sub-node sn-red" data-connect="qe-pea">Prompt Patterns Library</div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-red parent" data-connect="qe-pea">Advanced QE Applications</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-red">AI Test Planning / Defect Analysis</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-group">
-                            <div class="sub-node sn-red parent" data-connect="qe-cea">System Prompt Design</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-red">Persona / Behavioral Rules</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-red parent" data-connect="qe-cea">RAG Implementation</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-red">Document Retrieval / KB</div>
-                            </div>
-                        </div>
-                        <div class="sub-node sn-red" data-connect="qe-cea">Full Project Context</div>
-                    </div>
-                    <div class="center-col">
-                        <div class="main-node mn-red" id="qe-cea">Context Engineering<br>Advanced</div>
-                        <div class="main-node mn-red" id="qe-sdg">Synthetic Data<br>Generation</div>
-                    </div>
-                    <div class="branch branch-right">
-                        <div class="sub-group">
-                            <div class="sub-node sn-red parent" data-connect="qe-sdg">AI-Generated Test Data</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-red">Realistic / Edge Cases</div>
-                            </div>
-                        </div>
-                        <div class="sub-node sn-red" data-connect="qe-sdg">Privacy-Safe Data (PII)</div>
-                        <div class="sub-node sn-red" data-connect="qe-sdg">Data Validation &amp; QA</div>
-                    </div>
-                </div>
-
-                <svg class="connectors" id="svg-qe"></svg>
             </div>
         </div>
+        <!-- END NEW ROADMAP DESIGN -->
     </div>
 </div>
+
 
 <!-- ============================================================ -->
 <!-- TAB: SDET ROADMAP -->
@@ -2363,796 +2825,594 @@ Business Rules: Minimum order $10, Max 50 items
             <div class="legend-item"><div class="legend-dot" style="background:var(--red);"></div> Senior 1-2</div>
         </div>
 
-        <div class="diagram-scroll">
-            <div class="diagram-wrapper" id="diagram-sdet">
-                <div class="title-node title-sdet">SDET</div>
-
-                <!-- JUNIOR - GREEN -->
-                <div class="level-divider"><span>Junior</span></div>
-
-                <!-- Row 1: Front-end Automation Fundamentals -->
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-feaf">Selenium / Playwright</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Handling Web Elements</div>
-                                <div class="child-node cn-green">Advantages and Limitations</div>
-                                <div class="child-node cn-green">Exceptions</div>
-                                <div class="child-node cn-green">Synchronization</div>
-                                <div class="child-node cn-green">Debugging Techniques</div>
-                                <div class="child-node cn-green">Assertions</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="center-col">
-                        <div class="main-node mn-green" id="s-feaf">Front-end Automation<br>Fundamentals</div>
-                    </div>
-                    <div class="branch branch-right"></div>
+        <!-- NEW SDET ROADMAP DESIGN -->
+        <div class="roadmap-new sdet-roadmap">
+            <!-- JUNIOR LEVEL -->
+            <div class="level-section junior">
+                <div class="level-header">
+                    <div class="level-badge">Junior</div>
                 </div>
+                <div class="modules-grid">
+                    <!-- Front-end Automation Fundamentals -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Front-end Automation Fundamentals</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Selenium / Playwright</div>
+                            <ul class="subtopic-children">
+                                <li>Handling Web Elements</li>
+                                <li>Advantages &amp; Limitations</li>
+                                <li>Exceptions &amp; Synchronization</li>
+                                <li>Debugging Techniques</li>
+                                <li>Assertions</li>
+                            </ul>
+                        </div>
+                    </div>
 
-                <!-- Row 2: Programming Fundamentals -->
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-pf">OOP In Practice</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Classes, objects, constructors, access modifiers</div>
-                            </div>
+                    <!-- Programming Fundamentals -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Programming Fundamentals</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">OOP In Practice</div>
+                            <ul class="subtopic-children">
+                                <li>Classes, objects, constructors</li>
+                                <li>Access modifiers</li>
+                            </ul>
                         </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-pf">Inheritance &amp; Polymorphism</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Abstract classes, interfaces, method overriding</div>
-                            </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Inheritance &amp; Polymorphism</div>
+                            <ul class="subtopic-children">
+                                <li>Abstract classes, interfaces</li>
+                            </ul>
                         </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-pf">Error Handling Patterns</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Try/catch/finally, custom exceptions</div>
-                            </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Data Structures</div>
+                            <ul class="subtopic-children">
+                                <li>Arrays, Lists, Maps, Sets</li>
+                                <li>Queues, Stacks</li>
+                            </ul>
                         </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-pf">Data Structures Implementation</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Arrays, Lists, Maps, Sets, Queues, Stacks</div>
-                            </div>
+                        <ul class="items">
+                            <li>Error Handling Patterns</li>
+                            <li>Algorithms Basics</li>
+                            <li>Unit Testing</li>
+                            <li>SOLID Principles Intro</li>
+                            <li>Generics / Lambda</li>
+                        </ul>
+                    </div>
+
+                    <!-- API Automation -->
+                    <div class="module-card left">
+                        <h3 class="module-title">API Automation</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Bridge: Postman to Code</div>
+                            <ul class="subtopic-children">
+                                <li>Reproduce Postman requests</li>
+                                <li>Read/navigate JSON</li>
+                            </ul>
                         </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-pf">Algorithms Basics</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Searching, sorting, iteration vs recursion</div>
-                            </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Writing First API Test</div>
+                            <ul class="subtopic-children">
+                                <li>GET/POST requests</li>
+                                <li>Validate response fields</li>
+                                <li>Chain requests</li>
+                            </ul>
                         </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-pf">Working with Libraries/Packages</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Package managers (npm, Maven, NuGet, pip)</div>
-                            </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Making Tests Reusable</div>
+                            <ul class="subtopic-children">
+                                <li>Config files, headers</li>
+                                <li>Data from JSON/CSV</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Working Without Backend</div>
+                            <ul class="subtopic-children">
+                                <li>Postman mock server</li>
+                                <li>Simulate error responses</li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="center-col">
-                        <div class="main-node mn-green" id="s-pf">Programming<br>Fundamentals</div>
+
+                    <!-- SQL Fundamentals -->
+                    <div class="module-card right">
+                        <h3 class="module-title">SQL Fundamentals</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">DDL &amp; Schema</div>
+                            <ul class="subtopic-children">
+                                <li>CREATE, ALTER, DROP</li>
+                                <li>Table design understanding</li>
+                            </ul>
+                        </div>
+                        <ul class="items">
+                            <li>All JOIN Types</li>
+                            <li>Complex WHERE Clauses</li>
+                            <li>Aggregate Functions &amp; GROUP BY</li>
+                            <li>Database Connectivity from Code</li>
+                            <li>Parameterized Queries</li>
+                            <li>Transaction Basics</li>
+                            <li>Result Set Handling</li>
+                            <li>Schema Navigation (ERDs)</li>
+                            <li>Indexes Awareness</li>
+                        </ul>
                     </div>
-                    <div class="branch branch-right">
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-pf">Unit Testing</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Writing testable code, assertions, mocking basics</div>
-                            </div>
+
+                    <!-- Code Versioning -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Code Versioning</h3>
+                        <ul class="items">
+                            <li>Type of Version Control Systems</li>
+                            <li>GIT Basics</li>
+                            <li>Branching and Merging</li>
+                        </ul>
+                    </div>
+
+                    <!-- CI / CD -->
+                    <div class="module-card right">
+                        <h3 class="module-title">CI / CD</h3>
+                        <ul class="items">
+                            <li>Continuous Integration</li>
+                            <li>Continuous Delivery</li>
+                            <li>CI Pipelines Basics</li>
+                        </ul>
+                    </div>
+
+                    <!-- AI for Developers -->
+                    <div class="module-card left">
+                        <h3 class="module-title">AI for Developers</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">What is AI</div>
+                            <ul class="subtopic-children">
+                                <li>ML vs Deep Learning</li>
+                                <li>LLMs &amp; Code Generation</li>
+                            </ul>
                         </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-pf">Code Organization</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Namespaces, modules, project structure</div>
-                            </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">AI Coding Assistants</div>
+                            <ul class="subtopic-children">
+                                <li>GitHub Copilot Setup</li>
+                                <li>VS Code AI Extensions</li>
+                            </ul>
                         </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-pf">SOLID Principles Introduction</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Single Responsibility, Open/Closed basics</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-pf">Generics/Templates</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Type-safe collections and methods</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-pf">Lambda Expressions</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Anonymous functions, functional basics</div>
-                            </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">AI Safety</div>
+                            <ul class="subtopic-children">
+                                <li>Reviewing AI-Generated Code</li>
+                                <li>Security &amp; License Concerns</li>
+                            </ul>
                         </div>
                     </div>
+
+                    <!-- Prompt Engineering Basics -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Prompt Engineering Basics</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Writing Prompts for Code</div>
+                            <ul class="subtopic-children">
+                                <li>Describing needs</li>
+                                <li>Specifying language/framework</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Basic Patterns</div>
+                            <ul class="subtopic-children">
+                                <li>"Write a function that..."</li>
+                                <li>"Explain/Fix this code..."</li>
+                            </ul>
+                        </div>
+                        <ul class="items">
+                            <li>Learning from AI Suggestions</li>
+                        </ul>
+                    </div>
+
+                    <!-- Context Engineering Basics -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Context Engineering Basics</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Code Context Fundamentals</div>
+                            <ul class="subtopic-children">
+                                <li>What Context AI Needs</li>
+                                <li>File Structure Awareness</li>
+                                <li>Dependency Information</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Providing Code Context</div>
+                            <ul class="subtopic-children">
+                                <li>Sharing Relevant Files</li>
+                                <li>Explaining Architecture</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="module-card right" style="visibility: hidden;"></div>
                 </div>
+            </div>
 
-                <!-- Row: API Automation -->
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-api">Bridge: Postman to Code</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Reproduce Postman request in code</div>
-                                <div class="child-node cn-green">Read/navigate JSON response</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-api">Writing Your First API Test</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">GET request &amp; assert status</div>
-                                <div class="child-node cn-green">POST request with JSON body</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="center-col">
-                        <div class="main-node mn-green" id="s-api">API Automation</div>
-                    </div>
-                    <div class="branch branch-right">
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-api">Making Tests Reusable</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Extract base URL to config</div>
-                                <div class="child-node cn-green">Reuse headers across tests</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-api">Working Without a Backend</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Set up Postman mock server</div>
-                                <div class="child-node cn-green">Simulate error responses</div>
-                            </div>
-                        </div>
-                    </div>
+            <!-- SDET INTERMEDIATE LEVEL -->
+            <div class="level-section intermediate">
+                <div class="level-header">
+                    <div class="level-badge">Intermediate 1-4</div>
                 </div>
+                <div class="modules-grid">
+                    <!-- Design Patterns Fundamentals -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Design Patterns Fundamentals</h3>
+                        <ul class="items">
+                            <li>Page Object Model</li>
+                            <li>Screen Play Pattern</li>
+                            <li>Singleton</li>
+                            <li>Page Factory</li>
+                        </ul>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Testing Approaches</div>
+                            <ul class="subtopic-children">
+                                <li>BDD / TDD</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Testing Frameworks</div>
+                            <ul class="subtopic-children">
+                                <li>TestNG / JUnit</li>
+                                <li>NUnit / MsTest / Mocha</li>
+                                <li>Cucumber / Specflow</li>
+                            </ul>
+                        </div>
+                    </div>
 
-                <!-- Row: SQL Fundamentals -->
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-sqlf">DDL &amp; Schema Understanding</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">CREATE, ALTER, DROP, table design</div>
-                            </div>
+                    <!-- Front-end Automation Advanced -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Front-end Automation Advanced</h3>
+                        <ul class="items">
+                            <li>Dynamic Xpath Strategies</li>
+                            <li>Chrome DevTools Protocol</li>
+                            <li>Waits/Retry Management</li>
+                            <li>Improved Debugging</li>
+                        </ul>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Advanced Web Elements</div>
+                            <ul class="subtopic-children">
+                                <li>Shadow DOM / iFrames</li>
+                            </ul>
                         </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-sqlf">All JOIN Types</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">INNER, LEFT, RIGHT, FULL, CROSS, SELF</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-sqlf">Complex WHERE Clauses</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Compound conditions, subqueries</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-sqlf">Aggregate Functions</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">COUNT, SUM, AVG, GROUP BY, HAVING</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-sqlf">Database Connectivity</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">JDBC, ADO.NET, drivers</div>
-                            </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Multi-Framework Exposure</div>
+                            <ul class="subtopic-children">
+                                <li>Selenium / Playwright / Cypress</li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="center-col">
-                        <div class="main-node mn-green" id="s-sqlf">SQL Fundamentals</div>
+
+                    <!-- Advanced SQL -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Advanced SQL</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Window Functions</div>
+                            <ul class="subtopic-children">
+                                <li>ROW_NUMBER, RANK, LEAD, LAG</li>
+                                <li>PARTITION BY</li>
+                            </ul>
+                        </div>
+                        <ul class="items">
+                            <li>CTEs (recursive/non-recursive)</li>
+                            <li>Complex Subqueries</li>
+                            <li>Query Optimization</li>
+                            <li>Indexing Strategies</li>
+                            <li>Stored Procedures &amp; Functions</li>
+                            <li>Triggers &amp; Events</li>
+                            <li>Views &amp; Materialized Views</li>
+                            <li>Transactions &amp; Locking</li>
+                            <li>Dynamic SQL</li>
+                            <li>NoSQL Awareness</li>
+                        </ul>
                     </div>
-                    <div class="branch branch-right">
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-sqlf">Parameterized Queries</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Preventing SQL injection</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-sqlf">Transaction Basics</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">BEGIN, COMMIT, ROLLBACK</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-sqlf">Result Set Handling</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Mapping results to objects</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-sqlf">Schema Navigation</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">ERDs, foreign keys, relationships</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-sqlf">Indexes Awareness</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">What they are, why they matter</div>
-                            </div>
+
+                    <!-- Advanced API Automation -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Advanced API Automation</h3>
+                        <ul class="items">
+                            <li>Serialize / Deserialize</li>
+                            <li>Data Driven Testing</li>
+                            <li>Response Data Validation</li>
+                        </ul>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Non-Functional Testing</div>
+                            <ul class="subtopic-children">
+                                <li>Performance Testing</li>
+                                <li>Stress / Load Testing</li>
+                            </ul>
                         </div>
                     </div>
+
+                    <!-- Mobile Automation -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Mobile Automation</h3>
+                        <ul class="items">
+                            <li>Appium</li>
+                            <li>Gestures</li>
+                            <li>Locators</li>
+                        </ul>
+                    </div>
+
+                    <!-- Advanced GIT -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Advanced GIT</h3>
+                        <ul class="items">
+                            <li>Git Workflows</li>
+                            <li>Undoing Changes</li>
+                            <li>Tagging and Releases</li>
+                            <li>Cherry-picking</li>
+                            <li>Squashing / Rebase</li>
+                        </ul>
+                    </div>
+
+                    <!-- AI-Augmented Development -->
+                    <div class="module-card left">
+                        <h3 class="module-title">AI-Augmented Development</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Advanced AI Tools</div>
+                            <ul class="subtopic-children">
+                                <li>Copilot Advanced Features</li>
+                                <li>Claude Code / Cursor IDE</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">AI for Test Automation</div>
+                            <ul class="subtopic-children">
+                                <li>Generating Test Scripts</li>
+                                <li>Creating Page Objects</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">AI-Assisted Debugging</div>
+                            <ul class="subtopic-children">
+                                <li>Error Analysis</li>
+                                <li>Log Interpretation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Prompt Engineering Intermediate -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Prompt Engineering Intermediate</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Code Generation Prompts</div>
+                            <ul class="subtopic-children">
+                                <li>Framework-Specific Prompts</li>
+                                <li>Test Pattern / Refactoring</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Prompt Techniques</div>
+                            <ul class="subtopic-children">
+                                <li>Few-Shot with Examples</li>
+                                <li>Chain of Thought</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">SDET-Specific Patterns</div>
+                            <ul class="subtopic-children">
+                                <li>Test Framework Setup</li>
+                                <li>API/UI Automation Prompts</li>
+                                <li>CI/CD Configuration</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Context Engineering Intermediate -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Context Engineering Intermediate</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Repository-Aware Prompting</div>
+                            <ul class="subtopic-children">
+                                <li>Project Structure Context</li>
+                                <li>Existing Code Patterns</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Multi-File Context</div>
+                            <ul class="subtopic-children">
+                                <li>Related File References</li>
+                                <li>Test-Code Relationships</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Documentation as Context</div>
+                            <ul class="subtopic-children">
+                                <li>API Specs / Requirements</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="module-card right" style="visibility: hidden;"></div>
                 </div>
+            </div>
 
-                <!-- Row: Code Versioning -->
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-node sn-green" data-connect="s-cv">Type of Version Control Systems</div>
-                        <div class="sub-node sn-green" data-connect="s-cv">GIT Basics</div>
-                        <div class="sub-node sn-green" data-connect="s-cv">Branching and Merging</div>
-                    </div>
-                    <div class="center-col">
-                        <div class="main-node mn-green" id="s-cv">Code Versioning</div>
-                    </div>
-                    <div class="branch branch-right"></div>
+            <!-- SDET SENIOR LEVEL -->
+            <div class="level-section senior">
+                <div class="level-header">
+                    <div class="level-badge">Senior 1-2</div>
                 </div>
+                <div class="modules-grid">
+                    <!-- Programming Advanced / Best Practices -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Programming Advanced</h3>
+                        <ul class="items">
+                            <li>Data Structures &amp; Algorithms</li>
+                        </ul>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Design Patterns</div>
+                            <ul class="subtopic-children">
+                                <li>SOLID</li>
+                                <li>Behavioral / Structural</li>
+                            </ul>
+                        </div>
+                        <ul class="items">
+                            <li>Interfaces &amp; Abstract Classes</li>
+                            <li>Functional Programming</li>
+                            <li>Clean Code Principles</li>
+                            <li>TDD Hands-on</li>
+                        </ul>
+                    </div>
 
-                <!-- Row: CI/CD -->
-                <div class="row">
-                    <div class="branch branch-left"></div>
-                    <div class="center-col">
-                        <div class="main-node mn-green" id="s-cicd">CI / CD</div>
+                    <!-- Automation Design Pattern Development -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Automation Design Patterns</h3>
+                        <ul class="items">
+                            <li>Framework Development</li>
+                            <li>POM / Page Factory</li>
+                            <li>Screen Play Pattern / BDD</li>
+                            <li>Singleton Design Pattern</li>
+                            <li>Parallel Execution</li>
+                        </ul>
                     </div>
-                    <div class="branch branch-right">
-                        <div class="sub-node sn-green" data-connect="s-cicd">Continuous Integration</div>
-                        <div class="sub-node sn-green" data-connect="s-cicd">Continuous Delivery</div>
-                        <div class="sub-node sn-green" data-connect="s-cicd">CI Pipelines Basics</div>
-                    </div>
-                </div>
 
-                <!-- Row: AI for Developers -->
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-aifd">What is AI</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">ML vs Deep Learning</div>
-                                <div class="child-node cn-green">LLMs Explained</div>
-                            </div>
-                        </div>
+                    <!-- CI/CD Advanced Topics -->
+                    <div class="module-card left">
+                        <h3 class="module-title">CI/CD Advanced</h3>
+                        <ul class="items">
+                            <li>Docker in CI/CD</li>
+                            <li>YAML language</li>
+                            <li>Multi-stage pipelines</li>
+                            <li>Artifact Management</li>
+                            <li>Infrastructure as Code</li>
+                        </ul>
                     </div>
-                    <div class="center-col">
-                        <div class="main-node mn-green" id="s-aifd">AI for Developers</div>
-                    </div>
-                    <div class="branch branch-right">
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-aifd">AI Coding Assistants</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">GitHub Copilot</div>
-                                <div class="child-node cn-green">VS Code Extensions</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-aifd">AI Safety</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Code Review</div>
-                                <div class="child-node cn-green">Security Risks</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Row: Prompt Engineering Basics -->
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-peb">Writing Prompts</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Describe What You Need</div>
-                                <div class="child-node cn-green">Specify Language/Framework</div>
-                            </div>
+                    <!-- Mobile Automation Advanced -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Mobile Automation Advanced</h3>
+                        <ul class="items">
+                            <li>Parallel Executors</li>
+                            <li>Multiple App Contexts</li>
+                            <li>Mobile Device Virtualization</li>
+                        </ul>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Cloud Device Farms</div>
+                            <ul class="subtopic-children">
+                                <li>SauceLabs / BrowserStack</li>
+                                <li>AWS</li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="center-col">
-                        <div class="main-node mn-green" id="s-peb">Prompt Engineering<br>Basics</div>
-                    </div>
-                    <div class="branch branch-right">
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-peb">Basic Patterns</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">"Write a function..."</div>
-                                <div class="child-node cn-green">"Fix this error..."</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-peb">Learning from AI</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Understanding Suggestions</div>
-                                <div class="child-node cn-green">Iterating on Results</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-ceb">Code Context Fundamentals</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">What Context AI Needs</div>
-                                <div class="child-node cn-green">File Structure Awareness</div>
-                                <div class="child-node cn-green">Dependency Information</div>
-                            </div>
+                    <!-- AI Architecture -->
+                    <div class="module-card left">
+                        <h3 class="module-title">AI Architecture</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">LLM Integration</div>
+                            <ul class="subtopic-children">
+                                <li>OpenAI / Anthropic APIs</li>
+                                <li>Azure AI / AWS Bedrock</li>
+                                <li>Self-Hosted (Ollama)</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">AI in Test Infrastructure</div>
+                            <ul class="subtopic-children">
+                                <li>AI-Powered Test Selection</li>
+                                <li>Intelligent Prioritization</li>
+                                <li>Self-Healing Locators</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Building AI Agents</div>
+                            <ul class="subtopic-children">
+                                <li>Autonomous Test Agents</li>
+                                <li>Multi-Agent Orchestration</li>
+                                <li>LangChain, etc.</li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="center-col">
-                        <div class="main-node mn-green" id="s-ceb">Context Engineering<br>Basics</div>
-                    </div>
-                    <div class="branch branch-right">
-                        <div class="sub-group">
-                            <div class="sub-node sn-green parent" data-connect="s-ceb">Providing Code Context</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-green">Sharing Relevant Files</div>
-                                <div class="child-node cn-green">Explaining Architecture</div>
-                                <div class="child-node cn-green">Specifying Constraints</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- INTERMEDIATE 1-4 - YELLOW -->
-                <div class="level-divider"><span>Intermediate 1-4</span></div>
+                    <!-- Prompt Engineering Advanced -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Prompt Engineering Advanced</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Complex Automation Prompts</div>
+                            <ul class="subtopic-children">
+                                <li>Full Framework Generation</li>
+                                <li>Migration Prompts</li>
+                                <li>Architecture Design</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Prompt Management</div>
+                            <ul class="subtopic-children">
+                                <li>Version Control for Prompts</li>
+                                <li>Team Prompt Libraries</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Advanced Patterns</div>
+                            <ul class="subtopic-children">
+                                <li>Self-Correcting Prompts</li>
+                                <li>Validation Chains</li>
+                            </ul>
+                        </div>
+                    </div>
 
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-dpf">Page Object Model</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Script Creation</div>
-                            </div>
+                    <!-- Context Engineering Advanced -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Context Engineering Advanced</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">System Prompt Design</div>
+                            <ul class="subtopic-children">
+                                <li>Custom AI Personas</li>
+                                <li>Framework-Specific Instructions</li>
+                            </ul>
                         </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-dpf">Screen Play Pattern</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Script Creation</div>
-                            </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">RAG for Testing</div>
+                            <ul class="subtopic-children">
+                                <li>Test Doc Retrieval</li>
+                                <li>Codebase Knowledge Bases</li>
+                            </ul>
                         </div>
-                        <div class="sub-node sn-yellow" data-connect="s-dpf">Singleton</div>
-                        <div class="sub-node sn-yellow" data-connect="s-dpf">Page Factory</div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-dpf">Testing Approaches</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">BDD</div>
-                                <div class="child-node cn-yellow">TDD</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-dpf">Testing Frameworks</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">TestNG - JUnit</div>
-                                <div class="child-node cn-yellow">NUnit - MsTest - Mocha</div>
-                                <div class="child-node cn-yellow">Cucumber / SpecFlow</div>
-                            </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Context Architecture</div>
+                            <ul class="subtopic-children">
+                                <li>Dynamic Context Loading</li>
+                                <li>Token Optimization</li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="center-col">
-                        <div class="main-node mn-yellow" id="s-dpf">Design Patterns<br>Fundamentals</div>
-                    </div>
-                    <div class="branch branch-right"></div>
-                </div>
 
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-node sn-yellow" data-connect="s-feaa">Dynamic Xpath Strategies</div>
-                        <div class="sub-node sn-yellow" data-connect="s-feaa">Chrome DevTools Protocol</div>
-                        <div class="sub-node sn-yellow" data-connect="s-feaa">Waits/Retry Management</div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-feaa">Handling Advanced Web Elements</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Shadow DOM</div>
-                                <div class="child-node cn-yellow">iFrames</div>
-                            </div>
+                    <!-- AI-Powered Frameworks -->
+                    <div class="module-card right">
+                        <h3 class="module-title">AI-Powered Frameworks</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Integrating LLMs</div>
+                            <ul class="subtopic-children">
+                                <li>AI Test Data Factories</li>
+                                <li>Dynamic Assertion Gen</li>
+                                <li>Natural Language Steps</li>
+                            </ul>
                         </div>
-                        <div class="sub-node sn-yellow" data-connect="s-feaa">Improved Debugging</div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-feaa">Multi-Framework Exposure</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Selenium</div>
-                                <div class="child-node cn-yellow">Playwright</div>
-                                <div class="child-node cn-yellow">Cypress</div>
-                            </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Intelligent Reporting</div>
+                            <ul class="subtopic-children">
+                                <li>AI-Generated Reports</li>
+                                <li>Failure Analysis</li>
+                                <li>Trend Prediction</li>
+                            </ul>
                         </div>
-                    </div>
-                    <div class="center-col">
-                        <div class="main-node mn-yellow" id="s-feaa">Front-end Automation<br>Advanced</div>
-                        <div class="main-node mn-yellow" id="s-asql">Advanced SQL</div>
-                    </div>
-                    <div class="branch branch-right">
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-asql">Window Functions</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">ROW_NUMBER, RANK, DENSE_RANK, LEAD, LAG, PARTITION BY</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-asql">Common Table Expressions (CTEs)</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Recursive and non-recursive</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-asql">Complex Subqueries</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Correlated subqueries, EXISTS, IN vs JOIN</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-asql">Query Optimization</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Execution plans, EXPLAIN/ANALYZE, query tuning</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-asql">Indexing Strategies</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Clustered, non-clustered, composite, when to use</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-asql">Stored Procedures &amp; Functions</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Writing, parameters, output handling</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-asql">Triggers &amp; Events</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Understanding side effects, audit trails</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-asql">Views &amp; Materialized Views</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">When to use, performance implications</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-asql">Transactions &amp; Locking</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Isolation levels, deadlocks, concurrency</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-asql">Dynamic SQL</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Building queries programmatically, security</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-asql">Database Testing</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Data integrity validation, test data management</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-asql">NoSQL Awareness</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">When relational vs document/key-value stores</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-node sn-yellow" data-connect="s-aapi">Serialize / Deserialize</div>
-                        <div class="sub-node sn-yellow" data-connect="s-aapi">Data Driven</div>
-                        <div class="sub-node sn-yellow" data-connect="s-aapi">Response Data Validation</div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-aapi">Non-Functional Experience</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Performance Testing</div>
-                                <div class="child-node cn-yellow">Stress Testing</div>
-                                <div class="child-node cn-yellow">Load Testing</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="center-col">
-                        <div class="main-node mn-yellow" id="s-aapi">Advanced API<br>Automation</div>
-                        <div class="main-node mn-yellow" id="s-mob">Mobile Automation</div>
-                    </div>
-                    <div class="branch branch-right">
-                        <div class="sub-node sn-yellow" data-connect="s-mob">Appium</div>
-                        <div class="sub-node sn-yellow" data-connect="s-mob">Gestures</div>
-                        <div class="sub-node sn-yellow" data-connect="s-mob">Locators</div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-node sn-yellow" data-connect="s-agit">Git Workflows</div>
-                        <div class="sub-node sn-yellow" data-connect="s-agit">Undoing Changes</div>
-                        <div class="sub-node sn-yellow" data-connect="s-agit">Tagging and Releases</div>
-                        <div class="sub-node sn-yellow" data-connect="s-agit">Cherry-picking</div>
-                        <div class="sub-node sn-yellow" data-connect="s-agit">Squashing</div>
-                        <div class="sub-node sn-yellow" data-connect="s-agit">Rebase</div>
-                    </div>
-                    <div class="center-col">
-                        <div class="main-node mn-yellow" id="s-agit">Advanced GIT</div>
-                        <div class="main-node mn-yellow" id="s-aiad">AI-Augmented<br>Development</div>
-                    </div>
-                    <div class="branch branch-right">
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-aiad">Advanced AI Tools</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Copilot Advanced</div>
-                                <div class="child-node cn-yellow">Claude Code</div>
-                                <div class="child-node cn-yellow">Cursor IDE</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-aiad">AI for Test Automation</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Generating Test Scripts</div>
-                                <div class="child-node cn-yellow">Creating Page Objects</div>
-                                <div class="child-node cn-yellow">Writing Assertions</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-aiad">AI-Assisted Debugging</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Error Analysis</div>
-                                <div class="child-node cn-yellow">Log Interpretation</div>
-                                <div class="child-node cn-yellow">Root Cause Suggestions</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-pei">Code Generation Prompts</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Framework-Specific</div>
-                                <div class="child-node cn-yellow">Test Pattern Prompts</div>
-                                <div class="child-node cn-yellow">Refactoring Requests</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-pei">Prompt Techniques</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Few-Shot with Code</div>
-                                <div class="child-node cn-yellow">Chain of Thought</div>
-                                <div class="child-node cn-yellow">Specification-Based</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-pei">SDET-Specific Patterns</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Framework Setup</div>
-                                <div class="child-node cn-yellow">API Test Generation</div>
-                                <div class="child-node cn-yellow">UI Automation Prompts</div>
-                                <div class="child-node cn-yellow">CI/CD Configuration</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="center-col">
-                        <div class="main-node mn-yellow" id="s-pei">Prompt Engineering<br>Intermediate</div>
-                        <div class="main-node mn-yellow" id="s-cei">Context Engineering<br>Intermediate</div>
-                    </div>
-                    <div class="branch branch-right">
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-cei">Repository-Aware Prompting</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Project Structure Context</div>
-                                <div class="child-node cn-yellow">Existing Code Patterns</div>
-                                <div class="child-node cn-yellow">Team Conventions</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-cei">Multi-File Context</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">Related File References</div>
-                                <div class="child-node cn-yellow">Import/Dependency Context</div>
-                                <div class="child-node cn-yellow">Test-Code Relationships</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-yellow parent" data-connect="s-cei">Documentation as Context</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-yellow">API Specs</div>
-                                <div class="child-node cn-yellow">Requirements</div>
-                                <div class="child-node cn-yellow">Existing Test Plans</div>
-                            </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Self-Healing Automation</div>
+                            <ul class="subtopic-children">
+                                <li>Locator Recovery</li>
+                                <li>Test Self-Repair</li>
+                                <li>Adaptive Wait Strategies</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-
-                <!-- SENIOR 1-2 - RED -->
-                <div class="level-divider"><span>Senior 1-2</span></div>
-
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-node sn-red" data-connect="s-pabp">Data Structures and Algorithms</div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-red parent" data-connect="s-pabp">Design Patterns</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-red">SOLID</div>
-                                <div class="child-node cn-red">Behavioral Patterns</div>
-                                <div class="child-node cn-red">Structural Patterns</div>
-                            </div>
-                        </div>
-                        <div class="sub-node sn-red" data-connect="s-pabp">Interfaces and Abstract Classes</div>
-                        <div class="sub-node sn-red" data-connect="s-pabp">Functional Programming</div>
-                        <div class="sub-node sn-red" data-connect="s-pabp">Clean Code Principles</div>
-                        <div class="sub-node sn-red" data-connect="s-pabp">TDD Hands-on</div>
-                    </div>
-                    <div class="center-col">
-                        <div class="main-node mn-red" id="s-pabp">Programming Advanced<br>/ Best Practices</div>
-                        <div class="main-node mn-red" id="s-adpd">Automation Design<br>Pattern Development</div>
-                    </div>
-                    <div class="branch branch-right">
-                        <div class="sub-node sn-red" data-connect="s-adpd">Framework Development</div>
-                        <div class="sub-node sn-red" data-connect="s-adpd">POM / Page Factory</div>
-                        <div class="sub-node sn-red" data-connect="s-adpd">Screenplay BDD</div>
-                        <div class="sub-node sn-red" data-connect="s-adpd">Singleton Design Pattern</div>
-                        <div class="sub-node sn-red" data-connect="s-adpd">Parallel Execution</div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-node sn-red" data-connect="s-cicda">Docker in CI/CD</div>
-                        <div class="sub-node sn-red" data-connect="s-cicda">YAML Language</div>
-                        <div class="sub-node sn-red" data-connect="s-cicda">Multi-stage Pipelines</div>
-                        <div class="sub-node sn-red" data-connect="s-cicda">Artifact Management</div>
-                        <div class="sub-node sn-red" data-connect="s-cicda">Infrastructure as Code</div>
-                    </div>
-                    <div class="center-col">
-                        <div class="main-node mn-red" id="s-cicda">CI/CD Advanced<br>Topics</div>
-                        <div class="main-node mn-red" id="s-moba">Mobile Automation<br>Advanced</div>
-                    </div>
-                    <div class="branch branch-right">
-                        <div class="sub-node sn-red" data-connect="s-moba">Parallel Executors</div>
-                        <div class="sub-node sn-red" data-connect="s-moba">Multiple App Contexts</div>
-                        <div class="sub-node sn-red" data-connect="s-moba">Device Virtualization</div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-red parent" data-connect="s-moba">Cloud Device Farms</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-red">SauceLabs</div>
-                                <div class="child-node cn-red">BrowserStack</div>
-                                <div class="child-node cn-red">AWS Device Farm</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="branch branch-left"></div>
-                    <div class="center-col">
-                        <div class="main-node mn-red" id="s-sse">Secondary Skillset<br>Experience</div>
-                    </div>
-                    <div class="branch branch-right"></div>
-                </div>
-
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-group">
-                            <div class="sub-node sn-red parent" data-connect="s-aia">LLM Integration</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-red">OpenAI / Anthropic APIs</div>
-                                <div class="child-node cn-red">Azure AI / AWS Bedrock</div>
-                                <div class="child-node cn-red">Self-Hosted (Ollama)</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-red parent" data-connect="s-aia">AI in Test Infrastructure</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-red">AI-Powered Test Selection</div>
-                                <div class="child-node cn-red">Intelligent Prioritization</div>
-                                <div class="child-node cn-red">Self-Healing Locators</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-red parent" data-connect="s-aia">Building AI Agents</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-red">Autonomous Test Agents</div>
-                                <div class="child-node cn-red">Multi-Agent Orchestration</div>
-                                <div class="child-node cn-red">Agent Frameworks</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="center-col">
-                        <div class="main-node mn-red" id="s-aia">AI Architecture</div>
-                        <div class="main-node mn-red" id="s-pea">Prompt Engineering<br>Advanced</div>
-                    </div>
-                    <div class="branch branch-right">
-                        <div class="sub-group">
-                            <div class="sub-node sn-red parent" data-connect="s-pea">Complex Automation Prompts</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-red">Full Framework Generation</div>
-                                <div class="child-node cn-red">Migration Prompts</div>
-                                <div class="child-node cn-red">Architecture Design</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-red parent" data-connect="s-pea">Prompt Management</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-red">Version Control</div>
-                                <div class="child-node cn-red">Team Prompt Libraries</div>
-                                <div class="child-node cn-red">A/B Testing Prompts</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-red parent" data-connect="s-pea">Advanced Patterns</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-red">Self-Correcting Prompts</div>
-                                <div class="child-node cn-red">Validation Chains</div>
-                                <div class="child-node cn-red">Multi-Model Orchestration</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="branch branch-left">
-                        <div class="sub-group">
-                            <div class="sub-node sn-red parent" data-connect="s-cea">System Prompt Design</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-red">Custom AI Personas</div>
-                                <div class="child-node cn-red">Framework Instructions</div>
-                                <div class="child-node cn-red">Output Format Control</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-red parent" data-connect="s-cea">RAG for Testing</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-red">Test Doc Retrieval</div>
-                                <div class="child-node cn-red">Historical Test Data</div>
-                                <div class="child-node cn-red">Codebase Knowledge Bases</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-red parent" data-connect="s-cea">Context Architecture</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-red">Dynamic Context Loading</div>
-                                <div class="child-node cn-red">Context Caching</div>
-                                <div class="child-node cn-red">Token Optimization</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="center-col">
-                        <div class="main-node mn-red" id="s-cea">Context Engineering<br>Advanced</div>
-                        <div class="main-node mn-red" id="s-aipf">AI-Powered<br>Frameworks</div>
-                    </div>
-                    <div class="branch branch-right">
-                        <div class="sub-group">
-                            <div class="sub-node sn-red parent" data-connect="s-aipf">Integrating LLMs</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-red">AI Test Data Factories</div>
-                                <div class="child-node cn-red">Dynamic Assertions</div>
-                                <div class="child-node cn-red">Natural Language Steps</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-red parent" data-connect="s-aipf">Intelligent Reporting</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-red">AI Test Reports</div>
-                                <div class="child-node cn-red">Failure Analysis</div>
-                                <div class="child-node cn-red">Trend Prediction</div>
-                            </div>
-                        </div>
-                        <div class="sub-group">
-                            <div class="sub-node sn-red parent" data-connect="s-aipf">Self-Healing Automation</div>
-                            <div class="sub-children">
-                                <div class="child-node cn-red">Locator Recovery</div>
-                                <div class="child-node cn-red">Test Self-Repair</div>
-                                <div class="child-node cn-red">Adaptive Wait Strategies</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <svg class="connectors" id="svg-sdet"></svg>
             </div>
         </div>
+        <!-- END NEW SDET ROADMAP DESIGN -->
     </div>
 </div>
+
 
 <footer>
     <strong>QE Center of Excellence</strong> &mdash; Best Practices &mdash; 2025
