@@ -1114,50 +1114,53 @@
             letter-spacing: 0.3px;
         }
 
+        /* Items: Direct children of module (top-level items) */
         .module-card .items {
             list-style: none;
-            margin-top: 0.4rem;
-            margin-left: 0.4rem;
+            margin-top: 0.5rem;
         }
 
         .module-card .items > li {
-            padding: 0.25rem 0;
-            padding-left: 1rem;
+            padding: 0.3rem 0;
+            padding-left: 1.2rem;
             position: relative;
-            color: var(--text-muted);
+            color: var(--text);
             font-size: 0.85rem;
+            font-weight: 500;
         }
 
         .module-card .items > li::before {
-            content: '';
+            content: '›';
             position: absolute;
-            left: 0;
+            left: 0.2rem;
             top: 50%;
             transform: translateY(-50%);
-            width: 4px;
-            height: 4px;
-            background: var(--green);
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--green);
         }
 
         .level-section.intermediate .module-card .items > li::before {
-            background: var(--yellow);
+            color: var(--yellow);
         }
 
         .level-section.senior .module-card .items > li::before {
-            background: var(--red);
+            color: var(--red);
         }
 
+        /* Subtopic: Named group within module */
         .module-card .subtopic {
-            margin-top: 0.5rem;
+            margin-top: 0.6rem;
+            margin-left: 0.2rem;
         }
 
         .module-card .subtopic-title {
             font-size: 0.85rem;
             font-weight: 600;
-            padding: 0.2rem 0.5rem;
+            padding: 0.25rem 0.6rem;
             border-radius: 3px;
             display: inline-block;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.3rem;
             background: var(--bg-elevated);
             color: var(--text);
         }
@@ -1174,18 +1177,21 @@
             border-left: 3px solid var(--red);
         }
 
+        /* Subtopic children: Items under a subtopic */
         .module-card .subtopic-children {
             list-style: none;
-            margin-left: 0.8rem;
+            margin-left: 1rem;
             margin-bottom: 0.4rem;
+            padding-left: 0.8rem;
+            border-left: 1px solid rgba(255,255,255,0.1);
         }
 
         .module-card .subtopic-children li {
-            padding: 0.25rem 0;
-            padding-left: 1rem;
+            padding: 0.2rem 0;
+            padding-left: 0.8rem;
             position: relative;
             color: var(--text-muted);
-            font-size: 0.8rem;
+            font-size: 0.78rem;
         }
 
         .module-card .subtopic-children li::before {
@@ -1196,15 +1202,16 @@
             transform: translateY(-50%);
             width: 4px;
             height: 4px;
-            background: rgba(34,197,94,0.5);
+            border-radius: 50%;
+            background: rgba(34,197,94,0.6);
         }
 
         .level-section.intermediate .module-card .subtopic-children li::before {
-            background: rgba(234,179,8,0.5);
+            background: rgba(234,179,8,0.6);
         }
 
         .level-section.senior .module-card .subtopic-children li::before {
-            background: rgba(220,38,38,0.5);
+            background: rgba(220,38,38,0.6);
         }
 
         /* ===== RESPONSIVE ===== */
