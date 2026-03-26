@@ -977,12 +977,8 @@
             top: 0;
             bottom: 0;
             width: 2px;
-            background: var(--green);
+            background: var(--text-muted);
             transform: translateX(-50%);
-        }
-
-        .roadmap-new.sdet-roadmap::before {
-            background: var(--blue);
         }
 
         .level-section {
@@ -1110,7 +1106,7 @@
         }
 
         .module-card .module-title {
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             font-weight: 700;
             margin-bottom: 0.35rem;
             color: var(--text);
@@ -1127,7 +1123,7 @@
             padding-left: 0.8rem;
             position: relative;
             color: var(--text-muted);
-            font-size: 0.7rem;
+            font-size: 0.8rem;
         }
 
         .module-card .items > li::before {
@@ -1157,27 +1153,26 @@
         }
 
         .module-card .subtopic-title {
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             font-weight: 600;
             padding: 0.15rem 0.4rem;
             border-radius: 3px;
             display: inline-block;
             margin-bottom: 0.15rem;
+            background: var(--bg-elevated);
+            color: var(--text);
         }
 
         .level-section.junior .module-card .subtopic-title {
-            background: var(--green-dim);
-            color: var(--green-light);
+            border-left: 3px solid var(--green);
         }
 
         .level-section.intermediate .module-card .subtopic-title {
-            background: var(--yellow-dim);
-            color: var(--yellow-light);
+            border-left: 3px solid var(--yellow);
         }
 
         .level-section.senior .module-card .subtopic-title {
-            background: var(--red-dim);
-            color: var(--red-light);
+            border-left: 3px solid var(--red);
         }
 
         .module-card .subtopic-children {
@@ -1201,7 +1196,7 @@
             padding-left: 0.6rem;
             position: relative;
             color: var(--text-muted);
-            font-size: 0.65rem;
+            font-size: 0.75rem;
         }
 
         .module-card .subtopic-children li::before {
@@ -2937,24 +2932,71 @@ Business Rules: Minimum order $10, Max 50 items
                         </ul>
                     </div>
 
-                    <!-- Code Versioning -->
+                    <!-- Code Versioning Fundamentals -->
                     <div class="module-card left">
-                        <h3 class="module-title">Code Versioning</h3>
-                        <ul class="items">
-                            <li>Type of Version Control Systems</li>
-                            <li>GIT Basics</li>
-                            <li>Branching and Merging</li>
-                        </ul>
+                        <h3 class="module-title">Code Versioning Fundamentals</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Version Control Fundamentals</div>
+                            <ul class="subtopic-children">
+                                <li>Why version control matters</li>
+                                <li>Centralized vs distributed</li>
+                                <li>Clone, add, commit, push, pull</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">GIT Basics</div>
+                            <ul class="subtopic-children">
+                                <li>Set up GIT &amp; connect remote</li>
+                                <li>Track and stage changes</li>
+                                <li>Meaningful commit messages</li>
+                                <li>git log and git diff</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Branching and Merging</div>
+                            <ul class="subtopic-children">
+                                <li>Create/switch feature branches</li>
+                                <li>Merge &amp; resolve conflicts</li>
+                                <li>Merge vs rebase concepts</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Collaboration Basics</div>
+                            <ul class="subtopic-children">
+                                <li>Fork and clone repos</li>
+                                <li>Open pull requests</li>
+                                <li>Apply code review feedback</li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <!-- CI / CD -->
+                    <!-- CI / CD Fundamentals -->
                     <div class="module-card right">
-                        <h3 class="module-title">CI / CD</h3>
-                        <ul class="items">
-                            <li>Continuous Integration</li>
-                            <li>Continuous Delivery</li>
-                            <li>CI Pipelines Basics</li>
-                        </ul>
+                        <h3 class="module-title">CI / CD Fundamentals</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Core Concepts</div>
+                            <ul class="subtopic-children">
+                                <li>CI vs CD (delivery vs deployment)</li>
+                                <li>Where automation fits in pipeline</li>
+                                <li>Read basic YAML pipeline files</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Working with Pipelines</div>
+                            <ul class="subtopic-children">
+                                <li>Trigger pipelines manually/push</li>
+                                <li>Read logs to identify failures</li>
+                                <li>Pipeline vs test failure</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Running Tests in CI</div>
+                            <ul class="subtopic-children">
+                                <li>Configure job for test suite</li>
+                                <li>Environment variables</li>
+                                <li>Publish test reports</li>
+                            </ul>
+                        </div>
                     </div>
 
                     <!-- AI for Developers -->
@@ -3107,42 +3149,101 @@ Business Rules: Minimum order $10, Max 50 items
                         </ul>
                     </div>
 
-                    <!-- Advanced API Automation -->
+                    <!-- API Automation Intermediate -->
                     <div class="module-card right">
-                        <h3 class="module-title">Advanced API Automation</h3>
-                        <ul class="items">
-                            <li>Serialize / Deserialize</li>
-                            <li>Data Driven Testing</li>
-                            <li>Response Data Validation</li>
-                        </ul>
+                        <h3 class="module-title">API Automation Intermediate</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Serialization / Deserialization</div>
+                            <ul class="subtopic-children">
+                                <li>Map JSON to model objects</li>
+                                <li>Handle nested arrays</li>
+                                <li>Validate deserialized fields</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Data-Driven &amp; Auth</div>
+                            <ul class="subtopic-children">
+                                <li>Parameterize from JSON/CSV</li>
+                                <li>Token retrieval &amp; refresh</li>
+                                <li>Role-based access testing</li>
+                            </ul>
+                        </div>
                         <div class="subtopic">
                             <div class="subtopic-title">Non-Functional Testing</div>
                             <ul class="subtopic-children">
-                                <li>Performance Testing</li>
-                                <li>Stress / Load Testing</li>
+                                <li>Performance &amp; response times</li>
+                                <li>Stress &amp; load testing</li>
+                                <li>Concurrent request validation</li>
                             </ul>
                         </div>
-                    </div>
-
-                    <!-- Mobile Automation -->
-                    <div class="module-card left">
-                        <h3 class="module-title">Mobile Automation</h3>
                         <ul class="items">
-                            <li>Appium</li>
-                            <li>Gestures</li>
-                            <li>Locators</li>
+                            <li>JSON Schema Validation</li>
+                            <li>API Test Organization</li>
+                            <li>CI/CD Pipeline Integration</li>
                         </ul>
                     </div>
 
-                    <!-- Advanced GIT -->
-                    <div class="module-card right">
-                        <h3 class="module-title">Advanced GIT</h3>
+                    <!-- Mobile Automation Intermediate -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Mobile Automation Intermediate</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Environment Setup</div>
+                            <ul class="subtopic-children">
+                                <li>Configure Appium server</li>
+                                <li>USB debugging &amp; emulators</li>
+                                <li>ADB commands</li>
+                                <li>Desired capabilities</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Locators &amp; Gestures</div>
+                            <ul class="subtopic-children">
+                                <li>Appium Inspector</li>
+                                <li>resource-id, accessibility-id</li>
+                                <li>Tap, swipe, pinch, zoom</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Mobile-Specific Scenarios</div>
+                            <ul class="subtopic-children">
+                                <li>Interrupts (calls, SMS)</li>
+                                <li>Network conditions</li>
+                                <li>Native/webview contexts</li>
+                            </ul>
+                        </div>
                         <ul class="items">
-                            <li>Git Workflows</li>
-                            <li>Undoing Changes</li>
+                            <li>Page Object Model for Mobile</li>
+                            <li>Screenshot on Failure</li>
+                        </ul>
+                    </div>
+
+                    <!-- Code Versioning Intermediate -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Code Versioning Intermediate</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Git Workflows</div>
+                            <ul class="subtopic-children">
+                                <li>Gitflow, trunk-based</li>
+                                <li>Branching conventions</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">History Management</div>
+                            <ul class="subtopic-children">
+                                <li>git revert, reset, reflog</li>
+                                <li>Cherry-picking commits</li>
+                                <li>Squashing &amp; rebase</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">PR &amp; Code Review</div>
+                            <ul class="subtopic-children">
+                                <li>Structure reviewable PRs</li>
+                                <li>Conflict resolution</li>
+                            </ul>
+                        </div>
+                        <ul class="items">
                             <li>Tagging and Releases</li>
-                            <li>Cherry-picking</li>
-                            <li>Squashing / Rebase</li>
                         </ul>
                     </div>
 
@@ -3267,33 +3368,134 @@ Business Rules: Minimum order $10, Max 50 items
                         </ul>
                     </div>
 
-                    <!-- CI/CD Advanced Topics -->
+                    <!-- GIT Advanced -->
                     <div class="module-card left">
-                        <h3 class="module-title">CI/CD Advanced</h3>
+                        <h3 class="module-title">GIT Advanced</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Repository Architecture</div>
+                            <ul class="subtopic-children">
+                                <li>Mono-repo structure</li>
+                                <li>Sub-modules management</li>
+                                <li>Branch protection rules</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Advanced History</div>
+                            <ul class="subtopic-children">
+                                <li>Interactive rebase</li>
+                                <li>git bisect for debugging</li>
+                                <li>Split/clean commits</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Git Hooks &amp; Governance</div>
+                            <ul class="subtopic-children">
+                                <li>Pre-commit/push hooks</li>
+                                <li>Team conventions</li>
+                                <li>Repository health audit</li>
+                            </ul>
+                        </div>
                         <ul class="items">
-                            <li>Docker in CI/CD</li>
-                            <li>YAML language</li>
-                            <li>Multi-stage pipelines</li>
+                            <li>Framework Versioning</li>
+                            <li>Semantic versioning</li>
+                        </ul>
+                    </div>
+
+                    <!-- CI/CD Advanced Topics -->
+                    <div class="module-card right">
+                        <h3 class="module-title">CI/CD Advanced</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">YAML &amp; Pipeline as Code</div>
+                            <ul class="subtopic-children">
+                                <li>Multi-stage definitions</li>
+                                <li>Variables, conditions, templates</li>
+                                <li>Multi-environment support</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Docker in CI/CD</div>
+                            <ul class="subtopic-children">
+                                <li>Custom test images</li>
+                                <li>Container test execution</li>
+                                <li>Docker Compose</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Infrastructure &amp; Optimization</div>
+                            <ul class="subtopic-children">
+                                <li>IaC for test environments</li>
+                                <li>Pipeline bottlenecks</li>
+                                <li>Retry strategies</li>
+                            </ul>
+                        </div>
+                        <ul class="items">
                             <li>Artifact Management</li>
-                            <li>Infrastructure as Code</li>
+                            <li>Pipeline Governance</li>
+                        </ul>
+                    </div>
+
+                    <!-- API Automation Advanced -->
+                    <div class="module-card left">
+                        <h3 class="module-title">API Automation Advanced</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Contract Testing</div>
+                            <ul class="subtopic-children">
+                                <li>Consumer-driven contracts (Pact)</li>
+                                <li>Detect breaking changes</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Security &amp; Performance</div>
+                            <ul class="subtopic-children">
+                                <li>OWASP top 10 automation</li>
+                                <li>SQL injection/XSS testing</li>
+                                <li>SLA assertions</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Framework Design</div>
+                            <ul class="subtopic-children">
+                                <li>Reusable API framework</li>
+                                <li>Shared clients/interceptors</li>
+                            </ul>
+                        </div>
+                        <ul class="items">
+                            <li>API Mocking at Scale</li>
+                            <li>Observability &amp; Debugging</li>
                         </ul>
                     </div>
 
                     <!-- Mobile Automation Advanced -->
                     <div class="module-card right">
                         <h3 class="module-title">Mobile Automation Advanced</h3>
-                        <ul class="items">
-                            <li>Parallel Executors</li>
-                            <li>Multiple App Contexts</li>
-                            <li>Mobile Device Virtualization</li>
-                        </ul>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Parallel &amp; Multi-App</div>
+                            <ul class="subtopic-children">
+                                <li>Parallel device execution</li>
+                                <li>Multiple app contexts</li>
+                                <li>Test isolation</li>
+                            </ul>
+                        </div>
                         <div class="subtopic">
                             <div class="subtopic-title">Cloud Device Farms</div>
                             <ul class="subtopic-children">
                                 <li>SauceLabs / BrowserStack</li>
-                                <li>AWS</li>
+                                <li>AWS Device Farm</li>
+                                <li>Cloud test analysis</li>
                             </ul>
                         </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Performance &amp; Stability</div>
+                            <ul class="subtopic-children">
+                                <li>Memory/CPU monitoring</li>
+                                <li>App launch time metrics</li>
+                                <li>Flaky test strategies</li>
+                            </ul>
+                        </div>
+                        <ul class="items">
+                            <li>Device Virtualization</li>
+                            <li>CI/CD Integration</li>
+                        </ul>
                     </div>
 
                     <!-- AI Architecture -->
