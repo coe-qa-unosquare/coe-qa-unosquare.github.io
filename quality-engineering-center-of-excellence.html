@@ -1,0 +1,2483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QE Center of Excellence</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            /* Base - Black/Grey/White */
+            --bg: #0a0a0a;
+            --bg-card: #141414;
+            --bg-elevated: #1a1a1a;
+            --border: #2a2a2a;
+            --border-light: #3a3a3a;
+            --text: #ffffff;
+            --text-muted: #a0a0a0;
+            --text-dim: #666666;
+
+            /* Primary Blue (for titles, accents) */
+            --blue: #2563eb;
+            --blue-dim: rgba(37,99,235,0.12);
+            --blue-border: rgba(37,99,235,0.35);
+            --blue-light: #60a5fa;
+
+            /* Junior Level - Green */
+            --green: #22c55e;
+            --green-dim: rgba(34,197,94,0.15);
+            --green-border: rgba(34,197,94,0.4);
+            --green-light: #4ade80;
+
+            /* Intermediate Level - Yellow/Amber */
+            --yellow: #eab308;
+            --yellow-dim: rgba(234,179,8,0.15);
+            --yellow-border: rgba(234,179,8,0.4);
+            --yellow-light: #facc15;
+
+            /* Senior Level - Red */
+            --red: #dc2626;
+            --red-dim: rgba(220,38,38,0.15);
+            --red-border: rgba(220,38,38,0.4);
+            --red-light: #f87171;
+
+            /* Accent colors */
+            --cyan: #06b6d4;
+            --cyan-dim: rgba(6,182,212,0.12);
+            --cyan-border: rgba(6,182,212,0.35);
+            --cyan-light: #67e8f9;
+
+            --grey: #6b7280;
+            --grey-dim: rgba(107,114,128,0.12);
+            --grey-border: rgba(107,114,128,0.35);
+            --grey-light: #9ca3af;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== TAB BAR ===== */
+        .tab-bar {
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 8px;
+            backdrop-filter: blur(12px);
+        }
+
+        .tab-btn {
+            padding: 14px 28px;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dim);
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 0.3px;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-muted);
+            background: var(--bg-elevated);
+        }
+
+        .tab-btn.active {
+            color: var(--text);
+            background: var(--bg-elevated);
+        }
+
+        .tab-btn.active[data-tab="guide"] { box-shadow: inset 0 -2px 0 var(--blue); }
+        .tab-btn.active[data-tab="qe"] { box-shadow: inset 0 -2px 0 var(--blue); }
+        .tab-btn.active[data-tab="sdet"] { box-shadow: inset 0 -2px 0 var(--blue); }
+
+        .tab-content { display: none; animation: fadeIn 0.25s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ===== HERO ===== */
+        .hero {
+            text-align: center;
+            padding: 60px 24px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -60%; left: -30%; width: 160%; height: 180%;
+            background: radial-gradient(ellipse at 30% 20%, rgba(37,99,235,0.06) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 40%, rgba(37,99,235,0.04) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+            position: relative;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 .grad {
+            background: linear-gradient(135deg, #ffffff 0%, var(--blue-light) 50%, var(--blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .sub {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        /* ===== GUIDE CONTAINER ===== */
+        .guide-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px 60px;
+        }
+
+        /* ===== SECTION TITLES ===== */
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 48px 0 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: -0.3px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 22px;
+            border-radius: 2px;
+            background: var(--blue);
+        }
+
+        .section-title.blue::before { background: var(--blue); }
+        .section-title.grey::before { background: var(--grey); }
+        .section-title.green::before { background: var(--green); }
+        .section-title.yellow::before { background: var(--yellow); }
+        .section-title.red::before { background: var(--red); }
+
+        /* ===== PILLARS ===== */
+        .pillars {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .pillar {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 14px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .pillar:hover {
+            border-color: var(--blue-border);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(37,99,235,0.1);
+        }
+
+        .pillar .p-letter {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--blue), var(--blue-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
+        }
+
+        .pillar .p-name {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .pillar .p-desc {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        /* ===== FRAMEWORK COMPARISON TABLE ===== */
+        .comparison-table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+        }
+
+        .comparison-table th {
+            background: var(--bg-elevated);
+            color: var(--text);
+            padding: 16px 20px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comparison-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+            vertical-align: top;
+            line-height: 1.6;
+        }
+
+        .comparison-table tr:last-child td { border-bottom: none; }
+
+        .comparison-table tr:hover td {
+            background: rgba(59, 130, 246, 0.04);
+        }
+
+        .comparison-table .fw-name {
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .comparison-table .highlight {
+            color: var(--blue-light);
+            font-weight: 500;
+        }
+
+        /* ===== MNEMONIC CARDS ===== */
+        .mnemonic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .mnemonic-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            transition: all 0.2s;
+        }
+
+        .mnemonic-card:hover {
+            border-color: var(--border-light);
+            transform: translateY(-2px);
+        }
+
+        .mnemonic-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mnemonic-card .badge {
+            font-size: 0.65rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-race { background: var(--blue-dim); color: var(--blue-light); }
+        .badge-trace { background: var(--green-dim); color: var(--green-light); }
+        .badge-create { background: var(--grey-dim); color: var(--grey-light); }
+        .badge-trice { background: var(--cyan-dim); color: var(--cyan-light); }
+
+        .mnemonic-card .subtitle {
+            font-size: 0.78rem;
+            color: var(--text-dim);
+            margin-bottom: 16px;
+        }
+
+        .mnemonic-card .letter-list {
+            list-style: none;
+        }
+
+        .mnemonic-card .letter-list li {
+            padding: 10px 0;
+            display: flex;
+            gap: 14px;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.92rem;
+        }
+
+        .mnemonic-card .letter-list li:last-child { border-bottom: none; }
+
+        .mnemonic-card .letter {
+            font-weight: 800;
+            font-size: 1.15rem;
+            width: 28px;
+            flex-shrink: 0;
+        }
+
+        .letter-race { color: var(--blue-light); }
+        .letter-trace { color: var(--green-light); }
+        .letter-create { color: var(--grey-light); }
+        .letter-trice { color: var(--cyan-light); }
+
+        .mnemonic-card .letter-desc strong {
+            color: var(--text);
+        }
+
+        .mnemonic-card .letter-desc {
+            color: var(--text-muted);
+        }
+
+        /* ===== TECHNIQUE GRID ===== */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 18px;
+            margin: 24px 0;
+        }
+
+        .tech-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 26px;
+            transition: all 0.2s;
+        }
+
+        .tech-card:hover {
+            border-color: var(--blue-border);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        .tech-card .tc-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px; height: 30px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: var(--blue-dim);
+            color: var(--blue);
+        }
+
+        .tech-card h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .tech-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .tech-card .tc-use {
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        .tech-card .tc-use strong { color: var(--blue-light); }
+
+        /* ===== CONSOLE-LIKE DESIGN ===== */
+        .console-block {
+            margin-top: 14px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
+        }
+
+        .console-section {
+            padding: 14px 16px;
+            position: relative;
+        }
+
+        .console-section + .console-section {
+            border-top: 1px solid #30363d;
+        }
+
+        .console-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .console-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #3fb950;
+            box-shadow: 0 0 6px rgba(63, 185, 80, 0.5);
+        }
+
+        .console-dot.output {
+            background: #58a6ff;
+            box-shadow: 0 0 6px rgba(88, 166, 255, 0.5);
+        }
+
+        .console-label {
+            font-size: 0.68rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #8b949e;
+        }
+
+        .console-label.prompt { color: #3fb950; }
+        .console-label.output { color: #58a6ff; }
+
+        .console-content {
+            font-size: 0.78rem;
+            line-height: 1.7;
+            color: #c9d1d9;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 4px 10px;
+            background: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 5px;
+            color: #8b949e;
+            font-size: 0.65rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+            font-family: inherit;
+        }
+
+        .copy-btn:hover {
+            background: #30363d;
+            color: #c9d1d9;
+        }
+
+        .copy-btn.copied {
+            background: #238636;
+            border-color: #238636;
+            color: #fff;
+        }
+
+        /* ===== COMBO CARDS ===== */
+        .combo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 14px;
+            margin: 20px 0;
+        }
+
+        .combo-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .combo-card .combo-tags {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .combo-card .combo-tags span {
+            font-size: 0.68rem;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .combo-card h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .combo-card p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ===== ANTI-PATTERNS TABLE ===== */
+        .ap-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 14px;
+            overflow: hidden;
+            margin: 24px 0;
+            font-size: 0.92rem;
+            border: 1px solid var(--border);
+        }
+
+        .ap-table th {
+            background: var(--bg-elevated);
+            color: var(--text-muted);
+            padding: 14px 18px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ap-table td {
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .ap-table tr:last-child td { border-bottom: none; }
+
+        .ap-table .bad { color: #f87171; font-weight: 500; }
+        .ap-table .good { color: var(--blue-light); font-weight: 500; }
+
+        /* ===== DIAGRAM STYLES - IMPROVED UI/UX ===== */
+        .diagram-container {
+            padding: 40px 24px 80px;
+            background: linear-gradient(180deg, var(--bg) 0%, rgba(15,23,42,1) 100%);
+        }
+
+        .diagram-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .diagram-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .diagram-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            padding: 18px 28px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 32px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .legend-dot {
+            width: 14px; height: 14px;
+            border-radius: 4px;
+        }
+
+        .diagram-scroll {
+            overflow-x: auto;
+            padding-bottom: 30px;
+        }
+
+        .diagram-wrapper {
+            min-width: 1400px;
+            padding: 30px 60px 60px;
+            position: relative;
+        }
+
+        .title-node {
+            padding: 20px 40px;
+            border-radius: 14px;
+            font-size: 18px;
+            font-weight: 800;
+            text-align: center;
+            width: 300px;
+            margin: 0 auto 28px;
+            color: #fff;
+            position: relative;
+            z-index: 2;
+            letter-spacing: -0.3px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+
+        .title-qe { background: linear-gradient(135deg, #1e40af, #3b82f6, #60a5fa); }
+        .title-sdet { background: linear-gradient(135deg, #1e40af, #3b82f6, #60a5fa); }
+
+        .level-divider {
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        .level-divider span {
+            background: var(--bg);
+            padding: 8px 24px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            z-index: 1;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+        }
+
+        .level-divider::before {
+            content: '';
+            position: absolute;
+            left: 100px;
+            right: 100px;
+            top: 50%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-light), transparent);
+        }
+
+        .row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 14px 0;
+            position: relative;
+        }
+
+        .center-col {
+            display: flex;
+            gap: 28px;
+            justify-content: center;
+            flex-shrink: 0;
+            z-index: 2;
+            padding: 0 20px;
+        }
+
+        .main-node {
+            padding: 16px 22px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 700;
+            text-align: center;
+            min-width: 160px;
+            max-width: 200px;
+            color: #fff;
+            line-height: 1.4;
+            z-index: 2;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            transition: all 0.2s;
+        }
+
+        .main-node:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+
+        /* Level colors: Green (Junior), Yellow (Intermediate), Red (Senior) */
+        .mn-green { background: linear-gradient(135deg, #15803d, #22c55e); }
+        .mn-yellow { background: linear-gradient(135deg, #a16207, #eab308); }
+        .mn-red { background: linear-gradient(135deg, #b91c1c, #dc2626); }
+
+        .branch {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex-shrink: 0;
+            min-width: 200px;
+        }
+
+        .branch-left {
+            align-items: flex-end;
+            padding-right: 18px;
+        }
+        .branch-right {
+            align-items: flex-start;
+            padding-left: 18px;
+        }
+
+        .sub-node {
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 12px;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: all 0.15s;
+        }
+
+        .sub-node:hover {
+            filter: brightness(1.25);
+            transform: translateX(3px);
+        }
+
+        .branch-left .sub-node:hover {
+            transform: translateX(-3px);
+        }
+
+        /* Level colors: Green (Junior), Yellow (Intermediate), Red (Senior) */
+        .sn-green { background: var(--green-dim); border: 1px solid var(--green-border); color: var(--green-light); }
+        .sn-yellow { background: var(--yellow-dim); border: 1px solid var(--yellow-border); color: var(--yellow-light); }
+        .sn-red { background: var(--red-dim); border: 1px solid var(--red-border); color: var(--red-light); }
+
+        svg.connectors {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--text-dim);
+            font-size: 0.72rem;
+            border-top: 1px solid var(--border);
+            letter-spacing: 0.5px;
+        }
+
+        footer strong {
+            color: var(--text-muted);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .pillars { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.6rem; }
+            .pillars { grid-template-columns: repeat(2, 1fr); }
+            .tab-btn { padding: 12px 16px; font-size: 12px; }
+            .mnemonic-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 500px) {
+            .pillars { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+    <button class="tab-btn active" data-tab="guide">Quality Engineering AI Guide</button>
+    <button class="tab-btn" data-tab="qe">Quality Engineer</button>
+    <button class="tab-btn" data-tab="sdet">SDET</button>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB: CENTER OF EXCELLENCE & BEST PRACTICES -->
+<!-- ============================================================ -->
+<div class="tab-content active" id="tab-guide">
+    <div class="hero">
+        <h1><span class="grad">Center of Excellence</span><br>Best Practices</h1>
+        <p class="sub">Prompt engineering frameworks, techniques, and best practices for AI-augmented Quality Assurance.</p>
+    </div>
+
+    <div class="guide-container">
+
+        <!-- ===== FIVE PILLARS ===== -->
+        <div class="section-title">The Five Pillars of Prompt Excellence</div>
+        <div class="pillars">
+            <div class="pillar">
+                <div class="p-letter">C</div>
+                <div class="p-name">Clarity</div>
+                <div class="p-desc">Use precise, unambiguous language without unclear references.</div>
+            </div>
+            <div class="pillar">
+                <div class="p-letter">C</div>
+                <div class="p-name">Context</div>
+                <div class="p-desc">Provide tech stack, framework conventions, business rules.</div>
+            </div>
+            <div class="pillar">
+                <div class="p-letter">C</div>
+                <div class="p-name">Constraints</div>
+                <div class="p-desc">Define what should NOT happen as much as what should.</div>
+            </div>
+            <div class="pillar">
+                <div class="p-letter">C</div>
+                <div class="p-name">Completeness</div>
+                <div class="p-desc">Include API specs, schemas, sample responses, test files.</div>
+            </div>
+            <div class="pillar">
+                <div class="p-letter">C</div>
+                <div class="p-name">Correctability</div>
+                <div class="p-desc">Structure for easy verification. Request step-by-step reasoning.</div>
+            </div>
+        </div>
+
+        <!-- ===== PROMPT MNEMONICS ===== -->
+        <div class="section-title blue">Prompt Mnemonics Frameworks</div>
+
+        <!-- Quick Comparison Table -->
+        <div class="comparison-table-wrapper">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>RACE <span style="color:var(--blue-light)">(General & Agile)</span></th>
+                        <th>TRACE <span style="color:var(--green-light)">(Audience-Centric)</span></th>
+                        <th>CREATE <span style="color:var(--grey-light)">(Detailed & Complex)</span></th>
+                        <th>TRICE+ <span style="color:var(--cyan-light)">(QA-Optimized)</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="fw-name">Best For</td>
+                        <td>Fast, everyday tasks like emails or summaries.</td>
+                        <td>Educational content or technical documentation for specific groups.</td>
+                        <td>Complex projects requiring nuanced reasoning and strict output formats.</td>
+                        <td>Data-driven QA tasks requiring concrete artifacts and dynamic test data.</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-name">Key Strength</td>
+                        <td class="highlight">Minimalist and quick to implement.</td>
+                        <td class="highlight">High precision and tailored tone for a specific audience.</td>
+                        <td class="highlight">Comprehensive coverage with built-in evaluation.</td>
+                        <td class="highlight">Built-in data strategy for scalable, isolated test generation.</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-name">QA Application</td>
+                        <td>Quick test case drafts, bug summaries, sprint reports.</td>
+                        <td>Test documentation for devs vs. stakeholders, training materials.</td>
+                        <td>Test framework design, automation architecture, complex test plans.</td>
+                        <td>API testing, data-driven automation, test data generation, CI/CD integration.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Mnemonic Cards -->
+        <div class="mnemonic-grid">
+            <div class="mnemonic-card">
+                <h3>RACE <span class="badge badge-race">Agile Standard</span></h3>
+                <div class="subtitle">Designed for speed and clarity. The "go-to" for quick, solid responses.</div>
+                <ul class="letter-list">
+                    <li>
+                        <span class="letter letter-race">R</span>
+                        <span class="letter-desc"><strong>Role:</strong> Who should the AI be? (e.g., "Expert QA Engineer")</span>
+                    </li>
+                    <li>
+                        <span class="letter letter-race">A</span>
+                        <span class="letter-desc"><strong>Action:</strong> What should it do? (e.g., "Write test cases")</span>
+                    </li>
+                    <li>
+                        <span class="letter letter-race">C</span>
+                        <span class="letter-desc"><strong>Context:</strong> What is the background? (e.g., "For a REST API endpoint")</span>
+                    </li>
+                    <li>
+                        <span class="letter letter-race">E</span>
+                        <span class="letter-desc"><strong>Execute:</strong> What format or goal? (e.g., "Gherkin format, cover edge cases")</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="mnemonic-card">
+                <h3>TRACE <span class="badge badge-trace">Targeted</span></h3>
+                <div class="subtitle">Adds Audience to ensure the AI speaks to the right people.</div>
+                <ul class="letter-list">
+                    <li>
+                        <span class="letter letter-trace">T</span>
+                        <span class="letter-desc"><strong>Task:</strong> The job to be done.</span>
+                    </li>
+                    <li>
+                        <span class="letter letter-trace">R</span>
+                        <span class="letter-desc"><strong>Role:</strong> The AI's persona.</span>
+                    </li>
+                    <li>
+                        <span class="letter letter-trace">A</span>
+                        <span class="letter-desc"><strong>Audience:</strong> Who is reading this? (e.g., "Junior QA" vs. "Tech Lead")</span>
+                    </li>
+                    <li>
+                        <span class="letter letter-trace">C</span>
+                        <span class="letter-desc"><strong>Context:</strong> Relevant background details.</span>
+                    </li>
+                    <li>
+                        <span class="letter letter-trace">E</span>
+                        <span class="letter-desc"><strong>Expectation:</strong> Desired output format.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="mnemonic-card">
+                <h3>CREATE <span class="badge badge-create">Comprehensive</span></h3>
+                <div class="subtitle">A "deep-dive" framework for complex instructions requiring reasoning.</div>
+                <ul class="letter-list">
+                    <li>
+                        <span class="letter letter-create">C</span>
+                        <span class="letter-desc"><strong>Character:</strong> Detailed persona description.</span>
+                    </li>
+                    <li>
+                        <span class="letter letter-create">R</span>
+                        <span class="letter-desc"><strong>Request:</strong> Clear, specific task.</span>
+                    </li>
+                    <li>
+                        <span class="letter letter-create">E</span>
+                        <span class="letter-desc"><strong>Examples:</strong> Real-world samples to guide style.</span>
+                    </li>
+                    <li>
+                        <span class="letter letter-create">A</span>
+                        <span class="letter-desc"><strong>Additions:</strong> Refining with constraints or POV.</span>
+                    </li>
+                    <li>
+                        <span class="letter letter-create">T</span>
+                        <span class="letter-desc"><strong>Type of Output:</strong> Exact format and structure.</span>
+                    </li>
+                    <li>
+                        <span class="letter letter-create">E</span>
+                        <span class="letter-desc"><strong>Evaluate:</strong> Criteria to ensure quality.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="mnemonic-card">
+                <h3>TRICE+ <span class="badge badge-trice">QA-Optimized</span></h3>
+                <div class="subtitle">Designed for QA with built-in data strategy for scalable, isolated tests.</div>
+                <ul class="letter-list">
+                    <li>
+                        <span class="letter letter-trice">T</span>
+                        <span class="letter-desc"><strong>Task:</strong> Define the action precisely. (e.g., "Generate API test cases")</span>
+                    </li>
+                    <li>
+                        <span class="letter letter-trice">R</span>
+                        <span class="letter-desc"><strong>Role:</strong> Assign a persona. (e.g., "Senior SDET with REST expertise")</span>
+                    </li>
+                    <li>
+                        <span class="letter letter-trice">I</span>
+                        <span class="letter-desc"><strong>Input:</strong> Provide concrete artifacts. (e.g., OpenAPI spec, schemas, examples)</span>
+                    </li>
+                    <li>
+                        <span class="letter letter-trice">C</span>
+                        <span class="letter-desc"><strong>Constraints:</strong> Define boundaries. (e.g., "No hardcoded IDs, follow RBAC rules")</span>
+                    </li>
+                    <li>
+                        <span class="letter letter-trice">E</span>
+                        <span class="letter-desc"><strong>Expectation:</strong> Define output format. (e.g., "Gherkin scenarios with data tables")</span>
+                    </li>
+                    <li>
+                        <span class="letter letter-trice">+</span>
+                        <span class="letter-desc"><strong>Data Strategy:</strong> Dynamic data approach. (e.g., "Use faker for emails, UUIDs for IDs")</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ===== PROMPTING TECHNIQUES ===== -->
+        <div class="section-title blue">Prompting Techniques for QA</div>
+        <div class="tech-grid">
+            <div class="tech-card">
+                <div class="tc-num">1</div>
+                <h3>Zero-Shot Prompting</h3>
+                <p>Direct instruction with no examples provided. The model relies entirely on its pre-trained knowledge to complete the task. Best for straightforward requests where the desired output format is clear and commonly understood. Works well when the task aligns with standard patterns the model has seen during training.</p>
+                <div class="tc-use"><strong>QA Use:</strong> Manual test case design for functional testing</div>
+                <div class="console-block">
+                    <div class="console-section">
+                        <button class="copy-btn" onclick="copyContent(this)">Copy</button>
+                        <div class="console-header">
+                            <div class="console-dot"></div>
+                            <span class="console-label prompt">User Prompt</span>
+                        </div>
+                        <div class="console-content"><strong>Task:</strong> Create functional test cases for user registration
+
+<strong>Feature:</strong> User Registration Form
+<strong>Fields:</strong> Email, Password, Confirm Password, First Name, Last Name
+<strong>Business Rules:</strong>
+- Email must be unique in the system
+- Password minimum 8 characters with 1 uppercase, 1 number
+- All fields are required
+
+<strong>Output:</strong> Generate 5 test cases in Given/When/Then format covering positive and negative scenarios</div>
+                    </div>
+                    <div class="console-section">
+                        <div class="console-header">
+                            <div class="console-dot output"></div>
+                            <span class="console-label output">Expected LLM Output</span>
+                        </div>
+                        <div class="console-content">TC001: Successful Registration
+Given I am on the registration page
+When I enter valid email "john@example.com"
+And I enter password "SecurePass1" and confirm it
+And I fill First Name "John" and Last Name "Doe"
+And I click Register
+Then I should see "Registration successful" message
+
+TC002: Duplicate Email Rejection
+Given "existing@test.com" is already registered
+When I attempt to register with "existing@test.com"
+Then I should see "Email already exists" error
+
+TC003: Password Validation - Missing Uppercase
+Given I am on the registration page
+When I enter password "lowercase1"
+Then I should see "Password must contain uppercase" error
+
+TC004: Required Field Validation
+Given I am on the registration page
+When I leave First Name empty and click Register
+Then I should see "First Name is required" error
+
+TC005: Password Mismatch
+Given I enter password "SecurePass1"
+When I enter confirm password "DifferentPass1"
+Then I should see "Passwords do not match" error</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tech-card">
+                <div class="tc-num">2</div>
+                <h3>Few-Shot Prompting</h3>
+                <p>Provide 2-3 examples of desired input-output patterns before the actual task. This technique teaches the model your specific format, naming conventions, and style preferences. Particularly valuable for maintaining consistency across team artifacts and ensuring outputs match existing project standards.</p>
+                <div class="tc-use"><strong>QA Use:</strong> API automation test generation following team standards</div>
+                <div class="console-block">
+                    <div class="console-section">
+                        <button class="copy-btn" onclick="copyContent(this)">Copy</button>
+                        <div class="console-header">
+                            <div class="console-dot"></div>
+                            <span class="console-label prompt">User Prompt</span>
+                        </div>
+                        <div class="console-content"><strong>Context:</strong> Our team uses SuperTest with Jest. Follow these examples exactly.
+
+<strong>Example 1:</strong>
+describe('POST /api/login', () =&gt; {
+  it('should return 200 and token for valid credentials', async () =&gt; {
+    const response = await request(app)
+      .post('/api/login')
+      .send({ email: 'test@example.com', password: 'valid123' });
+    expect(response.status).toBe(200);
+    expect(response.body.token).toBeDefined();
+  });
+});
+
+<strong>Example 2:</strong>
+describe('GET /api/users/:id', () =&gt; {
+  it('should return 404 for non-existent user', async () =&gt; {
+    const response = await request(app)
+      .get('/api/users/99999');
+    expect(response.status).toBe(404);
+    expect(response.body.message).toBe('User not found');
+  });
+});
+
+<strong>Task:</strong> Generate 3 tests for PUT /api/products/:id endpoint (update product)</div>
+                    </div>
+                    <div class="console-section">
+                        <div class="console-header">
+                            <div class="console-dot output"></div>
+                            <span class="console-label output">Expected LLM Output</span>
+                        </div>
+                        <div class="console-content">describe('PUT /api/products/:id', () =&gt; {
+  it('should return 200 and updated product for valid data', async () =&gt; {
+    const response = await request(app)
+      .put('/api/products/1')
+      .send({ name: 'Updated Product', price: 29.99 });
+    expect(response.status).toBe(200);
+    expect(response.body.name).toBe('Updated Product');
+  });
+
+  it('should return 404 for non-existent product', async () =&gt; {
+    const response = await request(app)
+      .put('/api/products/99999')
+      .send({ name: 'Test', price: 10.00 });
+    expect(response.status).toBe(404);
+    expect(response.body.message).toBe('Product not found');
+  });
+
+  it('should return 400 for invalid price format', async () =&gt; {
+    const response = await request(app)
+      .put('/api/products/1')
+      .send({ name: 'Test', price: 'invalid' });
+    expect(response.status).toBe(400);
+    expect(response.body.message).toBe('Invalid price format');
+  });
+});</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tech-card">
+                <div class="tc-num">3</div>
+                <h3>Chain-of-Thought (CoT)</h3>
+                <p>Instruct the model to think step-by-step through intermediate logical steps before arriving at a conclusion. This technique improves reasoning accuracy for complex problems by making the thinking process explicit. Essential for root cause analysis, impact assessment, and multi-variable debugging scenarios.</p>
+                <div class="tc-use"><strong>QA Use:</strong> Bug re-test verification and regression analysis</div>
+                <div class="console-block">
+                    <div class="console-section">
+                        <button class="copy-btn" onclick="copyContent(this)">Copy</button>
+                        <div class="console-header">
+                            <div class="console-dot"></div>
+                            <span class="console-label prompt">User Prompt</span>
+                        </div>
+                        <div class="console-content"><strong>Bug ID:</strong> BUG-1234
+<strong>Original Issue:</strong> Shopping cart total shows incorrect value when applying discount code
+<strong>Root Cause:</strong> Percentage calculation was applied before tax instead of after
+<strong>Fix Applied:</strong> Updated calculateTotal() to apply discount after tax calculation
+
+<strong>Task:</strong> Think step-by-step about:
+1. What scenarios need re-testing
+2. What regression areas might be affected
+3. Generate a verification test plan</div>
+                    </div>
+                    <div class="console-section">
+                        <div class="console-header">
+                            <div class="console-dot output"></div>
+                            <span class="console-label output">Expected LLM Output</span>
+                        </div>
+                        <div class="console-content"><strong>Step 1: Analyzing Original Bug Impact</strong>
+- The bug affected price calculation order
+- Users saw incorrect totals (lower than expected)
+- Financial accuracy was compromised
+
+<strong>Step 2: Re-test Scenarios Required</strong>
+1. Apply 10% discount code → verify total = (subtotal + tax) - 10%
+2. Apply fixed-amount discount → verify correct order
+3. Apply multiple discounts → verify cumulative calculation
+4. Zero discount code → verify no change to total
+
+<strong>Step 3: Regression Risk Areas</strong>
+- Invoice generation (uses same calculation)
+- Order history displays
+- Email receipt totals
+- Analytics revenue reporting
+
+<strong>Step 4: Verification Test Plan</strong>
+| Test Case | Input | Expected Result |
+|-----------|-------|-----------------|
+| TC1 | $100 item + 8% tax + 10% discount | Total: $97.20 |
+| TC2 | $50 item + 8% tax + $5 off | Total: $49.00 |
+| TC3 | Edge: $0 discount code | No calculation change |
+| TC4 | Verify invoice matches cart | Values identical |</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tech-card">
+                <div class="tc-num">4</div>
+                <h3>Role Prompting</h3>
+                <p>Assign a specific persona or expert role to the model such as Security Tester, Performance Engineer, or Accessibility Specialist. This focuses the response through the lens of domain expertise, surfacing specialized knowledge and best practices relevant to that role. Combines well with other techniques.</p>
+                <div class="tc-use"><strong>QA Use:</strong> Front-end automation with accessibility focus</div>
+                <div class="console-block">
+                    <div class="console-section">
+                        <button class="copy-btn" onclick="copyContent(this)">Copy</button>
+                        <div class="console-header">
+                            <div class="console-dot"></div>
+                            <span class="console-label prompt">User Prompt</span>
+                        </div>
+                        <div class="console-content"><strong>Role:</strong> You are a Senior SDET specializing in accessibility automation testing with expertise in WCAG 2.1 guidelines.
+
+<strong>Context:</strong> We have a React login form that needs accessibility testing.
+
+<strong>Requirements:</strong>
+- Use Playwright with @axe-core/playwright
+- Check for WCAG 2.1 Level AA compliance
+- Verify keyboard navigation works correctly
+- Test screen reader compatibility
+
+<strong>Task:</strong> Generate a comprehensive accessibility test suite for the login form</div>
+                    </div>
+                    <div class="console-section">
+                        <div class="console-header">
+                            <div class="console-dot output"></div>
+                            <span class="console-label output">Expected LLM Output</span>
+                        </div>
+                        <div class="console-content">import { test, expect } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
+
+test.describe('Login Form Accessibility', () =&gt; {
+  test('should have no WCAG 2.1 AA violations', async ({ page }) =&gt; {
+    await page.goto('/login');
+    const results = await new AxeBuilder({ page })
+      .withTags(['wcag2a', 'wcag2aa'])
+      .analyze();
+    expect(results.violations).toEqual([]);
+  });
+
+  test('should support full keyboard navigation', async ({ page }) =&gt; {
+    await page.goto('/login');
+    await page.keyboard.press('Tab');
+    await expect(page.locator('#email')).toBeFocused();
+    await page.keyboard.press('Tab');
+    await expect(page.locator('#password')).toBeFocused();
+    await page.keyboard.press('Tab');
+    await expect(page.locator('#submit')).toBeFocused();
+    await page.keyboard.press('Enter');
+  });
+
+  test('should have proper ARIA labels', async ({ page }) =&gt; {
+    await page.goto('/login');
+    await expect(page.locator('#email'))
+      .toHaveAttribute('aria-label', 'Email address');
+    await expect(page.locator('#password'))
+      .toHaveAttribute('aria-label', 'Password');
+  });
+
+  test('should announce errors to screen readers', async ({ page }) =&gt; {
+    await page.goto('/login');
+    await page.click('#submit');
+    const errorRegion = page.locator('[role="alert"]');
+    await expect(errorRegion).toBeVisible();
+    await expect(errorRegion).toHaveAttribute('aria-live', 'polite');
+  });
+});</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tech-card">
+                <div class="tc-num">5</div>
+                <h3>Iterative Refinement</h3>
+                <p>Use multi-turn conversations to progressively improve outputs. Start broad, then narrow down with specific feedback: add edge cases, improve formatting, enhance coverage. This technique mimics the natural review cycle and produces polished, production-ready artifacts through incremental enhancement.</p>
+                <div class="tc-use"><strong>QA Use:</strong> Exploratory testing session documentation</div>
+                <div class="console-block">
+                    <div class="console-section">
+                        <button class="copy-btn" onclick="copyContent(this)">Copy</button>
+                        <div class="console-header">
+                            <div class="console-dot"></div>
+                            <span class="console-label prompt">User Prompt</span>
+                        </div>
+                        <div class="console-content"><strong>Turn 1:</strong> I'm testing a file upload feature. Help me create an exploratory testing charter.
+
+<strong>Turn 2:</strong> Good. Now add specific test ideas for edge cases around file types and sizes.
+
+<strong>Turn 3:</strong> Perfect. Format this as a session-based testing report with time boxes and findings sections.</div>
+                    </div>
+                    <div class="console-section">
+                        <div class="console-header">
+                            <div class="console-dot output"></div>
+                            <span class="console-label output">Expected LLM Output</span>
+                        </div>
+                        <div class="console-content"><strong>EXPLORATORY TESTING SESSION REPORT</strong>
+
+<strong>Charter:</strong> Explore file upload functionality focusing on boundary conditions and error handling
+<strong>Time Box:</strong> 60 minutes
+<strong>Tester:</strong> [Name]
+<strong>Date:</strong> [Date]
+
+<strong>TEST IDEAS EXPLORED:</strong>
+□ Upload exactly at max size limit (10MB)
+□ Upload 1 byte over limit (10MB + 1 byte)
+□ Upload 0 byte empty file
+□ Upload file with no extension
+□ Upload .exe disguised as .jpg
+□ Upload file with special characters in name
+□ Upload during network interruption
+□ Concurrent uploads (5 files simultaneously)
+
+<strong>FINDINGS:</strong>
+| ID | Severity | Description |
+|----|----------|-------------|
+| F1 | Medium | No validation for empty files |
+| F2 | High | .exe uploads accepted |
+| F3 | Low | Unicode filenames truncated |
+
+<strong>COVERAGE:</strong>
+- File types tested: 8/10
+- Size boundaries: Complete
+- Error messages: Partial
+
+<strong>NOTES FOR FOLLOW-UP:</strong>
+- Need to test with slow 3G network
+- Verify virus scan integration</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tech-card">
+                <div class="tc-num">6</div>
+                <h3>Self-Consistency Sampling</h3>
+                <p>Request multiple reasoning paths to the same problem, then identify the consensus or best approach. This technique reduces errors by cross-validating different solution strategies. Useful for complex decisions where there's no single obvious answer, helping to find the most robust solution.</p>
+                <div class="tc-use"><strong>QA Use:</strong> Bug severity classification and prioritization</div>
+                <div class="console-block">
+                    <div class="console-section">
+                        <button class="copy-btn" onclick="copyContent(this)">Copy</button>
+                        <div class="console-header">
+                            <div class="console-dot"></div>
+                            <span class="console-label prompt">User Prompt</span>
+                        </div>
+                        <div class="console-content"><strong>Bug Description:</strong>
+Users cannot complete checkout when cart contains more than 15 items. The "Place Order" button becomes unresponsive.
+
+<strong>Task:</strong> Classify this bug's severity using 3 different analysis approaches:
+1. User Impact perspective
+2. Business Revenue perspective
+3. Technical Risk perspective
+
+Then provide a consensus severity rating with justification.</div>
+                    </div>
+                    <div class="console-section">
+                        <div class="console-header">
+                            <div class="console-dot output"></div>
+                            <span class="console-label output">Expected LLM Output</span>
+                        </div>
+                        <div class="console-content"><strong>APPROACH 1: User Impact Analysis</strong>
+- Affected users: ~5% (those with 15+ items)
+- Workaround exists: Split into multiple orders
+- Frustration level: High
+- <strong>Severity: MEDIUM</strong>
+
+<strong>APPROACH 2: Business Revenue Analysis</strong>
+- Large orders = high-value customers
+- Average order &gt;15 items: $450
+- Potential daily revenue loss: $2,700
+- Customer churn risk: Moderate
+- <strong>Severity: HIGH</strong>
+
+<strong>APPROACH 3: Technical Risk Analysis</strong>
+- Root cause: Likely JavaScript memory issue
+- Could indicate deeper performance problems
+- May worsen over time
+- <strong>Severity: MEDIUM-HIGH</strong>
+
+<strong>CONSENSUS SEVERITY: HIGH</strong>
+
+<strong>Justification:</strong> 2 of 3 approaches indicate HIGH/MEDIUM-HIGH. The revenue impact on high-value customers and the technical debt risk outweigh the relatively small percentage of affected users. This bug blocks a critical business flow (checkout) with no seamless workaround.
+
+<strong>Recommendation:</strong> Priority 1 - Fix in current sprint</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tech-card">
+                <div class="tc-num">7</div>
+                <h3>Tree-of-Thought (ToT)</h3>
+                <p>Explore multiple branching reasoning paths like a decision tree, evaluate each branch's viability, and prune unpromising ones. This technique enables systematic evaluation of alternatives before committing to a solution. Ideal for strategic decisions like framework selection or test architecture planning.</p>
+                <div class="tc-use"><strong>QA Use:</strong> Test automation framework evaluation and selection</div>
+                <div class="console-block">
+                    <div class="console-section">
+                        <button class="copy-btn" onclick="copyContent(this)">Copy</button>
+                        <div class="console-header">
+                            <div class="console-dot"></div>
+                            <span class="console-label prompt">User Prompt</span>
+                        </div>
+                        <div class="console-content"><strong>Context:</strong> We need to choose a mobile testing framework.
+<strong>Requirements:</strong> iOS + Android, CI/CD integration, team knows JavaScript
+
+<strong>Task:</strong> Evaluate these 3 options using Tree-of-Thought:
+1. Appium
+2. Detox
+3. WebDriverIO with Appium
+
+For each branch, analyze: Learning curve, CI integration, Cross-platform support, Community support
+
+Then recommend the best option with justification.</div>
+                    </div>
+                    <div class="console-section">
+                        <div class="console-header">
+                            <div class="console-dot output"></div>
+                            <span class="console-label output">Expected LLM Output</span>
+                        </div>
+                        <div class="console-content"><strong>BRANCH 1: Appium</strong>
+├── Learning Curve: Moderate (familiar WebDriver API)
+├── CI Integration: Excellent (all major CI tools)
+├── Cross-platform: ✓ iOS + Android + Web
+├── Community: Large, mature ecosystem
+└── <strong>Score: 8/10</strong>
+
+<strong>BRANCH 2: Detox</strong>
+├── Learning Curve: Easy (React Native focus)
+├── CI Integration: Good (needs configuration)
+├── Cross-platform: ⚠️ Best for React Native only
+├── Community: Growing, RN-specific
+└── <strong>Score: 6/10</strong> (PRUNED - not universal)
+
+<strong>BRANCH 3: WebDriverIO + Appium</strong>
+├── Learning Curve: Easy (JS-based, good docs)
+├── CI Integration: Excellent (built-in reporters)
+├── Cross-platform: ✓ iOS + Android + Web
+├── Community: Active, modern approach
+└── <strong>Score: 9/10</strong>
+
+<strong>RECOMMENDATION: WebDriverIO + Appium</strong>
+
+<strong>Justification:</strong>
+- Team knows JS → minimal ramp-up
+- Same framework for web + mobile
+- Best-in-class CI/CD integration
+- Active community with modern practices</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tech-card">
+                <div class="tc-num">8</div>
+                <h3>ReAct (Reason + Act)</h3>
+                <p>Interleave reasoning with action steps in an iterative loop: Think about the problem, take an action, observe the result, then repeat. This technique mirrors how skilled testers approach debugging and investigation. Excellent for troubleshooting flaky tests, investigating bugs, and exploratory analysis.</p>
+                <div class="tc-use"><strong>QA Use:</strong> Debugging flaky tests with systematic investigation</div>
+                <div class="console-block">
+                    <div class="console-section">
+                        <button class="copy-btn" onclick="copyContent(this)">Copy</button>
+                        <div class="console-header">
+                            <div class="console-dot"></div>
+                            <span class="console-label prompt">User Prompt</span>
+                        </div>
+                        <div class="console-content"><strong>Problem:</strong> This API test passes locally but fails in CI 40% of the time:
+
+test('should fetch user profile', async () =&gt; {
+  const response = await api.get('/users/profile');
+  expect(response.data.name).toBe('John Doe');
+});
+
+<strong>Task:</strong> Use ReAct pattern to diagnose and fix. Show your Think/Act/Observe loop.</div>
+                    </div>
+                    <div class="console-section">
+                        <div class="console-header">
+                            <div class="console-dot output"></div>
+                            <span class="console-label output">Expected LLM Output</span>
+                        </div>
+                        <div class="console-content"><strong>THINK:</strong> Flaky in CI suggests environment difference. Could be:
+- Database state not reset
+- Race condition with test data setup
+- Network timeout differences
+
+<strong>ACT:</strong> Check if test depends on pre-existing data
+<strong>OBSERVE:</strong> Test assumes 'John Doe' exists but doesn't create it
+
+<strong>THINK:</strong> CI runs tests in isolation/parallel. Data may not exist.
+<strong>ACT:</strong> Add beforeEach to create test user
+<strong>OBSERVE:</strong> Still fails sometimes
+
+<strong>THINK:</strong> User creation might not complete before GET runs
+<strong>ACT:</strong> Add proper await and verification
+<strong>OBSERVE:</strong> ✓ Test now passes consistently
+
+<strong>FIXED CODE:</strong>
+test('should fetch user profile', async () =&gt; {
+  // Setup: Ensure user exists
+  await api.post('/users', { name: 'John Doe' });
+
+  // Add small delay for eventual consistency
+  await new Promise(r =&gt; setTimeout(r, 100));
+
+  const response = await api.get('/users/profile');
+  expect(response.data.name).toBe('John Doe');
+});
+
+<strong>ROOT CAUSE:</strong> Missing test isolation - test depended on global state</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tech-card">
+                <div class="tc-num">9</div>
+                <h3>Meta-Prompting</h3>
+                <p>Use the LLM to generate, improve, or optimize prompts themselves. This creates reusable templates that can be shared across teams, ensuring consistent high-quality outputs. Think of it as creating prompt libraries or test generation tools that multiply your productivity.</p>
+                <div class="tc-use"><strong>QA Use:</strong> Creating reusable test case generation templates</div>
+                <div class="console-block">
+                    <div class="console-section">
+                        <button class="copy-btn" onclick="copyContent(this)">Copy</button>
+                        <div class="console-header">
+                            <div class="console-dot"></div>
+                            <span class="console-label prompt">User Prompt</span>
+                        </div>
+                        <div class="console-content"><strong>Task:</strong> Create a reusable prompt template that our QA team can use to generate test cases for any CRUD API endpoint.
+
+<strong>Requirements:</strong>
+- Template should have clear placeholders
+- Include positive and negative scenarios
+- Cover authentication and authorization
+- Output in our standard format
+
+<strong>Deliverable:</strong> The template plus one example of how to use it</div>
+                    </div>
+                    <div class="console-section">
+                        <div class="console-header">
+                            <div class="console-dot output"></div>
+                            <span class="console-label output">Expected LLM Output</span>
+                        </div>
+                        <div class="console-content"><strong>CRUD API TEST CASE TEMPLATE</strong>
+
+---
+Generate test cases for: {{ENDPOINT_NAME}}
+Method: {{HTTP_METHOD}}
+Authentication: {{AUTH_TYPE}}
+Required Fields: {{REQUIRED_FIELDS}}
+Business Rules: {{BUSINESS_RULES}}
+
+Include test cases for:
+1. Happy path with valid data
+2. Missing required fields (one per field)
+3. Invalid data types
+4. Authentication failures (missing/invalid/expired token)
+5. Authorization (wrong role accessing endpoint)
+6. Boundary values for numeric/string fields
+7. Duplicate data handling (if applicable)
+
+Output Format: Test ID | Scenario | Expected Status | Expected Response
+---
+
+<strong>EXAMPLE USAGE:</strong>
+Generate test cases for: POST /api/orders
+Method: POST
+Authentication: Bearer Token (JWT)
+Required Fields: customerId, items[], shippingAddress
+Business Rules: Minimum order $10, Max 50 items
+
+<strong>Generated Output:</strong>
+| TC001 | Valid order creation | 201 | Order ID returned |
+| TC002 | Missing customerId | 400 | "customerId required" |
+| TC003 | Empty items array | 400 | "At least 1 item required" |
+| TC004 | No auth token | 401 | "Unauthorized" |
+| TC005 | Expired token | 401 | "Token expired" |</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tech-card">
+                <div class="tc-num">10</div>
+                <h3>Structured Output</h3>
+                <p>Explicitly request responses in specific formats: JSON, YAML, CSV, Gherkin, Markdown tables, or custom schemas. This ensures outputs can be directly imported into test management tools, CI pipelines, or documentation systems. Critical for automation workflows where parsing and consistency matter.</p>
+                <div class="tc-use"><strong>QA Use:</strong> Generating test data in specific formats for automation</div>
+                <div class="console-block">
+                    <div class="console-section">
+                        <button class="copy-btn" onclick="copyContent(this)">Copy</button>
+                        <div class="console-header">
+                            <div class="console-dot"></div>
+                            <span class="console-label prompt">User Prompt</span>
+                        </div>
+                        <div class="console-content"><strong>Task:</strong> Generate test data for e-commerce order testing
+
+<strong>Output Format:</strong> JSON array that can be directly used in our test fixtures
+
+<strong>Requirements:</strong>
+- 5 order objects
+- Include: orderId, customerId, items (array), total, status
+- Mix of statuses: pending, shipped, delivered, cancelled
+- Realistic product names and prices
+- Properly formatted dates (ISO 8601)
+
+<strong>Constraint:</strong> Output ONLY valid JSON, no explanations</div>
+                    </div>
+                    <div class="console-section">
+                        <div class="console-header">
+                            <div class="console-dot output"></div>
+                            <span class="console-label output">Expected LLM Output</span>
+                        </div>
+                        <div class="console-content">[
+  {
+    "orderId": "ORD-2024-001",
+    "customerId": "CUST-A123",
+    "items": [
+      {"sku": "LAPTOP-PRO-15", "name": "ProBook Laptop 15\"", "qty": 1, "price": 999.99}
+    ],
+    "total": 999.99,
+    "status": "delivered",
+    "createdAt": "2024-01-15T10:30:00Z"
+  },
+  {
+    "orderId": "ORD-2024-002",
+    "customerId": "CUST-B456",
+    "items": [
+      {"sku": "HEADPHONES-BT", "name": "Wireless Headphones", "qty": 2, "price": 79.99},
+      {"sku": "CHARGER-USB-C", "name": "USB-C Fast Charger", "qty": 1, "price": 29.99}
+    ],
+    "total": 189.97,
+    "status": "shipped",
+    "createdAt": "2024-01-18T14:22:00Z"
+  },
+  {
+    "orderId": "ORD-2024-003",
+    "customerId": "CUST-C789",
+    "items": [
+      {"sku": "MONITOR-27", "name": "27\" 4K Monitor", "qty": 1, "price": 449.00}
+    ],
+    "total": 449.00,
+    "status": "pending",
+    "createdAt": "2024-01-20T09:15:00Z"
+  }
+]</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== COMBINING TECHNIQUES ===== -->
+        <div class="section-title grey">Combining Techniques for Maximum Impact</div>
+        <div class="combo-grid">
+            <div class="combo-card">
+                <div class="combo-tags">
+                    <span style="background:var(--indigo-dim);color:var(--indigo-light);">Role</span>
+                    <span style="color:var(--text-dim);">+</span>
+                    <span style="background:var(--blue-dim);color:var(--blue-light);">Chain-of-Thought</span>
+                </div>
+                <h4>Security Analysis</h4>
+                <p>"As a security engineer, think step-by-step about how an attacker might exploit this API endpoint." Combines specialized knowledge with rigorous analysis.</p>
+            </div>
+            <div class="combo-card">
+                <div class="combo-tags">
+                    <span style="background:var(--blue-dim);color:var(--blue-light);">Few-Shot</span>
+                    <span style="color:var(--text-dim);">+</span>
+                    <span style="background:var(--grey-dim);color:var(--grey-light);">Structured Output</span>
+                </div>
+                <h4>Scalable Test Generation</h4>
+                <p>Provide 2 example test cases in JSON format, then ask for 20 more in the same structure. Gets consistent, parseable output at scale.</p>
+            </div>
+            <div class="combo-card">
+                <div class="combo-tags">
+                    <span style="background:var(--indigo-dim);color:var(--indigo-light);">Role</span>
+                    <span style="color:var(--text-dim);">+</span>
+                    <span style="background:var(--slate-dim);color:var(--slate-light);">Self-Consistency</span>
+                </div>
+                <h4>Unbiased Bug Classification</h4>
+                <p>Ask the model to classify a bug's severity from three roles (developer, PM, end user), then take consensus. Reduces individual bias.</p>
+            </div>
+            <div class="combo-card">
+                <div class="combo-tags">
+                    <span style="background:var(--grey-dim);color:var(--grey-light);">Meta</span>
+                    <span style="color:var(--text-dim);">+</span>
+                    <span style="background:var(--blue-dim);color:var(--blue-light);">Iterative</span>
+                </div>
+                <h4>Template Library Building</h4>
+                <p>Generate a prompt template, test it, refine across iterations until it consistently produces high-quality test artifacts for your team.</p>
+            </div>
+            <div class="combo-card">
+                <div class="combo-tags">
+                    <span style="background:var(--blue-dim);color:var(--blue-light);">RACE</span>
+                    <span style="color:var(--text-dim);">+</span>
+                    <span style="background:var(--indigo-dim);color:var(--indigo-light);">Role</span>
+                </div>
+                <h4>Quick Expert Reviews</h4>
+                <p>Combine RACE structure with a specialist role for rapid, expert-level analysis. "As a performance tester (Role), analyze this query (Action) for our e-commerce DB (Context), list bottlenecks in bullets (Execute)."</p>
+            </div>
+            <div class="combo-card">
+                <div class="combo-tags">
+                    <span style="background:var(--grey-dim);color:var(--grey-light);">CREATE</span>
+                    <span style="color:var(--text-dim);">+</span>
+                    <span style="background:var(--blue-dim);color:var(--blue-light);">CoT</span>
+                </div>
+                <h4>Framework Architecture</h4>
+                <p>Use CREATE's comprehensive structure with explicit "think through each decision" instructions for designing test automation frameworks with justified choices.</p>
+            </div>
+        </div>
+
+        <!-- ===== ANTI-PATTERNS ===== -->
+        <div class="section-title rose">Anti-Patterns to Avoid</div>
+        <table class="ap-table">
+            <thead>
+                <tr>
+                    <th>Anti-Pattern</th>
+                    <th>Problem</th>
+                    <th>Correct Approach</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="bad">"Write API tests"</td>
+                    <td>Vague, no context</td>
+                    <td class="good">"Write Supertest assertions for /users POST validating 201 with JSON schema"</td>
+                </tr>
+                <tr>
+                    <td class="bad">"Test the login"</td>
+                    <td>No scenarios defined</td>
+                    <td class="good">"Generate 5 test cases: valid creds, invalid password, missing email, SQL injection, rate limiting"</td>
+                </tr>
+                <tr>
+                    <td class="bad">Missing input artifacts</td>
+                    <td>AI hallucinations</td>
+                    <td class="good">Always include OpenAPI spec, schema, or sample payloads</td>
+                </tr>
+                <tr>
+                    <td class="bad">No style reference</td>
+                    <td>Inconsistent output</td>
+                    <td class="good">Inject 15-30 lines of exemplary existing tests for style matching</td>
+                </tr>
+                <tr>
+                    <td class="bad">Only happy path</td>
+                    <td>Incomplete coverage</td>
+                    <td class="good">Explicitly request error scenarios, edge cases, security tests</td>
+                </tr>
+                <tr>
+                    <td class="bad">Hardcoded test data</td>
+                    <td>Brittle, non-isolated</td>
+                    <td class="good">Specify faker usage or factory pattern for dynamic data</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB: QUALITY ENGINEER ROADMAP -->
+<!-- ============================================================ -->
+<div class="tab-content" id="tab-qe">
+    <div class="diagram-container">
+        <div class="diagram-header">
+            <h2 style="color: var(--blue-light);">Software Quality Assurance Roadmap</h2>
+            <p>Career roadmap for testing strategy, process excellence, and AI-augmented QA</p>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item"><div class="legend-dot" style="background:var(--green);"></div> Junior QE</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--yellow);"></div> Intermediate</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--red);"></div> Senior</div>
+        </div>
+
+        <div class="diagram-scroll">
+            <div class="diagram-wrapper" id="diagram-qe">
+                <div class="title-node title-qe">Quality Engineer</div>
+
+                <!-- JUNIOR QE - GREEN -->
+                <div class="level-divider"><span>Junior QE</span></div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-green" data-connect="qe-bbt">Equivalence Partition</div>
+                        <div class="sub-node sn-green" data-connect="qe-bbt">Boundary Value Analysis</div>
+                        <div class="sub-node sn-green" data-connect="qe-bbt">Decision Table</div>
+                        <div class="sub-node sn-green" data-connect="qe-bbt">State Transition</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-green" id="qe-bbt">Black Box<br>Techniques</div>
+                        <div class="main-node mn-green" id="qe-apif">API Fundamentals</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-green" data-connect="qe-apif">REST</div>
+                        <div class="sub-node sn-green" data-connect="qe-apif">HTTP Methods</div>
+                        <div class="sub-node sn-green" data-connect="qe-apif">HTTP Status Codes</div>
+                        <div class="sub-node sn-green" data-connect="qe-apif">Data Formats</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-green" data-connect="qe-sqlf">Select Statements</div>
+                        <div class="sub-node sn-green" data-connect="qe-sqlf">Joins</div>
+                        <div class="sub-node sn-green" data-connect="qe-sqlf">Filtering and Sorting</div>
+                        <div class="sub-node sn-green" data-connect="qe-sqlf">CRUD</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-green" id="qe-sqlf">SQL Fundamentals</div>
+                        <div class="main-node mn-green" id="qe-postman">Postman</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-green" data-connect="qe-postman">Collections</div>
+                        <div class="sub-node sn-green" data-connect="qe-postman">Requests</div>
+                        <div class="sub-node sn-green" data-connect="qe-postman">Variables</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-green" data-connect="qe-apitf">Status Code Validation</div>
+                        <div class="sub-node sn-green" data-connect="qe-apitf">Payload and Schema Validation</div>
+                        <div class="sub-node sn-green" data-connect="qe-apitf">Header Verification</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-green" id="qe-apitf">API Testing<br>Fundamentals</div>
+                        <div class="main-node mn-green" id="qe-stf">Software Testing<br>Fundamentals</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-green" data-connect="qe-stf">Software Testing Lifecycle</div>
+                        <div class="sub-node sn-green" data-connect="qe-stf">Dynamic vs Static Testing</div>
+                        <div class="sub-node sn-green" data-connect="qe-stf">Bug Lifecycle</div>
+                        <div class="sub-node sn-green" data-connect="qe-stf">Psychology of Testing</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-green" data-connect="qe-tot">Regression</div>
+                        <div class="sub-node sn-green" data-connect="qe-tot">Smoke</div>
+                        <div class="sub-node sn-green" data-connect="qe-tot">E2E</div>
+                        <div class="sub-node sn-green" data-connect="qe-tot">Sanity</div>
+                        <div class="sub-node sn-green" data-connect="qe-tot">Ad-hoc</div>
+                        <div class="sub-node sn-green" data-connect="qe-tot">Functional</div>
+                        <div class="sub-node sn-green" data-connect="qe-tot">Integration</div>
+                        <div class="sub-node sn-green" data-connect="qe-tot">Automation</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-green" id="qe-tot">Types of Testing</div>
+                        <div class="main-node mn-green" id="qe-tcd">Test Case Design</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-green" data-connect="qe-tcd">Test Maintenance</div>
+                        <div class="sub-node sn-green" data-connect="qe-tcd">Principles of Testing</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-green" data-connect="qe-swdev">OOP Fundamentals</div>
+                        <div class="sub-node sn-green" data-connect="qe-swdev">Data Types</div>
+                        <div class="sub-node sn-green" data-connect="qe-swdev">Control Flow</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-green" id="qe-swdev">Software<br>Development</div>
+                    </div>
+                    <div class="branch branch-right"></div>
+                </div>
+
+                <!-- INTERMEDIATE - YELLOW -->
+                <div class="level-divider"><span>Intermediate</span></div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-yellow" data-connect="qe-aapi">CI Integration (Newman)</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-aapi">Executing Locally (Postman)</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-aapi">JavaScript Validations</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-aapi">Swagger</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-aapi">Data-Driven &amp; Parameterized Testing</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-aapi">Authentication &amp; RBAC</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-yellow" id="qe-aapi">Advanced API<br>Testing</div>
+                        <div class="main-node mn-yellow" id="qe-acc">Accessibility<br>Testing</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-yellow" data-connect="qe-acc">Color Contrast</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-acc">Text Alternatives</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-acc">ARIA Testing</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-acc">Keyboard Accessibility</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-yellow" data-connect="qe-wcag">Level A</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-wcag">Level AA</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-wcag">Level AAA</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-yellow" id="qe-wcag">WCAG Principles</div>
+                        <div class="main-node mn-yellow" id="qe-aif">AI Fundamentals</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-yellow" data-connect="qe-aif">Gen AI vs ML</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-aif">LLMs</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-aif">Tokens and Context Windows</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-yellow" data-connect="qe-aitools">Copilot</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-aitools">Claude Code</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-yellow" id="qe-aitools">Hands-on Tool<br>Experience</div>
+                        <div class="main-node mn-yellow" id="qe-mob">Mobile Testing</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-yellow" data-connect="qe-mob">Mobile Testing Techniques</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-mob">Mobile Cloud</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-mob">Platforms</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-yellow" data-connect="qe-mtt">Interruption</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-mtt">Localization</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-mtt">Performance</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-mtt">Network Testing</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-yellow" id="qe-mtt">Mobile Testing<br>Techniques</div>
+                        <div class="main-node mn-yellow" id="qe-mc">Mobile Cloud</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-yellow" data-connect="qe-mc">Testflight</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-mc">Simulators</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-yellow" data-connect="qe-plat">Native/Hybrid/Responsive Apps</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-plat">Real Devices</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-plat">Emulators</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-yellow" id="qe-plat">Platforms</div>
+                        <div class="main-node mn-yellow" id="qe-prog">Programming</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-yellow" data-connect="qe-prog">Hands-On Experience</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-prog">Design and Creation of Simple Algorithms</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-yellow" data-connect="qe-hoe">Abstraction</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-hoe">Encapsulation</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-hoe">Inheritance</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-hoe">Polymorphism</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-yellow" id="qe-hoe">Hands-On<br>Experience</div>
+                        <div class="main-node mn-yellow" id="qe-sqli">SQL Intermediate<br>Concepts</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-yellow" data-connect="qe-sqli">Advanced Joins</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-sqli">Aggregations</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-sqli">Subqueries</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-sqli">Constraints</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-yellow" data-connect="qe-advj">Right Join</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-advj">Full-outer Join</div>
+                        <div class="sub-node sn-yellow" data-connect="qe-advj">Self Join</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-yellow" id="qe-advj">Advanced Joins</div>
+                    </div>
+                    <div class="branch branch-right"></div>
+                </div>
+
+                <!-- SENIOR - RED -->
+                <div class="level-divider"><span>Senior</span></div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-red" data-connect="qe-wa">Low Code Tools (Testim, Mabl)</div>
+                        <div class="sub-node sn-red" data-connect="qe-wa">JavaScript</div>
+                        <div class="sub-node sn-red" data-connect="qe-wa">XPaths</div>
+                        <div class="sub-node sn-red" data-connect="qe-wa">Selenium</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-red" id="qe-wa">Web Automation</div>
+                        <div class="main-node mn-red" id="qe-sa">Software<br>Automation</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-red" data-connect="qe-sa">Test Frameworks (TestNG, NUnit, Cucumber)</div>
+                        <div class="sub-node sn-red" data-connect="qe-sa">Testing Types</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-red" data-connect="qe-tt">Load Testing</div>
+                        <div class="sub-node sn-red" data-connect="qe-tt">Stress Testing</div>
+                        <div class="sub-node sn-red" data-connect="qe-tt">Volume Testing</div>
+                        <div class="sub-node sn-red" data-connect="qe-tt">Soak Testing</div>
+                        <div class="sub-node sn-red" data-connect="qe-tt">Scalability Testing</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-red" id="qe-tt">Testing Types</div>
+                        <div class="main-node mn-red" id="qe-perf">Performance<br>Testing</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-red" data-connect="qe-perf">JMeter</div>
+                        <div class="sub-node sn-red" data-connect="qe-perf">Load Runner</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-red" data-connect="qe-att">Estimations</div>
+                        <div class="sub-node sn-red" data-connect="qe-att">Risk-Based Testing</div>
+                        <div class="sub-node sn-red" data-connect="qe-att">Dynamic Test Selection</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-red" id="qe-att">Advanced Test<br>Techniques</div>
+                        <div class="main-node mn-red" id="qe-advt">Advanced Testing</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-red" data-connect="qe-advt">Reporting</div>
+                        <div class="sub-node sn-red" data-connect="qe-advt">DoD &amp; DoR Analysis</div>
+                        <div class="sub-node sn-red" data-connect="qe-advt">Release Management</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-red" data-connect="qe-est">Algorithmic &amp; Probabilistic Forecasting</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-red" id="qe-est">Estimations</div>
+                        <div class="main-node mn-red" id="qe-rep">Reporting</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-red" data-connect="qe-rep">Defect Leakage</div>
+                        <div class="sub-node sn-red" data-connect="qe-rep">Defect-Reopen Rate</div>
+                        <div class="sub-node sn-red" data-connect="qe-rep">Test Coverage</div>
+                        <div class="sub-node sn-red" data-connect="qe-rep">Story Coverage</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-red" data-connect="qe-aiqe">Context Engineering</div>
+                        <div class="sub-node sn-red" data-connect="qe-aiqe">Prompt Engineering</div>
+                        <div class="sub-node sn-red" data-connect="qe-aiqe">Synthetic Data Generation</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-red" id="qe-aiqe">AI In Quality<br>Engineering</div>
+                        <div class="main-node mn-red" id="qe-asql">Advanced SQL</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-red" data-connect="qe-asql">Views</div>
+                        <div class="sub-node sn-red" data-connect="qe-asql">Stored Procedures</div>
+                        <div class="sub-node sn-red" data-connect="qe-asql">SQL Injection</div>
+                        <div class="sub-node sn-red" data-connect="qe-asql">Windows Functions</div>
+                    </div>
+                </div>
+
+                <svg class="connectors" id="svg-qe"></svg>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB: SDET ROADMAP -->
+<!-- ============================================================ -->
+<div class="tab-content" id="tab-sdet">
+    <div class="diagram-container">
+        <div class="diagram-header">
+            <h2 style="color: var(--blue-light);">Software Development Engineer in Test - Roadmap</h2>
+            <p>Career roadmap for automation engineering, framework development, and AI-powered testing</p>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item"><div class="legend-dot" style="background:var(--green);"></div> Junior Level</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--yellow);"></div> Intermediate 1-4</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--red);"></div> Senior 1-2</div>
+        </div>
+
+        <div class="diagram-scroll">
+            <div class="diagram-wrapper" id="diagram-sdet">
+                <div class="title-node title-sdet">SDET</div>
+
+                <!-- JUNIOR LEVEL - GREEN -->
+                <div class="level-divider"><span>Junior Level</span></div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-green" data-connect="s-selwd">Handling Web Elements</div>
+                        <div class="sub-node sn-green" data-connect="s-selwd">Locators</div>
+                        <div class="sub-node sn-green" data-connect="s-selwd">Advantages and Limitations</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-green" id="s-selwd">Selenium WebDriver</div>
+                        <div class="main-node mn-green" id="s-feaf">Front-end Automation<br>Fundamentals</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-green" data-connect="s-feaf">Selenium Exceptions</div>
+                        <div class="sub-node sn-green" data-connect="s-feaf">Synchronization</div>
+                        <div class="sub-node sn-green" data-connect="s-feaf">Debugging Techniques</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-green" data-connect="s-sdf">Object-Oriented Programming</div>
+                        <div class="sub-node sn-green" data-connect="s-sdf">Error Handling</div>
+                        <div class="sub-node sn-green" data-connect="s-sdf">Data Structures</div>
+                        <div class="sub-node sn-green" data-connect="s-sdf">Data Types</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-green" id="s-sdf">Software Development<br>Fundamentals</div>
+                        <div class="main-node mn-green" id="s-api">API Automation</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-green" data-connect="s-api">Type of Requests</div>
+                        <div class="sub-node sn-green" data-connect="s-api">Response Codes</div>
+                        <div class="sub-node sn-green" data-connect="s-api">API Testing Techniques</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-green" data-connect="s-apitools">Newman</div>
+                        <div class="sub-node sn-green" data-connect="s-apitools">Postman</div>
+                        <div class="sub-node sn-green" data-connect="s-apitools">Mock Servers</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-green" id="s-apitools">API Tools</div>
+                        <div class="main-node mn-green" id="s-sql">SQL</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-green" data-connect="s-sql">CRUD</div>
+                        <div class="sub-node sn-green" data-connect="s-sql">DML</div>
+                        <div class="sub-node sn-green" data-connect="s-sql">JOINS</div>
+                        <div class="sub-node sn-green" data-connect="s-sql">Data Structures</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-green" data-connect="s-cv">Type of Version Control Systems</div>
+                        <div class="sub-node sn-green" data-connect="s-cv">GIT Basics</div>
+                        <div class="sub-node sn-green" data-connect="s-cv">Branching and Merging</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-green" id="s-cv">Code Versioning</div>
+                        <div class="main-node mn-green" id="s-cicd">CI / CD</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-green" data-connect="s-cicd">Continuous Integration</div>
+                        <div class="sub-node sn-green" data-connect="s-cicd">Continuous Delivery</div>
+                        <div class="sub-node sn-green" data-connect="s-cicd">CI Pipelines Basics</div>
+                    </div>
+                </div>
+
+                <!-- INTERMEDIATE 1-4 - YELLOW -->
+                <div class="level-divider"><span>Intermediate 1-4</span></div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-yellow" data-connect="s-dpf">Page Object Model</div>
+                        <div class="sub-node sn-yellow" data-connect="s-dpf">Screen Play Pattern</div>
+                        <div class="sub-node sn-yellow" data-connect="s-dpf">Testing Frameworks</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-yellow" id="s-dpf">Design Patterns<br>Fundamentals</div>
+                        <div class="main-node mn-yellow" id="s-tfr">Testing Frameworks</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-yellow" data-connect="s-tfr">TestNG - JUnit</div>
+                        <div class="sub-node sn-yellow" data-connect="s-tfr">NUnit - MsTest - Mocha</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-yellow" data-connect="s-scripts">Creation of Scripts (Established Framework)</div>
+                        <div class="sub-node sn-yellow" data-connect="s-scripts">Creation of Scripts (Distributed Framework)</div>
+                        <div class="sub-node sn-yellow" data-connect="s-scripts">Cucumber / SpecFlow</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-yellow" id="s-scripts">Script Creation</div>
+                        <div class="main-node mn-yellow" id="s-feaa">Front-end Automation<br>Advanced</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-yellow" data-connect="s-feaa">Dynamic Xpath Strategies</div>
+                        <div class="sub-node sn-yellow" data-connect="s-feaa">Chrome DevTools Protocol</div>
+                        <div class="sub-node sn-yellow" data-connect="s-feaa">Waits/Retry Management</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-yellow" data-connect="s-feadv">Improved Debugging and Screenshots</div>
+                        <div class="sub-node sn-yellow" data-connect="s-feadv">Handling Advanced Web Elements</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-yellow" id="s-feadv">Advanced Web Elements</div>
+                        <div class="main-node mn-yellow" id="s-asql">Advanced SQL</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-yellow" data-connect="s-asql">Aggregate Functions</div>
+                        <div class="sub-node sn-yellow" data-connect="s-asql">Stored Procedures</div>
+                        <div class="sub-node sn-yellow" data-connect="s-asql">Subqueries</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-yellow" data-connect="s-awe">Shadow DOM</div>
+                        <div class="sub-node sn-yellow" data-connect="s-awe">iFrames</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-yellow" id="s-awe">Handling Advanced<br>Web Elements</div>
+                        <div class="main-node mn-yellow" id="s-asqlext">Advanced SQL (Cont.)</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-yellow" data-connect="s-asqlext">Triggers</div>
+                        <div class="sub-node sn-yellow" data-connect="s-asqlext">Views</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-yellow" data-connect="s-aapi">Serialize</div>
+                        <div class="sub-node sn-yellow" data-connect="s-aapi">Deserialize</div>
+                        <div class="sub-node sn-yellow" data-connect="s-aapi">API / Data Driven</div>
+                        <div class="sub-node sn-yellow" data-connect="s-aapi">Response Data Validation</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-yellow" id="s-aapi">Advanced API<br>Automation</div>
+                        <div class="main-node mn-yellow" id="s-nft">Non-Functional</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-yellow" data-connect="s-nft">Performance Testing</div>
+                        <div class="sub-node sn-yellow" data-connect="s-nft">Stress Testing</div>
+                        <div class="sub-node sn-yellow" data-connect="s-nft">Load Testing</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-yellow" data-connect="s-mob">Appium</div>
+                        <div class="sub-node sn-yellow" data-connect="s-mob">Gestures</div>
+                        <div class="sub-node sn-yellow" data-connect="s-mob">Locators</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-yellow" id="s-mob">Mobile Automation</div>
+                        <div class="main-node mn-yellow" id="s-agit">Advanced GIT</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-yellow" data-connect="s-agit">Git Workflows</div>
+                        <div class="sub-node sn-yellow" data-connect="s-agit">Undoing Changes</div>
+                        <div class="sub-node sn-yellow" data-connect="s-agit">Tagging and Releases</div>
+                        <div class="sub-node sn-yellow" data-connect="s-agit">Cherry-picking</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-yellow" data-connect="s-dsa">SOLID</div>
+                        <div class="sub-node sn-yellow" data-connect="s-dsa">Behavioral Patterns</div>
+                        <div class="sub-node sn-yellow" data-connect="s-dsa">Structural Patterns</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-yellow" id="s-dsa">Data Structures<br>&amp; Algorithms</div>
+                        <div class="main-node mn-yellow" id="s-pabp">Programming Advanced<br>/ Best Practices</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-yellow" data-connect="s-pabp">Interfaces and Abstract Classes</div>
+                        <div class="sub-node sn-yellow" data-connect="s-pabp">Functional Programming</div>
+                        <div class="sub-node sn-yellow" data-connect="s-pabp">Clean Code Principles</div>
+                        <div class="sub-node sn-yellow" data-connect="s-pabp">Test Driven Development</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-yellow" data-connect="s-adpd">Framework Development &amp; Documentation</div>
+                        <div class="sub-node sn-yellow" data-connect="s-adpd">POM / Page Factory</div>
+                        <div class="sub-node sn-yellow" data-connect="s-adpd">Screen Play Pattern / Serenity BDD</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-yellow" id="s-adpd">Automation Design<br>Pattern Development</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-yellow" data-connect="s-adpd">Singleton Design Pattern</div>
+                        <div class="sub-node sn-yellow" data-connect="s-adpd">Parallel Execution</div>
+                    </div>
+                </div>
+
+                <!-- SENIOR 1-2 - RED -->
+                <div class="level-divider"><span>Senior 1-2</span></div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-red" data-connect="s-cicda">Pipeline as a Code</div>
+                        <div class="sub-node sn-red" data-connect="s-cicda">Docker in CI/CD</div>
+                        <div class="sub-node sn-red" data-connect="s-cicda">Artifact Management</div>
+                        <div class="sub-node sn-red" data-connect="s-cicda">Infrastructure as Code</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-red" id="s-cicda">CI/CD Advanced<br>Topics</div>
+                        <div class="main-node mn-red" id="s-ai">AI</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-red" data-connect="s-ai">VS Code + Copilot</div>
+                        <div class="sub-node sn-red" data-connect="s-ai">Azure Foundry or Similar</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-red" data-connect="s-moba">Parallel Executors</div>
+                        <div class="sub-node sn-red" data-connect="s-moba">Handling Multiple App Contexts</div>
+                        <div class="sub-node sn-red" data-connect="s-moba">Mobile Device Virtualization</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-red" id="s-moba">Mobile Automation<br>Advanced Topics</div>
+                        <div class="main-node mn-red" id="s-ssk">Secondary Skillset<br>Experience</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-red" data-connect="s-ssk">JavaScript</div>
+                        <div class="sub-node sn-red" data-connect="s-ssk">Python</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="branch branch-left">
+                        <div class="sub-node sn-red" data-connect="s-js">Cypress</div>
+                        <div class="sub-node sn-red" data-connect="s-js">Playwright</div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-red" id="s-js">JavaScript</div>
+                        <div class="main-node mn-red" id="s-py">Python</div>
+                    </div>
+                    <div class="branch branch-right">
+                        <div class="sub-node sn-red" data-connect="s-py">Pycharm</div>
+                        <div class="sub-node sn-red" data-connect="s-py">RPA</div>
+                    </div>
+                </div>
+
+                <svg class="connectors" id="svg-sdet"></svg>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <strong>QE Center of Excellence</strong> &mdash; Best Practices &mdash; 2025
+</footer>
+
+<script>
+    // Copy button functionality
+    function copyContent(btn) {
+        const section = btn.closest('.console-section');
+        const content = section.querySelector('.console-content').textContent;
+
+        navigator.clipboard.writeText(content).then(() => {
+            btn.textContent = 'Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = 'Copy';
+                btn.classList.remove('copied');
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy:', err);
+            btn.textContent = 'Error';
+            setTimeout(() => {
+                btn.textContent = 'Copy';
+            }, 2000);
+        });
+    }
+
+    // Tab switching
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+        document.getElementById(`tab-${tabId}`).classList.add('active');
+        setTimeout(drawAll, 100);
+        window.scrollTo(0, 0);
+    }
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+    });
+
+    // Draw connector lines
+    function drawConnectors(wrapperId, svgId) {
+        const wrapper = document.getElementById(wrapperId);
+        const svg = document.getElementById(svgId);
+        if (!wrapper || !svg || wrapper.offsetParent === null) return;
+
+        svg.setAttribute('width', wrapper.scrollWidth);
+        svg.setAttribute('height', wrapper.scrollHeight);
+        svg.innerHTML = '';
+
+        function pos(el) {
+            const r = el.getBoundingClientRect();
+            const w = wrapper.getBoundingClientRect();
+            return {
+                cx: r.left - w.left + r.width / 2,
+                cy: r.top - w.top + r.height / 2,
+                l: r.left - w.left,
+                r: r.left - w.left + r.width,
+                t: r.top - w.top,
+                b: r.top - w.top + r.height
+            };
+        }
+
+        function line(x1, y1, x2, y2, color) {
+            const l = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            l.setAttribute('x1', x1);
+            l.setAttribute('y1', y1);
+            l.setAttribute('x2', x2);
+            l.setAttribute('y2', y2);
+            l.setAttribute('stroke', color || '#2a3155');
+            l.setAttribute('stroke-width', '1.5');
+            l.setAttribute('stroke-opacity', '0.5');
+            svg.appendChild(l);
+        }
+
+        function getNodeColor(mainEl) {
+            const cls = mainEl.className;
+            if (cls.includes('mn-green')) return 'rgba(34,197,94,0.5)';
+            if (cls.includes('mn-yellow')) return 'rgba(234,179,8,0.5)';
+            if (cls.includes('mn-red')) return 'rgba(220,38,38,0.5)';
+            return 'rgba(100,100,100,0.4)';
+        }
+
+        // Connect sub-nodes to main nodes
+        wrapper.querySelectorAll('.sub-node[data-connect]').forEach(sub => {
+            const main = document.getElementById(sub.getAttribute('data-connect'));
+            if (!main) return;
+            const sp = pos(sub), mp = pos(main);
+            const color = getNodeColor(main);
+            if (sub.closest('.branch-left')) {
+                line(sp.r, sp.cy, mp.l, sp.cy, color);
+            } else {
+                line(sp.l, sp.cy, mp.r, sp.cy, color);
+            }
+        });
+
+        // Connect rows vertically
+        const rows = wrapper.querySelectorAll('.row');
+        for (let i = 0; i < rows.length - 1; i++) {
+            const c1 = rows[i].querySelector('.center-col');
+            const c2 = rows[i + 1].querySelector('.center-col');
+            if (c1 && c2) {
+                const p1 = pos(c1), p2 = pos(c2);
+                line(p1.cx, p1.b, p2.cx, p2.t, '#2a3155');
+            }
+        }
+
+        // Connect title to first row
+        const title = wrapper.querySelector('.title-node');
+        const firstCC = rows[0]?.querySelector('.center-col');
+        if (title && firstCC) {
+            const tp = pos(title), fp = pos(firstCC);
+            line(tp.cx, tp.b, fp.cx, fp.t, '#2a3155');
+        }
+    }
+
+    function drawAll() {
+        drawConnectors('diagram-qe', 'svg-qe');
+        drawConnectors('diagram-sdet', 'svg-sdet');
+    }
+
+    window.addEventListener('load', () => setTimeout(drawAll, 150));
+    window.addEventListener('resize', drawAll);
+</script>
+
+</body>
+</html>
