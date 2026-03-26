@@ -2705,29 +2705,73 @@ Business Rules: Minimum order $10, Max 50 items
                     <!-- Advanced Testing -->
                     <div class="module-card left">
                         <h3 class="module-title">Advanced Testing</h3>
-                        <ul class="items">
-                            <li>DoD &amp; DoR Analysis</li>
-                            <li>Release Management</li>
-                        </ul>
                         <div class="subtopic">
-                            <div class="subtopic-title">Advanced Techniques</div>
+                            <div class="subtopic-title">Risk-Based Testing</div>
                             <ul class="subtopic-children">
-                                <li>Risk-Based Testing</li>
-                                <li>Dynamic Test Selection</li>
+                                <li>Prioritize coverage using likelihood and impact per feature</li>
+                                <li>Adjust depth and scope based on risk level</li>
+                                <li>Document and communicate risk decisions to stakeholders</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Dynamic Test Selection</div>
+                            <ul class="subtopic-children">
+                                <li>Select regression tests based on scope of change</li>
+                                <li>Reduce execution time without sacrificing meaningful coverage</li>
                             </ul>
                         </div>
                         <div class="subtopic">
                             <div class="subtopic-title">Estimations</div>
                             <ul class="subtopic-children">
-                                <li>Algorithmic Forecasting</li>
-                                <li>Probabilistic Forecasting</li>
+                                <li>Break down effort by complexity and risk</li>
+                                <li>Apply algorithmic forecasting for predictable work</li>
+                                <li>Apply probabilistic forecasting for ambiguous features</li>
+                                <li>Communicate estimates with confidence ranges not single numbers</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Reporting</div>
+                            <div class="subtopic-title">Shift-Left Testing</div>
                             <ul class="subtopic-children">
-                                <li>Defect Leakage / Reopen Rate</li>
-                                <li>Test / Story Coverage</li>
+                                <li>Involve QE from requirements and design phases</li>
+                                <li>Challenge acceptance criteria before development starts</li>
+                                <li>Identify testability issues early to reduce cost of defects</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Continuous Testing</div>
+                            <ul class="subtopic-children">
+                                <li>Define quality gates that block pipeline progression on failure</li>
+                                <li>Monitor test results across builds and flag coverage gaps</li>
+                                <li>Balance fast feedback with meaningful test depth</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Feature Flags and Progressive Delivery</div>
+                            <ul class="subtopic-children">
+                                <li>Validate behavior when features are toggled on and off</li>
+                                <li>Test flag combinations and coordinate scope with canary releases</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Observability and Monitoring as Testing</div>
+                            <ul class="subtopic-children">
+                                <li>Use logs, traces and metrics to validate system behavior</li>
+                                <li>Correlate production incidents with gaps in test coverage</li>
+                                <li>Treat production monitoring as an extension of the test strategy</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Reporting and Metrics</div>
+                            <ul class="subtopic-children">
+                                <li>Defect Leakage, Defect-Reopen Rate, Test Coverage, DoR and DoD</li>
+                                <li>Present metrics as quality signals not just numbers</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Release Management</div>
+                            <ul class="subtopic-children">
+                                <li>Define testing scope, sign-off criteria and go/no-go recommendations</li>
+                                <li>Assess readiness based on metrics, risk and open defects</li>
                             </ul>
                         </div>
                     </div>
