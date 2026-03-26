@@ -1117,11 +1117,22 @@
         .module-card .items {
             list-style: none;
             margin-top: 0.4rem;
+            margin-left: 0.8rem;
+            padding-left: 0.8rem;
+            border-left: 2px solid rgba(34,197,94,0.3);
+        }
+
+        .level-section.intermediate .module-card .items {
+            border-left-color: rgba(234,179,8,0.3);
+        }
+
+        .level-section.senior .module-card .items {
+            border-left-color: rgba(220,38,38,0.3);
         }
 
         .module-card .items > li {
             padding: 0.25rem 0;
-            padding-left: 1.2rem;
+            padding-left: 1rem;
             position: relative;
             color: var(--text-muted);
             font-size: 0.85rem;
@@ -1134,19 +1145,15 @@
             top: 50%;
             width: 6px;
             height: 2px;
-            background: var(--border);
-        }
-
-        .level-section.junior .module-card .items > li::before {
-            background: rgba(34,197,94,0.4);
+            background: rgba(34,197,94,0.6);
         }
 
         .level-section.intermediate .module-card .items > li::before {
-            background: rgba(234,179,8,0.4);
+            background: rgba(234,179,8,0.6);
         }
 
         .level-section.senior .module-card .items > li::before {
-            background: rgba(220,38,38,0.4);
+            background: rgba(220,38,38,0.6);
         }
 
         .module-card .subtopic {
@@ -1180,20 +1187,20 @@
             list-style: none;
             margin-left: 0.8rem;
             padding-left: 0.8rem;
-            border-left: 2px solid var(--green);
+            border-left: 2px solid rgba(34,197,94,0.3);
             margin-bottom: 0.4rem;
         }
 
         .level-section.intermediate .module-card .subtopic-children {
-            border-left-color: var(--yellow);
+            border-left-color: rgba(234,179,8,0.3);
         }
 
         .level-section.senior .module-card .subtopic-children {
-            border-left-color: var(--red);
+            border-left-color: rgba(220,38,38,0.3);
         }
 
         .module-card .subtopic-children li {
-            padding: 0.2rem 0;
+            padding: 0.25rem 0;
             padding-left: 1rem;
             position: relative;
             color: var(--text-muted);
@@ -1207,18 +1214,15 @@
             top: 50%;
             width: 6px;
             height: 2px;
-        }
-
-        .level-section.junior .module-card .subtopic-children li::before {
-            background: var(--green);
+            background: rgba(34,197,94,0.6);
         }
 
         .level-section.intermediate .module-card .subtopic-children li::before {
-            background: var(--yellow);
+            background: rgba(234,179,8,0.6);
         }
 
         .level-section.senior .module-card .subtopic-children li::before {
-            background: var(--red);
+            background: rgba(220,38,38,0.6);
         }
 
         /* ===== RESPONSIVE ===== */
