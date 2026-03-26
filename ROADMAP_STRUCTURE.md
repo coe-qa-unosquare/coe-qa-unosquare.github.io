@@ -183,11 +183,16 @@
 - Aggregations
 - Subqueries
 - Constraints
-- GROUP BY & HAVING - Grouping with conditions
-- CASE Statements - Conditional logic in queries
-- UNION / INTERSECT / EXCEPT - Combining result sets
-- NULL Handling - COALESCE, NULLIF, IS NULL patterns
-- Date/Time Functions - Date manipulation, formatting
+- GROUP BY & HAVING 
+  - Grouping with conditions
+- CASE Statements 
+  - Conditional logic in queries
+- UNION / INTERSECT / EXCEPT 
+  - Combining result sets
+- NULL Handling 
+  - COALESCE, NULLIF, IS NULL patterns
+- Date/Time Functions 
+  - Date manipulation, formatting
 
 ### Module: AI Deep Dive
 - LLM Architecture (Conceptual)
@@ -237,16 +242,18 @@
 ## Senior 1-2
 
 ### Software Automation
-- Web Automation / Low Code
+- Front-end Automation
+  - Low Code
   - Testim
   - Mabl
-  - JavaScript
-- Web Automation / Selenium
+  - Cypress Prompt
+- Selenium / Playwright
   - XPaths
-- Test Frameworks
-  - TestNG
-  - NUnit
-  - Cucumber
+  - Script Maintenance
+  - Test Frameworks
+    - TestNG
+    - NUnit
+    - Cucumber
 
 ### Performance Testing (Conceptual)
 - Testing Types
@@ -255,10 +262,10 @@
   - Volume Testing
   - Soak Testing
   - Scalability Testing
-- Performance Testing
-- JMeter
-- Load Runner
-- Blaze Meter
+- Performance Testing Tools
+    - JMeter
+    - Load Runner
+    - Blaze Meter
 
 ### Advanced Testing
 - DoD & DoR Analysis
@@ -279,10 +286,14 @@
 - Stored Procedures
 - SQL Injection
 - Windows Functions
-- Query Optimization & Execution Plans - Understanding EXPLAIN/ANALYZE to identify slow queries
-- Indexing Strategies - When and how to use indexes effectively
-- Transactions & Locking - ACID properties, deadlocks, isolation levels
-- Database Performance Testing - Identifying bottlenecks, query profiling
+- Query Optimization & Execution Plans 
+  - Understanding EXPLAIN/ANALYZE to identify slow queries
+- Indexing Strategies 
+  - When and how to use indexes effectively
+- Transactions & Locking 
+  - ACID properties, deadlocks, isolation levels
+- Database Performance Testing 
+  - Identifying bottlenecks, query profiling
 - Data Integrity Validation - Constraints verification, referential integrity checks
 
 

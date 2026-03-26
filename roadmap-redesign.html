@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QE Roadmap - Center of Excellence</title>
+    <title>QE Roadmap - Redesign Preview</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
             --bg: #0a0a0a;
@@ -17,14 +15,19 @@
             --border: #2a2a2a;
             --text: #ffffff;
             --text-muted: #a0a0a0;
-            --junior-color: #22c55e;
-            --intermediate-color: #eab308;
-            --senior-color: #dc2626;
-            --connector-color: #2a2a2a;
+            --green: #22c55e;
+            --green-light: #86efac;
+            --green-dim: rgba(34,197,94,0.15);
+            --yellow: #eab308;
+            --yellow-light: #fef08a;
+            --yellow-dim: rgba(234,179,8,0.15);
+            --red: #dc2626;
+            --red-light: #fca5a5;
+            --red-dim: rgba(220,38,38,0.15);
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.4;
@@ -33,27 +36,23 @@
 
         .header {
             text-align: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .header h1 {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             font-weight: 700;
-            margin-bottom: 0.15rem;
-            background: linear-gradient(135deg, var(--junior-color), var(--intermediate-color), var(--senior-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--text);
         }
 
         .header p {
             color: var(--text-muted);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
         }
 
         /* Main roadmap container */
         .roadmap {
-            max-width: 1100px;
+            max-width: 900px;
             margin: 0 auto;
             position: relative;
         }
@@ -66,20 +65,13 @@
             top: 0;
             bottom: 0;
             width: 2px;
-            background: linear-gradient(180deg,
-                var(--junior-color) 0%,
-                var(--junior-color) 33%,
-                var(--intermediate-color) 33%,
-                var(--intermediate-color) 66%,
-                var(--senior-color) 66%,
-                var(--senior-color) 100%
-            );
+            background: var(--green);
             transform: translateX(-50%);
         }
 
         /* Level sections */
         .level {
-            margin-bottom: 1.25rem;
+            margin-bottom: 1rem;
             position: relative;
         }
 
@@ -87,311 +79,208 @@
             text-align: center;
             position: relative;
             z-index: 10;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.6rem;
         }
 
         .level-badge {
             display: inline-block;
-            padding: 0.3rem 1rem;
+            padding: 0.25rem 0.75rem;
             border-radius: 4px;
             font-weight: 600;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             background: var(--bg);
-            border: 1px solid;
-        }
-
-        .level.junior .level-badge {
-            border-color: var(--junior-color);
-            color: var(--junior-color);
+            border: 1px solid var(--green);
+            color: var(--green);
         }
 
         .level.intermediate .level-badge {
-            border-color: var(--intermediate-color);
-            color: var(--intermediate-color);
+            border-color: var(--yellow);
+            color: var(--yellow);
         }
 
         .level.senior .level-badge {
-            border-color: var(--senior-color);
-            color: var(--senior-color);
+            border-color: var(--red);
+            color: var(--red);
         }
 
         /* Grid for modules */
         .modules-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 0.5rem 2.5rem;
-            position: relative;
+            gap: 0.4rem 2rem;
         }
 
         /* Module cards */
         .module {
             background: var(--bg-card);
             border-radius: 6px;
-            padding: 0.6rem 0.8rem;
+            padding: 0.5rem 0.65rem;
             position: relative;
             border: 1px solid var(--border);
-            transition: all 0.15s ease;
         }
 
-        .module:hover {
-            border-color: #3a3a3a;
-        }
-
-        /* Connector to spine - LEFT modules */
-        .module.left::before {
-            content: '';
-            position: absolute;
-            right: -1.25rem;
-            top: 0.7rem;
-            width: 1.25rem;
-            height: 1px;
-            background: var(--connector-color);
-        }
-
-        .module.left::after {
-            content: '';
-            position: absolute;
-            right: -1.25rem;
-            top: 0.7rem;
-            width: 6px;
-            height: 6px;
-            background: currentColor;
-            border-radius: 50%;
-            transform: translate(50%, -50%);
-        }
-
-        /* Connector to spine - RIGHT modules */
-        .module.right::before {
-            content: '';
-            position: absolute;
-            left: -1.25rem;
-            top: 0.7rem;
-            width: 1.25rem;
-            height: 1px;
-            background: var(--connector-color);
-        }
-
+        /* Connectors */
+        .module.left::after,
         .module.right::after {
             content: '';
             position: absolute;
-            left: -1.25rem;
-            top: 0.7rem;
+            top: 0.6rem;
             width: 6px;
             height: 6px;
-            background: currentColor;
+            background: var(--green);
             border-radius: 50%;
-            transform: translate(-50%, -50%);
         }
 
-        /* Level-specific colors for connectors */
-        .level.junior .module.left::after,
-        .level.junior .module.right::after {
-            color: var(--junior-color);
+        .module.left::before {
+            content: '';
+            position: absolute;
+            right: -1rem;
+            top: 0.6rem;
+            width: 1rem;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .module.left::after {
+            right: -1rem;
+            transform: translate(50%, -50%);
+        }
+
+        .module.right::before {
+            content: '';
+            position: absolute;
+            left: -1rem;
+            top: 0.6rem;
+            width: 1rem;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .module.right::after {
+            left: -1rem;
+            transform: translate(-50%, -50%);
         }
 
         .level.intermediate .module.left::after,
         .level.intermediate .module.right::after {
-            color: var(--intermediate-color);
+            background: var(--yellow);
         }
 
         .level.senior .module.left::after,
         .level.senior .module.right::after {
-            color: var(--senior-color);
+            background: var(--red);
         }
 
+        /* Module title */
         .module-title {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 700;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.3rem;
             color: var(--text);
             text-transform: uppercase;
             letter-spacing: 0.3px;
         }
 
-        /* Children/topics list */
-        .module-children {
+        /* Level 1: Simple items (no children) */
+        .items {
             list-style: none;
-            position: relative;
         }
 
-        .module-children li {
-            padding: 0.15rem 0;
-            padding-left: 0.9rem;
+        .items > li {
+            padding: 0.12rem 0;
+            padding-left: 0.7rem;
             position: relative;
             color: var(--text-muted);
-            font-size: 0.65rem;
-            transition: color 0.15s ease;
-        }
-
-        .module-children li:hover {
-            color: var(--text);
-        }
-
-        /* Tree branch connectors for children */
-        .module-children li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            width: 6px;
-            height: 1px;
-            background: var(--connector-color);
-        }
-
-        .module-children li::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 50%;
-            width: 1px;
-            background: var(--connector-color);
-        }
-
-        .module-children li:first-child::after {
-            top: 50%;
-        }
-
-        .module-children li:last-child::after {
-            bottom: auto;
-            height: calc(50% + 1px);
-        }
-
-        /* Level 2: Sub-topics (parent items with children) */
-        .module-children .subtopic {
-            font-weight: 600;
-            color: var(--text);
-            font-size: 0.68rem;
-            padding: 0.25rem 0;
-            padding-left: 0.9rem;
-            margin-top: 0.15rem;
-        }
-
-        .level.junior .module-children .subtopic {
-            color: #86efac;
-        }
-        .level.intermediate .module-children .subtopic {
-            color: #fef08a;
-        }
-        .level.senior .module-children .subtopic {
-            color: #fca5a5;
-        }
-
-        /* Level 3: Children of sub-topics */
-        .module-children .subtopic-children {
-            list-style: none;
-            margin-left: 0.9rem;
-            padding-left: 0.6rem;
-            border-left: 1px solid var(--connector-color);
-            margin-bottom: 0.2rem;
-        }
-
-        .module-children .subtopic-children li {
-            padding: 0.1rem 0;
-            padding-left: 0.6rem;
             font-size: 0.6rem;
-            color: var(--text-muted);
-            position: relative;
         }
 
-        .module-children .subtopic-children li::before {
+        .items > li::before {
             content: '';
             position: absolute;
             left: 0;
             top: 50%;
             width: 4px;
             height: 1px;
-            background: var(--connector-color);
+            background: var(--border);
         }
 
-        .module-children .subtopic-children li::after {
-            display: none;
+        /* Level 2: Subtopics (parent with children) */
+        .subtopic {
+            margin-top: 0.2rem;
         }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .modules-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .module.left::before,
-            .module.right::before {
-                display: none;
-            }
-
-            .module.left::after,
-            .module.right::after {
-                left: -2rem;
-                right: auto;
-            }
-
-            .roadmap::before {
-                left: 1rem;
-            }
+        .subtopic-title {
+            font-size: 0.6rem;
+            font-weight: 600;
+            padding: 0.15rem 0.4rem;
+            border-radius: 3px;
+            display: inline-block;
+            margin-bottom: 0.15rem;
         }
 
-        /* Legend */
-        .legend {
-            max-width: 1400px;
-            margin: 4rem auto 2rem;
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            flex-wrap: wrap;
+        .level.junior .subtopic-title {
+            background: var(--green-dim);
+            color: var(--green-light);
         }
 
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
+        .level.intermediate .subtopic-title {
+            background: var(--yellow-dim);
+            color: var(--yellow-light);
         }
 
-        .legend-dot {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
+        .level.senior .subtopic-title {
+            background: var(--red-dim);
+            color: var(--red-light);
         }
 
-        .legend-dot.junior { background: var(--junior-color); }
-        .legend-dot.intermediate { background: var(--intermediate-color); }
-        .legend-dot.senior { background: var(--senior-color); }
+        /* Level 3: Children of subtopics */
+        .subtopic-children {
+            list-style: none;
+            margin-left: 0.5rem;
+            padding-left: 0.5rem;
+            border-left: 1px solid var(--border);
+            margin-bottom: 0.2rem;
+        }
+
+        .subtopic-children li {
+            padding: 0.08rem 0;
+            padding-left: 0.5rem;
+            position: relative;
+            color: var(--text-muted);
+            font-size: 0.55rem;
+        }
+
+        .subtopic-children li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 4px;
+            height: 1px;
+            background: var(--border);
+        }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>QE Roadmap</h1>
-        <p>Center of Excellence - Software Quality Engineering Career Path</p>
-    </div>
-
-    <div class="legend">
-        <div class="legend-item">
-            <div class="legend-dot junior"></div>
-            <span>Junior QE</span>
-        </div>
-        <div class="legend-item">
-            <div class="legend-dot intermediate"></div>
-            <span>Intermediate QE</span>
-        </div>
-        <div class="legend-item">
-            <div class="legend-dot senior"></div>
-            <span>Senior QE</span>
-        </div>
+        <h1>QE Roadmap - Design Preview</h1>
+        <p>Showing 3-level hierarchy examples from updated structure</p>
     </div>
 
     <div class="roadmap">
         <!-- JUNIOR LEVEL -->
         <div class="level junior">
             <div class="level-header">
-                <div class="level-badge">Junior QE</div>
+                <div class="level-badge">Junior</div>
             </div>
             <div class="modules-grid">
-                <!-- Left Column -->
+
+                <!-- Left: Black Box Techniques (simple list) -->
                 <div class="module left">
                     <h3 class="module-title">Black Box Techniques</h3>
-                    <ul class="module-children">
+                    <ul class="items">
                         <li>Equivalence Partition</li>
                         <li>Boundary Value Analysis</li>
                         <li>Decision Table</li>
@@ -399,27 +288,42 @@
                     </ul>
                 </div>
 
-                <!-- Right Column -->
+                <!-- Right: API Fundamentals (with subtopics) -->
                 <div class="module right">
                     <h3 class="module-title">API Fundamentals</h3>
-                    <ul class="module-children">
+                    <ul class="items">
                         <li>REST Architecture</li>
                         <li>HTTP Methods</li>
                         <li>HTTP Status Codes</li>
                         <li>Data Formats</li>
-                        <li>Request/Response Structure</li>
-                        <li>Authentication Basics</li>
-                        <li>JSON Structure</li>
-                        <li>Common Headers</li>
                     </ul>
+                    <div class="subtopic">
+                        <div class="subtopic-title">Request/Response Structure</div>
+                        <ul class="subtopic-children">
+                            <li>Headers, body, query params</li>
+                            <li>Path parameters</li>
+                        </ul>
+                    </div>
+                    <div class="subtopic">
+                        <div class="subtopic-title">JSON Structure</div>
+                        <ul class="subtopic-children">
+                            <li>Objects, arrays, nesting</li>
+                        </ul>
+                    </div>
+                    <div class="subtopic">
+                        <div class="subtopic-title">Authentication Basics</div>
+                        <ul class="subtopic-children">
+                            <li>API Keys, Bearer tokens</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <!-- Left Column -->
+                <!-- Left: SQL Fundamentals -->
                 <div class="module left">
                     <h3 class="module-title">SQL Fundamentals</h3>
-                    <ul class="module-children">
-                        <li>SELECT Statement</li>
-                        <li>COUNT Keyword</li>
+                    <ul class="items">
+                        <li>SELECT statement</li>
+                        <li>COUNT keyword</li>
                         <li>WHERE Clause Operators</li>
                         <li>Basic Joins (INNER, LEFT)</li>
                         <li>ORDER BY & LIMIT</li>
@@ -429,47 +333,59 @@
                     </ul>
                 </div>
 
-                <!-- Right Column -->
+                <!-- Right: API Testing Fundamentals -->
                 <div class="module right">
                     <h3 class="module-title">API Testing Fundamentals</h3>
-                    <ul class="module-children">
-                        <li class="subtopic">Postman</li>
+                    <div class="subtopic">
+                        <div class="subtopic-title">Postman</div>
                         <ul class="subtopic-children">
                             <li>Collections</li>
                             <li>Requests</li>
                             <li>Variables</li>
                         </ul>
+                    </div>
+                    <ul class="items">
                         <li>Status Code Validation</li>
                         <li>Payload & Schema Validation</li>
                         <li>Header Verification</li>
                     </ul>
                 </div>
 
-                <!-- Left Column -->
+                <!-- Left: Software Testing Fundamentals -->
                 <div class="module left">
                     <h3 class="module-title">Software Testing Fundamentals</h3>
-                    <ul class="module-children">
+                    <ul class="items">
                         <li>Software Testing Lifecycle</li>
-                        <li class="subtopic">Testing Approaches</li>
+                    </ul>
+                    <div class="subtopic">
+                        <div class="subtopic-title">Testing Approaches</div>
                         <ul class="subtopic-children">
                             <li>Dynamic Testing</li>
                             <li>Static Testing</li>
                         </ul>
+                    </div>
+                    <ul class="items">
                         <li>Bug Lifecycle</li>
-                        <li class="subtopic">Types of Testing</li>
+                        <li>Psychology of Testing</li>
+                    </ul>
+                    <div class="subtopic">
+                        <div class="subtopic-title">Types of Testing</div>
                         <ul class="subtopic-children">
                             <li>Regression / Smoke / E2E</li>
+                            <li>Sanity / Ad-hoc</li>
                             <li>Functional / Integration</li>
                         </ul>
+                    </div>
+                    <ul class="items">
                         <li>Test Case Design</li>
                         <li>Principles of Testing</li>
                     </ul>
                 </div>
 
-                <!-- Right Column -->
+                <!-- Right: Programming Basics -->
                 <div class="module right">
                     <h3 class="module-title">Programming Basics</h3>
-                    <ul class="module-children">
+                    <ul class="items">
                         <li>OOP Fundamentals</li>
                         <li>Variables & Constants</li>
                         <li>Operators</li>
@@ -481,71 +397,117 @@
                     </ul>
                 </div>
 
-                <!-- Left Column -->
+                <!-- Left: AI Fundamentals -->
                 <div class="module left">
                     <h3 class="module-title">AI Fundamentals</h3>
-                    <ul class="module-children">
-                        <li>What is Artificial Intelligence</li>
-                        <li>Machine Learning vs Deep Learning</li>
-                        <li>Large Language Models (LLMs)</li>
-                        <li>AI Tools Overview</li>
-                        <li>AI Limitations & Risks</li>
-                    </ul>
+                    <div class="subtopic">
+                        <div class="subtopic-title">What is AI</div>
+                        <ul class="subtopic-children">
+                            <li>ML vs Deep Learning</li>
+                            <li>What are LLMs</li>
+                            <li>How AI Models are Trained</li>
+                        </ul>
+                    </div>
+                    <div class="subtopic">
+                        <div class="subtopic-title">AI Tools Overview</div>
+                        <ul class="subtopic-children">
+                            <li>ChatGPT / Claude / Gemini</li>
+                            <li>GitHub Copilot</li>
+                            <li>AI Testing Tools</li>
+                        </ul>
+                    </div>
+                    <div class="subtopic">
+                        <div class="subtopic-title">AI Limitations</div>
+                        <ul class="subtopic-children">
+                            <li>Hallucinations</li>
+                            <li>Bias in AI</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <!-- Right Column -->
+                <!-- Right: Prompt Engineering Basics -->
                 <div class="module right">
                     <h3 class="module-title">Prompt Engineering Basics</h3>
-                    <ul class="module-children">
-                        <li>Anatomy of a Good Prompt</li>
-                        <li>Basic Prompt Patterns</li>
-                        <li>Question Prompts</li>
-                        <li>Task Prompts</li>
-                        <li>Role Assignment</li>
+                    <div class="subtopic">
+                        <div class="subtopic-title">Anatomy of a Good Prompt</div>
+                        <ul class="subtopic-children">
+                            <li>Clear Instructions</li>
+                            <li>Specific Requests</li>
+                            <li>Expected Output Format</li>
+                        </ul>
+                    </div>
+                    <div class="subtopic">
+                        <div class="subtopic-title">Basic Prompt Patterns</div>
+                        <ul class="subtopic-children">
+                            <li>Question Prompts</li>
+                            <li>Task Prompts</li>
+                            <li>Role Assignment</li>
+                        </ul>
+                    </div>
+                    <ul class="items">
                         <li>Common Mistakes to Avoid</li>
                     </ul>
                 </div>
 
-                <!-- Left Column -->
+                <!-- Left: Context Engineering Basics -->
                 <div class="module left">
                     <h3 class="module-title">Context Engineering Basics</h3>
-                    <ul class="module-children">
-                        <li>What is Context in AI</li>
-                        <li>Tokens Explained</li>
-                        <li>Context Window Limits</li>
-                        <li>Providing Effective Context</li>
-                        <li>Background Information</li>
-                        <li>Constraints and Rules</li>
-                    </ul>
+                    <div class="subtopic">
+                        <div class="subtopic-title">What is Context in AI</div>
+                        <ul class="subtopic-children">
+                            <li>Tokens Explained</li>
+                            <li>Context Window Limits</li>
+                        </ul>
+                    </div>
+                    <div class="subtopic">
+                        <div class="subtopic-title">Providing Effective Context</div>
+                        <ul class="subtopic-children">
+                            <li>Background Information</li>
+                            <li>Relevant Examples</li>
+                            <li>Constraints and Rules</li>
+                        </ul>
+                    </div>
                 </div>
+
+                <div class="module right" style="visibility: hidden;"></div>
+
             </div>
         </div>
 
         <!-- INTERMEDIATE LEVEL -->
         <div class="level intermediate">
             <div class="level-header">
-                <div class="level-badge">Intermediate QE</div>
+                <div class="level-badge">Intermediate 1-4</div>
             </div>
             <div class="modules-grid">
-                <!-- Left Column -->
+
+                <!-- Left: Advanced API Testing -->
                 <div class="module left">
                     <h3 class="module-title">Advanced API Testing</h3>
-                    <ul class="module-children">
-                        <li>Newman CLI</li>
-                        <li>JavaScript Validations</li>
-                        <li>Swagger/OpenAPI</li>
+                    <div class="subtopic">
+                        <div class="subtopic-title">Postman</div>
+                        <ul class="subtopic-children">
+                            <li>Newman CLI</li>
+                            <li>JavaScript Validations</li>
+                        </ul>
+                    </div>
+                    <ul class="items">
+                        <li>Swagger</li>
                         <li>Data-Driven Testing</li>
-                        <li>Parameterized Testing</li>
-                        <li>Authentication & RBAC</li>
+                        <li>Auth & RBAC</li>
                     </ul>
                 </div>
 
-                <!-- Right Column -->
+                <!-- Right: Accessibility Testing -->
                 <div class="module right">
                     <h3 class="module-title">Accessibility Testing</h3>
-                    <ul class="module-children">
-                        <li>WCAG Principles</li>
-                        <li>Level A, AA, AAA</li>
+                    <div class="subtopic">
+                        <div class="subtopic-title">WCAG Principles</div>
+                        <ul class="subtopic-children">
+                            <li>Level A / AA / AAA</li>
+                        </ul>
+                    </div>
+                    <ul class="items">
                         <li>Color Contrast</li>
                         <li>Text Alternatives</li>
                         <li>ARIA Testing</li>
@@ -553,212 +515,161 @@
                     </ul>
                 </div>
 
-                <!-- Left Column -->
+                <!-- Left: Mobile Testing -->
                 <div class="module left">
                     <h3 class="module-title">Mobile Testing</h3>
-                    <ul class="module-children">
-                        <li>Interruption Testing</li>
-                        <li>Localization</li>
-                        <li>Performance Testing</li>
-                        <li>Network Testing</li>
-                        <li>TestFlight</li>
-                        <li>Simulators & Emulators</li>
-                        <li>Real Devices</li>
-                    </ul>
+                    <div class="subtopic">
+                        <div class="subtopic-title">Testing Techniques</div>
+                        <ul class="subtopic-children">
+                            <li>Interruption / Localization</li>
+                            <li>Performance / Network</li>
+                        </ul>
+                    </div>
+                    <div class="subtopic">
+                        <div class="subtopic-title">Mobile Cloud</div>
+                        <ul class="subtopic-children">
+                            <li>Testflight / Simulators</li>
+                        </ul>
+                    </div>
+                    <div class="subtopic">
+                        <div class="subtopic-title">Platforms</div>
+                        <ul class="subtopic-children">
+                            <li>Native/Hybrid/Responsive</li>
+                            <li>Real Devices / Emulators</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <!-- Right Column -->
+                <!-- Right: Programming -->
                 <div class="module right">
-                    <h3 class="module-title">Programming Intermediate</h3>
-                    <ul class="module-children">
-                        <li>Abstraction</li>
-                        <li>Encapsulation</li>
-                        <li>Inheritance</li>
-                        <li>Polymorphism</li>
-                        <li>Collections & Data Structures</li>
-                        <li>String Manipulation & Regex</li>
+                    <h3 class="module-title">Programming</h3>
+                    <div class="subtopic">
+                        <div class="subtopic-title">OOP Hands-On</div>
+                        <ul class="subtopic-children">
+                            <li>Abstraction / Encapsulation</li>
+                            <li>Inheritance / Polymorphism</li>
+                        </ul>
+                    </div>
+                    <div class="subtopic">
+                        <div class="subtopic-title">Collections & Data Structures</div>
+                        <ul class="subtopic-children">
+                            <li>Lists, Maps, Sets, Arrays</li>
+                        </ul>
+                    </div>
+                    <ul class="items">
+                        <li>String Manipulation / Regex</li>
                         <li>File I/O Operations</li>
                         <li>Exception Handling</li>
+                        <li>Unit Testing Basics</li>
                     </ul>
                 </div>
 
-                <!-- Left Column -->
-                <div class="module left">
-                    <h3 class="module-title">SQL Intermediate</h3>
-                    <ul class="module-children">
-                        <li>Advanced Joins</li>
-                        <li>Aggregations</li>
-                        <li>Subqueries</li>
-                        <li>GROUP BY & HAVING</li>
-                        <li>CASE Statements</li>
-                        <li>UNION / INTERSECT / EXCEPT</li>
-                        <li>Date/Time Functions</li>
-                    </ul>
-                </div>
-
-                <!-- Right Column -->
-                <div class="module right">
-                    <h3 class="module-title">AI Deep Dive</h3>
-                    <ul class="module-children">
-                        <li>LLM Architecture (Conceptual)</li>
-                        <li>Transformers Overview</li>
-                        <li>AI Model Comparison</li>
-                        <li>GPT vs Claude vs Gemini</li>
-                        <li>GitHub Copilot</li>
-                        <li>Claude Code</li>
-                    </ul>
-                </div>
-
-                <!-- Left Column -->
-                <div class="module left">
-                    <h3 class="module-title">Prompt Engineering Intermediate</h3>
-                    <ul class="module-children">
-                        <li>Prompt Frameworks (TRICE+, RACE)</li>
-                        <li>Few-Shot Prompting</li>
-                        <li>Chain of Thought</li>
-                        <li>QE Test Case Generation</li>
-                        <li>Bug Report Writing</li>
-                        <li>Test Data Creation</li>
-                    </ul>
-                </div>
-
-                <!-- Right Column -->
-                <div class="module right">
-                    <h3 class="module-title">Context Engineering Intermediate</h3>
-                    <ul class="module-children">
-                        <li>Context Optimization</li>
-                        <li>Prioritizing Information</li>
-                        <li>Structured Context Templates</li>
-                        <li>Multi-Turn Conversations</li>
-                        <li>Providing Requirements Context</li>
-                        <li>Including Error Logs</li>
-                    </ul>
-                </div>
             </div>
         </div>
 
         <!-- SENIOR LEVEL -->
         <div class="level senior">
             <div class="level-header">
-                <div class="level-badge">Senior QE</div>
+                <div class="level-badge">Senior 1-2</div>
             </div>
             <div class="modules-grid">
-                <!-- Left Column -->
+
+                <!-- Left: Software Automation -->
                 <div class="module left">
                     <h3 class="module-title">Software Automation</h3>
-                    <ul class="module-children">
-                        <li>Testim (Low Code)</li>
-                        <li>Mabl (Low Code)</li>
-                        <li>Selenium with JavaScript</li>
-                        <li>XPaths</li>
-                        <li>TestNG</li>
-                        <li>NUnit</li>
-                        <li>Cucumber</li>
-                    </ul>
+                    <div class="subtopic">
+                        <div class="subtopic-title">Front-end Automation</div>
+                        <ul class="subtopic-children">
+                            <li>Low Code (Testim, Mabl)</li>
+                            <li>Cypress Prompt</li>
+                        </ul>
+                    </div>
+                    <div class="subtopic">
+                        <div class="subtopic-title">Selenium / Playwright</div>
+                        <ul class="subtopic-children">
+                            <li>XPaths</li>
+                            <li>Script Maintenance</li>
+                        </ul>
+                    </div>
+                    <div class="subtopic">
+                        <div class="subtopic-title">Test Frameworks</div>
+                        <ul class="subtopic-children">
+                            <li>TestNG / NUnit / Cucumber</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <!-- Right Column -->
+                <!-- Right: Performance Testing -->
                 <div class="module right">
                     <h3 class="module-title">Performance Testing</h3>
-                    <ul class="module-children">
-                        <li>Load Testing</li>
-                        <li>Stress Testing</li>
-                        <li>Volume Testing</li>
-                        <li>Soak Testing</li>
-                        <li>Scalability Testing</li>
-                        <li>JMeter</li>
-                        <li>LoadRunner</li>
-                        <li>BlazeMeter</li>
-                    </ul>
+                    <div class="subtopic">
+                        <div class="subtopic-title">Testing Types</div>
+                        <ul class="subtopic-children">
+                            <li>Load / Stress Testing</li>
+                            <li>Volume / Soak Testing</li>
+                            <li>Scalability Testing</li>
+                        </ul>
+                    </div>
+                    <div class="subtopic">
+                        <div class="subtopic-title">Tools</div>
+                        <ul class="subtopic-children">
+                            <li>JMeter</li>
+                            <li>Load Runner</li>
+                            <li>Blaze Meter</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <!-- Left Column -->
+                <!-- Left: Advanced Testing -->
                 <div class="module left">
                     <h3 class="module-title">Advanced Testing</h3>
-                    <ul class="module-children">
+                    <ul class="items">
                         <li>DoD & DoR Analysis</li>
                         <li>Release Management</li>
-                        <li>Risk-Based Testing</li>
-                        <li>Dynamic Test Selection</li>
-                        <li>Estimations & Forecasting</li>
-                        <li>Defect Leakage Metrics</li>
-                        <li>Test Coverage</li>
                     </ul>
+                    <div class="subtopic">
+                        <div class="subtopic-title">Advanced Techniques</div>
+                        <ul class="subtopic-children">
+                            <li>Risk-Based Testing</li>
+                            <li>Dynamic Test Selection</li>
+                        </ul>
+                    </div>
+                    <div class="subtopic">
+                        <div class="subtopic-title">Reporting</div>
+                        <ul class="subtopic-children">
+                            <li>Defect Leakage / Reopen Rate</li>
+                            <li>Test / Story Coverage</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <!-- Right Column -->
+                <!-- Right: Advanced SQL -->
                 <div class="module right">
                     <h3 class="module-title">Advanced SQL</h3>
-                    <ul class="module-children">
+                    <ul class="items">
                         <li>Views</li>
                         <li>Stored Procedures</li>
                         <li>SQL Injection</li>
-                        <li>Window Functions</li>
-                        <li>Query Optimization</li>
-                        <li>Indexing Strategies</li>
-                        <li>Transactions & Locking</li>
-                        <li>Database Performance Testing</li>
+                        <li>Windows Functions</li>
                     </ul>
+                    <div class="subtopic">
+                        <div class="subtopic-title">Query Optimization</div>
+                        <ul class="subtopic-children">
+                            <li>EXPLAIN/ANALYZE</li>
+                            <li>Indexing Strategies</li>
+                        </ul>
+                    </div>
+                    <div class="subtopic">
+                        <div class="subtopic-title">Transactions & Locking</div>
+                        <ul class="subtopic-children">
+                            <li>ACID, deadlocks, isolation</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <!-- Left Column -->
-                <div class="module left">
-                    <h3 class="module-title">AI Mastery</h3>
-                    <ul class="module-children">
-                        <li>Fine-Tuning vs Prompting</li>
-                        <li>RAG (Retrieval Augmented Generation)</li>
-                        <li>Embeddings & Vector Databases</li>
-                        <li>AI Integration via APIs</li>
-                        <li>AI in CI/CD Pipelines</li>
-                        <li>AI Governance & Ethics</li>
-                    </ul>
-                </div>
-
-                <!-- Right Column -->
-                <div class="module right">
-                    <h3 class="module-title">Prompt Engineering Advanced</h3>
-                    <ul class="module-children">
-                        <li>Multi-Step Task Chains</li>
-                        <li>Self-Reflection Prompts</li>
-                        <li>Validation & Verification Prompts</li>
-                        <li>Prompt Patterns Library</li>
-                        <li>AI-Powered Test Planning</li>
-                        <li>Automated Defect Analysis</li>
-                        <li>Risk Assessment with AI</li>
-                    </ul>
-                </div>
-
-                <!-- Left Column -->
-                <div class="module left">
-                    <h3 class="module-title">Context Engineering Advanced</h3>
-                    <ul class="module-children">
-                        <li>System Prompt Design</li>
-                        <li>Persona Configuration</li>
-                        <li>RAG Implementation</li>
-                        <li>Document Retrieval</li>
-                        <li>Knowledge Base Integration</li>
-                        <li>Full Project Context Management</li>
-                    </ul>
-                </div>
-
-                <!-- Right Column -->
-                <div class="module right">
-                    <h3 class="module-title">Synthetic Data Generation</h3>
-                    <ul class="module-children">
-                        <li>AI-Generated Test Data</li>
-                        <li>Edge Case Generation</li>
-                        <li>Boundary Value Data</li>
-                        <li>PII Anonymization</li>
-                        <li>Compliant Test Data</li>
-                        <li>Data Quality Checks</li>
-                    </ul>
-                </div>
             </div>
         </div>
-    </div>
 
-    <div style="text-align: center; margin-top: 4rem; color: var(--text-secondary); font-size: 0.9rem;">
-        <p>QE Center of Excellence © 2024</p>
     </div>
 </body>
 </html>
