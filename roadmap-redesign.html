@@ -52,7 +52,7 @@
 
         /* Main roadmap container */
         .roadmap {
-            max-width: 900px;
+            max-width: 700px;
             margin: 0 auto;
             position: relative;
         }
@@ -118,7 +118,15 @@
             border-radius: 6px;
             padding: 0.5rem 0.65rem;
             position: relative;
-            border: 1px solid var(--border);
+            border: 1px solid var(--green);
+        }
+
+        .level.intermediate .module {
+            border-color: var(--yellow);
+        }
+
+        .level.senior .module {
+            border-color: var(--red);
         }
 
         /* Connectors */
@@ -201,9 +209,21 @@
             position: absolute;
             left: 0;
             top: 50%;
-            width: 4px;
-            height: 1px;
+            width: 6px;
+            height: 2px;
             background: var(--border);
+        }
+
+        .level.junior .items > li::before {
+            background: rgba(34,197,94,0.4);
+        }
+
+        .level.intermediate .items > li::before {
+            background: rgba(234,179,8,0.4);
+        }
+
+        .level.senior .items > li::before {
+            background: rgba(220,38,38,0.4);
         }
 
         /* Level 2: Subtopics (parent with children) */
@@ -240,8 +260,16 @@
             list-style: none;
             margin-left: 0.5rem;
             padding-left: 0.5rem;
-            border-left: 1px solid var(--border);
+            border-left: 2px solid var(--green);
             margin-bottom: 0.2rem;
+        }
+
+        .level.intermediate .subtopic-children {
+            border-left-color: var(--yellow);
+        }
+
+        .level.senior .subtopic-children {
+            border-left-color: var(--red);
         }
 
         .subtopic-children li {
@@ -257,9 +285,20 @@
             position: absolute;
             left: 0;
             top: 50%;
-            width: 4px;
-            height: 1px;
-            background: var(--border);
+            width: 6px;
+            height: 2px;
+        }
+
+        .level.junior .subtopic-children li::before {
+            background: var(--green);
+        }
+
+        .level.intermediate .subtopic-children li::before {
+            background: var(--yellow);
+        }
+
+        .level.senior .subtopic-children li::before {
+            background: var(--red);
         }
     </style>
 </head>
