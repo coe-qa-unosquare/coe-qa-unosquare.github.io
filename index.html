@@ -661,6 +661,25 @@
         .diagram-scroll {
             overflow-x: auto;
             padding-bottom: 30px;
+            scroll-behavior: smooth;
+        }
+
+        .diagram-scroll::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .diagram-scroll::-webkit-scrollbar-track {
+            background: var(--bg-card);
+            border-radius: 4px;
+        }
+
+        .diagram-scroll::-webkit-scrollbar-thumb {
+            background: var(--border-light);
+            border-radius: 4px;
+        }
+
+        .diagram-scroll::-webkit-scrollbar-thumb:hover {
+            background: var(--blue-border);
         }
 
         .diagram-wrapper {
@@ -676,7 +695,7 @@
             font-weight: 800;
             text-align: center;
             width: 300px;
-            margin: 0 auto 28px;
+            margin: 0 auto 20px;
             color: #fff;
             position: relative;
             z-index: 2;
@@ -689,7 +708,7 @@
 
         .level-divider {
             text-align: center;
-            padding: 20px 0;
+            padding: 16px 0 12px;
             position: relative;
         }
 
@@ -719,19 +738,20 @@
 
         .row {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             justify-content: center;
-            padding: 14px 0;
+            padding: 8px 0;
             position: relative;
+            min-height: fit-content;
         }
 
         .center-col {
             display: flex;
-            gap: 24px;
+            gap: 20px;
             justify-content: center;
             flex-shrink: 0;
             z-index: 2;
-            padding: 0 15px;
+            padding: 0 12px;
             align-self: center;
             min-width: 280px;
         }
@@ -742,7 +762,7 @@
         }
 
         .main-node {
-            padding: 16px 22px;
+            padding: 14px 20px;
             border-radius: 12px;
             font-size: 13px;
             font-weight: 700;
@@ -769,23 +789,24 @@
         .branch {
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 6px;
             flex-shrink: 0;
             min-width: 200px;
+            justify-content: center;
         }
 
         .branch-left {
             align-items: flex-end;
-            padding-right: 18px;
+            padding-right: 20px;
         }
         .branch-right {
             align-items: flex-start;
-            padding-left: 18px;
+            padding-left: 20px;
         }
 
         .sub-node {
             border-radius: 8px;
-            padding: 8px 16px;
+            padding: 7px 14px;
             font-size: 12px;
             font-weight: 500;
             white-space: nowrap;
@@ -833,22 +854,22 @@
         .sub-children {
             display: flex;
             flex-direction: column;
-            gap: 4px;
-            padding-top: 6px;
+            gap: 5px;
+            padding-top: 8px;
             position: relative;
         }
 
         .branch-left .sub-children {
             align-items: flex-end;
-            margin-right: 6px;
-            padding-right: 18px;
+            margin-right: 8px;
+            padding-right: 16px;
             border-right: 2px solid var(--yellow-border);
         }
 
         .branch-right .sub-children {
             align-items: flex-start;
-            margin-left: 6px;
-            padding-left: 18px;
+            margin-left: 8px;
+            padding-left: 16px;
             border-left: 2px solid var(--yellow-border);
         }
 
@@ -859,7 +880,7 @@
 
         .child-node {
             border-radius: 5px;
-            padding: 4px 10px;
+            padding: 5px 12px;
             font-size: 10px;
             font-weight: 500;
             white-space: nowrap;
@@ -872,9 +893,9 @@
         .branch-right .child-node::before {
             content: '';
             position: absolute;
-            left: -18px;
+            left: -16px;
             top: 50%;
-            width: 16px;
+            width: 14px;
             height: 2px;
             transform: translateY(-50%);
         }
@@ -882,9 +903,9 @@
         .branch-left .child-node::before {
             content: '';
             position: absolute;
-            right: -18px;
+            right: -16px;
             top: 50%;
-            width: 16px;
+            width: 14px;
             height: 2px;
             transform: translateY(-50%);
         }
@@ -3153,34 +3174,37 @@ Business Rules: Minimum order $10, Max 50 items
         function pos(el) {
             const r = el.getBoundingClientRect();
             const w = wrapper.getBoundingClientRect();
+            const scrollLeft = wrapper.scrollLeft || 0;
+            const scrollTop = wrapper.scrollTop || 0;
             return {
-                cx: r.left - w.left + r.width / 2,
-                cy: r.top - w.top + r.height / 2,
-                l: r.left - w.left,
-                r: r.left - w.left + r.width,
-                t: r.top - w.top,
-                b: r.top - w.top + r.height
+                cx: r.left - w.left + scrollLeft + r.width / 2,
+                cy: r.top - w.top + scrollTop + r.height / 2,
+                l: r.left - w.left + scrollLeft,
+                r: r.left - w.left + scrollLeft + r.width,
+                t: r.top - w.top + scrollTop,
+                b: r.top - w.top + scrollTop + r.height
             };
         }
 
-        function line(x1, y1, x2, y2, color) {
+        function line(x1, y1, x2, y2, color, width = 2) {
             const l = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-            l.setAttribute('x1', x1);
-            l.setAttribute('y1', y1);
-            l.setAttribute('x2', x2);
-            l.setAttribute('y2', y2);
+            l.setAttribute('x1', Math.round(x1));
+            l.setAttribute('y1', Math.round(y1));
+            l.setAttribute('x2', Math.round(x2));
+            l.setAttribute('y2', Math.round(y2));
             l.setAttribute('stroke', color || '#2a3155');
-            l.setAttribute('stroke-width', '2');
-            l.setAttribute('stroke-opacity', '0.7');
+            l.setAttribute('stroke-width', width.toString());
+            l.setAttribute('stroke-opacity', '0.75');
+            l.setAttribute('stroke-linecap', 'round');
             svg.appendChild(l);
         }
 
         function getNodeColor(mainEl) {
             const cls = mainEl.className;
-            if (cls.includes('mn-green')) return 'rgba(34,197,94,0.7)';
-            if (cls.includes('mn-yellow')) return 'rgba(234,179,8,0.7)';
-            if (cls.includes('mn-red')) return 'rgba(220,38,38,0.7)';
-            return 'rgba(100,100,100,0.5)';
+            if (cls.includes('mn-green')) return 'rgba(34,197,94,0.8)';
+            if (cls.includes('mn-yellow')) return 'rgba(234,179,8,0.8)';
+            if (cls.includes('mn-red')) return 'rgba(220,38,38,0.8)';
+            return 'rgba(100,100,100,0.6)';
         }
 
         // Group sub-nodes by their main node and branch side
@@ -3205,27 +3229,34 @@ Business Rules: Minimum order $10, Max 50 items
                         if (children) {
                             const childBounds = children.getBoundingClientRect();
                             const wrapperBounds = wrapper.getBoundingClientRect();
-                            p.groupBottom = childBounds.bottom - wrapperBounds.top;
+                            const scrollTop = wrapper.scrollTop || 0;
+                            p.groupBottom = childBounds.bottom - wrapperBounds.top + scrollTop;
                         }
                     }
                     return p;
                 });
-                // Use actual bounds: top of highest, bottom of lowest (including children)
-                const minY = Math.min(...positions.map(p => p.t), mp.t);
-                const maxY = Math.max(...positions.map(p => p.groupBottom || p.b), mp.b);
-                // Position trunk 25px from sub-nodes, but ensure gap from main node
+
+                // Calculate proper bounds
+                const minY = Math.min(...positions.map(p => p.t));
+                const maxY = Math.max(...positions.map(p => p.groupBottom || p.b));
                 const subRight = Math.max(...positions.map(p => p.r));
-                const idealTrunk = subRight + 25;
-                const maxTrunk = mp.l - 15;
+
+                // Position trunk with proper spacing
+                const idealTrunk = subRight + 22;
+                const maxTrunk = mp.l - 18;
                 const trunkX = Math.min(idealTrunk, maxTrunk);
 
-                // Vertical trunk line (spanning full height including children)
-                line(trunkX, minY, trunkX, maxY, color);
-                // Horizontal line from trunk to main node's left edge
-                line(trunkX, mp.cy, mp.l, mp.cy, color);
-                // Horizontal lines from each sub-node's right edge to trunk
+                // Ensure vertical line covers all nodes properly
+                const verticalStart = Math.min(minY, mp.cy - 10);
+                const verticalEnd = Math.max(maxY, mp.cy + 10);
+
+                // Vertical trunk line
+                line(trunkX, verticalStart, trunkX, verticalEnd, color, 2.5);
+                // Horizontal line from trunk to main node
+                line(trunkX, mp.cy, mp.l, mp.cy, color, 2.5);
+                // Horizontal lines from each sub-node to trunk
                 positions.forEach(sp => {
-                    line(sp.r, sp.cy, trunkX, sp.cy, color);
+                    line(sp.r, sp.cy, trunkX, sp.cy, color, 2);
                 });
             }
 
@@ -3240,41 +3271,70 @@ Business Rules: Minimum order $10, Max 50 items
                         if (children) {
                             const childBounds = children.getBoundingClientRect();
                             const wrapperBounds = wrapper.getBoundingClientRect();
-                            p.groupBottom = childBounds.bottom - wrapperBounds.top;
+                            const scrollTop = wrapper.scrollTop || 0;
+                            p.groupBottom = childBounds.bottom - wrapperBounds.top + scrollTop;
                         }
                     }
                     return p;
                 });
-                // Use actual bounds: top of highest, bottom of lowest (including children)
-                const minY = Math.min(...positions.map(p => p.t), mp.t);
-                const maxY = Math.max(...positions.map(p => p.groupBottom || p.b), mp.b);
-                // Position trunk 25px from sub-nodes, but ensure gap from main node
+
+                // Calculate proper bounds
+                const minY = Math.min(...positions.map(p => p.t));
+                const maxY = Math.max(...positions.map(p => p.groupBottom || p.b));
                 const subLeft = Math.min(...positions.map(p => p.l));
-                const idealTrunk = subLeft - 25;
-                const minTrunk = mp.r + 15;
+
+                // Position trunk with proper spacing
+                const idealTrunk = subLeft - 22;
+                const minTrunk = mp.r + 18;
                 const trunkX = Math.max(idealTrunk, minTrunk);
 
-                // Vertical trunk line (spanning from min to max Y including main node)
-                line(trunkX, minY, trunkX, maxY, color);
-                // Horizontal line from trunk to main node's right edge
-                line(trunkX, mp.cy, mp.r, mp.cy, color);
-                // Horizontal lines from each sub-node's left edge to trunk
+                // Ensure vertical line covers all nodes properly
+                const verticalStart = Math.min(minY, mp.cy - 10);
+                const verticalEnd = Math.max(maxY, mp.cy + 10);
+
+                // Vertical trunk line
+                line(trunkX, verticalStart, trunkX, verticalEnd, color, 2.5);
+                // Horizontal line from trunk to main node
+                line(trunkX, mp.cy, mp.r, mp.cy, color, 2.5);
+                // Horizontal lines from each sub-node to trunk
                 positions.forEach(sp => {
-                    line(sp.l, sp.cy, trunkX, sp.cy, color);
+                    line(sp.l, sp.cy, trunkX, sp.cy, color, 2);
                 });
             }
         });
-
-        // No center vertical line - branch connectors provide the structure
     }
 
     function drawAll() {
-        drawConnectors('diagram-qe', 'svg-qe');
-        drawConnectors('diagram-sdet', 'svg-sdet');
+        // Small delay to ensure layout is fully calculated
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                drawConnectors('diagram-qe', 'svg-qe');
+                drawConnectors('diagram-sdet', 'svg-sdet');
+            });
+        });
     }
 
-    window.addEventListener('load', () => setTimeout(drawAll, 200));
-    window.addEventListener('resize', drawAll);
+    // Redraw on tab changes to ensure proper rendering
+    function setupTabListeners() {
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                setTimeout(drawAll, 100);
+            });
+        });
+    }
+
+    // Initialize
+    window.addEventListener('load', () => {
+        setupTabListeners();
+        setTimeout(drawAll, 250);
+    });
+
+    // Redraw on resize with debouncing
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(drawAll, 150);
+    });
 </script>
 
 </body>
