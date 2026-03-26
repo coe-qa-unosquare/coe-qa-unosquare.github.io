@@ -738,22 +738,24 @@
 
         .row {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
-            padding: 8px 0;
+            padding: 12px 0;
             position: relative;
             min-height: fit-content;
         }
 
         .center-col {
             display: flex;
-            gap: 20px;
-            justify-content: center;
+            flex-direction: column;
+            gap: 16px;
+            justify-content: flex-start;
             flex-shrink: 0;
             z-index: 2;
-            padding: 0 12px;
-            align-self: center;
-            min-width: 280px;
+            padding: 0 20px;
+            align-self: flex-start;
+            min-width: 200px;
+            padding-top: 20px;
         }
 
         /* When there's only one main node, position it to the left side to avoid overlapping center line */
@@ -789,10 +791,11 @@
         .branch {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
             flex-shrink: 0;
             min-width: 200px;
-            justify-content: center;
+            max-width: 400px;
+            justify-content: flex-start;
         }
 
         .branch-left {
@@ -2367,6 +2370,7 @@ Business Rules: Minimum order $10, Max 50 items
                 <!-- JUNIOR - GREEN -->
                 <div class="level-divider"><span>Junior</span></div>
 
+                <!-- Row 1: Front-end Automation Fundamentals -->
                 <div class="row">
                     <div class="branch branch-left">
                         <div class="sub-group">
@@ -2383,9 +2387,13 @@ Business Rules: Minimum order $10, Max 50 items
                     </div>
                     <div class="center-col">
                         <div class="main-node mn-green" id="s-feaf">Front-end Automation<br>Fundamentals</div>
-                        <div class="main-node mn-green" id="s-pf">Programming<br>Fundamentals</div>
                     </div>
-                    <div class="branch branch-right">
+                    <div class="branch branch-right"></div>
+                </div>
+
+                <!-- Row 2: Programming Fundamentals -->
+                <div class="row">
+                    <div class="branch branch-left">
                         <div class="sub-group">
                             <div class="sub-node sn-green parent" data-connect="s-pf">OOP In Practice</div>
                             <div class="sub-children">
@@ -2422,6 +2430,11 @@ Business Rules: Minimum order $10, Max 50 items
                                 <div class="child-node cn-green">Package managers (npm, Maven, NuGet, pip)</div>
                             </div>
                         </div>
+                    </div>
+                    <div class="center-col">
+                        <div class="main-node mn-green" id="s-pf">Programming<br>Fundamentals</div>
+                    </div>
+                    <div class="branch branch-right">
                         <div class="sub-group">
                             <div class="sub-node sn-green parent" data-connect="s-pf">Unit Testing</div>
                             <div class="sub-children">
