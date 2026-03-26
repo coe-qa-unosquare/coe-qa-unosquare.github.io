@@ -2623,79 +2623,35 @@ Business Rules: Minimum order $10, Max 50 items
                         </div>
                         <div class="subtopic">
                             <div class="subtopic-title">Low Code Tools</div>
-                            <div class="subtopic-group">
-                                <div class="subtopic">
-                                    <div class="subtopic-title">Testim</div>
-                                    <ul class="subtopic-children">
-                                        <li>Create and maintain stable AI-assisted test scripts</li>
-                                        <li>Handle dynamic elements using smart locators</li>
-                                    </ul>
-                                </div>
-                                <div class="subtopic">
-                                    <div class="subtopic-title">Mabl</div>
-                                    <ul class="subtopic-children">
-                                        <li>Record, edit and maintain end-to-end journeys</li>
-                                        <li>Analyze auto-detected visual and functional regressions</li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <ul class="subtopic-children">
+                                <li>Testim — create and maintain AI-assisted scripts using smart locators</li>
+                                <li>Mabl — record, maintain journeys and analyze auto-detected regressions</li>
+                            </ul>
                         </div>
                         <div class="subtopic">
                             <div class="subtopic-title">Selenium / Playwright</div>
-                            <div class="subtopic-group">
-                                <div class="subtopic">
-                                    <div class="subtopic-title">XPath and Locator Strategy</div>
-                                    <ul class="subtopic-children">
-                                        <li>Write stable locators that survive UI changes</li>
-                                        <li>Choose between id, css, xpath and accessibility locators</li>
-                                    </ul>
-                                </div>
-                                <div class="subtopic">
-                                    <div class="subtopic-title">Script Creation and Maintenance</div>
-                                    <ul class="subtopic-children">
-                                        <li>Write scripts that cover happy path and edge cases</li>
-                                        <li>Refactor and update scripts after UI changes</li>
-                                        <li>Apply basic POM structure to organize scripts</li>
-                                    </ul>
-                                </div>
-                                <div class="subtopic">
-                                    <div class="subtopic-title">Synchronization and Stability</div>
-                                    <ul class="subtopic-children">
-                                        <li>Use explicit waits to handle dynamic content</li>
-                                        <li>Identify and fix flaky tests caused by timing issues</li>
-                                    </ul>
-                                </div>
-                                <div class="subtopic">
-                                    <div class="subtopic-title">Exception Handling</div>
-                                    <ul class="subtopic-children">
-                                        <li>Catch and handle common automation exceptions</li>
-                                        <li>Add meaningful error messages for faster debugging</li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <ul class="subtopic-children">
+                                <li>Write stable locators that survive UI changes (id, css, xpath, accessibility)</li>
+                                <li>Write scripts covering happy path and edge cases</li>
+                                <li>Refactor and update scripts after UI changes</li>
+                                <li>Apply basic POM structure to organize scripts</li>
+                                <li>Use explicit waits and fix flaky tests caused by timing issues</li>
+                                <li>Catch common exceptions and add meaningful error messages</li>
+                            </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Test Frameworks (Conceptually)</div>
+                            <div class="subtopic-title">Test Frameworks (Conceptual Awareness)</div>
                             <ul class="subtopic-children">
-                                <li>TestNG / JUnit / NUnit</li>
-                                <li>Annotations</li>
+                                <li>TestNG / JUnit / NUnit — suites, annotations, parallel execution</li>
+                                <li>Cucumber — feature files, step definitions and Gherkin scenarios</li>
                             </ul>
-                            <div class="subtopic-group">
-                                <div class="subtopic">
-                                    <div class="subtopic-title">Cucumber</div>
-                                    <ul class="subtopic-children">
-                                        <li>Feature Files</li>
-                                        <li>Step Definitions</li>
-                                        <li>Gherkin Scenarios</li>
-                                    </ul>
-                                </div>
-                            </div>
                         </div>
                         <div class="subtopic">
                             <div class="subtopic-title">Automation in the QE Process</div>
                             <ul class="subtopic-children">
-                                <li>Triage automation failures and distinguish flaky from real bugs</li>
+                                <li>Triage failures and distinguish flaky tests from real bugs</li>
                                 <li>Report automation coverage and results to the team</li>
+                                <li>Integrate suites into CI/CD for smoke, sanity and regression runs</li>
                             </ul>
                         </div>
                     </div>
@@ -2704,21 +2660,44 @@ Business Rules: Minimum order $10, Max 50 items
                     <div class="module-card right">
                         <h3 class="module-title">Performance Testing (Conceptual)</h3>
                         <div class="subtopic">
-                            <div class="subtopic-title">Testing Types</div>
+                            <div class="subtopic-title">Core Concepts</div>
                             <ul class="subtopic-children">
-                                <li>Load Testing</li>
-                                <li>Stress Testing</li>
-                                <li>Volume Testing</li>
-                                <li>Soak Testing</li>
-                                <li>Scalability Testing</li>
+                                <li>Differentiate Load, Stress, Volume, Soak and Scalability testing</li>
+                                <li>Define performance acceptance criteria and SLAs with the team</li>
+                                <li>Recognize common issues such as memory leaks, bottlenecks and timeouts</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Performance Testing Tools</div>
+                            <div class="subtopic-title">Test Design and Planning</div>
                             <ul class="subtopic-children">
-                                <li>JMeter</li>
-                                <li>Load Runner</li>
-                                <li>Blaze Meter</li>
+                                <li>Identify critical user journeys worth performance testing</li>
+                                <li>Define realistic load patterns based on real usage data</li>
+                                <li>Document entry and exit criteria for performance test runs</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Tools</div>
+                            <ul class="subtopic-children">
+                                <li>JMeter — execute existing scripts, adjust thread count and interpret reports</li>
+                                <li>BlazeMeter — run cloud-based tests and share results with stakeholders</li>
+                                <li>LoadRunner — interpret results generated by the performance engineering team</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Results Analysis</div>
+                            <ul class="subtopic-children">
+                                <li>Identify response time degradation and error rate spikes</li>
+                                <li>Distinguish between frontend, backend and network bottlenecks</li>
+                                <li>Correlate results with infrastructure metrics (CPU, memory)</li>
+                                <li>Track performance trends across builds and releases</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Collaboration and Process</div>
+                            <ul class="subtopic-children">
+                                <li>Coordinate with developers and DevOps to resolve bottlenecks</li>
+                                <li>Advocate for performance testing as part of the definition of done</li>
+                                <li>Raise performance risks early based on architecture and load expectations</li>
                             </ul>
                         </div>
                     </div>
