@@ -1,0 +1,2492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QE Playbooks & Metrics</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --bg: #0a0a0a;
+            --bg-card: #141414;
+            --bg-elevated: #1a1a1a;
+            --border: #2a2a2a;
+            --border-light: #3a3a3a;
+            --text: #ffffff;
+            --text-muted: #a0a0a0;
+            --text-dim: #666666;
+            --blue: #2563eb;
+            --blue-dim: rgba(37,99,235,0.12);
+            --blue-border: rgba(37,99,235,0.35);
+            --blue-light: #60a5fa;
+            --green: #22c55e;
+            --green-dim: rgba(34,197,94,0.12);
+            --green-border: rgba(34,197,94,0.5);
+            --green-light: #4ade80;
+            --yellow: #eab308;
+            --yellow-dim: rgba(234,179,8,0.12);
+            --yellow-border: rgba(234,179,8,0.5);
+            --yellow-light: #facc15;
+            --red: #dc2626;
+            --red-dim: rgba(220,38,38,0.12);
+            --red-border: rgba(220,38,38,0.5);
+            --red-light: #f87171;
+            --cyan: #06b6d4;
+            --cyan-dim: rgba(6,182,212,0.12);
+            --cyan-border: rgba(6,182,212,0.35);
+            --cyan-light: #67e8f9;
+            --grey: #6b7280;
+            --grey-dim: rgba(107,114,128,0.12);
+            --grey-border: rgba(107,114,128,0.35);
+            --grey-light: #9ca3af;
+            --purple: #a855f7;
+            --purple-dim: rgba(168,85,247,0.12);
+            --purple-border: rgba(168,85,247,0.35);
+            --purple-light: #c084fc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== NAV BAR ===== */
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 8px 24px;
+            backdrop-filter: blur(12px);
+        }
+
+        .nav-back {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-back:hover {
+            color: var(--text);
+            border-color: var(--blue-border);
+            background: var(--blue-dim);
+        }
+
+        .nav-back svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .tab-group {
+            display: flex;
+            gap: 4px;
+        }
+
+        .tab-btn {
+            padding: 14px 28px;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dim);
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 0.3px;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-muted);
+            background: var(--bg-elevated);
+        }
+
+        .tab-btn.active {
+            color: var(--text);
+            background: var(--bg-elevated);
+            box-shadow: inset 0 -2px 0 var(--blue);
+        }
+
+        .tab-content { display: none; animation: fadeIn 0.25s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ===== HERO ===== */
+        .hero {
+            text-align: center;
+            padding: 60px 24px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -60%; left: -30%; width: 160%; height: 180%;
+            background: radial-gradient(ellipse at 30% 20%, rgba(37,99,235,0.06) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 40%, rgba(37,99,235,0.04) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+            position: relative;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 .grad {
+            background: linear-gradient(135deg, #ffffff 0%, var(--blue-light) 50%, var(--blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .sub {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px 60px;
+        }
+
+        /* ===== SECTION TITLES ===== */
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 48px 0 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: -0.3px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 22px;
+            border-radius: 2px;
+            background: var(--blue);
+        }
+
+        .section-title.blue::before { background: var(--blue); }
+        .section-title.green::before { background: var(--green); }
+        .section-title.yellow::before { background: var(--yellow); }
+        .section-title.red::before { background: var(--red); }
+        .section-title.cyan::before { background: var(--cyan); }
+        .section-title.purple::before { background: var(--purple); }
+
+        /* ===== DECISION TREE ===== */
+        .decision-tree {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 32px;
+            margin: 24px 0;
+        }
+
+        .dt-question {
+            background: var(--blue-dim);
+            border: 1px solid var(--blue-border);
+            border-radius: 10px;
+            padding: 16px 20px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--blue-light);
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .dt-branches {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .dt-branch {
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+
+        .dt-branch:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        }
+
+        .dt-branch.yes {
+            background: rgba(34,197,94,0.06);
+            border-color: var(--green-border);
+        }
+
+        .dt-branch.no {
+            background: rgba(234,179,8,0.06);
+            border-color: var(--yellow-border);
+        }
+
+        .dt-branch-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .dt-branch.yes .dt-branch-label { color: var(--green-light); }
+        .dt-branch.no .dt-branch-label { color: var(--yellow-light); }
+
+        .dt-branch h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .dt-branch p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .dt-connector {
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            padding: 8px 0;
+            position: relative;
+        }
+
+        .dt-connector::before {
+            content: '│';
+            display: block;
+            color: var(--border-light);
+            font-size: 1.2rem;
+        }
+
+        /* ===== QUALITY GATES ===== */
+        .gates-pipeline {
+            display: flex;
+            gap: 0;
+            margin: 24px 0;
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+
+        .gate-stage {
+            flex: 1;
+            min-width: 200px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 24px 20px;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .gate-stage:first-child { border-radius: 14px 0 0 14px; }
+        .gate-stage:last-child { border-radius: 0 14px 14px 0; }
+
+        .gate-stage:hover {
+            border-color: var(--blue-border);
+            z-index: 1;
+        }
+
+        .gate-stage::after {
+            content: '→';
+            position: absolute;
+            right: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-dim);
+            font-size: 1.2rem;
+            z-index: 2;
+        }
+
+        .gate-stage:last-child::after { display: none; }
+
+        .gate-stage .stage-name {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--blue-light);
+            margin-bottom: 10px;
+        }
+
+        .gate-stage h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .gate-checks {
+            list-style: none;
+        }
+
+        .gate-checks li {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            padding: 4px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            line-height: 1.5;
+        }
+
+        .gate-checks li::before {
+            content: '✓';
+            color: var(--green);
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* ===== FRAMEWORK CARDS ===== */
+        .fw-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 18px;
+            margin: 24px 0;
+        }
+
+        .fw-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 26px;
+            transition: all 0.2s;
+        }
+
+        .fw-card:hover {
+            border-color: var(--border-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        .fw-card .fw-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px; height: 36px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .fw-card h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .fw-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 14px;
+        }
+
+        .fw-card .fw-items {
+            list-style: none;
+            border-top: 1px solid var(--border);
+            padding-top: 14px;
+        }
+
+        .fw-card .fw-items li {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            padding: 5px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .fw-card .fw-items li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--text-dim);
+        }
+
+        /* ===== COMPARISON TABLE ===== */
+        .comparison-table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+        }
+
+        .comparison-table th {
+            background: var(--bg-elevated);
+            color: var(--text);
+            padding: 16px 20px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comparison-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+            vertical-align: top;
+            line-height: 1.6;
+        }
+
+        .comparison-table tr:last-child td { border-bottom: none; }
+
+        .comparison-table tr:hover td {
+            background: rgba(59, 130, 246, 0.04);
+        }
+
+        .comparison-table .fw-name {
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .comparison-table .highlight {
+            color: var(--blue-light);
+            font-weight: 500;
+        }
+
+        /* ===== PLAYBOOK CARDS (Security / Perf) ===== */
+        .playbook-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin: 24px 0;
+        }
+
+        .playbook-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 28px;
+            transition: all 0.2s;
+        }
+
+        .playbook-card:hover {
+            border-color: var(--border-light);
+            transform: translateY(-2px);
+        }
+
+        .playbook-card .pb-badge {
+            font-size: 0.65rem;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            margin-bottom: 14px;
+        }
+
+        .pb-badge.security { background: var(--red-dim); color: var(--red-light); }
+        .pb-badge.performance { background: var(--cyan-dim); color: var(--cyan-light); }
+
+        .playbook-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .playbook-card .pb-desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .pb-phases {
+            list-style: none;
+        }
+
+        .pb-phases li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.88rem;
+        }
+
+        .pb-phases li:last-child { border-bottom: none; }
+
+        .pb-phase-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px; height: 24px;
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .security .pb-phase-num { background: var(--red-dim); color: var(--red-light); }
+        .performance .pb-phase-num { background: var(--cyan-dim); color: var(--cyan-light); }
+
+        .pb-phase-text {
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .pb-phase-text strong {
+            color: var(--text);
+        }
+
+        /* ===== SHIFT LEFT / RIGHT ===== */
+        .shift-diagram {
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+            margin: 24px 0;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .shift-side {
+            flex: 1;
+            padding: 28px 24px;
+            position: relative;
+        }
+
+        .shift-side.left {
+            background: linear-gradient(135deg, rgba(34,197,94,0.08), rgba(34,197,94,0.02));
+            border-right: 1px solid var(--border);
+        }
+
+        .shift-side.right {
+            background: linear-gradient(135deg, rgba(168,85,247,0.08), rgba(168,85,247,0.02));
+        }
+
+        .shift-side h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .shift-side.left h3 { color: var(--green-light); }
+        .shift-side.right h3 { color: var(--purple-light); }
+
+        .shift-side .shift-tagline {
+            font-size: 0.78rem;
+            color: var(--text-dim);
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+
+        .shift-items {
+            list-style: none;
+        }
+
+        .shift-items li {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            padding: 7px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .shift-side.left .shift-items li::before {
+            content: '←';
+            position: absolute;
+            left: 0;
+            color: var(--green);
+        }
+
+        .shift-side.right .shift-items li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--purple);
+        }
+
+        /* ===== KPI CATALOGUE ===== */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 18px;
+            margin: 24px 0;
+        }
+
+        .kpi-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            transition: all 0.2s;
+        }
+
+        .kpi-card:hover {
+            border-color: var(--blue-border);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(37,99,235,0.1);
+        }
+
+        .kpi-card .kpi-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+            margin-bottom: 8px;
+        }
+
+        .kpi-card .kpi-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .kpi-card .kpi-formula {
+            font-family: 'SF Mono', Consolas, Monaco, monospace;
+            font-size: 0.82rem;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 8px 12px;
+            color: var(--blue-light);
+            margin-bottom: 12px;
+        }
+
+        .kpi-card .kpi-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .kpi-card .kpi-target {
+            margin-top: 12px;
+            font-size: 0.82rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .kpi-target .target-label {
+            color: var(--text-dim);
+        }
+
+        .kpi-target .target-value {
+            color: var(--green-light);
+            font-weight: 700;
+        }
+
+        /* ===== DASHBOARD GUIDE ===== */
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .dash-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            transition: all 0.2s;
+        }
+
+        .dash-panel:hover {
+            border-color: var(--border-light);
+        }
+
+        .dash-panel.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .dash-panel .panel-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .panel-label .dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+        }
+
+        .dot.green { background: var(--green); }
+        .dot.yellow { background: var(--yellow); }
+        .dot.blue { background: var(--blue); }
+        .dot.red { background: var(--red); }
+        .dot.cyan { background: var(--cyan); }
+
+        .dash-panel h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .dash-panel p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .dash-metrics {
+            list-style: none;
+            margin-top: 10px;
+        }
+
+        .dash-metrics li {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            padding: 5px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .dash-metrics li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--text-dim);
+        }
+
+        /* ===== BENCHMARKS TABLE ===== */
+        .benchmark-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .benchmark-tag.good { background: var(--green-dim); color: var(--green-light); }
+        .benchmark-tag.avg { background: var(--yellow-dim); color: var(--yellow-light); }
+        .benchmark-tag.poor { background: var(--red-dim); color: var(--red-light); }
+
+        /* ===== MATURITY MODEL ===== */
+        .maturity-levels {
+            display: flex;
+            gap: 0;
+            margin: 24px 0;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .maturity-level {
+            flex: 1;
+            padding: 24px 16px;
+            text-align: center;
+            position: relative;
+            transition: all 0.2s;
+            cursor: default;
+            border-right: 1px solid var(--border);
+        }
+
+        .maturity-level:last-child { border-right: none; }
+
+        .maturity-level:hover {
+            transform: scale(1.02);
+            z-index: 1;
+        }
+
+        .maturity-level.l1 { background: linear-gradient(180deg, rgba(220,38,38,0.1), transparent); }
+        .maturity-level.l2 { background: linear-gradient(180deg, rgba(234,179,8,0.1), transparent); }
+        .maturity-level.l3 { background: linear-gradient(180deg, rgba(37,99,235,0.1), transparent); }
+        .maturity-level.l4 { background: linear-gradient(180deg, rgba(34,197,94,0.1), transparent); }
+        .maturity-level.l5 { background: linear-gradient(180deg, rgba(168,85,247,0.1), transparent); }
+
+        .maturity-level .ml-num {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .maturity-level.l1 .ml-num { color: var(--red-light); }
+        .maturity-level.l2 .ml-num { color: var(--yellow-light); }
+        .maturity-level.l3 .ml-num { color: var(--blue-light); }
+        .maturity-level.l4 .ml-num { color: var(--green-light); }
+        .maturity-level.l5 .ml-num { color: var(--purple-light); }
+
+        .maturity-level .ml-name {
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .maturity-level .ml-desc {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* ===== ESTIMATION CARDS ===== */
+        .estimation-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 32px;
+            margin: 24px 0;
+        }
+
+        .estimation-section h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .estimation-section .est-intro {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .est-formula-box {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin: 16px 0;
+            text-align: center;
+        }
+
+        .est-formula-box .formula {
+            font-family: 'SF Mono', Consolas, Monaco, monospace;
+            font-size: 1rem;
+            color: var(--blue-light);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .est-formula-box .formula-parts {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .est-formula-box .formula-part {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .est-formula-box .formula-part .fp-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .est-example {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-top: 20px;
+        }
+
+        .est-example h4 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .est-example .est-calc {
+            font-family: 'SF Mono', Consolas, Monaco, monospace;
+            font-size: 0.85rem;
+            color: var(--cyan-light);
+            line-height: 1.8;
+        }
+
+        .est-example .est-result {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--green-light);
+            margin-top: 10px;
+        }
+
+        /* ===== WHY IT MATTERS ===== */
+        .why-matters {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .why-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.2s;
+        }
+
+        .why-card:hover {
+            border-color: var(--border-light);
+            transform: translateY(-2px);
+        }
+
+        .why-card h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .why-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .playbook-grid { grid-template-columns: 1fr; }
+            .maturity-levels { flex-direction: column; }
+            .maturity-level { border-right: none; border-bottom: 1px solid var(--border); }
+            .maturity-level:last-child { border-bottom: none; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-bar { flex-direction: column; gap: 8px; padding: 8px; }
+            .tab-btn { padding: 12px 16px; font-size: 12px; }
+            .dt-branches { grid-template-columns: 1fr; }
+            .gates-pipeline { flex-direction: column; }
+            .gate-stage { border-radius: 0; }
+            .gate-stage:first-child { border-radius: 14px 14px 0 0; }
+            .gate-stage:last-child { border-radius: 0 0 14px 14px; }
+            .gate-stage::after { display: none; }
+            .shift-diagram { flex-direction: column; }
+            .shift-side.left { border-right: none; border-bottom: 1px solid var(--border); }
+            .dashboard-layout { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV BAR -->
+<div class="nav-bar">
+    <a href="index.html" class="nav-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+        Back to Main
+    </a>
+    <div class="tab-group">
+        <button class="tab-btn active" data-tab="process">Process & Architecture</button>
+        <button class="tab-btn" data-tab="metrics">Quality Metrics</button>
+        <button class="tab-btn" data-tab="planning">Planning Frameworks</button>
+    </div>
+    <div style="width: 120px;"></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB: QE PROCESS & ARCHITECTURE GUIDES -->
+<!-- ============================================================ -->
+<div class="tab-content active" id="tab-process">
+    <div class="hero">
+        <h1><span class="grad">QE Process & Architecture</span><br>Guides</h1>
+        <p class="sub">Test automation strategies, CI/CD quality gates, risk-based frameworks, security playbooks, and shift-left/right best practices.</p>
+    </div>
+
+    <div class="container">
+
+        <!-- DECISION TREE -->
+        <h2 class="section-title blue">Test Automation Strategy Decision Tree</h2>
+
+        <div class="decision-tree">
+            <div class="dt-question">Is the feature stable and unlikely to change frequently?</div>
+            <div class="dt-branches">
+                <div class="dt-branch yes">
+                    <div class="dt-branch-label">Yes — Stable Feature</div>
+                    <h4>Automate End-to-End</h4>
+                    <p>Invest in robust UI + API automation. High ROI since tests won't need constant maintenance.</p>
+                </div>
+                <div class="dt-branch no">
+                    <div class="dt-branch-label">No — Rapidly Changing</div>
+                    <h4>Focus on API & Unit Tests</h4>
+                    <p>Avoid brittle UI tests. Use contract tests and keep the feedback loop fast until the feature stabilises.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="decision-tree">
+            <div class="dt-question">Is there a critical user journey or revenue-impacting flow?</div>
+            <div class="dt-branches">
+                <div class="dt-branch yes">
+                    <div class="dt-branch-label">Yes — High Business Impact</div>
+                    <h4>Full Regression + Smoke Suite</h4>
+                    <p>Build a dedicated smoke suite that runs on every deploy. Add synthetic monitoring in production for continuous validation.</p>
+                </div>
+                <div class="dt-branch no">
+                    <div class="dt-branch-label">No — Low Risk Path</div>
+                    <h4>Exploratory + Targeted Coverage</h4>
+                    <p>Use risk-based selection. Automate only the happy path; rely on exploratory testing for edge cases.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="decision-tree">
+            <div class="dt-question">Does the system have complex integrations or third-party dependencies?</div>
+            <div class="dt-branches">
+                <div class="dt-branch yes">
+                    <div class="dt-branch-label">Yes — Complex Integrations</div>
+                    <h4>Contract Testing + Service Virtualisation</h4>
+                    <p>Use Pact or similar for consumer-driven contracts. Mock external services to decouple test execution from third-party availability.</p>
+                </div>
+                <div class="dt-branch no">
+                    <div class="dt-branch-label">No — Self-Contained</div>
+                    <h4>Standard Integration Tests</h4>
+                    <p>Direct integration tests against real dependencies in a controlled environment. Simpler setup, faster feedback.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CI/CD QUALITY GATES -->
+        <h2 class="section-title green">CI/CD Quality Gates Reference</h2>
+
+        <div class="gates-pipeline">
+            <div class="gate-stage">
+                <div class="stage-name">Pre-Commit</div>
+                <h4>Local Quality</h4>
+                <ul class="gate-checks">
+                    <li>Linting & formatting checks</li>
+                    <li>Unit tests (affected modules)</li>
+                    <li>Pre-commit hooks (secrets scan)</li>
+                    <li>Type checking</li>
+                </ul>
+            </div>
+            <div class="gate-stage">
+                <div class="stage-name">PR / Build</div>
+                <h4>Integration Gate</h4>
+                <ul class="gate-checks">
+                    <li>Full unit test suite</li>
+                    <li>API integration tests</li>
+                    <li>Code coverage threshold (≥80%)</li>
+                    <li>Static analysis (SonarQube)</li>
+                    <li>Dependency vulnerability scan</li>
+                </ul>
+            </div>
+            <div class="gate-stage">
+                <div class="stage-name">Staging</div>
+                <h4>Release Candidate</h4>
+                <ul class="gate-checks">
+                    <li>E2E smoke suite</li>
+                    <li>Performance baseline check</li>
+                    <li>Contract test validation</li>
+                    <li>Accessibility scan (a11y)</li>
+                    <li>Visual regression</li>
+                </ul>
+            </div>
+            <div class="gate-stage">
+                <div class="stage-name">Production</div>
+                <h4>Deploy & Monitor</h4>
+                <ul class="gate-checks">
+                    <li>Canary deployment checks</li>
+                    <li>Synthetic monitoring</li>
+                    <li>Error rate threshold (&lt;0.1%)</li>
+                    <li>Latency P95 validation</li>
+                    <li>Rollback trigger conditions</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- RISK-BASED TESTING -->
+        <h2 class="section-title yellow">Risk-Based Testing Frameworks</h2>
+
+        <div class="fw-grid">
+            <div class="fw-card">
+                <div class="fw-icon" style="background: var(--yellow-dim); color: var(--yellow-light);">R</div>
+                <h3>Risk Matrix Prioritisation</h3>
+                <p>Plot features on a Likelihood × Impact grid to allocate testing effort where it matters most.</p>
+                <ul class="fw-items">
+                    <li>Critical (High/High) — Full regression + exploratory</li>
+                    <li>Major (High/Low or Low/High) — Targeted automation</li>
+                    <li>Minor (Low/Low) — Sanity checks only</li>
+                </ul>
+            </div>
+            <div class="fw-card">
+                <div class="fw-icon" style="background: var(--blue-dim); color: var(--blue-light);">P</div>
+                <h3>PRISMA Method</h3>
+                <p>Product Risk Management — a structured approach to identifying, classifying, and mitigating quality risks.</p>
+                <ul class="fw-items">
+                    <li>Risk identification workshops with stakeholders</li>
+                    <li>Risk classification by business function</li>
+                    <li>Test strategy mapped to risk profile</li>
+                </ul>
+            </div>
+            <div class="fw-card">
+                <div class="fw-icon" style="background: var(--green-dim); color: var(--green-light);">H</div>
+                <h3>Heuristic Risk-Based Testing</h3>
+                <p>Use mnemonics and heuristics to quickly surface risk areas without heavyweight documentation.</p>
+                <ul class="fw-items">
+                    <li>SFDPOT — Structure, Function, Data, Platform, Operations, Time</li>
+                    <li>FEW HICCUPS — for risk identification</li>
+                    <li>Combine with Session-Based Test Management</li>
+                </ul>
+            </div>
+            <div class="fw-card">
+                <div class="fw-icon" style="background: var(--cyan-dim); color: var(--cyan-light);">C</div>
+                <h3>Change-Based Risk Analysis</h3>
+                <p>Focus testing effort on areas impacted by recent code changes using dependency and blast-radius analysis.</p>
+                <ul class="fw-items">
+                    <li>Git diff analysis for change scope</li>
+                    <li>Dependency graph traversal for impact mapping</li>
+                    <li>Dynamic test selection based on affected modules</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SECURITY & PERFORMANCE PLAYBOOKS -->
+        <h2 class="section-title red">Security & Performance Testing Playbooks</h2>
+
+        <div class="playbook-grid">
+            <div class="playbook-card security">
+                <span class="pb-badge security">Security</span>
+                <h3>Security Testing Playbook</h3>
+                <p class="pb-desc">A phased approach to integrating security testing throughout the SDLC, from threat modelling to penetration testing.</p>
+                <ul class="pb-phases">
+                    <li>
+                        <span class="pb-phase-num">1</span>
+                        <span class="pb-phase-text"><strong>Threat Modelling</strong> — Identify attack surfaces using STRIDE during design. Map data flows and trust boundaries.</span>
+                    </li>
+                    <li>
+                        <span class="pb-phase-num">2</span>
+                        <span class="pb-phase-text"><strong>SAST Integration</strong> — Static analysis in CI pipeline. Flag OWASP Top 10 vulnerabilities before code review.</span>
+                    </li>
+                    <li>
+                        <span class="pb-phase-num">3</span>
+                        <span class="pb-phase-text"><strong>DAST Scanning</strong> — Automated dynamic scans in staging. Test for XSS, SQLi, CSRF, and auth bypass.</span>
+                    </li>
+                    <li>
+                        <span class="pb-phase-num">4</span>
+                        <span class="pb-phase-text"><strong>Dependency Audit</strong> — Continuous SCA scanning. Auto-create tickets for CVEs above severity threshold.</span>
+                    </li>
+                    <li>
+                        <span class="pb-phase-num">5</span>
+                        <span class="pb-phase-text"><strong>Penetration Testing</strong> — Quarterly manual pen tests on critical flows. Retest remediations within 2 sprints.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="playbook-card performance">
+                <span class="pb-badge performance">Performance</span>
+                <h3>Performance Testing Playbook</h3>
+                <p class="pb-desc">Structured approach to validating system performance from component-level benchmarks to full load and chaos testing.</p>
+                <ul class="pb-phases">
+                    <li>
+                        <span class="pb-phase-num">1</span>
+                        <span class="pb-phase-text"><strong>Baseline Profiling</strong> — Establish response time, throughput, and resource baselines under normal load.</span>
+                    </li>
+                    <li>
+                        <span class="pb-phase-num">2</span>
+                        <span class="pb-phase-text"><strong>Load Testing</strong> — Validate system behaviour under expected peak concurrency. Use k6, Gatling, or JMeter.</span>
+                    </li>
+                    <li>
+                        <span class="pb-phase-num">3</span>
+                        <span class="pb-phase-text"><strong>Stress Testing</strong> — Push beyond capacity to find breaking points. Document degradation patterns and recovery.</span>
+                    </li>
+                    <li>
+                        <span class="pb-phase-num">4</span>
+                        <span class="pb-phase-text"><strong>Soak / Endurance</strong> — Long-running tests to detect memory leaks, connection pool exhaustion, and resource drift.</span>
+                    </li>
+                    <li>
+                        <span class="pb-phase-num">5</span>
+                        <span class="pb-phase-text"><strong>Chaos Engineering</strong> — Inject failures (network, disk, CPU) to validate resilience and auto-recovery mechanisms.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SHIFT LEFT / SHIFT RIGHT -->
+        <h2 class="section-title purple">Shift-Left & Shift-Right Best Practices</h2>
+
+        <div class="shift-diagram">
+            <div class="shift-side left">
+                <h3>← Shift Left</h3>
+                <p class="shift-tagline">Find bugs earlier, fix them cheaper</p>
+                <ul class="shift-items">
+                    <li>Requirements-phase test case design (BDD/Gherkin)</li>
+                    <li>Static analysis and linting in IDE plugins</li>
+                    <li>Unit test coverage as a PR merge gate</li>
+                    <li>API contract testing before frontend exists</li>
+                    <li>Threat modelling during architecture review</li>
+                    <li>Developer-owned integration tests</li>
+                    <li>Test data management as code</li>
+                </ul>
+            </div>
+            <div class="shift-side right">
+                <h3>Shift Right →</h3>
+                <p class="shift-tagline">Validate in production, learn from real usage</p>
+                <ul class="shift-items">
+                    <li>Synthetic monitoring and health checks</li>
+                    <li>Canary and blue/green deployments</li>
+                    <li>Feature flags with kill-switch capability</li>
+                    <li>Real-user monitoring (RUM) and error tracking</li>
+                    <li>Chaos engineering in production-like environments</li>
+                    <li>A/B testing for UX quality validation</li>
+                    <li>Observability — structured logging, tracing, metrics</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB: QUALITY METRICS PLAYBOOK -->
+<!-- ============================================================ -->
+<div class="tab-content" id="tab-metrics">
+    <div class="hero">
+        <h1><span class="grad">Quality Metrics</span><br>Playbook</h1>
+        <p class="sub">KPI catalogue, dashboard design guidance, industry benchmarks, and a maturity model self-assessment to measure and improve your QE practice.</p>
+    </div>
+
+    <div class="container">
+
+        <!-- KPI CATALOGUE -->
+        <h2 class="section-title blue">KPI Catalogue</h2>
+
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-label">Effectiveness</div>
+                <div class="kpi-name">Defect Leakage Rate</div>
+                <div class="kpi-formula">leaked_defects / total_defects × 100</div>
+                <p class="kpi-desc">Percentage of defects found in production that were missed during testing. Measures test effectiveness at catching bugs before release.</p>
+                <div class="kpi-target">
+                    <span class="target-label">Target:</span>
+                    <span class="target-value">&lt; 5%</span>
+                </div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Coverage</div>
+                <div class="kpi-name">Test Coverage</div>
+                <div class="kpi-formula">lines_tested / total_lines × 100</div>
+                <p class="kpi-desc">Percentage of code exercised by automated tests. Track at multiple levels — unit, API, E2E — separately. A single number hides imbalances in the test pyramid. Complement with requirement-level coverage to catch business logic gaps that code coverage misses.</p>
+                <div class="kpi-target">
+                    <span class="target-label">Target:</span>
+                    <span class="target-value">≥ 80% (unit), ≥ 60% (API)</span>
+                </div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Recovery</div>
+                <div class="kpi-name">Mean Time to Recover (MTTR)</div>
+                <div class="kpi-formula">Σ(recovery_time) / incident_count</div>
+                <p class="kpi-desc">Average time from incident detection to full resolution. A DORA metric that reflects team capability and process maturity.</p>
+                <div class="kpi-target">
+                    <span class="target-label">Target:</span>
+                    <span class="target-value">&lt; 1 hour</span>
+                </div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Velocity</div>
+                <div class="kpi-name">Automation Rate</div>
+                <div class="kpi-formula">automated_tests / total_tests × 100</div>
+                <p class="kpi-desc">Percentage of test cases that are automated. Track by layer (unit, API, E2E) for a balanced view rather than one number.</p>
+                <div class="kpi-target">
+                    <span class="target-label">Target:</span>
+                    <span class="target-value">≥ 70%</span>
+                </div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Reliability</div>
+                <div class="kpi-name">Test Flakiness Rate</div>
+                <div class="kpi-formula">flaky_runs / total_runs × 100</div>
+                <p class="kpi-desc">Percentage of test executions that produce inconsistent results. Flaky tests erode trust and slow delivery.</p>
+                <div class="kpi-target">
+                    <span class="target-label">Target:</span>
+                    <span class="target-value">&lt; 2%</span>
+                </div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Efficiency</div>
+                <div class="kpi-name">Defect Detection Efficiency</div>
+                <div class="kpi-formula">pre_release_defects / total_defects × 100</div>
+                <p class="kpi-desc">Ratio of defects caught before release vs total. Higher is better — shows how much of your quality effort pays off before users are impacted.</p>
+                <div class="kpi-target">
+                    <span class="target-label">Target:</span>
+                    <span class="target-value">≥ 95%</span>
+                </div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Traceability</div>
+                <div class="kpi-name">Story Coverage</div>
+                <div class="kpi-formula">stories_with_tests / total_stories × 100</div>
+                <p class="kpi-desc">Percentage of user stories with at least one linked test case. Answers "did QA touch every requirement?" — critical for audit trails and ensuring no feature ships untested.</p>
+                <div class="kpi-target">
+                    <span class="target-label">Target:</span>
+                    <span class="target-value">100%</span>
+                </div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Quality</div>
+                <div class="kpi-name">Defect Bounce Rate</div>
+                <div class="kpi-formula">bounced_bugs / total_fixes_verified × 100</div>
+                <p class="kpi-desc">Bugs returned to QA after being marked "fixed" that are still broken. Signals poor dev-QA alignment, unclear repro steps, or insufficient fix verification by developers.</p>
+                <div class="kpi-target">
+                    <span class="target-label">Target:</span>
+                    <span class="target-value">&lt; 10%</span>
+                </div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Stability</div>
+                <div class="kpi-name">Defect Re-Open Rate</div>
+                <div class="kpi-formula">reopened_bugs / total_closed_bugs × 100</div>
+                <p class="kpi-desc">Bugs closed but resurfaced later — same issue or regression. Indicates root-cause fixes aren't holding. Persistently high rates point to architectural debt or inadequate regression.</p>
+                <div class="kpi-target">
+                    <span class="target-label">Target:</span>
+                    <span class="target-value">&lt; 5%</span>
+                </div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Responsiveness</div>
+                <div class="kpi-name">Bug Fix Average Time</div>
+                <div class="kpi-formula">Σ(fix_verified_date - reported_date) / bug_count</div>
+                <p class="kpi-desc">Mean time from bug report to verified fix. Track by severity — P0/P1 with high fix times is a red flag. Long averages slow the entire release cycle and erode team confidence.</p>
+                <div class="kpi-target">
+                    <span class="target-label">Target:</span>
+                    <span class="target-value">P0: &lt; 4h, P1: &lt; 1d, P2: &lt; 3d</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- DASHBOARD DESIGN GUIDE -->
+        <h2 class="section-title green">Dashboard Design Guide</h2>
+
+        <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 8px; line-height: 1.6;">A well-designed quality dashboard tells a story. Here's a recommended layout with the panels you should track and why each matters.</p>
+
+        <div class="dashboard-layout">
+            <div class="dash-panel">
+                <div class="panel-label"><span class="dot red"></span> Release Health</div>
+                <h4>Deployment & Stability</h4>
+                <p>The first thing anyone should see — is the system healthy right now?</p>
+                <ul class="dash-metrics">
+                    <li>Deployment frequency (daily/weekly trend)</li>
+                    <li>Change failure rate (%)</li>
+                    <li>Active incidents count</li>
+                    <li>Rollback frequency</li>
+                </ul>
+            </div>
+            <div class="dash-panel">
+                <div class="panel-label"><span class="dot green"></span> Test Execution</div>
+                <h4>Pipeline Quality Signal</h4>
+                <p>Shows whether the test suite is providing reliable, timely feedback to the team.</p>
+                <ul class="dash-metrics">
+                    <li>Pass/fail ratio (last 7 days)</li>
+                    <li>Test execution time trend</li>
+                    <li>Flaky test count and top offenders</li>
+                    <li>Coverage delta per sprint</li>
+                </ul>
+            </div>
+            <div class="dash-panel">
+                <div class="panel-label"><span class="dot yellow"></span> Defect Trends</div>
+                <h4>Bug Inflow & Resolution</h4>
+                <p>Track whether the team is getting ahead of bugs or falling behind.</p>
+                <ul class="dash-metrics">
+                    <li>Open vs. closed defects (burndown)</li>
+                    <li>Defect leakage rate by sprint</li>
+                    <li>Mean time to detect (MTTD)</li>
+                    <li>Severity distribution (P0–P3)</li>
+                </ul>
+            </div>
+            <div class="dash-panel">
+                <div class="panel-label"><span class="dot blue"></span> DORA Metrics</div>
+                <h4>Engineering Velocity</h4>
+                <p>The four key metrics that correlate with high-performing engineering teams.</p>
+                <ul class="dash-metrics">
+                    <li>Lead time for changes</li>
+                    <li>Deployment frequency</li>
+                    <li>Change failure rate</li>
+                    <li>Mean time to recovery (MTTR)</li>
+                </ul>
+            </div>
+            <div class="dash-panel full-width">
+                <div class="panel-label"><span class="dot cyan"></span> Design Principles</div>
+                <h4>What Makes a Good Quality Dashboard</h4>
+                <p>Keep these principles in mind when building or reviewing your quality dashboards:</p>
+                <ul class="dash-metrics">
+                    <li><strong style="color:var(--text)">Actionable over decorative</strong> — every metric should prompt a decision or investigation</li>
+                    <li><strong style="color:var(--text)">Trend over snapshot</strong> — show 7/14/30-day trends, not just current values</li>
+                    <li><strong style="color:var(--text)">Context over numbers</strong> — include thresholds, baselines, and colour-coded status</li>
+                    <li><strong style="color:var(--text)">Audience-aware</strong> — executives need rollups, engineers need drill-downs</li>
+                    <li><strong style="color:var(--text)">Refresh cadence</strong> — real-time for incidents, daily for trends, weekly for reports</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- BENCHMARKS -->
+        <h2 class="section-title yellow">Benchmarks — Industry Averages by Project Type</h2>
+
+        <div class="comparison-table-wrapper">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>SaaS / Web App</th>
+                        <th>Mobile App</th>
+                        <th>Enterprise / Legacy</th>
+                        <th>Embedded / IoT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="fw-name">Deployment Frequency</td>
+                        <td><span class="benchmark-tag good">Multiple/day</span></td>
+                        <td><span class="benchmark-tag avg">Bi-weekly</span></td>
+                        <td><span class="benchmark-tag poor">Monthly+</span></td>
+                        <td><span class="benchmark-tag poor">Quarterly</span></td>
+                    </tr>
+                    <tr>
+                        <td class="fw-name">Lead Time for Changes</td>
+                        <td><span class="benchmark-tag good">&lt; 1 day</span></td>
+                        <td><span class="benchmark-tag avg">1–7 days</span></td>
+                        <td><span class="benchmark-tag poor">1–6 months</span></td>
+                        <td><span class="benchmark-tag poor">1–3 months</span></td>
+                    </tr>
+                    <tr>
+                        <td class="fw-name">Change Failure Rate</td>
+                        <td><span class="benchmark-tag good">0–5%</span></td>
+                        <td><span class="benchmark-tag avg">5–10%</span></td>
+                        <td><span class="benchmark-tag poor">16–30%</span></td>
+                        <td><span class="benchmark-tag avg">10–15%</span></td>
+                    </tr>
+                    <tr>
+                        <td class="fw-name">MTTR</td>
+                        <td><span class="benchmark-tag good">&lt; 1 hour</span></td>
+                        <td><span class="benchmark-tag avg">1–24 hours</span></td>
+                        <td><span class="benchmark-tag poor">1–7 days</span></td>
+                        <td><span class="benchmark-tag avg">1–7 days</span></td>
+                    </tr>
+                    <tr>
+                        <td class="fw-name">Test Automation Rate</td>
+                        <td><span class="benchmark-tag good">70–90%</span></td>
+                        <td><span class="benchmark-tag avg">50–70%</span></td>
+                        <td><span class="benchmark-tag poor">20–40%</span></td>
+                        <td><span class="benchmark-tag avg">40–60%</span></td>
+                    </tr>
+                    <tr>
+                        <td class="fw-name">Defect Leakage</td>
+                        <td><span class="benchmark-tag good">&lt; 5%</span></td>
+                        <td><span class="benchmark-tag avg">5–10%</span></td>
+                        <td><span class="benchmark-tag poor">10–20%</span></td>
+                        <td><span class="benchmark-tag avg">5–15%</span></td>
+                    </tr>
+                    <tr>
+                        <td class="fw-name">Flakiness Rate</td>
+                        <td><span class="benchmark-tag good">&lt; 2%</span></td>
+                        <td><span class="benchmark-tag avg">2–5%</span></td>
+                        <td><span class="benchmark-tag poor">5–15%</span></td>
+                        <td><span class="benchmark-tag avg">3–8%</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- MATURITY MODEL -->
+        <h2 class="section-title purple">QE Maturity Model</h2>
+
+        <div class="maturity-levels">
+            <div class="maturity-level l1">
+                <div class="ml-num">1</div>
+                <div class="ml-name">Initial</div>
+                <p class="ml-desc">Ad-hoc testing, no automation. Quality depends on individual effort. No metrics tracked.</p>
+            </div>
+            <div class="maturity-level l2">
+                <div class="ml-num">2</div>
+                <div class="ml-name">Managed</div>
+                <p class="ml-desc">Basic test plans exist. Some automation at unit level. Defects tracked in a tool. Manual regression before releases.</p>
+            </div>
+            <div class="maturity-level l3">
+                <div class="ml-num">3</div>
+                <div class="ml-name">Defined</div>
+                <p class="ml-desc">Test strategy documented. CI/CD with quality gates. Automation across layers. KPIs tracked and reviewed.</p>
+            </div>
+            <div class="maturity-level l4">
+                <div class="ml-num">4</div>
+                <div class="ml-name">Measured</div>
+                <p class="ml-desc">Data-driven decisions. Risk-based test selection. Observability in production. Quality embedded in team culture.</p>
+            </div>
+            <div class="maturity-level l5">
+                <div class="ml-num">5</div>
+                <div class="ml-name">Optimising</div>
+                <p class="ml-desc">Continuous improvement loops. AI-assisted testing. Self-healing tests. Quality is a competitive advantage.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB: PLANNING FRAMEWORKS -->
+<!-- ============================================================ -->
+<div class="tab-content" id="tab-planning">
+    <div class="hero">
+        <h1><span class="grad">Planning</span><br>Frameworks</h1>
+        <p class="sub">Practical models for QE estimation, regression prioritisation, and effort planning — built from real project data, not textbook theory.</p>
+    </div>
+
+    <div class="container">
+
+        <!-- REGRESSION RE-PRIORITIZATION FRAMEWORK -->
+        <h2 class="section-title red">Regression Suite Re-Prioritisation Framework</h2>
+
+        <div class="estimation-section">
+            <h3>Weighted Scoring for Regression Modules</h3>
+            <p class="est-intro">When regression suites grow large, not all modules deserve equal execution time. This framework uses a weighted composite score to re-prioritise modules based on risk, complexity, and surface area. Apply it to modules above a time threshold (e.g., 28+ hours) where optimisation has the highest ROI.</p>
+
+            <div class="est-formula-box">
+                <div class="formula">(Priority AVG x 2) + Story Points AVG + (Linked Items / 2)</div>
+                <div class="formula-parts">
+                    <div class="formula-part"><span class="fp-dot" style="background: var(--red-light);"></span> Priority AVG x 2 — Risk severity (heaviest weight)</div>
+                    <div class="formula-part"><span class="fp-dot" style="background: var(--yellow-light);"></span> Story Points AVG — Implementation complexity</div>
+                    <div class="formula-part"><span class="fp-dot" style="background: var(--cyan-light);"></span> Linked Items / 2 — Surface area (dampened)</div>
+                </div>
+            </div>
+
+            <div class="comparison-table-wrapper" style="margin-top: 20px;">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>What It Measures</th>
+                            <th>Why This Weight</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="fw-name">Priority AVG x 2</td>
+                            <td>Average severity of defects and stories linked to the module. Use weighted priority values (P1=4, P2=3, P3=2, P4=1) rather than raw priority numbers to prevent low-severity volume from diluting critical bugs.</td>
+                            <td>Risk is the dominant factor — a high-priority module with fewer stories still needs thorough regression. If any single item is P1, flag the module regardless of composite score.</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Story Points AVG</td>
+                            <td>Average complexity of work items touching the module</td>
+                            <td>Complex implementations have higher regression potential — weighted at 1x as a baseline</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Linked Items / 2</td>
+                            <td>Count of user stories and bugs that touch the component. For long-lived trackers, apply time decay: items from the last 2 sprints count at full weight, older items at 0.5x.</td>
+                            <td>Dampened to prevent high-traffic modules from automatically dominating the ranking. Recent activity matters more than historical volume.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- SCORE TIERS -->
+            <div class="comparison-table-wrapper" style="margin-top: 20px;">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Score Range</th>
+                            <th>Tier</th>
+                            <th>Regression Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="fw-name"><span class="benchmark-tag poor">15+</span></td>
+                            <td style="color: var(--red-light); font-weight: 600;">Critical</td>
+                            <td>Run every regression cycle. Include in smoke suite. Consider dedicated test ownership.</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name"><span class="benchmark-tag avg">8–14.9</span></td>
+                            <td style="color: var(--yellow-light); font-weight: 600;">High</td>
+                            <td>Run every release. Prioritise in time-constrained cycles. Review quarterly for tier changes.</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name"><span class="benchmark-tag good">0–7.9</span></td>
+                            <td style="color: var(--green-light); font-weight: 600;">Standard</td>
+                            <td>Run on full regression cycles. Can be deferred in hotfix scenarios. Rotate coverage in time-boxed runs.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="est-example">
+                <h4>Example: Scoring a Full Regression Suite — "NovaPay" Fintech Platform</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">NovaPay is a B2B payment platform. The QE team inherited a 42-hour regression suite across 9 modules. Sprint 14 just ended and the team has 2 days to run regression before a major client demo. They need to decide what runs first.</p>
+            </div>
+
+            <!-- VISUAL MODULE MAP -->
+            <div style="margin-top: 0; display: flex; flex-direction: column; gap: 20px;">
+
+                <!-- CRITICAL TIER -->
+                <div style="border: 1px solid rgba(220,38,38,0.3); border-radius: 12px; overflow: hidden;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: rgba(220,38,38,0.08); border-bottom: 1px solid rgba(220,38,38,0.2);">
+                        <span style="font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--red-light);">Critical — Run Day 1</span>
+                        <span style="font-size: 0.72rem; color: var(--text-dim);">4 modules</span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border);">
+
+                        <!-- Payment Processing -->
+                        <div style="background: var(--bg-card); padding: 16px;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;">
+                                <span style="font-size: 0.85rem; font-weight: 600; color: var(--text);">Payment Processing</span>
+                                <span style="font-size: 1.1rem; font-weight: 700; color: var(--red-light);">24.8</span>
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <div style="font-size: 0.68rem; color: var(--text-dim); margin-bottom: 4px;">Bug Priority Distribution</div>
+                                <div style="display: flex; gap: 2px; height: 6px; border-radius: 3px; overflow: hidden;">
+                                    <div style="flex: 2; background: #ef4444;" title="2x P1"></div>
+                                    <div style="flex: 3; background: #f97316;" title="3x P2"></div>
+                                </div>
+                                <div style="display: flex; gap: 8px; margin-top: 4px;">
+                                    <span style="font-size: 0.68rem; color: #ef4444;">2x P1</span>
+                                    <span style="font-size: 0.68rem; color: #f97316;">3x P2</span>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 16px;">
+                                <div style="flex: 1;">
+                                    <div style="font-size: 0.68rem; color: var(--text-dim); margin-bottom: 3px;">Story Pts AVG</div>
+                                    <div style="display: flex; align-items: center; gap: 6px;">
+                                        <div style="flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden;">
+                                            <div style="width: 100%; height: 100%; background: var(--yellow-light); border-radius: 2px;"></div>
+                                        </div>
+                                        <span style="font-size: 0.75rem; font-weight: 600; color: var(--yellow-light);">8.0</span>
+                                    </div>
+                                </div>
+                                <div style="flex: 1;">
+                                    <div style="font-size: 0.68rem; color: var(--text-dim); margin-bottom: 3px;">Linked Items</div>
+                                    <div style="display: flex; align-items: center; gap: 6px;">
+                                        <div style="flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden;">
+                                            <div style="width: 100%; height: 100%; background: var(--cyan-light); border-radius: 2px;"></div>
+                                        </div>
+                                        <span style="font-size: 0.75rem; font-weight: 600; color: var(--cyan-light);">22</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- User Authentication -->
+                        <div style="background: var(--bg-card); padding: 16px;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;">
+                                <span style="font-size: 0.85rem; font-weight: 600; color: var(--text);">User Authentication</span>
+                                <span style="font-size: 1.1rem; font-weight: 700; color: var(--red-light);">17.9</span>
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <div style="font-size: 0.68rem; color: var(--text-dim); margin-bottom: 4px;">Bug Priority Distribution</div>
+                                <div style="display: flex; gap: 2px; height: 6px; border-radius: 3px; overflow: hidden;">
+                                    <div style="flex: 1; background: #ef4444;" title="1x P1"></div>
+                                    <div style="flex: 4; background: #f97316;" title="4x P2"></div>
+                                </div>
+                                <div style="display: flex; gap: 8px; margin-top: 4px;">
+                                    <span style="font-size: 0.68rem; color: #ef4444;">1x P1</span>
+                                    <span style="font-size: 0.68rem; color: #f97316;">4x P2</span>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 16px;">
+                                <div style="flex: 1;">
+                                    <div style="font-size: 0.68rem; color: var(--text-dim); margin-bottom: 3px;">Story Pts AVG</div>
+                                    <div style="display: flex; align-items: center; gap: 6px;">
+                                        <div style="flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden;">
+                                            <div style="width: 62%; height: 100%; background: var(--yellow-light); border-radius: 2px;"></div>
+                                        </div>
+                                        <span style="font-size: 0.75rem; font-weight: 600; color: var(--yellow-light);">5.0</span>
+                                    </div>
+                                </div>
+                                <div style="flex: 1;">
+                                    <div style="font-size: 0.68rem; color: var(--text-dim); margin-bottom: 3px;">Linked Items</div>
+                                    <div style="display: flex; align-items: center; gap: 6px;">
+                                        <div style="flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden;">
+                                            <div style="width: 64%; height: 100%; background: var(--cyan-light); border-radius: 2px;"></div>
+                                        </div>
+                                        <span style="font-size: 0.75rem; font-weight: 600; color: var(--cyan-light);">14</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Invoice Generation -->
+                        <div style="background: var(--bg-card); padding: 16px;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;">
+                                <span style="font-size: 0.85rem; font-weight: 600; color: var(--text);">Invoice Generation</span>
+                                <span style="font-size: 1.1rem; font-weight: 700; color: var(--red-light);">17.5</span>
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <div style="font-size: 0.68rem; color: var(--text-dim); margin-bottom: 4px;">Bug Priority Distribution</div>
+                                <div style="display: flex; gap: 2px; height: 6px; border-radius: 3px; overflow: hidden;">
+                                    <div style="flex: 3; background: #f97316;" title="P2"></div>
+                                    <div style="flex: 4; background: #eab308;" title="P3"></div>
+                                </div>
+                                <div style="display: flex; gap: 8px; margin-top: 4px;">
+                                    <span style="font-size: 0.68rem; color: #f97316;">P2</span>
+                                    <span style="font-size: 0.68rem; color: #eab308;">P3</span>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 16px;">
+                                <div style="flex: 1;">
+                                    <div style="font-size: 0.68rem; color: var(--text-dim); margin-bottom: 3px;">Story Pts AVG</div>
+                                    <div style="display: flex; align-items: center; gap: 6px;">
+                                        <div style="flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden;">
+                                            <div style="width: 75%; height: 100%; background: var(--yellow-light); border-radius: 2px;"></div>
+                                        </div>
+                                        <span style="font-size: 0.75rem; font-weight: 600; color: var(--yellow-light);">6.0</span>
+                                    </div>
+                                </div>
+                                <div style="flex: 1;">
+                                    <div style="font-size: 0.68rem; color: var(--text-dim); margin-bottom: 3px;">Linked Items</div>
+                                    <div style="display: flex; align-items: center; gap: 6px;">
+                                        <div style="flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden;">
+                                            <div style="width: 73%; height: 100%; background: var(--cyan-light); border-radius: 2px;"></div>
+                                        </div>
+                                        <span style="font-size: 0.75rem; font-weight: 600; color: var(--cyan-light);">16</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Merchant Dashboard -->
+                        <div style="background: var(--bg-card); padding: 16px;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;">
+                                <span style="font-size: 0.85rem; font-weight: 600; color: var(--text);">Merchant Dashboard</span>
+                                <span style="font-size: 1.1rem; font-weight: 700; color: var(--red-light);">17.5</span>
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <div style="font-size: 0.68rem; color: var(--text-dim); margin-bottom: 4px;">Bug Priority Distribution</div>
+                                <div style="display: flex; gap: 2px; height: 6px; border-radius: 3px; overflow: hidden;">
+                                    <div style="flex: 4; background: #f97316;" title="P2"></div>
+                                    <div style="flex: 5; background: #eab308;" title="P3"></div>
+                                </div>
+                                <div style="display: flex; gap: 8px; margin-top: 4px;">
+                                    <span style="font-size: 0.68rem; color: #f97316;">P2</span>
+                                    <span style="font-size: 0.68rem; color: #eab308;">P3</span>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 16px;">
+                                <div style="flex: 1;">
+                                    <div style="font-size: 0.68rem; color: var(--text-dim); margin-bottom: 3px;">Story Pts AVG</div>
+                                    <div style="display: flex; align-items: center; gap: 6px;">
+                                        <div style="flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden;">
+                                            <div style="width: 62%; height: 100%; background: var(--yellow-light); border-radius: 2px;"></div>
+                                        </div>
+                                        <span style="font-size: 0.75rem; font-weight: 600; color: var(--yellow-light);">5.0</span>
+                                    </div>
+                                </div>
+                                <div style="flex: 1;">
+                                    <div style="font-size: 0.68rem; color: var(--text-dim); margin-bottom: 3px;">Linked Items</div>
+                                    <div style="display: flex; align-items: center; gap: 6px;">
+                                        <div style="flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden;">
+                                            <div style="width: 91%; height: 100%; background: var(--cyan-light); border-radius: 2px;"></div>
+                                        </div>
+                                        <span style="font-size: 0.75rem; font-weight: 600; color: var(--cyan-light);">20</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- HIGH TIER -->
+                <div style="border: 1px solid rgba(234,179,8,0.3); border-radius: 12px; overflow: hidden;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: rgba(234,179,8,0.06); border-bottom: 1px solid rgba(234,179,8,0.2);">
+                        <span style="font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--yellow-light);">High — Run Day 2</span>
+                        <span style="font-size: 0.72rem; color: var(--text-dim);">3 modules</span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--border);">
+
+                        <!-- Webhook Management -->
+                        <div style="background: var(--bg-card); padding: 16px;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;">
+                                <span style="font-size: 0.82rem; font-weight: 600; color: var(--text);">Webhook Mgmt</span>
+                                <span style="font-size: 1rem; font-weight: 700; color: var(--yellow-light);">12.9</span>
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <div style="display: flex; gap: 2px; height: 5px; border-radius: 3px; overflow: hidden;">
+                                    <div style="flex: 3; background: #f97316;"></div>
+                                    <div style="flex: 4; background: #eab308;"></div>
+                                </div>
+                                <div style="display: flex; gap: 6px; margin-top: 3px;">
+                                    <span style="font-size: 0.65rem; color: #f97316;">P2</span>
+                                    <span style="font-size: 0.65rem; color: #eab308;">P3</span>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 12px; font-size: 0.7rem;">
+                                <span style="color: var(--yellow-light);">SP: 4.0</span>
+                                <span style="color: var(--cyan-light);">Links: 10</span>
+                            </div>
+                        </div>
+
+                        <!-- Reporting & Analytics -->
+                        <div style="background: var(--bg-card); padding: 16px;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;">
+                                <span style="font-size: 0.82rem; font-weight: 600; color: var(--text);">Reporting</span>
+                                <span style="font-size: 1rem; font-weight: 700; color: var(--yellow-light);">11.1</span>
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <div style="display: flex; gap: 2px; height: 5px; border-radius: 3px; overflow: hidden;">
+                                    <div style="flex: 6; background: #eab308;"></div>
+                                    <div style="flex: 2; background: #a3a3a3;"></div>
+                                </div>
+                                <div style="display: flex; gap: 6px; margin-top: 3px;">
+                                    <span style="font-size: 0.65rem; color: #eab308;">P3</span>
+                                    <span style="font-size: 0.65rem; color: #a3a3a3;">P4</span>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 12px; font-size: 0.7rem;">
+                                <span style="color: var(--yellow-light);">SP: 3.0</span>
+                                <span style="color: var(--cyan-light);">Links: 12</span>
+                            </div>
+                        </div>
+
+                        <!-- Notification Engine -->
+                        <div style="background: var(--bg-card); padding: 16px;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;">
+                                <span style="font-size: 0.82rem; font-weight: 600; color: var(--text);">Notifications</span>
+                                <span style="font-size: 1rem; font-weight: 700; color: var(--yellow-light);">9.5</span>
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <div style="display: flex; gap: 2px; height: 5px; border-radius: 3px; overflow: hidden;">
+                                    <div style="flex: 5; background: #eab308;"></div>
+                                    <div style="flex: 3; background: #a3a3a3;"></div>
+                                </div>
+                                <div style="display: flex; gap: 6px; margin-top: 3px;">
+                                    <span style="font-size: 0.65rem; color: #eab308;">P3</span>
+                                    <span style="font-size: 0.65rem; color: #a3a3a3;">P4</span>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 12px; font-size: 0.7rem;">
+                                <span style="color: var(--yellow-light);">SP: 3.0</span>
+                                <span style="color: var(--cyan-light);">Links: 8</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- STANDARD TIER -->
+                <div style="border: 1px solid rgba(34,197,94,0.25); border-radius: 12px; overflow: hidden;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: rgba(34,197,94,0.05); border-bottom: 1px solid rgba(34,197,94,0.15);">
+                        <span style="font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--green-light);">Standard — Defer if needed</span>
+                        <span style="font-size: 0.72rem; color: var(--text-dim);">2 modules</span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border);">
+
+                        <!-- User Preferences -->
+                        <div style="background: var(--bg-card); padding: 16px;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;">
+                                <span style="font-size: 0.82rem; font-weight: 600; color: var(--text);">User Preferences</span>
+                                <span style="font-size: 1rem; font-weight: 700; color: var(--green-light);">6.9</span>
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <div style="display: flex; gap: 2px; height: 5px; border-radius: 3px; overflow: hidden;">
+                                    <div style="flex: 5; background: #eab308;"></div>
+                                    <div style="flex: 3; background: #a3a3a3;"></div>
+                                </div>
+                                <div style="display: flex; gap: 6px; margin-top: 3px;">
+                                    <span style="font-size: 0.65rem; color: #eab308;">P3</span>
+                                    <span style="font-size: 0.65rem; color: #a3a3a3;">P4</span>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 12px; font-size: 0.7rem;">
+                                <span style="color: var(--yellow-light);">SP: 2.0</span>
+                                <span style="color: var(--cyan-light);">Links: 6</span>
+                            </div>
+                        </div>
+
+                        <!-- Static Pages -->
+                        <div style="background: var(--bg-card); padding: 16px;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;">
+                                <span style="font-size: 0.82rem; font-weight: 600; color: var(--text);">Static Pages</span>
+                                <span style="font-size: 1rem; font-weight: 700; color: var(--green-light);">4.5</span>
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <div style="display: flex; gap: 2px; height: 5px; border-radius: 3px; overflow: hidden;">
+                                    <div style="flex: 1; background: #a3a3a3;"></div>
+                                </div>
+                                <div style="display: flex; gap: 6px; margin-top: 3px;">
+                                    <span style="font-size: 0.65rem; color: #a3a3a3;">all P4</span>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 12px; font-size: 0.7rem;">
+                                <span style="color: var(--yellow-light);">SP: 1.0</span>
+                                <span style="color: var(--cyan-light);">Links: 4</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Priority Legend -->
+                <div style="display: flex; align-items: center; gap: 16px; padding: 10px 16px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px;">
+                    <span style="font-size: 0.68rem; font-weight: 600; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px;">Priority Colors</span>
+                    <div style="display: flex; align-items: center; gap: 4px;"><div style="width: 10px; height: 10px; border-radius: 2px; background: #ef4444;"></div><span style="font-size: 0.7rem; color: var(--text-muted);">P1 Blocker</span></div>
+                    <div style="display: flex; align-items: center; gap: 4px;"><div style="width: 10px; height: 10px; border-radius: 2px; background: #f97316;"></div><span style="font-size: 0.7rem; color: var(--text-muted);">P2 Critical</span></div>
+                    <div style="display: flex; align-items: center; gap: 4px;"><div style="width: 10px; height: 10px; border-radius: 2px; background: #eab308;"></div><span style="font-size: 0.7rem; color: var(--text-muted);">P3 Major</span></div>
+                    <div style="display: flex; align-items: center; gap: 4px;"><div style="width: 10px; height: 10px; border-radius: 2px; background: #a3a3a3;"></div><span style="font-size: 0.7rem; color: var(--text-muted);">P4 Minor</span></div>
+                </div>
+
+            </div>
+
+            <!-- Detailed Scoring Table -->
+            <div style="margin-top: 20px; padding: 12px 16px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px 8px 0 0;">
+                <span style="font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim);">Detailed Scoring Breakdown</span>
+            </div>
+            <div class="comparison-table-wrapper" style="margin-top: 0;">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Module</th>
+                            <th>Priority ×2</th>
+                            <th>Story Pts</th>
+                            <th>Links ÷2</th>
+                            <th>= Score</th>
+                            <th>Tier</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="fw-name">Payment Processing</td>
+                            <td>6.8 <span style="color: var(--text-dim); font-size: 0.75rem;">← avg 3.4</span></td>
+                            <td>8.0</td>
+                            <td>10.0 <span style="color: var(--text-dim); font-size: 0.75rem;">← 20 eff.</span></td>
+                            <td><strong>24.8</strong></td>
+                            <td><span class="benchmark-tag poor">Critical</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">User Authentication</td>
+                            <td>6.4 <span style="color: var(--text-dim); font-size: 0.75rem;">← avg 3.2</span></td>
+                            <td>5.0</td>
+                            <td>6.5 <span style="color: var(--text-dim); font-size: 0.75rem;">← 13 eff.</span></td>
+                            <td><strong>17.9</strong></td>
+                            <td><span class="benchmark-tag poor">Critical</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Invoice Generation</td>
+                            <td>5.0 <span style="color: var(--text-dim); font-size: 0.75rem;">← avg 2.5</span></td>
+                            <td>6.0</td>
+                            <td>6.5 <span style="color: var(--text-dim); font-size: 0.75rem;">← 13 eff.</span></td>
+                            <td><strong>17.5</strong></td>
+                            <td><span class="benchmark-tag poor">Critical</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Merchant Dashboard</td>
+                            <td>4.0 <span style="color: var(--text-dim); font-size: 0.75rem;">← avg 2.0</span></td>
+                            <td>5.0</td>
+                            <td>8.5 <span style="color: var(--text-dim); font-size: 0.75rem;">← 17 eff.</span></td>
+                            <td><strong>17.5</strong></td>
+                            <td><span class="benchmark-tag poor">Critical</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Webhook Management</td>
+                            <td>4.4 <span style="color: var(--text-dim); font-size: 0.75rem;">← avg 2.2</span></td>
+                            <td>4.0</td>
+                            <td>4.5 <span style="color: var(--text-dim); font-size: 0.75rem;">← 9 eff.</span></td>
+                            <td><strong>12.9</strong></td>
+                            <td><span class="benchmark-tag avg">High</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Reporting &amp; Analytics</td>
+                            <td>3.6 <span style="color: var(--text-dim); font-size: 0.75rem;">← avg 1.8</span></td>
+                            <td>3.0</td>
+                            <td>4.5 <span style="color: var(--text-dim); font-size: 0.75rem;">← 9 eff.</span></td>
+                            <td><strong>11.1</strong></td>
+                            <td><span class="benchmark-tag avg">High</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Notification Engine</td>
+                            <td>3.0 <span style="color: var(--text-dim); font-size: 0.75rem;">← avg 1.5</span></td>
+                            <td>3.0</td>
+                            <td>3.5 <span style="color: var(--text-dim); font-size: 0.75rem;">← 7 eff.</span></td>
+                            <td><strong>9.5</strong></td>
+                            <td><span class="benchmark-tag avg">High</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">User Preferences</td>
+                            <td>2.4 <span style="color: var(--text-dim); font-size: 0.75rem;">← avg 1.2</span></td>
+                            <td>2.0</td>
+                            <td>2.5 <span style="color: var(--text-dim); font-size: 0.75rem;">← 5 eff.</span></td>
+                            <td><strong>6.9</strong></td>
+                            <td><span class="benchmark-tag good">Standard</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Static Pages (Help, FAQ)</td>
+                            <td>2.0 <span style="color: var(--text-dim); font-size: 0.75rem;">← avg 1.0</span></td>
+                            <td>1.0</td>
+                            <td>1.5 <span style="color: var(--text-dim); font-size: 0.75rem;">← 3 eff.</span></td>
+                            <td><strong>4.5</strong></td>
+                            <td><span class="benchmark-tag good">Standard</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="est-example" style="margin-top: 16px;">
+                <h4>Decision: 2-Day Regression Window</h4>
+                <div class="est-calc">
+                    Day 1: Run all <strong style="color: var(--red-light);">Critical</strong> modules (Payment Processing, Authentication, Invoice Generation, Merchant Dashboard)<br>
+                    Day 2: Run all <strong style="color: var(--yellow-light);">High</strong> modules (Webhook Management, Reporting, Notification Engine)<br>
+                    <br>
+                    <strong style="color: var(--green-light);">Standard</strong> modules (User Preferences, Static Pages) are deferred — low risk, low complexity. If time permits on Day 2, run User Preferences as a stretch goal.
+                </div>
+                <div class="est-result">The team covers 87% of risk-weighted regression in 2 days. Payment Processing runs first because it has the highest score AND contains P1 items — the P1 flag independently confirms the formula's ranking. Without this framework, the team was previously running modules alphabetically.</div>
+            </div>
+
+            <!-- WHEN TO USE -->
+            <div style="margin-top: 20px; padding: 16px 20px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 10px;">
+                <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 250px;">
+                        <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--green-light); margin-bottom: 8px;">When to use</div>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">Large regression suites (28+ hours) backed by a tracker with priority, story points, and linked items data. Best applied when you need to decide execution order under time pressure.</p>
+                    </div>
+                    <div style="flex: 1; min-width: 250px;">
+                        <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--red-light); margin-bottom: 8px;">When not to use</div>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">Small suites where everything runs in under a few hours. Also not suitable when tracker data is incomplete or inconsistent — the formula is only as good as its inputs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- QE ESTIMATION APPROACH -->
+        <h2 class="section-title cyan">QE Estimation Approach for New Systems</h2>
+
+        <div class="estimation-section">
+            <h3>Step 1 — Module-Based Estimation (Baseline)</h3>
+            <p class="est-intro">Start from the count of modules or screens. Assign effort bands based on expected complexity and QA depth. When a module spans multiple categories (e.g., a CRUD screen with payment integration), always use the highest applicable band.</p>
+
+            <div class="comparison-table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Module Type</th>
+                            <th>Description</th>
+                            <th>QA Effort Estimate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="fw-name">Simple</td>
+                            <td>Static page, few fields, no logic</td>
+                            <td><span class="highlight">0.5–1 QA day</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Moderate</td>
+                            <td>CRUD screens, form validations, 1–2 integrations</td>
+                            <td><span class="highlight">1.5–2 QA days</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Complex</td>
+                            <td>Dynamic flows, multi-step processes, cross-module logic</td>
+                            <td><span class="highlight">3–4 QA days</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Critical</td>
+                            <td>Auth, payments, core data flow, or high risk</td>
+                            <td><span class="highlight">5–7 QA days</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="margin-top: 16px; padding: 14px 18px; background: rgba(234,179,8,0.06); border: 1px solid var(--yellow-border); border-radius: 10px;">
+                <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;"><strong style="color: var(--yellow-light);">Category overlap rule:</strong> If a module touches multiple bands, classify it by its highest-risk characteristic. A CRUD form that processes payments is Critical, not Moderate. When in doubt, go up — underestimating is more costly than a slight overestimate.</p>
+            </div>
+        </div>
+
+        <div class="estimation-section">
+            <h3>Step 2 — Risk-Weighted Adjustment</h3>
+            <p class="est-intro">Layer a risk multiplier based on documentation clarity, system importance, and team context. Instead of multiplying all factors together (which over-inflates), take the average of all multipliers for a grounded estimate. Use discrete levels to remove false precision debates.</p>
+
+            <div class="comparison-table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Risk Factor</th>
+                            <th>Low (Advantage)</th>
+                            <th>Normal (Baseline)</th>
+                            <th>Elevated</th>
+                            <th>High</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="fw-name">Requirements Clarity</td>
+                            <td><span class="benchmark-tag good">Clear — 1.0</span></td>
+                            <td>Adequate — 1.0</td>
+                            <td><span class="benchmark-tag avg">Gaps exist — 1.15</span></td>
+                            <td><span class="benchmark-tag poor">Unclear / missing — 1.3</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Integration Dependency</td>
+                            <td><span class="benchmark-tag good">None — 1.0</span></td>
+                            <td>Internal only — 1.0</td>
+                            <td><span class="benchmark-tag avg">1–2 external APIs — 1.25</span></td>
+                            <td><span class="benchmark-tag poor">3+ or unstable — 1.5</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Business Criticality</td>
+                            <td><span class="benchmark-tag good">Low impact — 1.0</span></td>
+                            <td>Standard flow — 1.0</td>
+                            <td><span class="benchmark-tag avg">Key user journey — 1.2</span></td>
+                            <td><span class="benchmark-tag poor">Revenue / auth / data — 1.4</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Team Experience</td>
+                            <td><span class="benchmark-tag good">Senior / familiar — 0.85</span></td>
+                            <td>Mixed team — 1.0</td>
+                            <td><span class="benchmark-tag avg">Mostly junior — 1.15</span></td>
+                            <td><span class="benchmark-tag poor">New to domain — 1.3</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Environment Readiness</td>
+                            <td><span class="benchmark-tag good">Stable / existing — 1.0</span></td>
+                            <td>Minor setup — 1.0</td>
+                            <td><span class="benchmark-tag avg">New environment — 1.15</span></td>
+                            <td><span class="benchmark-tag poor">Unknown / from scratch — 1.3</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="est-formula-box" style="margin-top: 20px;">
+                <div class="formula">QA Effort = (Base Days x Final Multiplier) + Rework Buffer (15–25%)</div>
+                <div class="formula-parts">
+                    <div class="formula-part"><span class="fp-dot" style="background: var(--green-light);"></span> Final Multiplier = max( AVG of all factors, highest single factor x 0.8 )</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 16px; padding: 14px 18px; background: rgba(37,99,235,0.06); border: 1px solid var(--blue-border); border-radius: 10px;">
+                <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;"><strong style="color: var(--blue-light);">Why the floor?</strong> Averaging flattens outliers. If you have 4 normal factors and 1 extreme (e.g., Integration at 1.5), the AVG drops to just 1.1 — hiding a real risk. The floor ensures the worst single factor still has meaningful pull: max(1.1, 1.5 x 0.8) = max(1.1, 1.2) = <strong>1.2</strong>.</p>
+            </div>
+
+            <div style="margin-top: 12px; padding: 14px 18px; background: rgba(168,85,247,0.06); border: 1px solid var(--purple-border); border-radius: 10px;">
+                <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;"><strong style="color: var(--purple-light);">Why the rework buffer?</strong> Base estimates cover initial test execution, but real projects have bug-fix-retest cycles. Industry standard is 15–25% on top. Use 15% for stable teams with low defect rates, 25% for new systems or teams with historically high bounce rates.</p>
+            </div>
+
+            <div style="margin-top: 12px; padding: 14px 18px; background: rgba(6,182,212,0.06); border: 1px solid var(--cyan-border); border-radius: 10px;">
+                <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;"><strong style="color: var(--cyan-light);">AI Acceleration Factor</strong> — Teams leveraging AI for test case generation, test data creation, automation scripting, and defect analysis can apply an acceleration factor that reduces base effort. AI also compresses rework cycles (faster retesting, automated regression updates), so the rework buffer drops from 20% to 15%.</p>
+            </div>
+
+            <div class="comparison-table-wrapper" style="margin-top: 12px;">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Module Type</th>
+                            <th>AI Factor</th>
+                            <th>Reduction</th>
+                            <th>Rationale</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="fw-name">Simple</td>
+                            <td><span class="highlight">x 0.50</span></td>
+                            <td>50%</td>
+                            <td>AI generates most test cases and scripts; minimal human review needed</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Moderate</td>
+                            <td><span class="highlight">x 0.65</span></td>
+                            <td>35%</td>
+                            <td>AI handles CRUD test generation, validation scripts, and test data setup</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Complex</td>
+                            <td><span class="highlight">x 0.75</span></td>
+                            <td>25%</td>
+                            <td>AI assists with test design but cross-module logic still requires human judgment</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Critical</td>
+                            <td><span class="highlight">x 0.80</span></td>
+                            <td>20%</td>
+                            <td>Human oversight essential for auth, payments, compliance; AI supports execution</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="est-formula-box" style="margin-top: 12px;">
+                <div class="formula">AI-Assisted QA Effort = (Base Days x AI Factor x Risk Multiplier) x Rework Buffer (15%)</div>
+            </div>
+
+            <div class="est-example">
+                <h4>Worked Example: Single Module Calculation</h4>
+                <div class="est-calc">
+                    Base effort for a Complex screen = 4 QA days<br>
+                    <br>
+                    Requirements clarity: Gaps exist → 1.15<br>
+                    Integration dependency: 1–2 external APIs → 1.25<br>
+                    Business criticality: Key user journey → 1.2<br>
+                    Team experience: Mostly junior → 1.15<br>
+                    Environment readiness: New environment → 1.15<br>
+                    <br>
+                    AVG = (1.15 + 1.25 + 1.2 + 1.15 + 1.15) / 5 = <strong>1.18</strong><br>
+                    Highest single factor = 1.25 → floor = 1.25 x 0.8 = <strong>1.0</strong><br>
+                    Final Multiplier = max(1.18, 1.0) = <strong>1.18</strong><br>
+                    <br>
+                    4 days x 1.18 = 4.72 days<br>
+                    + 20% rework buffer = 4.72 x 1.2 = <strong>5.66 days</strong>
+                </div>
+                <div class="est-result">Round up to 6 QA days — accounting for requirement gaps, external API dependencies, a key user journey, a mostly junior team, a new environment, and a 20% rework buffer for bug-fix-retest cycles.</div>
+            </div>
+
+            <!-- FULL PROJECT EXAMPLE -->
+            <div class="est-example" style="margin-top: 24px;">
+                <h4>Full Project Example: "HealthTrack" Patient Portal — New Build</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">HealthTrack is a new patient portal for a regional hospital network. The product team identified 8 modules. The QA team is a mix of 1 senior and 3 intermediate QEs. Requirements exist but have gaps in the integration layer. Staging environment needs to be provisioned from scratch. The hospital's compliance team requires full audit trails.</p>
+            </div>
+
+            <div class="est-example" style="margin-top: 0; border-top: none; border-radius: 0 0 10px 10px;">
+                <h4>Step 1 — Module Classification</h4>
+            </div>
+
+            <div class="comparison-table-wrapper" style="margin-top: 0;">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Module</th>
+                            <th>Type</th>
+                            <th>Rationale</th>
+                            <th>Base Days</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="fw-name">Patient Login & MFA</td>
+                            <td><span class="benchmark-tag poor">Critical</span></td>
+                            <td>Auth + HIPAA compliance = highest risk band regardless of complexity</td>
+                            <td><span class="highlight">6</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Appointment Scheduling</td>
+                            <td><span class="benchmark-tag poor">Critical</span></td>
+                            <td>Multi-step flow with calendar integration, provider availability API, and payment pre-auth</td>
+                            <td><span class="highlight">5</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Medical Records Viewer</td>
+                            <td><span class="benchmark-tag avg">Complex</span></td>
+                            <td>Pulls from 3 internal APIs, renders PDFs, dynamic filtering — but read-only (no write risk)</td>
+                            <td><span class="highlight">4</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Prescription Refill Request</td>
+                            <td><span class="benchmark-tag avg">Complex</span></td>
+                            <td>Multi-step form with pharmacy API integration, validation rules, and approval workflow</td>
+                            <td><span class="highlight">4</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Billing & Insurance</td>
+                            <td><span class="benchmark-tag poor">Critical</span></td>
+                            <td>Payment processing + insurance verification. Category overlap: CRUD + payments = Critical.</td>
+                            <td><span class="highlight">6</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Messaging (Patient ↔ Provider)</td>
+                            <td><span class="benchmark-tag avg">Complex</span></td>
+                            <td>Real-time messaging with attachments, read receipts, and notification triggers</td>
+                            <td><span class="highlight">3</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Profile & Preferences</td>
+                            <td><span class="benchmark-tag good">Moderate</span></td>
+                            <td>Standard CRUD — name, address, notification preferences, insurance card upload</td>
+                            <td><span class="highlight">2</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Help Center & FAQ</td>
+                            <td><span class="benchmark-tag good">Simple</span></td>
+                            <td>Static content pages with search. No business logic.</td>
+                            <td><span class="highlight">1</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="est-example" style="margin-top: 16px;">
+                <h4>Step 2 — Risk-Weighted Adjustment (Project-Level Factors)</h4>
+                <div class="est-calc">
+                    Requirements clarity: Gaps exist (integration specs incomplete) → <strong>1.15</strong><br>
+                    Integration dependency: 3+ external APIs (EHR, pharmacy, insurance) → <strong>1.5</strong><br>
+                    Business criticality: Revenue + compliance (HIPAA) → <strong>1.4</strong><br>
+                    Team experience: Mixed (1 Sr + 3 Int) → <strong>1.0</strong><br>
+                    Environment readiness: From scratch → <strong>1.3</strong><br>
+                    <br>
+                    AVG = (1.15 + 1.5 + 1.4 + 1.0 + 1.3) / 5 = <strong>1.27</strong><br>
+                    Highest single factor = 1.5 → floor = 1.5 x 0.8 = <strong>1.2</strong><br>
+                    Final Multiplier = max(1.27, 1.2) = <strong>1.27</strong><br>
+                    <br>
+                    <em style="color: var(--text-dim);">Note: without the floor rule, this project would still use 1.27. But if the team were senior (0.85) and everything else stayed the same, AVG would drop to 1.24 while the floor would be 1.2 — close enough that the integration risk still drives the estimate.</em>
+                </div>
+            </div>
+
+            <div class="est-example" style="margin-top: 16px;">
+                <h4>Step 3 — Final Estimate</h4>
+            </div>
+
+            <div class="comparison-table-wrapper" style="margin-top: 0;">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Module</th>
+                            <th>Type</th>
+                            <th>Base Days</th>
+                            <th>Traditional<br><span style="font-weight: 400; font-size: 0.7rem;">x1.27 risk, x1.2 rework</span></th>
+                            <th>AI-Assisted<br><span style="font-weight: 400; font-size: 0.7rem;">AI factor, x1.27 risk, x1.15 rework</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="fw-name">Patient Login & MFA</td>
+                            <td><span class="benchmark-tag poor">Critical</span></td>
+                            <td>6</td>
+                            <td>10 days</td>
+                            <td><strong class="highlight">7 days</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Appointment Scheduling</td>
+                            <td><span class="benchmark-tag poor">Critical</span></td>
+                            <td>5</td>
+                            <td>8 days</td>
+                            <td><strong class="highlight">6 days</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Medical Records Viewer</td>
+                            <td><span class="benchmark-tag avg">Complex</span></td>
+                            <td>4</td>
+                            <td>7 days</td>
+                            <td><strong class="highlight">5 days</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Prescription Refill Request</td>
+                            <td><span class="benchmark-tag avg">Complex</span></td>
+                            <td>4</td>
+                            <td>7 days</td>
+                            <td><strong class="highlight">5 days</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Billing & Insurance</td>
+                            <td><span class="benchmark-tag poor">Critical</span></td>
+                            <td>6</td>
+                            <td>10 days</td>
+                            <td><strong class="highlight">7 days</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Messaging</td>
+                            <td><span class="benchmark-tag avg">Complex</span></td>
+                            <td>3</td>
+                            <td>5 days</td>
+                            <td><strong class="highlight">4 days</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Profile & Preferences</td>
+                            <td><span class="benchmark-tag good">Moderate</span></td>
+                            <td>2</td>
+                            <td>4 days</td>
+                            <td><strong class="highlight">2 days</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-name">Help Center & FAQ</td>
+                            <td><span class="benchmark-tag good">Simple</span></td>
+                            <td>1</td>
+                            <td>2 days</td>
+                            <td><strong class="highlight">1 day</strong></td>
+                        </tr>
+                        <tr style="background: var(--bg-elevated);">
+                            <td class="fw-name" style="color: var(--blue-light);">TOTAL</td>
+                            <td></td>
+                            <td style="color: var(--blue-light); font-weight: 700;">31 days</td>
+                            <td><strong style="color: var(--text-muted);">53 QA days</strong></td>
+                            <td><strong style="color: var(--cyan-light); font-size: 1.05rem;">37 QA days</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="est-example" style="margin-top: 16px;">
+                <h4>What This Tells the PM</h4>
+                <div class="est-calc">
+                    <strong style="color: var(--text-muted);">Traditional approach:</strong><br>
+                    53 QA days across a team of 4 QEs = <strong>~14 working days (~3 weeks)</strong><br>
+                    <br>
+                    <strong style="color: var(--cyan-light);">AI-assisted approach:</strong><br>
+                    37 QA days across a team of 4 QEs = <strong>~10 working days (~2 weeks)</strong><br>
+                    <br>
+                    <span style="color: var(--text-dim);">Breakdown (traditional → AI-assisted):</span><br>
+                    Without risk adjustment: 31 days → 21 days<br>
+                    With risk adjustment only: 39 days → 27 days<br>
+                    With risk + rework buffer: 53 days → <strong>37 days (30% reduction)</strong>
+                </div>
+                <div class="est-result">AI acceleration saves ~1 full week of calendar time for this team. The reduction is most visible in Simple and Moderate modules (35–50% less effort), while Critical modules still require substantial human oversight (20% reduction). The QE lead should present both estimates — the traditional total justifies baseline headcount, while the AI-assisted total shows the efficiency gain the team delivers by leveraging tooling.</div>
+            </div>
+
+            <!-- WHEN TO USE -->
+            <div style="margin-top: 20px; padding: 16px 20px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 10px;">
+                <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 250px;">
+                        <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--green-light); margin-bottom: 8px;">When to use</div>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">New systems or major feature builds where you need to estimate QA effort from scratch. Works best when you can identify and classify modules upfront and have enough context to assess risk factors.</p>
+                    </div>
+                    <div style="flex: 1; min-width: 250px;">
+                        <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--red-light); margin-bottom: 8px;">When not to use</div>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">Existing systems with historical data — use actuals from past sprints instead. Also not suitable for spike work or prototypes where scope is intentionally undefined.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // Tab switching
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+        document.getElementById(`tab-${tabId}`).classList.add('active');
+        window.scrollTo(0, 0);
+    }
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+    });
+</script>
+
+</body>
+</html>

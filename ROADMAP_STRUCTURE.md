@@ -614,7 +614,7 @@
 
 ### Design Patterns Fundamentals
 - Page Object Model
--   Creation of Scripts (Established Framework)
+  - Creation of Scripts (Established Framework)
 - Screen Play Pattern
   - Creation of Scripts (Established Framework)
 - Singleton
@@ -647,20 +647,6 @@
   - Recursive and non-recursive
 - Complex Subqueries 
   - Correlated subqueries, EXISTS, IN vs JOIN
-- Query Optimization 
-  - Execution plans, EXPLAIN/ANALYZE, query tuning
-- Indexing Strategies 
-  - Clustered, non-clustered, composite, when to use
-- Stored Procedures & Functions 
-  - Writing, parameters, output handling
-- Triggers & Events 
-  - Understanding side effects, audit trails
-- Views & Materialized Views 
-  - When to use, performance implications
-- Transactions & Locking 
-  - Isolation levels, deadlocks, concurrency
-- Dynamic SQL 
-  - Building queries programmatically, security considerations
 - Database Testing 
   - Data integrity validation, test data management
 - NoSQL Awareness 

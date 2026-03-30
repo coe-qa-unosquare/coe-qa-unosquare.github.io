@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Roadmaps — QE Center of Excellence</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --bg:           #0d0d0d;
+            --bg-card:      #131313;
+            --bg-hover:     #171717;
+            --border:       #242424;
+            --border-hover: #3a3a3a;
+            --text:         #f0f0f0;
+            --text-muted:   #888888;
+            --text-dim:     #555555;
+            --accent:       #3b7dd8;
+            --accent-dim:   rgba(59, 125, 216, 0.10);
+            --accent-border:rgba(59, 125, 216, 0.30);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Navigation ───────────────────────────────────────── */
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            padding: 0 32px;
+            height: 52px;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+
+        .nav-back:hover {
+            color: var(--text);
+        }
+
+        .nav-back svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* ── Hero ─────────────────────────────────────────────── */
+
+        .hero {
+            padding: 72px 32px 48px;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .hero-eyebrow {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 16px;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.9rem, 4vw, 2.6rem);
+            font-weight: 700;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+            max-width: 520px;
+        }
+
+        /* ── Cards ────────────────────────────────────────────── */
+
+        .cards-container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0 32px 100px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .roadmap-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 36px 32px 32px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            transition: background 0.2s, border-color 0.2s;
+            position: relative;
+        }
+
+        .roadmap-card:hover {
+            background: var(--bg-hover);
+            border-color: var(--border-hover);
+        }
+
+        .card-label {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1.6px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 20px;
+        }
+
+        .roadmap-card h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            color: var(--text);
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .roadmap-card .card-desc {
+            font-size: 0.855rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 28px;
+        }
+
+
+        /* ── CTA ──────────────────────────────────────────────── */
+
+        .card-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--accent);
+            margin-top: auto;
+        }
+
+        .card-cta svg {
+            width: 14px;
+            height: 14px;
+            transition: transform 0.2s;
+        }
+
+        .roadmap-card:hover .card-cta svg {
+            transform: translateX(3px);
+        }
+
+        /* ── Footer ───────────────────────────────────────────── */
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 20px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        footer span {
+            font-size: 11px;
+            letter-spacing: 0.3px;
+            color: var(--text-dim);
+        }
+
+        footer .sep {
+            width: 1px;
+            height: 12px;
+            background: var(--border);
+        }
+
+        /* ── Responsive ───────────────────────────────────────── */
+
+        @media (max-width: 640px) {
+            .hero { padding: 48px 20px 36px; }
+            .cards-container {
+                grid-template-columns: 1fr;
+                padding: 0 20px 72px;
+            }
+            .nav-bar { padding: 0 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="nav-bar">
+    <a href="index.html" class="nav-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+        Back to Main
+    </a>
+</nav>
+
+<div class="hero">
+    <p class="hero-eyebrow">QE Center of Excellence</p>
+    <h1>Career Roadmaps</h1>
+    <p>Structured learning paths from Junior to Senior. Choose your track and explore the skills, tools, and knowledge expected at each level.</p>
+</div>
+
+<div class="cards-container">
+
+    <a href="qe-roadmap.html" class="roadmap-card">
+        <p class="card-label">Track 01</p>
+        <h2>Quality Engineer</h2>
+        <p class="card-desc">Testing strategy, process excellence, and AI-augmented QA. For engineers focused on test design, risk analysis, and quality leadership.</p>
+        <div class="card-cta">
+            View Roadmap
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+        </div>
+    </a>
+
+    <a href="sdet-roadmap.html" class="roadmap-card">
+        <p class="card-label">Track 02</p>
+        <h2>Software Development Engineer in Test</h2>
+        <p class="card-desc">Automation engineering, framework development, and AI-powered testing. For engineers who build test infrastructure, pipelines, and tooling.</p>
+        <div class="card-cta">
+            View Roadmap
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+        </div>
+    </a>
+
+</div>
+
+<footer>
+    <span>QE Center of Excellence</span>
+    <div class="sep"></div>
+    <span>Career Roadmaps</span>
+</footer>
+
+</body>
+</html>

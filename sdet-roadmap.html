@@ -1,0 +1,2395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDET Roadmap — QE Center of Excellence</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            /* Base - Black/Grey/White */
+            --bg: #0a0a0a;
+            --bg-card: #141414;
+            --bg-elevated: #1a1a1a;
+            --border: #2a2a2a;
+            --border-light: #3a3a3a;
+            --text: #ffffff;
+            --text-muted: #a0a0a0;
+            --text-dim: #666666;
+
+            /* Primary Blue (for titles, accents) */
+            --blue: #2563eb;
+            --blue-dim: rgba(37,99,235,0.12);
+            --blue-border: rgba(37,99,235,0.35);
+            --blue-light: #60a5fa;
+
+            /* Junior Level - Green (3 tones) */
+            --green: #22c55e;
+            --green-l1: #16a34a;           /* Level 1 - Main node (darker) */
+            --green-l2: #22c55e;           /* Level 2 - Sub node (medium) */
+            --green-l3: #4ade80;           /* Level 3 - Child node (lighter) */
+            --green-dim: rgba(34,197,94,0.12);
+            --green-dim-l2: rgba(34,197,94,0.18);
+            --green-dim-l3: rgba(74,222,128,0.15);
+            --green-border: rgba(34,197,94,0.5);
+            --green-border-l2: rgba(34,197,94,0.4);
+            --green-border-l3: rgba(74,222,128,0.35);
+            --green-light: #4ade80;
+            --green-text-l2: #86efac;
+            --green-text-l3: #bbf7d0;
+
+            /* Intermediate Level - Yellow/Amber (3 tones) */
+            --yellow: #eab308;
+            --yellow-l1: #ca8a04;          /* Level 1 - Main node (darker amber) */
+            --yellow-l2: #eab308;          /* Level 2 - Sub node (medium) */
+            --yellow-l3: #fde047;          /* Level 3 - Child node (lighter) */
+            --yellow-dim: rgba(234,179,8,0.12);
+            --yellow-dim-l2: rgba(234,179,8,0.18);
+            --yellow-dim-l3: rgba(253,224,71,0.15);
+            --yellow-border: rgba(234,179,8,0.5);
+            --yellow-border-l2: rgba(234,179,8,0.4);
+            --yellow-border-l3: rgba(253,224,71,0.35);
+            --yellow-light: #facc15;
+            --yellow-text-l2: #fef08a;
+            --yellow-text-l3: #fef9c3;
+
+            /* Senior Level - Red (3 tones) */
+            --red: #dc2626;
+            --red-l1: #b91c1c;             /* Level 1 - Main node (darker) */
+            --red-l2: #ef4444;             /* Level 2 - Sub node (medium) */
+            --red-l3: #fca5a5;             /* Level 3 - Child node (lighter) */
+            --red-dim: rgba(220,38,38,0.12);
+            --red-dim-l2: rgba(239,68,68,0.18);
+            --red-dim-l3: rgba(252,165,165,0.15);
+            --red-border: rgba(220,38,38,0.5);
+            --red-border-l2: rgba(239,68,68,0.4);
+            --red-border-l3: rgba(252,165,165,0.35);
+            --red-light: #f87171;
+            --red-text-l2: #fca5a5;
+            --red-text-l3: #fecaca;
+
+            /* Accent colors */
+            --cyan: #06b6d4;
+            --cyan-dim: rgba(6,182,212,0.12);
+            --cyan-border: rgba(6,182,212,0.35);
+            --cyan-light: #67e8f9;
+
+            --grey: #6b7280;
+            --grey-dim: rgba(107,114,128,0.12);
+            --grey-border: rgba(107,114,128,0.35);
+            --grey-light: #9ca3af;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== TAB BAR ===== */
+        .tab-bar {
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 8px;
+            backdrop-filter: blur(12px);
+        }
+
+        .tab-btn {
+            padding: 14px 28px;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dim);
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 0.3px;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-muted);
+            background: var(--bg-elevated);
+        }
+
+        .tab-btn.active {
+            color: var(--text);
+            background: var(--bg-elevated);
+        }
+
+        .tab-btn.active[data-tab="guide"] { box-shadow: inset 0 -2px 0 var(--blue); }
+        .tab-btn.active[data-tab="qe"] { box-shadow: inset 0 -2px 0 var(--blue); }
+        .tab-btn.active[data-tab="sdet"] { box-shadow: inset 0 -2px 0 var(--blue); }
+
+        .tab-content { display: none; animation: fadeIn 0.25s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ===== HERO ===== */
+        .hero {
+            text-align: center;
+            padding: 60px 24px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -60%; left: -30%; width: 160%; height: 180%;
+            background: radial-gradient(ellipse at 30% 20%, rgba(37,99,235,0.06) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 40%, rgba(37,99,235,0.04) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+            position: relative;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 .grad {
+            background: linear-gradient(135deg, #ffffff 0%, var(--blue-light) 50%, var(--blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .sub {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        /* ===== GUIDE CONTAINER ===== */
+        .guide-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px 60px;
+        }
+
+        /* ===== SECTION TITLES ===== */
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 48px 0 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: -0.3px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 22px;
+            border-radius: 2px;
+            background: var(--blue);
+        }
+
+        .section-title.blue::before { background: var(--blue); }
+        .section-title.grey::before { background: var(--grey); }
+        .section-title.green::before { background: var(--green); }
+        .section-title.yellow::before { background: var(--yellow); }
+        .section-title.red::before { background: var(--red); }
+
+        /* ===== PILLARS ===== */
+        .pillars {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .pillar {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 14px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .pillar:hover {
+            border-color: var(--blue-border);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(37,99,235,0.1);
+        }
+
+        .pillar .p-letter {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--blue), var(--blue-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
+        }
+
+        .pillar .p-name {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .pillar .p-desc {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        /* ===== FRAMEWORK COMPARISON TABLE ===== */
+        .comparison-table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+        }
+
+        .comparison-table th {
+            background: var(--bg-elevated);
+            color: var(--text);
+            padding: 16px 20px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comparison-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+            vertical-align: top;
+            line-height: 1.6;
+        }
+
+        .comparison-table tr:last-child td { border-bottom: none; }
+
+        .comparison-table tr:hover td {
+            background: rgba(59, 130, 246, 0.04);
+        }
+
+        .comparison-table .fw-name {
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .comparison-table .highlight {
+            color: var(--blue-light);
+            font-weight: 500;
+        }
+
+        /* ===== MNEMONIC CARDS ===== */
+        .mnemonic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .mnemonic-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            transition: all 0.2s;
+        }
+
+        .mnemonic-card:hover {
+            border-color: var(--border-light);
+            transform: translateY(-2px);
+        }
+
+        .mnemonic-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mnemonic-card .badge {
+            font-size: 0.65rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-race { background: var(--blue-dim); color: var(--blue-light); }
+        .badge-trace { background: var(--green-dim); color: var(--green-light); }
+        .badge-create { background: var(--grey-dim); color: var(--grey-light); }
+        .badge-trice { background: var(--cyan-dim); color: var(--cyan-light); }
+
+        .mnemonic-card .subtitle {
+            font-size: 0.78rem;
+            color: var(--text-dim);
+            margin-bottom: 16px;
+        }
+
+        .mnemonic-card .letter-list {
+            list-style: none;
+        }
+
+        .mnemonic-card .letter-list li {
+            padding: 10px 0;
+            display: flex;
+            gap: 14px;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.92rem;
+        }
+
+        .mnemonic-card .letter-list li:last-child { border-bottom: none; }
+
+        .mnemonic-card .letter {
+            font-weight: 800;
+            font-size: 1.15rem;
+            width: 28px;
+            flex-shrink: 0;
+        }
+
+        .letter-race { color: var(--blue-light); }
+        .letter-trace { color: var(--green-light); }
+        .letter-create { color: var(--grey-light); }
+        .letter-trice { color: var(--cyan-light); }
+
+        .mnemonic-card .letter-desc strong {
+            color: var(--text);
+        }
+
+        .mnemonic-card .letter-desc {
+            color: var(--text-muted);
+        }
+
+        /* ===== TECHNIQUE GRID ===== */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 18px;
+            margin: 24px 0;
+        }
+
+        .tech-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 26px;
+            transition: all 0.2s;
+        }
+
+        .tech-card:hover {
+            border-color: var(--blue-border);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        .tech-card .tc-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px; height: 30px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: var(--blue-dim);
+            color: var(--blue);
+        }
+
+        .tech-card h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .tech-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .tech-card .tc-use {
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        .tech-card .tc-use strong { color: var(--blue-light); }
+
+        /* ===== CONSOLE-LIKE DESIGN ===== */
+        .console-block {
+            margin-top: 14px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
+        }
+
+        .console-section {
+            padding: 14px 16px;
+            position: relative;
+        }
+
+        .console-section + .console-section {
+            border-top: 1px solid #30363d;
+        }
+
+        .console-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .console-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #3fb950;
+            box-shadow: 0 0 6px rgba(63, 185, 80, 0.5);
+        }
+
+        .console-dot.output {
+            background: #58a6ff;
+            box-shadow: 0 0 6px rgba(88, 166, 255, 0.5);
+        }
+
+        .console-label {
+            font-size: 0.68rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #8b949e;
+        }
+
+        .console-label.prompt { color: #3fb950; }
+        .console-label.output { color: #58a6ff; }
+
+        .console-content {
+            font-size: 0.78rem;
+            line-height: 1.7;
+            color: #c9d1d9;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 4px 10px;
+            background: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 5px;
+            color: #8b949e;
+            font-size: 0.65rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+            font-family: inherit;
+        }
+
+        .copy-btn:hover {
+            background: #30363d;
+            color: #c9d1d9;
+        }
+
+        .copy-btn.copied {
+            background: #238636;
+            border-color: #238636;
+            color: #fff;
+        }
+
+        /* ===== COMBO CARDS ===== */
+        .combo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 14px;
+            margin: 20px 0;
+        }
+
+        .combo-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .combo-card .combo-tags {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .combo-card .combo-tags span {
+            font-size: 0.68rem;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .combo-card h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .combo-card p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ===== ANTI-PATTERNS TABLE ===== */
+        .ap-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 14px;
+            overflow: hidden;
+            margin: 24px 0;
+            font-size: 0.92rem;
+            border: 1px solid var(--border);
+        }
+
+        .ap-table th {
+            background: var(--bg-elevated);
+            color: var(--text-muted);
+            padding: 14px 18px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ap-table td {
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .ap-table tr:last-child td { border-bottom: none; }
+
+        .ap-table .bad { color: #f87171; font-weight: 500; }
+        .ap-table .good { color: var(--blue-light); font-weight: 500; }
+
+        /* ===== DIAGRAM STYLES - IMPROVED UI/UX ===== */
+        .diagram-container {
+            padding: 40px 24px 80px;
+            background: linear-gradient(180deg, var(--bg) 0%, rgba(15,23,42,1) 100%);
+        }
+
+        .diagram-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .diagram-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .diagram-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            padding: 18px 28px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 32px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .legend-dot {
+            width: 14px; height: 14px;
+            border-radius: 4px;
+        }
+
+        .diagram-scroll {
+            overflow-x: auto;
+            padding-bottom: 30px;
+            scroll-behavior: smooth;
+        }
+
+        .diagram-scroll::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .diagram-scroll::-webkit-scrollbar-track {
+            background: var(--bg-card);
+            border-radius: 4px;
+        }
+
+        .diagram-scroll::-webkit-scrollbar-thumb {
+            background: var(--border-light);
+            border-radius: 4px;
+        }
+
+        .diagram-scroll::-webkit-scrollbar-thumb:hover {
+            background: var(--blue-border);
+        }
+
+        .diagram-wrapper {
+            min-width: 1400px;
+            padding: 30px 60px 60px;
+            position: relative;
+        }
+
+        .title-node {
+            padding: 20px 40px;
+            border-radius: 14px;
+            font-size: 18px;
+            font-weight: 800;
+            text-align: center;
+            width: 300px;
+            margin: 0 auto 20px;
+            color: #fff;
+            position: relative;
+            z-index: 2;
+            letter-spacing: -0.3px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+
+        .title-qe { background: linear-gradient(135deg, #1e40af, #3b82f6, #60a5fa); }
+        .title-sdet { background: linear-gradient(135deg, #1e40af, #3b82f6, #60a5fa); }
+
+        .level-divider {
+            text-align: center;
+            padding: 16px 0 12px;
+            position: relative;
+        }
+
+        .level-divider span {
+            background: var(--bg);
+            padding: 8px 24px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            z-index: 1;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+        }
+
+        .level-divider::before {
+            content: '';
+            position: absolute;
+            left: 100px;
+            right: 100px;
+            top: 50%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-light), transparent);
+        }
+
+        .row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 12px 0;
+            position: relative;
+            min-height: fit-content;
+        }
+
+        .center-col {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            justify-content: flex-start;
+            flex-shrink: 0;
+            z-index: 2;
+            padding: 0 20px;
+            align-self: flex-start;
+            min-width: 200px;
+            padding-top: 20px;
+        }
+
+        /* When there's only one main node, position it to the left side to avoid overlapping center line */
+        .center-col:has(.main-node:only-child) {
+            justify-content: flex-start;
+        }
+
+        .main-node {
+            padding: 14px 20px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 700;
+            text-align: center;
+            min-width: 160px;
+            max-width: 200px;
+            color: #fff;
+            line-height: 1.4;
+            z-index: 2;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            transition: all 0.2s;
+        }
+
+        .main-node:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+
+        /* Level colors: Green (Junior), Yellow (Intermediate), Red (Senior) */
+        .mn-green { background: linear-gradient(135deg, #15803d, #22c55e); }
+        .mn-yellow { background: linear-gradient(135deg, #a16207, #eab308); }
+        .mn-red { background: linear-gradient(135deg, #b91c1c, #dc2626); }
+
+        .branch {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex-shrink: 0;
+            min-width: 200px;
+            max-width: 400px;
+            justify-content: flex-start;
+        }
+
+        .branch-left {
+            align-items: flex-end;
+            padding-right: 20px;
+        }
+        .branch-right {
+            align-items: flex-start;
+            padding-left: 20px;
+        }
+
+        .sub-node {
+            border-radius: 8px;
+            padding: 7px 14px;
+            font-size: 12px;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: all 0.15s;
+        }
+
+        .sub-node:hover {
+            filter: brightness(1.25);
+            transform: translateX(3px);
+        }
+
+        .branch-left .sub-node:hover {
+            transform: translateX(-3px);
+        }
+
+        /* Level 2 - Sub-nodes (medium tone) */
+        .sn-green { background: var(--green-dim-l2); border: 1px solid var(--green-border-l2); color: var(--green-text-l2); }
+        .sn-yellow { background: var(--yellow-dim-l2); border: 1px solid var(--yellow-border-l2); color: var(--yellow-text-l2); }
+        .sn-red { background: var(--red-dim-l2); border: 1px solid var(--red-border-l2); color: var(--red-text-l2); }
+
+        /* 3-Level Hierarchy: Sub-groups with children */
+        .sub-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            position: relative;
+            margin-bottom: 6px;
+        }
+
+        .branch-left .sub-group {
+            align-items: flex-end;
+        }
+
+        .branch-right .sub-group {
+            align-items: flex-start;
+        }
+
+        .sub-node.parent {
+            font-weight: 700;
+            position: relative;
+            border-width: 2px;
+            z-index: 2;
+        }
+
+        .sub-children {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            padding-top: 8px;
+            position: relative;
+        }
+
+        .branch-left .sub-children {
+            align-items: flex-end;
+            margin-right: 8px;
+            padding-right: 16px;
+            border-right: 2px solid var(--yellow-border);
+        }
+
+        .branch-right .sub-children {
+            align-items: flex-start;
+            margin-left: 8px;
+            padding-left: 16px;
+            border-left: 2px solid var(--yellow-border);
+        }
+
+        /* Color variants for the vertical tree line */
+        .sub-group:has(.cn-green) .sub-children { border-color: var(--green-border); }
+        .sub-group:has(.cn-yellow) .sub-children { border-color: var(--yellow-border); }
+        .sub-group:has(.cn-red) .sub-children { border-color: var(--red-border); }
+
+        .child-node {
+            border-radius: 5px;
+            padding: 5px 12px;
+            font-size: 10px;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: all 0.15s;
+            position: relative;
+            opacity: 0.85;
+        }
+
+        /* Horizontal connector line from vertical line to each child */
+        .branch-right .child-node::before {
+            content: '';
+            position: absolute;
+            left: -16px;
+            top: 50%;
+            width: 14px;
+            height: 2px;
+            transform: translateY(-50%);
+        }
+
+        .branch-left .child-node::before {
+            content: '';
+            position: absolute;
+            right: -16px;
+            top: 50%;
+            width: 14px;
+            height: 2px;
+            transform: translateY(-50%);
+        }
+
+        .child-node:hover {
+            filter: brightness(1.25);
+            opacity: 1;
+        }
+
+        /* Level 3 - Child node colors (lightest tone) with matching connector colors */
+        .cn-green {
+            background: var(--green-dim-l3);
+            border: 1px solid var(--green-border-l3);
+            color: var(--green-text-l3);
+        }
+        .cn-green::before { background: var(--green-border-l3); }
+
+        .cn-yellow {
+            background: var(--yellow-dim-l3);
+            border: 1px solid var(--yellow-border-l3);
+            color: var(--yellow-text-l3);
+        }
+        .cn-yellow::before { background: var(--yellow-border-l3); }
+
+        .cn-red {
+            background: var(--red-dim-l3);
+            border: 1px solid var(--red-border-l3);
+            color: var(--red-text-l3);
+        }
+        .cn-red::before { background: var(--red-border-l3); }
+
+        svg.connectors {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--text-dim);
+            font-size: 0.72rem;
+            border-top: 1px solid var(--border);
+            letter-spacing: 0.5px;
+        }
+
+        footer strong {
+            color: var(--text-muted);
+        }
+
+        /* ===== NEW ROADMAP DESIGN ===== */
+        .roadmap-new {
+            max-width: 910px;
+            margin: 0 auto;
+            position: relative;
+            padding: 0 1.5rem;
+        }
+
+        .roadmap-new::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--text-muted);
+            transform: translateX(-50%);
+        }
+
+        .level-section {
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .level-section .level-header {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            margin-bottom: 0.6rem;
+        }
+
+        .level-section .level-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            background: var(--bg);
+            border: 1px solid var(--green);
+            color: var(--green);
+        }
+
+        .level-section.intermediate .level-badge {
+            border-color: var(--yellow);
+            color: var(--yellow);
+        }
+
+        .level-section.senior .level-badge {
+            border-color: var(--red);
+            color: var(--red);
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.6rem 2.5rem;
+        }
+
+        .module-card {
+            background: var(--bg-card);
+            border-radius: 6px;
+            padding: 0.75rem 1rem;
+            position: relative;
+            border: 1px solid var(--green);
+            transition: all 0.2s;
+        }
+
+        .module-card:hover {
+            border-color: var(--green-light);
+            box-shadow: 0 2px 8px rgba(34, 197, 94, 0.15);
+        }
+
+        .level-section.intermediate .module-card {
+            border-color: var(--yellow);
+        }
+
+        .level-section.intermediate .module-card:hover {
+            border-color: var(--yellow-light);
+            box-shadow: 0 2px 8px rgba(234, 179, 8, 0.15);
+        }
+
+        .level-section.senior .module-card {
+            border-color: var(--red);
+        }
+
+        .level-section.senior .module-card:hover {
+            border-color: var(--red-light);
+            box-shadow: 0 2px 8px rgba(220, 38, 38, 0.15);
+        }
+
+        .module-card.left::after,
+        .module-card.right::after {
+            content: '';
+            position: absolute;
+            top: 1rem;
+            width: 6px;
+            height: 6px;
+            background: var(--green);
+            border-radius: 50%;
+        }
+
+        .module-card.left::before {
+            content: '';
+            position: absolute;
+            right: -1.25rem;
+            top: 1rem;
+            width: 1.25rem;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .module-card.left::after {
+            right: -1.25rem;
+            transform: translate(50%, -50%);
+        }
+
+        .module-card.right::before {
+            content: '';
+            position: absolute;
+            left: -1.25rem;
+            top: 1rem;
+            width: 1.25rem;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .module-card.right::after {
+            left: -1.25rem;
+            transform: translate(-50%, -50%);
+        }
+
+        .level-section.intermediate .module-card.left::after,
+        .level-section.intermediate .module-card.right::after {
+            background: var(--yellow);
+        }
+
+        .level-section.senior .module-card.left::after,
+        .level-section.senior .module-card.right::after {
+            background: var(--red);
+        }
+
+        .module-card .module-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            color: var(--text);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        /* Items: Direct children of module (same style as subtopic-title) */
+        .module-card .items {
+            list-style: none;
+            margin-top: 0.5rem;
+        }
+
+        .module-card .items > li {
+            padding: 0.25rem 0.5rem;
+            margin: 0.2rem 0;
+            color: var(--text);
+            font-size: 0.82rem;
+            font-weight: 500;
+            border-left: 3px solid var(--green);
+            background: rgba(34,197,94,0.05);
+        }
+
+        .level-section.intermediate .module-card .items > li {
+            border-left-color: var(--yellow);
+            background: rgba(234,179,8,0.05);
+        }
+
+        .level-section.senior .module-card .items > li {
+            border-left-color: var(--red);
+            background: rgba(220,38,38,0.05);
+        }
+
+        /* Subtopic: Named group within module (same style as items) */
+        .module-card .subtopic {
+            margin-top: 0.5rem;
+        }
+
+        .module-card .subtopic-title {
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 0.25rem 0.5rem;
+            display: block;
+            color: var(--text);
+            border-left: 3px solid var(--green);
+            background: rgba(34,197,94,0.05);
+        }
+
+        .level-section.intermediate .module-card .subtopic-title {
+            border-left-color: var(--yellow);
+            background: rgba(234,179,8,0.05);
+        }
+
+        .level-section.senior .module-card .subtopic-title {
+            border-left-color: var(--red);
+            background: rgba(220,38,38,0.05);
+        }
+
+        /* Subtopic children: Items under a subtopic */
+        .module-card .subtopic-children {
+            list-style: none;
+            margin-left: 0.75rem;
+            margin-bottom: 0.3rem;
+            padding-left: 0.75rem;
+            border-left: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .module-card .subtopic-children li {
+            padding: 0.15rem 0;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+
+        .module-card .subtopic-children li::before {
+            content: '–';
+            margin-right: 0.4rem;
+            color: rgba(34,197,94,0.5);
+        }
+
+        .level-section.intermediate .module-card .subtopic-children li::before {
+            color: rgba(234,179,8,0.5);
+        }
+
+        .level-section.senior .module-card .subtopic-children li::before {
+            color: rgba(220,38,38,0.5);
+        }
+
+        /* Nested subtopic group (for 3-level hierarchy) */
+        .module-card .subtopic-group {
+            margin-left: 1rem;
+            padding-left: 0.5rem;
+            border-left: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 0.3rem;
+        }
+
+        .module-card .subtopic-group .subtopic {
+            margin-top: 0.3rem;
+        }
+
+        .module-card .subtopic-group .subtopic-title {
+            font-size: 0.78rem;
+            padding: 0.2rem 0.4rem;
+        }
+
+        .module-card .subtopic-group .subtopic-children {
+            margin-left: 0.5rem;
+            padding-left: 0.5rem;
+        }
+
+        .module-card .subtopic-group .subtopic-children li {
+            font-size: 0.72rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .pillars { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.6rem; }
+            .pillars { grid-template-columns: repeat(2, 1fr); }
+            .tab-btn { padding: 12px 16px; font-size: 12px; }
+            .mnemonic-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 500px) {
+            .pillars { grid-template-columns: 1fr; }
+        }
+
+        /* ===== NAV BAR ===== */
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 8px 24px;
+            backdrop-filter: blur(12px);
+        }
+
+        .nav-back {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-back:hover {
+            color: var(--text);
+            border-color: var(--blue-border);
+            background: var(--blue-dim);
+        }
+
+        .nav-back svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .nav-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.3px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="nav-bar">
+    <a href="roadmaps.html" class="nav-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+        Back to Roadmaps
+    </a>
+    <span class="nav-title">SDET Roadmap</span>
+    <div style="width: 160px;"></div>
+</div>
+
+    <div class="diagram-container">
+        <div class="diagram-header">
+            <h2 style="color: var(--blue-light);">Software Development Engineer in Test - Roadmap</h2>
+            <p>Career roadmap for automation engineering, framework development, and AI-powered testing</p>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item"><div class="legend-dot" style="background:var(--green);"></div> Junior</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--yellow);"></div> Intermediate 1-4</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--red);"></div> Senior 1-2</div>
+        </div>
+
+        <!-- NEW SDET ROADMAP DESIGN -->
+        <div class="roadmap-new sdet-roadmap">
+            <!-- JUNIOR LEVEL -->
+            <div class="level-section junior">
+                <div class="level-header">
+                    <div class="level-badge">Junior</div>
+                </div>
+                <div class="modules-grid">
+                    <!-- Front-end Automation Fundamentals -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Front-end Automation Fundamentals</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Framework Awareness</div>
+                            <ul class="subtopic-children">
+                                <li>Understand Selenium vs Playwright differences</li>
+                                <li>Set up and run first automated test in both</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Handling Web Elements</div>
+                            <ul class="subtopic-children">
+                                <li>Locate using id, name, css, xpath</li>
+                                <li>Interact with inputs, buttons, dropdowns, alerts</li>
+                                <li>Extract/validate text, attributes, visibility</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Synchronization</div>
+                            <ul class="subtopic-children">
+                                <li>Why timing issues cause failures</li>
+                                <li>Apply explicit waits for dynamic elements</li>
+                                <li>Replace hardcoded sleeps with wait strategies</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Exceptions and Debugging</div>
+                            <ul class="subtopic-children">
+                                <li>Handle NoSuchElement, StaleElement, Timeout</li>
+                                <li>Read stack traces, use DevTools</li>
+                                <li>Capture screenshots on failure</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Assertions</div>
+                            <ul class="subtopic-children">
+                                <li>Assert presence, text, attributes, navigation</li>
+                                <li>Write meaningful assertion messages</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Script Organization</div>
+                            <ul class="subtopic-children">
+                                <li>Separate locators, actions, assertions</li>
+                                <li>Apply basic POM structure</li>
+                                <li>Write reusable methods</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Programming Fundamentals -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Programming Fundamentals</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">OOP Basics</div>
+                            <ul class="subtopic-children">
+                                <li>Create classes/objects for test components</li>
+                                <li>Use constructors to initialize test objects</li>
+                                <li>Apply access modifiers to protect members</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Inheritance and Polymorphism</div>
+                            <ul class="subtopic-children">
+                                <li>Extend base class to share common behavior</li>
+                                <li>Override methods per page/component</li>
+                                <li>Abstract classes vs interfaces</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Error Handling</div>
+                            <ul class="subtopic-children">
+                                <li>Try/catch/finally for graceful failures</li>
+                                <li>Throw meaningful exceptions</li>
+                                <li>Expected vs unexpected exceptions</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Data Structures</div>
+                            <ul class="subtopic-children">
+                                <li>Lists and arrays for test data collections</li>
+                                <li>Maps for key-value configurations</li>
+                                <li>Choose right structure for the task</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Working with Libraries and Packages</div>
+                            <ul class="subtopic-children">
+                                <li>Manage dependencies (npm, Maven, NuGet, pip)</li>
+                                <li>Import and use external libraries</li>
+                                <li>Understand versioning in shared projects</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Code Organization</div>
+                            <ul class="subtopic-children">
+                                <li>Structure into logical folders/modules</li>
+                                <li>Write readable, self-documenting code</li>
+                                <li>Break logic into reusable helper methods</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- API Automation Basics -->
+                    <div class="module-card left">
+                        <h3 class="module-title">API Automation Basics</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Bridge: Postman to Code</div>
+                            <ul class="subtopic-children">
+                                <li>Reproduce Postman request in code</li>
+                                <li>Read/navigate JSON response</li>
+                                <li>Print/filter response fields</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Writing Your First API Test</div>
+                            <ul class="subtopic-children">
+                                <li>GET request &amp; assert status</li>
+                                <li>POST request with JSON body</li>
+                                <li>Validate response field</li>
+                                <li>Chain two requests</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Making Tests Reusable</div>
+                            <ul class="subtopic-children">
+                                <li>Extract base URL to config</li>
+                                <li>Reuse headers across tests</li>
+                                <li>Read body from JSON file</li>
+                                <li>Read data from CSV file</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Working Without a Backend</div>
+                            <ul class="subtopic-children">
+                                <li>Set up Postman mock server</li>
+                                <li>Write tests against mock</li>
+                                <li>Simulate error responses</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- SQL Fundamentals -->
+                    <div class="module-card right">
+                        <h3 class="module-title">SQL Fundamentals</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">DDL &amp; Schema Understanding</div>
+                            <ul class="subtopic-children">
+                                <li>CREATE, ALTER, DROP</li>
+                                <li>Understanding table design</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">All JOIN Types</div>
+                            <ul class="subtopic-children">
+                                <li>INNER, LEFT, RIGHT, FULL OUTER</li>
+                                <li>CROSS, SELF</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Complex WHERE Clauses</div>
+                            <ul class="subtopic-children">
+                                <li>Compound conditions</li>
+                                <li>Subqueries in WHERE</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Aggregate Functions &amp; GROUP BY</div>
+                            <ul class="subtopic-children">
+                                <li>COUNT, SUM, AVG with grouping</li>
+                                <li>HAVING clause</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Database Connectivity from Code</div>
+                            <ul class="subtopic-children">
+                                <li>JDBC, ADO.NET, database drivers</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Parameterized Queries</div>
+                            <ul class="subtopic-children">
+                                <li>Preventing SQL injection</li>
+                                <li>Prepared statements</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Transaction Basics</div>
+                            <ul class="subtopic-children">
+                                <li>BEGIN, COMMIT, ROLLBACK from code</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Result Set Handling</div>
+                            <ul class="subtopic-children">
+                                <li>Mapping query results to objects</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Database Schema Navigation</div>
+                            <ul class="subtopic-children">
+                                <li>Understanding ERDs</li>
+                                <li>Foreign keys, relationships</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Indexes Awareness</div>
+                            <ul class="subtopic-children">
+                                <li>What they are, why they matter</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Code Versioning Fundamentals -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Code Versioning Fundamentals</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Version Control Fundamentals</div>
+                            <ul class="subtopic-children">
+                                <li>Why version control matters</li>
+                                <li>Centralized vs distributed</li>
+                                <li>Clone, add, commit, push, pull</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">GIT Basics</div>
+                            <ul class="subtopic-children">
+                                <li>Set up GIT &amp; connect remote</li>
+                                <li>Track and stage changes</li>
+                                <li>Meaningful commit messages</li>
+                                <li>git log and git diff</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Branching and Merging</div>
+                            <ul class="subtopic-children">
+                                <li>Create/switch feature branches</li>
+                                <li>Merge &amp; resolve conflicts</li>
+                                <li>Merge vs rebase concepts</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Collaboration Basics</div>
+                            <ul class="subtopic-children">
+                                <li>Fork and clone repos</li>
+                                <li>Open pull requests</li>
+                                <li>Apply code review feedback</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- CI / CD Fundamentals -->
+                    <div class="module-card right">
+                        <h3 class="module-title">CI / CD Fundamentals</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Core Concepts</div>
+                            <ul class="subtopic-children">
+                                <li>CI vs CD (delivery vs deployment)</li>
+                                <li>Where automation fits in pipeline</li>
+                                <li>Read basic YAML pipeline files</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Working with Pipelines</div>
+                            <ul class="subtopic-children">
+                                <li>Trigger pipelines manually/push</li>
+                                <li>Read logs to identify failures</li>
+                                <li>Pipeline vs test failure</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Running Tests in CI</div>
+                            <ul class="subtopic-children">
+                                <li>Configure job for test suite</li>
+                                <li>Environment variables</li>
+                                <li>Publish test reports</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- AI for Developers -->
+                    <div class="module-card left">
+                        <h3 class="module-title">AI for Developers</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">What is AI</div>
+                            <ul class="subtopic-children">
+                                <li>ML vs Deep Learning</li>
+                                <li>LLMs &amp; Code Generation</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">AI Coding Assistants</div>
+                            <ul class="subtopic-children">
+                                <li>GitHub Copilot Setup</li>
+                                <li>VS Code AI Extensions</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">AI Safety</div>
+                            <ul class="subtopic-children">
+                                <li>Reviewing AI-Generated Code</li>
+                                <li>Security &amp; License Concerns</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Prompt Engineering Basics -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Prompt Engineering Basics</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Writing Prompts for Code</div>
+                            <ul class="subtopic-children">
+                                <li>Describing needs</li>
+                                <li>Specifying language/framework</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Basic Patterns</div>
+                            <ul class="subtopic-children">
+                                <li>"Write a function that..."</li>
+                                <li>"Explain/Fix this code..."</li>
+                            </ul>
+                        </div>
+                        <ul class="items">
+                            <li>Learning from AI Suggestions</li>
+                        </ul>
+                    </div>
+
+                    <!-- Context Engineering Basics -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Context Engineering Basics</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Code Context Fundamentals</div>
+                            <ul class="subtopic-children">
+                                <li>What Context AI Needs</li>
+                                <li>File Structure Awareness</li>
+                                <li>Dependency Information</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Providing Code Context</div>
+                            <ul class="subtopic-children">
+                                <li>Sharing Relevant Files</li>
+                                <li>Explaining Architecture</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="module-card right" style="visibility: hidden;"></div>
+                </div>
+            </div>
+
+            <!-- SDET INTERMEDIATE LEVEL -->
+            <div class="level-section intermediate">
+                <div class="level-header">
+                    <div class="level-badge">Intermediate 1-4</div>
+                </div>
+                <div class="modules-grid">
+                    <!-- Design Patterns Fundamentals -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Design Patterns Fundamentals</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Page Object Model</div>
+                            <ul class="subtopic-children">
+                                <li>Creation of Scripts (Established Framework)</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Screen Play Pattern</div>
+                            <ul class="subtopic-children">
+                                <li>Creation of Scripts (Established Framework)</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Singleton</div>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Page Factory</div>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Testing Approaches</div>
+                            <ul class="subtopic-children">
+                                <li>BDD</li>
+                                <li>TDD</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Testing Frameworks Implementation</div>
+                            <ul class="subtopic-children">
+                                <li>TestNG - JUnit</li>
+                                <li>NUnit - MsTest - Mocha</li>
+                                <li>Cucumber / Specflow</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Front-end Automation Advanced -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Front-end Automation Advanced</h3>
+                        <ul class="items">
+                            <li>Dynamic Xpath Strategies</li>
+                            <li>Chrome DevTools Protocol</li>
+                            <li>Waits/Retry Management</li>
+                            <li>Improved Debugging</li>
+                        </ul>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Advanced Web Elements</div>
+                            <ul class="subtopic-children">
+                                <li>Shadow DOM / iFrames</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Multi-Framework Exposure</div>
+                            <ul class="subtopic-children">
+                                <li>Selenium / Playwright / Cypress</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- SQL Intermediate -->
+                    <div class="module-card left">
+                        <h3 class="module-title">SQL Intermediate</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Window Functions</div>
+                            <ul class="subtopic-children">
+                                <li>ROW_NUMBER, RANK, DENSE_RANK, LEAD, LAG, PARTITION BY</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Common Table Expressions (CTEs)</div>
+                            <ul class="subtopic-children">
+                                <li>Recursive and non-recursive</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Complex Subqueries</div>
+                            <ul class="subtopic-children">
+                                <li>Correlated subqueries, EXISTS, IN vs JOIN</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Database Testing</div>
+                            <ul class="subtopic-children">
+                                <li>Data integrity validation, test data management</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">NoSQL Awareness</div>
+                            <ul class="subtopic-children">
+                                <li>When relational vs document/key-value stores</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- API Automation Intermediate -->
+                    <div class="module-card right">
+                        <h3 class="module-title">API Automation Intermediate</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Serialization / Deserialization</div>
+                            <ul class="subtopic-children">
+                                <li>Map JSON to model objects</li>
+                                <li>Handle nested arrays</li>
+                                <li>Validate deserialized fields</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Data-Driven &amp; Auth</div>
+                            <ul class="subtopic-children">
+                                <li>Parameterize from JSON/CSV</li>
+                                <li>Token retrieval &amp; refresh</li>
+                                <li>Role-based access testing</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Non-Functional Testing</div>
+                            <ul class="subtopic-children">
+                                <li>Performance &amp; response times</li>
+                                <li>Stress &amp; load testing</li>
+                                <li>Concurrent request validation</li>
+                            </ul>
+                        </div>
+                        <ul class="items">
+                            <li>JSON Schema Validation</li>
+                            <li>API Test Organization</li>
+                            <li>CI/CD Pipeline Integration</li>
+                        </ul>
+                    </div>
+
+                    <!-- Mobile Automation Intermediate -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Mobile Automation Intermediate</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Environment Setup</div>
+                            <ul class="subtopic-children">
+                                <li>Configure Appium server</li>
+                                <li>USB debugging &amp; emulators</li>
+                                <li>ADB commands</li>
+                                <li>Desired capabilities</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Locators &amp; Gestures</div>
+                            <ul class="subtopic-children">
+                                <li>Appium Inspector</li>
+                                <li>resource-id, accessibility-id</li>
+                                <li>Tap, swipe, pinch, zoom</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Mobile-Specific Scenarios</div>
+                            <ul class="subtopic-children">
+                                <li>Interrupts (calls, SMS)</li>
+                                <li>Network conditions</li>
+                                <li>Native/webview contexts</li>
+                            </ul>
+                        </div>
+                        <ul class="items">
+                            <li>Page Object Model for Mobile</li>
+                            <li>Screenshot on Failure</li>
+                        </ul>
+                    </div>
+
+                    <!-- Code Versioning Intermediate -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Code Versioning Intermediate</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Git Workflows</div>
+                            <ul class="subtopic-children">
+                                <li>Gitflow, trunk-based</li>
+                                <li>Branching conventions</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">History Management</div>
+                            <ul class="subtopic-children">
+                                <li>git revert, reset, reflog</li>
+                                <li>Cherry-picking commits</li>
+                                <li>Squashing &amp; rebase</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">PR &amp; Code Review</div>
+                            <ul class="subtopic-children">
+                                <li>Structure reviewable PRs</li>
+                                <li>Conflict resolution</li>
+                            </ul>
+                        </div>
+                        <ul class="items">
+                            <li>Tagging and Releases</li>
+                        </ul>
+                    </div>
+
+                    <!-- AI-Augmented Development -->
+                    <div class="module-card left">
+                        <h3 class="module-title">AI-Augmented Development</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Advanced AI Tools</div>
+                            <ul class="subtopic-children">
+                                <li>Copilot Advanced Features</li>
+                                <li>Claude Code / Cursor IDE</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">AI for Test Automation</div>
+                            <ul class="subtopic-children">
+                                <li>Generating Test Scripts</li>
+                                <li>Creating Page Objects</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">AI-Assisted Debugging</div>
+                            <ul class="subtopic-children">
+                                <li>Error Analysis</li>
+                                <li>Log Interpretation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Prompt Engineering Intermediate -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Prompt Engineering Intermediate</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Code Generation Prompts</div>
+                            <ul class="subtopic-children">
+                                <li>Framework-Specific Prompts</li>
+                                <li>Test Pattern / Refactoring</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Prompt Techniques</div>
+                            <ul class="subtopic-children">
+                                <li>Few-Shot with Examples</li>
+                                <li>Chain of Thought</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">SDET-Specific Patterns</div>
+                            <ul class="subtopic-children">
+                                <li>Test Framework Setup</li>
+                                <li>API/UI Automation Prompts</li>
+                                <li>CI/CD Configuration</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Context Engineering Intermediate -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Context Engineering Intermediate</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Repository-Aware Prompting</div>
+                            <ul class="subtopic-children">
+                                <li>Project Structure Context</li>
+                                <li>Existing Code Patterns</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Multi-File Context</div>
+                            <ul class="subtopic-children">
+                                <li>Related File References</li>
+                                <li>Test-Code Relationships</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Documentation as Context</div>
+                            <ul class="subtopic-children">
+                                <li>API Specs / Requirements</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="module-card right" style="visibility: hidden;"></div>
+                </div>
+            </div>
+
+            <!-- SDET SENIOR LEVEL -->
+            <div class="level-section senior">
+                <div class="level-header">
+                    <div class="level-badge">Senior 1-2</div>
+                </div>
+                <div class="modules-grid">
+                    <!-- Programming Advanced / Best Practices -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Programming Advanced / Best Practices</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Data Structures and Algorithms</div>
+                            <ul class="subtopic-children">
+                                <li>Choose the right structure for test data management</li>
+                                <li>Optimize framework code using efficient algorithms</li>
+                                <li>Identify and resolve performance bottlenecks</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Design Patterns</div>
+                            <ul class="subtopic-children">
+                                <li>SOLID — apply across page objects, helpers, layers</li>
+                                <li>Behavioral — Strategy, Observer, Command</li>
+                                <li>Structural — Decorator, Adapter, Facade</li>
+                                <li>Creational — Factory, Builder, Singleton</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Interfaces and Abstract Classes</div>
+                            <ul class="subtopic-children">
+                                <li>Define contracts between framework layers</li>
+                                <li>Decouple test logic from implementation</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Functional Programming</div>
+                            <ul class="subtopic-children">
+                                <li>Lambdas and streams for test data</li>
+                                <li>Immutability for parallel run safety</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Clean Code Principles</div>
+                            <ul class="subtopic-children">
+                                <li>Self-documenting code, consistent naming</li>
+                                <li>Refactor into single-purpose functions</li>
+                                <li>Lead maintainability-focused code reviews</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Test Driven Development</div>
+                            <ul class="subtopic-children">
+                                <li>Write failing tests before implementing helpers</li>
+                                <li>Apply TDD to framework utilities</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Automation Design Pattern Development -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Automation Design Pattern Development</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Framework Development</div>
+                            <ul class="subtopic-children">
+                                <li>Design scalable architecture across projects</li>
+                                <li>Separate layers (drivers, pages, tests, utils)</li>
+                                <li>Build onboarding docs and contribution guides</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">POM / Page Factory</div>
+                            <ul class="subtopic-children">
+                                <li>Implement POM with inheritance for shared components</li>
+                                <li>Page Factory for lazy element loading</li>
+                                <li>Manage complex page hierarchies</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Screenplay Pattern / BDD</div>
+                            <ul class="subtopic-children">
+                                <li>Implement actor, task, interaction layers</li>
+                                <li>Integrate Screenplay with Cucumber</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Design Patterns in Frameworks</div>
+                            <ul class="subtopic-children">
+                                <li>Singleton — driver and config management</li>
+                                <li>Factory — dynamic driver/browser instances</li>
+                                <li>Builder — fluent test data construction</li>
+                                <li>Strategy — swap execution strategies</li>
+                                <li>Observer — event-based reporting/logging</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Parallel Execution</div>
+                            <ul class="subtopic-children">
+                                <li>Thread-safe page objects and utilities</li>
+                                <li>Test data isolation across threads</li>
+                                <li>Optimize suite distribution for fast feedback</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Framework Governance</div>
+                            <ul class="subtopic-children">
+                                <li>Define coding standards, enforce via linting</li>
+                                <li>Versioned releases with changelogs</li>
+                                <li>Lead framework adoption across teams</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- GIT Advanced -->
+                    <div class="module-card left">
+                        <h3 class="module-title">GIT Advanced</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Repository Architecture</div>
+                            <ul class="subtopic-children">
+                                <li>Structure a mono-repo for multiple automation frameworks</li>
+                                <li>Manage sub-modules for shared test libraries</li>
+                                <li>Define and enforce branching strategies across teams</li>
+                                <li>Set up branch protection rules and required reviewers</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Advanced History Management</div>
+                            <ul class="subtopic-children">
+                                <li>Rewrite history across multiple commits with interactive rebase</li>
+                                <li>Split a large commit into smaller logical units</li>
+                                <li>Use git bisect to identify which commit introduced a bug</li>
+                                <li>Audit and clean up stale branches at scale</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Automation Framework Versioning</div>
+                            <ul class="subtopic-children">
+                                <li>Version and publish shared automation libraries</li>
+                                <li>Manage dependency updates across multiple test projects</li>
+                                <li>Maintain changelogs aligned to app release versions</li>
+                                <li>Use semantic versioning for framework releases</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Git Hooks and Automation</div>
+                            <ul class="subtopic-children">
+                                <li>Enforce code style and linting on pre-commit</li>
+                                <li>Run smoke tests before push with pre-push hooks</li>
+                                <li>Automate ticket references and commit message validation</li>
+                                <li>Share hooks across the team using a hooks manager</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Governance and Best Practices</div>
+                            <ul class="subtopic-children">
+                                <li>Define and document GIT conventions for QE/SDET teams</li>
+                                <li>Conduct GIT training and onboarding for new team members</li>
+                                <li>Audit repository health (branch count, stale PRs, commit quality)</li>
+                                <li>Lead code review culture within the automation team</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- CI/CD Advanced Topics -->
+                    <div class="module-card right">
+                        <h3 class="module-title">CI/CD Advanced Topics</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">YAML and Pipeline as Code</div>
+                            <ul class="subtopic-children">
+                                <li>Write and maintain complex multi-stage pipeline definitions</li>
+                                <li>Use variables, conditions and templates to avoid duplication</li>
+                                <li>Parameterize pipelines to support multiple environments</li>
+                                <li>Version control pipelines alongside automation code</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Docker in CI/CD</div>
+                            <ul class="subtopic-children">
+                                <li>Build and maintain custom Docker images for test execution</li>
+                                <li>Run test suites inside containers for environment consistency</li>
+                                <li>Optimize image size and layer caching for faster builds</li>
+                                <li>Use Docker Compose to spin up app and dependencies locally</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Multi-Stage Pipelines</div>
+                            <ul class="subtopic-children">
+                                <li>Design stages for build, test, report and deploy</li>
+                                <li>Run smoke, regression and API suites in parallel stages</li>
+                                <li>Configure stage dependencies and failure conditions</li>
+                                <li>Trigger specific test suites based on changed file paths</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Artifact Management</div>
+                            <ul class="subtopic-children">
+                                <li>Publish and version test reports as pipeline artifacts</li>
+                                <li>Share build artifacts between pipeline stages</li>
+                                <li>Manage and publish shared automation libraries</li>
+                                <li>Archive and retrieve historical test results</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Infrastructure as Code</div>
+                            <ul class="subtopic-children">
+                                <li>Provision test environments using IaC tools</li>
+                                <li>Tear down and recreate environments on demand</li>
+                                <li>Manage environment variables and secrets securely</li>
+                                <li>Validate environment health before test execution</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Pipeline Optimization and Governance</div>
+                            <ul class="subtopic-children">
+                                <li>Identify and reduce bottlenecks in test execution time</li>
+                                <li>Configure retry strategies for flaky tests in pipeline</li>
+                                <li>Monitor pipeline health, failure trends and execution time</li>
+                                <li>Define and document CI/CD standards for QE/SDET teams</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- API Automation Advanced -->
+                    <div class="module-card left">
+                        <h3 class="module-title">API Automation Advanced</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Contract Testing</div>
+                            <ul class="subtopic-children">
+                                <li>Consumer-driven contracts (Pact)</li>
+                                <li>Detect breaking changes</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Security &amp; Performance</div>
+                            <ul class="subtopic-children">
+                                <li>OWASP top 10 automation</li>
+                                <li>SQL injection/XSS testing</li>
+                                <li>SLA assertions</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Framework Design</div>
+                            <ul class="subtopic-children">
+                                <li>Reusable API framework</li>
+                                <li>Shared clients/interceptors</li>
+                            </ul>
+                        </div>
+                        <ul class="items">
+                            <li>API Mocking at Scale</li>
+                            <li>Observability &amp; Debugging</li>
+                        </ul>
+                    </div>
+
+                    <!-- Mobile Automation Advanced -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Mobile Automation Advanced</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Parallel &amp; Multi-App</div>
+                            <ul class="subtopic-children">
+                                <li>Parallel device execution</li>
+                                <li>Multiple app contexts</li>
+                                <li>Test isolation</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Cloud Device Farms</div>
+                            <ul class="subtopic-children">
+                                <li>SauceLabs / BrowserStack</li>
+                                <li>AWS Device Farm</li>
+                                <li>Cloud test analysis</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Performance &amp; Stability</div>
+                            <ul class="subtopic-children">
+                                <li>Memory/CPU monitoring</li>
+                                <li>App launch time metrics</li>
+                                <li>Flaky test strategies</li>
+                            </ul>
+                        </div>
+                        <ul class="items">
+                            <li>Device Virtualization</li>
+                            <li>CI/CD Integration</li>
+                        </ul>
+                    </div>
+
+                    <!-- AI Architecture -->
+                    <div class="module-card left">
+                        <h3 class="module-title">AI Architecture</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">LLM Integration</div>
+                            <ul class="subtopic-children">
+                                <li>OpenAI / Anthropic APIs</li>
+                                <li>Azure AI / AWS Bedrock</li>
+                                <li>Self-Hosted (Ollama)</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">AI in Test Infrastructure</div>
+                            <ul class="subtopic-children">
+                                <li>AI-Powered Test Selection</li>
+                                <li>Intelligent Prioritization</li>
+                                <li>Self-Healing Locators</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Building AI Agents</div>
+                            <ul class="subtopic-children">
+                                <li>Autonomous Test Agents</li>
+                                <li>Multi-Agent Orchestration</li>
+                                <li>LangChain, etc.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Prompt Engineering Advanced -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Prompt Engineering Advanced</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Complex Automation Prompts</div>
+                            <ul class="subtopic-children">
+                                <li>Generate framework scaffolding from specs</li>
+                                <li>Migrate test suites between frameworks</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Meta Prompting</div>
+                            <ul class="subtopic-children">
+                                <li>Prompts that generate/improve other prompts</li>
+                                <li>Self-refining loops with validation</li>
+                                <li>LLMs to evaluate prompt effectiveness</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Prompt Patterns</div>
+                            <ul class="subtopic-children">
+                                <li>Chain of thought — step by step reasoning</li>
+                                <li>Few-shot — examples to shape output</li>
+                                <li>Role prompting — expert personas</li>
+                                <li>Self-correcting — model fixes its output</li>
+                                <li>Validation chains — output feeds next prompt</li>
+                                <li>Tree of thought — explore multiple paths</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Multi-Model Orchestration</div>
+                            <ul class="subtopic-children">
+                                <li>Combine models for generation/validation</li>
+                                <li>Pipelines where models check each other</li>
+                                <li>Integrate into CI/CD for test generation</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Prompt Management</div>
+                            <ul class="subtopic-children">
+                                <li>Version control prompts with automation code</li>
+                                <li>Team prompt libraries and A/B testing</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">AI Agent Design</div>
+                            <ul class="subtopic-children">
+                                <li>Autonomous agents that explore/test features</li>
+                                <li>Goals, constraints, human-in-the-loop steps</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Evaluation and Quality Control</div>
+                            <ul class="subtopic-children">
+                                <li>Detect hallucinations in generated code</li>
+                                <li>Automated evaluators for test cases</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Context Engineering Advanced -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Context Engineering Advanced</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">System Prompt Design</div>
+                            <ul class="subtopic-children">
+                                <li>Custom AI Personas</li>
+                                <li>Framework-Specific Instructions</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">RAG for Testing</div>
+                            <ul class="subtopic-children">
+                                <li>Test Doc Retrieval</li>
+                                <li>Codebase Knowledge Bases</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Context Architecture</div>
+                            <ul class="subtopic-children">
+                                <li>Dynamic Context Loading</li>
+                                <li>Token Optimization</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- AI-Powered Frameworks -->
+                    <div class="module-card right">
+                        <h3 class="module-title">AI-Powered Frameworks</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Integrating LLMs</div>
+                            <ul class="subtopic-children">
+                                <li>AI Test Data Factories</li>
+                                <li>Dynamic Assertion Gen</li>
+                                <li>Natural Language Steps</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Intelligent Reporting</div>
+                            <ul class="subtopic-children">
+                                <li>AI-Generated Reports</li>
+                                <li>Failure Analysis</li>
+                                <li>Trend Prediction</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Self-Healing Automation</div>
+                            <ul class="subtopic-children">
+                                <li>Locator Recovery</li>
+                                <li>Test Self-Repair</li>
+                                <li>Adaptive Wait Strategies</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END NEW SDET ROADMAP DESIGN -->
+    </div>
+</div>
+
+<footer>
+    <strong>QE Center of Excellence</strong> &mdash; SDET Roadmap &mdash;
+</footer>
+
+</body>
+</html>
