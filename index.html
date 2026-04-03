@@ -1263,9 +1263,10 @@
         @media (max-width: 768px) {
             .hero h1 { font-size: 1.6rem; }
             .pillars { grid-template-columns: repeat(2, 1fr); }
-            .tab-btn { padding: 12px 16px; font-size: 12px; }
+            .tab-bar { flex-wrap: wrap; justify-content: center; gap: 2px; }
+            .tab-btn { padding: 10px 14px; font-size: 11px; }
             .nav-logo-wordmark { display: none; }
-            .nav-logo-group { border-right: none; padding-right: 8px; }
+            .nav-logo-group { border-right: none; padding-right: 8px; width: 100%; justify-content: center; margin-right: 0; }
             .mnemonic-grid { grid-template-columns: 1fr; }
         }
 
@@ -1279,12 +1280,14 @@
 <!-- TAB BAR -->
 <div class="tab-bar">
     <div class="nav-logo-group">
-        <img src="logos/unicorn.png" alt="Unosquare" class="nav-logo-icon">
-        <img src="logos/LogotypeLightGrey.png" alt="Unosquare" class="nav-logo-wordmark">
+        <img src="assets/logos/unicorn.png" alt="Unosquare" class="nav-logo-icon">
+        <img src="assets/logos/LogotypeLightGrey.png" alt="Unosquare" class="nav-logo-wordmark">
     </div>
     <button class="tab-btn active" data-tab="guide">Quality Engineering AI Guide</button>
-    <a href="roadmaps.html" class="tab-btn" style="text-decoration:none;">Roadmaps →</a>
-    <a href="playbooks.html" class="tab-btn" style="text-decoration:none;">Playbooks & Metrics →</a>
+    <a href="roadmaps/index.html" class="tab-btn" style="text-decoration:none;">Career Roadmaps →</a>
+    <a href="playbooks/playbooks.html" class="tab-btn" style="text-decoration:none;">Playbooks →</a>
+    <a href="templates/templates.html" class="tab-btn" style="text-decoration:none;">Templates →</a>
+    <a href="resources/learning-resources.html" class="tab-btn" style="text-decoration:none;">Resources →</a>
 </div>
 
 <!-- ============================================================ -->
@@ -2210,7 +2213,7 @@ Business Rules: Minimum order $10, Max 50 items
 
 
 <footer>
-    <img src="logos/LogotypeLightGrey.png" alt="Unosquare" class="footer-logo">
+    <img src="assets/logos/LogotypeLightGrey.png" alt="Unosquare" class="footer-logo">
     <div class="sep"></div>
     <strong>QE Center of Excellence</strong>
     <div class="sep"></div>

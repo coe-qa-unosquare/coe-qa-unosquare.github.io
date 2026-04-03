@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Resources — QE Center of Excellence</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --bg: #0a0a0a;
+            --bg-card: #141414;
+            --bg-elevated: #1a1a1a;
+            --border: #2a2a2a;
+            --border-light: #3a3a3a;
+            --text: #ffffff;
+            --text-muted: #a0a0a0;
+            --text-dim: #666666;
+            --blue: #2563eb;
+            --blue-dim: rgba(37,99,235,0.12);
+            --blue-border: rgba(37,99,235,0.35);
+            --blue-light: #60a5fa;
+            --green: #22c55e;
+            --green-dim: rgba(34,197,94,0.12);
+            --green-border: rgba(34,197,94,0.5);
+            --yellow: #eab308;
+            --yellow-dim: rgba(234,179,8,0.12);
+            --yellow-border: rgba(234,179,8,0.5);
+            --red: #dc2626;
+            --red-dim: rgba(220,38,38,0.12);
+            --red-border: rgba(220,38,38,0.5);
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ===== NAV BAR ===== */
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 8px 24px;
+            backdrop-filter: blur(12px);
+        }
+
+        .nav-back {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-back:hover {
+            color: var(--text);
+            border-color: var(--blue-border);
+            background: var(--blue-dim);
+        }
+
+        .nav-back svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .nav-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.3px;
+        }
+
+        .nav-logo {
+            height: 26px;
+            width: auto;
+            opacity: 0.7;
+            mix-blend-mode: screen;
+            transition: opacity 0.2s;
+        }
+        .nav-logo:hover { opacity: 1; }
+
+        /* ===== HERO ===== */
+        .hero {
+            text-align: center;
+            padding: 64px 24px 32px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--blue-light) 50%, var(--blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* ===== FILTER TABS ===== */
+        .controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 0 24px 32px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 4px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 4px;
+        }
+
+        .filter-tab {
+            padding: 8px 20px;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dim);
+            background: transparent;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 0.2px;
+        }
+
+        .filter-tab:hover {
+            color: var(--text-muted);
+            background: var(--bg-elevated);
+        }
+
+        .filter-tab.active {
+            color: var(--text);
+            background: var(--bg-elevated);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .expand-btn {
+            padding: 8px 16px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-dim);
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .expand-btn:hover {
+            color: var(--text-muted);
+            border-color: var(--border-light);
+            background: var(--bg-elevated);
+        }
+
+        /* ===== CONTENT AREA ===== */
+        .content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px 64px;
+        }
+
+        /* ===== MODULE CARD ===== */
+        .module-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+
+        .module-card:hover {
+            border-color: var(--border-light);
+        }
+
+        .module-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 22px;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s;
+        }
+
+        .module-header:hover {
+            background: var(--bg-elevated);
+        }
+
+        .module-chevron {
+            width: 18px;
+            height: 18px;
+            color: var(--text-dim);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0;
+        }
+
+        .module-card.expanded .module-chevron {
+            transform: rotate(90deg);
+        }
+
+        .module-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+            letter-spacing: -0.2px;
+            flex: 1;
+        }
+
+        .module-badge {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 6px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            flex-shrink: 0;
+        }
+
+        .badge-junior {
+            color: var(--green);
+            background: var(--green-dim);
+            border: 1px solid var(--green-border);
+        }
+
+        .badge-intermediate {
+            color: var(--yellow);
+            background: var(--yellow-dim);
+            border: 1px solid var(--yellow-border);
+        }
+
+        .badge-senior {
+            color: var(--red);
+            background: var(--red-dim);
+            border: 1px solid var(--red-border);
+        }
+
+        .resource-count {
+            font-size: 12px;
+            color: var(--text-dim);
+            font-weight: 500;
+            flex-shrink: 0;
+        }
+
+        /* ===== EXPANDABLE BODY ===== */
+        .module-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .module-card.expanded .module-body {
+            max-height: 600px;
+        }
+
+        .module-body-inner {
+            padding: 0 22px 18px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* ===== RESOURCE ITEM ===== */
+        .resource-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px 14px;
+            margin-top: 6px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .resource-item:hover {
+            background: var(--bg-elevated);
+        }
+
+        .resource-icon {
+            font-size: 18px;
+            line-height: 1;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .resource-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .resource-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            letter-spacing: -0.1px;
+            margin-bottom: 2px;
+        }
+
+        .resource-source {
+            font-size: 12px;
+            color: var(--text-dim);
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .resource-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .resource-arrow {
+            width: 16px;
+            height: 16px;
+            color: var(--text-dim);
+            flex-shrink: 0;
+            margin-top: 2px;
+            opacity: 0;
+            transform: translateX(-4px);
+            transition: all 0.2s;
+        }
+
+        .resource-item:hover .resource-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .resource-item:hover .resource-title {
+            color: var(--blue-light);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 24px;
+            color: var(--text-dim);
+            font-size: 0.72rem;
+            border-top: 1px solid var(--border);
+            letter-spacing: 0.5px;
+        }
+
+        footer strong {
+            color: var(--text-muted);
+        }
+
+        .footer-logo {
+            height: 16px;
+            width: auto;
+            opacity: 0.6;
+        }
+
+        footer .sep {
+            width: 1px;
+            height: 12px;
+            background: var(--border);
+        }
+
+        /* ===== HIDDEN MODULES ===== */
+        .module-card.hidden {
+            display: none;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+            }
+
+            .module-header {
+                padding: 14px 16px;
+            }
+
+            .module-body-inner {
+                padding: 0 16px 14px;
+            }
+
+            .resource-item {
+                padding: 12px 10px;
+            }
+
+            .controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="nav-bar">
+    <a href="../index.html" class="nav-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+        Back to Main
+    </a>
+    <span class="nav-title">Learning Resources</span>
+    <img src="../assets/logos/unicorn.png" alt="Unosquare" class="nav-logo" style="width: 160px; height: 26px; object-fit: contain; object-position: right;">
+</div>
+
+<!-- HERO -->
+<section class="hero">
+    <h1>Learning Resources</h1>
+    <p>Curated resources for every module on the roadmap. 2-3 vetted picks per topic — no fluff.</p>
+</section>
+
+<!-- CONTROLS -->
+<div class="controls">
+    <div class="filter-tabs">
+        <button class="filter-tab active" data-filter="all">All</button>
+        <button class="filter-tab" data-filter="junior">Junior</button>
+        <button class="filter-tab" data-filter="intermediate">Intermediate</button>
+        <button class="filter-tab" data-filter="senior">Senior</button>
+    </div>
+    <button class="expand-btn" id="toggleAll">Expand All</button>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+    <!-- ===== JUNIOR MODULES ===== -->
+
+    <div class="module-card" data-level="junior">
+        <div class="module-header" onclick="toggleModule(this)">
+            <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            <span class="module-title">Black Box Techniques (Fundamentals)</span>
+            <span class="module-badge badge-junior">Junior</span>
+            <span class="resource-count">3 resources</span>
+        </div>
+        <div class="module-body">
+            <div class="module-body-inner">
+                <a href="https://www.istqb.org/certifications/certified-tester-foundation-level" target="_blank" rel="noopener" class="resource-item">
+                    <span class="resource-icon">📄</span>
+                    <div class="resource-info">
+                        <div class="resource-title">ISTQB Foundation - Test Design Techniques</div>
+                        <div class="resource-source">istqb.org</div>
+                        <div class="resource-desc">Official ISTQB syllabus chapter on test design. The canonical reference.</div>
+                    </div>
+                    <svg class="resource-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+                <a href="https://www.youtube.com/watch?v=pkYMjhR2e1g" target="_blank" rel="noopener" class="resource-item">
+                    <span class="resource-icon">🎥</span>
+                    <div class="resource-info">
+                        <div class="resource-title">Software Testing Techniques</div>
+                        <div class="resource-source">YouTube / freeCodeCamp</div>
+                        <div class="resource-desc">1-hour walkthrough covering equivalence partitioning, BVA, decision tables with examples.</div>
+                    </div>
+                    <svg class="resource-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+                <a href="https://www.ministryoftesting.com/articles/test-design-kata" target="_blank" rel="noopener" class="resource-item">
+                    <span class="resource-icon">🛠</span>
+                    <div class="resource-info">
+                        <div class="resource-title">Test Design Kata</div>
+                        <div class="resource-source">ministryoftesting.com</div>
+                        <div class="resource-desc">Hands-on exercises to practice applying techniques to real scenarios.</div>
+                    </div>
+                    <svg class="resource-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="module-card" data-level="junior">
+        <div class="module-header" onclick="toggleModule(this)">
+            <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            <span class="module-title">API (Fundamentals)</span>
+            <span class="module-badge badge-junior">Junior</span>
+            <span class="resource-count">3 resources</span>
+        </div>
+        <div class="module-body">
+            <div class="module-body-inner">
+                <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview" target="_blank" rel="noopener" class="resource-item">
+                    <span class="resource-icon">📄</span>
+                    <div class="resource-info">
+                        <div class="resource-title">HTTP Overview</div>
+                        <div class="resource-source">MDN Web Docs</div>
+                        <div class="resource-desc">Definitive guide to HTTP protocol, methods, status codes, and headers.</div>
+                    </div>
+                    <svg class="resource-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+                <a href="https://www.youtube.com/watch?v=GZvSYJDk-us" target="_blank" rel="noopener" class="resource-item">
+                    <span class="resource-icon">🎥</span>
+                    <div class="resource-info">
+                        <div class="resource-title">APIs for Beginners</div>
+                        <div class="resource-source">YouTube / freeCodeCamp</div>
+                        <div class="resource-desc">Full course covering REST, JSON, HTTP methods, and Postman basics.</div>
+                    </div>
+                    <svg class="resource-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+                <a href="https://reqres.in/" target="_blank" rel="noopener" class="resource-item">
+                    <span class="resource-icon">🛠</span>
+                    <div class="resource-info">
+                        <div class="resource-title">Reqres.in</div>
+                        <div class="resource-source">reqres.in</div>
+                        <div class="resource-desc">Free hosted REST API for testing and prototyping. Perfect for practice.</div>
+                    </div>
+                    <svg class="resource-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="module-card" data-level="junior">
+        <div class="module-header" onclick="toggleModule(this)">
+            <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            <span class="module-title">SQL (Fundamentals)</span>
+            <span class="module-badge badge-junior">Junior</span>
+            <span class="resource-count">3 resources</span>
+        </div>
+        <div class="module-body">
+            <div class="module-body-inner">
+                <a href="https://sqlbolt.com/" target="_blank" rel="noopener" class="resource-item">
+                    <span class="resource-icon">🛠</span>
+                    <div class="resource-info">
+                        <div class="resource-title">SQLBolt</div>
+                        <div class="resource-source">sqlbolt.com</div>
+                        <div class="resource-desc">Interactive SQL lessons. Learn by doing — no setup required.</div>
+                    </div>
+                    <svg class="resource-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+                <a href="https://www.youtube.com/watch?v=7S_tz1z_5bA" target="_blank" rel="noopener" class="resource-item">
+                    <span class="resource-icon">🎥</span>
+                    <div class="resource-info">
+                        <div class="resource-title">SQL Tutorial for Beginners</div>
+                        <div class="resource-source">YouTube / Programming with Mosh</div>
+                        <div class="resource-desc">3-hour comprehensive SQL course from SELECT to JOINs.</div>
+                    </div>
+                    <svg class="resource-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+                <a href="https://learnsql.com/blog/sql-basics-cheat-sheet/" target="_blank" rel="noopener" class="resource-item">
+                    <span class="resource-icon">📄</span>
+                    <div class="resource-info">
+                        <div class="resource-title">SQL Cheat Sheet</div>
+                        <div class="resource-source">learnsql.com</div>
+                        <div class="resource-desc">Quick reference for syntax, operators, and common patterns.</div>
+                    </div>
+                    <svg class="resource-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== INTERMEDIATE MODULES ===== -->
+
+    <div class="module-card" data-level="intermediate">
+        <div class="module-header" onclick="toggleModule(this)">
+            <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            <span class="module-title">API Testing (Intermediate)</span>
+            <span class="module-badge badge-intermediate">Intermediate</span>
+            <span class="resource-count">3 resources</span>
+        </div>
+        <div class="module-body">
+            <div class="module-body-inner">
+                <a href="https://learning.postman.com/docs/getting-started/introduction/" target="_blank" rel="noopener" class="resource-item">
+                    <span class="resource-icon">📄</span>
+                    <div class="resource-info">
+                        <div class="resource-title">Postman Learning Center</div>
+                        <div class="resource-source">learning.postman.com</div>
+                        <div class="resource-desc">Official docs covering Newman, environments, scripting, and workflows.</div>
+                    </div>
+                    <svg class="resource-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+                <a href="https://www.youtube.com/watch?v=VywxIQ2ZXw4" target="_blank" rel="noopener" class="resource-item">
+                    <span class="resource-icon">🎥</span>
+                    <div class="resource-info">
+                        <div class="resource-title">API Testing with Postman</div>
+                        <div class="resource-source">YouTube / Valentin Despa</div>
+                        <div class="resource-desc">Advanced Postman course: chaining, variables, Newman CI integration.</div>
+                    </div>
+                    <svg class="resource-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+                <a href="https://petstore.swagger.io/" target="_blank" rel="noopener" class="resource-item">
+                    <span class="resource-icon">🛠</span>
+                    <div class="resource-info">
+                        <div class="resource-title">Swagger Petstore</div>
+                        <div class="resource-source">petstore.swagger.io</div>
+                        <div class="resource-desc">Full OpenAPI spec to practice real-world API testing scenarios.</div>
+                    </div>
+                    <svg class="resource-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="module-card" data-level="intermediate">
+        <div class="module-header" onclick="toggleModule(this)">
+            <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            <span class="module-title">Accessibility Testing (Intermediate)</span>
+            <span class="module-badge badge-intermediate">Intermediate</span>
+            <span class="resource-count">3 resources</span>
+        </div>
+        <div class="module-body">
+            <div class="module-body-inner">
+                <a href="https://www.w3.org/WAI/WCAG21/quickref/" target="_blank" rel="noopener" class="resource-item">
+                    <span class="resource-icon">📄</span>
+                    <div class="resource-info">
+                        <div class="resource-title">WCAG 2.1 Quick Reference</div>
+                        <div class="resource-source">w3.org/WAI</div>
+                        <div class="resource-desc">Official W3C quick reference. Filterable by level and technique.</div>
+                    </div>
+                    <svg class="resource-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+                <a href="https://www.deque.com/axe/devtools/" target="_blank" rel="noopener" class="resource-item">
+                    <span class="resource-icon">🛠</span>
+                    <div class="resource-info">
+                        <div class="resource-title">axe DevTools</div>
+                        <div class="resource-source">deque.com</div>
+                        <div class="resource-desc">Browser extension for automated accessibility testing. Industry standard.</div>
+                    </div>
+                    <svg class="resource-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+                <a href="https://www.youtube.com/watch?v=cOmehxAU_4s" target="_blank" rel="noopener" class="resource-item">
+                    <span class="resource-icon">🎥</span>
+                    <div class="resource-info">
+                        <div class="resource-title">Accessibility Testing Tutorial</div>
+                        <div class="resource-source">YouTube / Deque Systems</div>
+                        <div class="resource-desc">Practical guide to testing with screen readers and axe.</div>
+                    </div>
+                    <svg class="resource-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SENIOR MODULES ===== -->
+
+    <div class="module-card" data-level="senior">
+        <div class="module-header" onclick="toggleModule(this)">
+            <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            <span class="module-title">API Testing (Advanced)</span>
+            <span class="module-badge badge-senior">Senior</span>
+            <span class="resource-count">3 resources</span>
+        </div>
+        <div class="module-body">
+            <div class="module-body-inner">
+                <a href="https://owasp.org/API-Security/editions/2023/en/0x11-t10/" target="_blank" rel="noopener" class="resource-item">
+                    <span class="resource-icon">📄</span>
+                    <div class="resource-info">
+                        <div class="resource-title">OWASP API Security Top 10</div>
+                        <div class="resource-source">owasp.org</div>
+                        <div class="resource-desc">The definitive list of API security risks every senior QE should know.</div>
+                    </div>
+                    <svg class="resource-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+                <a href="https://docs.pact.io/" target="_blank" rel="noopener" class="resource-item">
+                    <span class="resource-icon">🛠</span>
+                    <div class="resource-info">
+                        <div class="resource-title">Pact Contract Testing Docs</div>
+                        <div class="resource-source">docs.pact.io</div>
+                        <div class="resource-desc">Getting started with consumer-driven contract testing.</div>
+                    </div>
+                    <svg class="resource-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+                <a href="https://swagger.io/blog/api-strategy/api-governance/" target="_blank" rel="noopener" class="resource-item">
+                    <span class="resource-icon">📄</span>
+                    <div class="resource-info">
+                        <div class="resource-title">API Governance Best Practices</div>
+                        <div class="resource-source">swagger.io/blog</div>
+                        <div class="resource-desc">Versioning, deprecation, and documentation standards for API quality.</div>
+                    </div>
+                    <svg class="resource-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <img src="../assets/logos/LogotypeLightGrey.png" alt="Unosquare" class="footer-logo">
+    <div class="sep"></div>
+    <strong>QE Center of Excellence</strong>
+    <div class="sep"></div>
+    <span>Learning Resources</span>
+</footer>
+
+<script>
+    // Toggle individual module
+    function toggleModule(header) {
+        const card = header.parentElement;
+        card.classList.toggle('expanded');
+    }
+
+    // Filter tabs
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const moduleCards = document.querySelectorAll('.module-card');
+
+    filterTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Update active tab
+            filterTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            const filter = tab.dataset.filter;
+
+            moduleCards.forEach(card => {
+                if (filter === 'all' || card.dataset.level === filter) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+    });
+
+    // Expand All / Collapse All
+    const toggleAllBtn = document.getElementById('toggleAll');
+    let allExpanded = false;
+
+    toggleAllBtn.addEventListener('click', () => {
+        allExpanded = !allExpanded;
+        toggleAllBtn.textContent = allExpanded ? 'Collapse All' : 'Expand All';
+
+        moduleCards.forEach(card => {
+            if (!card.classList.contains('hidden')) {
+                if (allExpanded) {
+                    card.classList.add('expanded');
+                } else {
+                    card.classList.remove('expanded');
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

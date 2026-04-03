@@ -1,0 +1,1 @@
+- [QE Site Design Direction](project_design_direction.md) — sober dark theme, single blue accent, no gradients or rainbow badges; reference for all site pages

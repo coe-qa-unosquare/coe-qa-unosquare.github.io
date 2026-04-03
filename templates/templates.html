@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Templates & Artifacts — QE Center of Excellence</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --bg: #0a0a0a;
+            --bg-card: #141414;
+            --bg-elevated: #1a1a1a;
+            --border: #2a2a2a;
+            --border-light: #3a3a3a;
+            --text: #ffffff;
+            --text-muted: #a0a0a0;
+            --text-dim: #666666;
+            --blue: #2563eb;
+            --blue-dim: rgba(37,99,235,0.12);
+            --blue-border: rgba(37,99,235,0.35);
+            --blue-light: #60a5fa;
+            --green: #22c55e;
+            --green-dim: rgba(34,197,94,0.12);
+            --green-border: rgba(34,197,94,0.5);
+            --yellow: #eab308;
+            --yellow-dim: rgba(234,179,8,0.12);
+            --yellow-border: rgba(234,179,8,0.5);
+            --red: #dc2626;
+            --red-dim: rgba(220,38,38,0.12);
+            --red-border: rgba(220,38,38,0.5);
+            --cyan: #06b6d4;
+            --cyan-dim: rgba(6,182,212,0.12);
+            --cyan-border: rgba(6,182,212,0.35);
+            --purple: #a855f7;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* NAV BAR */
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 8px 24px;
+            backdrop-filter: blur(12px);
+        }
+        .nav-back {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-back:hover { color: var(--text); }
+        .nav-back svg { width: 16px; height: 16px; }
+        .nav-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+        .nav-logo {
+            height: 26px;
+            opacity: 0.7;
+            mix-blend-mode: screen;
+        }
+
+        /* HERO */
+        .hero {
+            text-align: center;
+            padding: 56px 24px 32px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #ffffff 0%, var(--blue-light) 50%, var(--blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+        }
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            font-weight: 400;
+            margin-bottom: 24px;
+        }
+        .stats-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            font-size: 0.82rem;
+            color: var(--text-dim);
+        }
+        .stats-bar .stat {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .stats-bar .stat strong {
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        .stats-bar .dot {
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: var(--border-light);
+        }
+
+        /* FILTER BAR */
+        .filter-bar {
+            max-width: 1048px;
+            margin: 0 auto;
+            padding: 0 24px 24px;
+        }
+        .filter-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .filter-tabs {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            flex: 1;
+        }
+        .filter-tab {
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .filter-tab:hover {
+            border-color: var(--border-light);
+            color: var(--text);
+        }
+        .filter-tab.active {
+            background: var(--blue-dim);
+            border-color: var(--blue-border);
+            color: var(--blue-light);
+        }
+        .filter-tab[data-category="test-documentation"].active {
+            background: var(--blue-dim);
+            border-color: var(--blue-border);
+            color: var(--blue-light);
+        }
+        .filter-tab[data-category="daily-qe-work"].active {
+            background: var(--green-dim);
+            border-color: var(--green-border);
+            color: var(--green);
+        }
+        .filter-tab[data-category="automation"].active {
+            background: var(--cyan-dim);
+            border-color: var(--cyan-border);
+            color: var(--cyan);
+        }
+        .filter-tab[data-category="process-governance"].active {
+            background: var(--yellow-dim);
+            border-color: var(--yellow-border);
+            color: var(--yellow);
+        }
+        .search-input {
+            padding: 7px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text);
+            font-size: 0.8rem;
+            font-family: inherit;
+            width: 220px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .search-input::placeholder { color: var(--text-dim); }
+        .search-input:focus { border-color: var(--blue-border); }
+        .btn-expand-all {
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .btn-expand-all:hover {
+            border-color: var(--border-light);
+            color: var(--text);
+        }
+
+        /* GRID */
+        .templates-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            max-width: 1048px;
+            margin: 0 auto;
+            padding: 0 24px 48px;
+        }
+        @media (max-width: 768px) {
+            .templates-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 1.8rem; }
+            .filter-row { flex-direction: column; align-items: stretch; }
+            .search-input { width: 100%; }
+        }
+
+        /* CARDS */
+        .template-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .template-card:hover {
+            border-color: var(--border-light);
+        }
+        .template-card.hidden { display: none; }
+        .card-accent {
+            height: 3px;
+        }
+        .card-accent.blue { background: linear-gradient(90deg, var(--blue), var(--blue-light)); }
+        .card-accent.green { background: linear-gradient(90deg, var(--green), #4ade80); }
+        .card-accent.cyan { background: linear-gradient(90deg, var(--cyan), #22d3ee); }
+        .card-accent.yellow { background: linear-gradient(90deg, var(--yellow), #facc15); }
+
+        .card-header {
+            padding: 20px 20px 16px;
+        }
+        .card-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 0.68rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 10px;
+        }
+        .card-badge.blue {
+            background: var(--blue-dim);
+            color: var(--blue-light);
+            border: 1px solid var(--blue-border);
+        }
+        .card-badge.green {
+            background: var(--green-dim);
+            color: var(--green);
+            border: 1px solid var(--green-border);
+        }
+        .card-badge.cyan {
+            background: var(--cyan-dim);
+            color: var(--cyan);
+            border: 1px solid var(--cyan-border);
+        }
+        .card-badge.yellow {
+            background: var(--yellow-dim);
+            color: var(--yellow);
+            border: 1px solid var(--yellow-border);
+        }
+        .card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+        .card-desc {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+        .card-actions {
+            display: flex;
+            gap: 8px;
+            padding: 0 20px 16px;
+        }
+        .btn {
+            padding: 7px 16px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-preview {
+            background: var(--bg-elevated);
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+        }
+        .btn-preview:hover {
+            background: var(--border);
+            color: var(--text);
+        }
+        .btn-preview.active {
+            background: var(--blue-dim);
+            color: var(--blue-light);
+            border-color: var(--blue-border);
+        }
+        .btn-copy {
+            background: var(--blue);
+            color: #fff;
+        }
+        .btn-copy:hover {
+            background: #3b82f6;
+        }
+        .btn-copy svg, .btn-preview svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* PREVIEW PANEL */
+        .card-preview {
+            display: none;
+            border-top: 1px solid var(--border);
+            padding: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .card-preview.open { display: block; }
+
+        /* Scrollbar styling */
+        .card-preview::-webkit-scrollbar { width: 6px; }
+        .card-preview::-webkit-scrollbar-track { background: transparent; }
+        .card-preview::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 3px; }
+
+        /* RENDERED MARKDOWN STYLES */
+        .md h1 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+        .md h2 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--blue-light);
+            margin: 20px 0 10px;
+        }
+        .md h3 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin: 14px 0 8px;
+        }
+        .md p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        .md ul, .md ol {
+            margin: 8px 0 8px 20px;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+        .md li { margin-bottom: 4px; }
+        .md .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+        .md .checklist li {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 3px 0;
+        }
+        .md .checklist li::before {
+            content: '';
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            min-width: 14px;
+            border: 1.5px solid var(--border-light);
+            border-radius: 3px;
+            margin-top: 2px;
+        }
+        .md table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 0.78rem;
+        }
+        .md th {
+            text-align: left;
+            padding: 8px 10px;
+            background: var(--bg-elevated);
+            color: var(--text-muted);
+            font-weight: 600;
+            border: 1px solid var(--border);
+            white-space: nowrap;
+        }
+        .md td {
+            padding: 7px 10px;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+        .md code {
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            background: var(--bg-elevated);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.78rem;
+            color: var(--cyan);
+        }
+        .md pre {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px 16px;
+            overflow-x: auto;
+            margin: 10px 0;
+            font-size: 0.76rem;
+            line-height: 1.6;
+        }
+        .md pre code {
+            background: none;
+            padding: 0;
+            color: var(--text-muted);
+        }
+        .md hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 16px 0;
+        }
+        .md strong { color: var(--text); font-weight: 600; }
+
+        /* TOAST */
+        .toast {
+            position: fixed;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: var(--green);
+            color: #fff;
+            padding: 10px 24px;
+            border-radius: 10px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            font-family: inherit;
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            box-shadow: 0 8px 32px rgba(34,197,94,0.3);
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* FOOTER */
+        footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 24px;
+            color: var(--text-dim);
+            font-size: 0.72rem;
+            border-top: 1px solid var(--border);
+        }
+        .footer-logo {
+            height: 16px;
+            width: auto;
+            opacity: 0.6;
+        }
+        footer .sep {
+            width: 1px;
+            height: 12px;
+            background: var(--border);
+        }
+        footer strong {
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav-bar">
+    <a href="../index.html" class="nav-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+        Back to Main
+    </a>
+    <span class="nav-title">Templates & Artifacts</span>
+    <img src="../assets/logos/unicorn.png" alt="Unosquare" class="nav-logo" style="width: 160px; height: 26px; object-fit: contain; object-position: right;">
+</div>
+
+<!-- HERO -->
+<section class="hero">
+    <h1>Templates & Artifacts</h1>
+    <p>Ready-to-use templates for every QE and SDET. Copy, adapt, deliver.</p>
+    <div class="stats-bar">
+        <span class="stat"><strong>14</strong> Templates</span>
+        <span class="dot"></span>
+        <span class="stat"><strong>4</strong> Categories</span>
+        <span class="dot"></span>
+        <span class="stat"><strong>Copy & Go</strong></span>
+    </div>
+</section>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+    <div class="filter-row">
+        <div class="filter-tabs">
+            <button class="filter-tab active" data-category="all">All</button>
+            <button class="filter-tab" data-category="test-documentation">Test Documentation</button>
+            <button class="filter-tab" data-category="daily-qe-work">Daily QE Work</button>
+            <button class="filter-tab" data-category="automation">Automation</button>
+            <button class="filter-tab" data-category="process-governance">Process & Governance</button>
+        </div>
+        <input type="text" class="search-input" placeholder="Search templates..." id="searchInput">
+        <button class="btn-expand-all" id="expandAllBtn">Expand All</button>
+    </div>
+</div>
+
+<!-- TEMPLATES GRID -->
+<div class="templates-grid" id="templatesGrid">
+    <!-- Cards injected by JS -->
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">Copied to clipboard!</div>
+
+<!-- FOOTER -->
+<footer>
+    <img src="../assets/logos/LogotypeLightGrey.png" alt="Unosquare" class="footer-logo">
+    <div class="sep"></div>
+    <strong>QE Center of Excellence</strong>
+    <div class="sep"></div>
+    <span>Templates & Artifacts</span>
+</footer>
+
+<script>
+// ============================================================
+// TEMPLATE DATA
+// ============================================================
+const templates = [
+  // ── Category 1: Test Documentation ────────────────────────
+  {
+    id: 1,
+    title: "Test Plan",
+    category: "test-documentation",
+    categoryLabel: "Test Documentation",
+    color: "blue",
+    description: "Comprehensive test plan covering scope, approach, entry/exit criteria, risks, and schedule.",
+    raw: `# Test Plan — [Project Name]
+
+## 1. Overview
+- **Project:** [Project Name]
+- **Version:** [X.X]
+- **Author:** [Name]
+- **Date:** [YYYY-MM-DD]
+- **Status:** Draft | In Review | Approved
+
+## 2. Scope
+### In Scope
+- [Feature/Module 1]
+- [Feature/Module 2]
+
+### Out of Scope
+- [Explicitly excluded items]
+
+## 3. Test Approach
+- **Testing Types:** Functional, Regression, Integration, E2E
+- **Testing Levels:** Unit (Dev), API (QE/SDET), UI (QE)
+- **Automation Scope:** [What will be automated vs manual]
+- **Tools:** Postman, Selenium/Playwright, JMeter
+
+## 4. Entry Criteria
+- [ ] Requirements reviewed and approved
+- [ ] Test environment available and stable
+- [ ] Test data prepared
+- [ ] Build deployed to test environment
+
+## 5. Exit Criteria
+- [ ] All critical and high-priority test cases executed
+- [ ] No open P1/P2 defects
+- [ ] Test coverage meets agreed threshold (≥ X%)
+- [ ] Test summary report delivered
+
+## 6. Test Environment
+| Environment | URL | Purpose |
+|-------------|-----|---------|
+| Dev         |     | Unit/Integration |
+| QA          |     | Functional/Regression |
+| Staging     |     | E2E/UAT |
+
+## 7. Risk Assessment
+| Risk | Likelihood | Impact | Mitigation |
+|------|-----------|--------|------------|
+| Unstable environment | Medium | High | Backup env, early smoke tests |
+| Incomplete requirements | High | High | Early QE involvement, assumption log |
+| Resource constraints | Medium | Medium | Cross-train, prioritize critical paths |
+
+## 8. Schedule
+| Phase | Start | End | Owner |
+|-------|-------|-----|-------|
+| Test Planning | | | |
+| Test Design | | | |
+| Test Execution | | | |
+| Regression | | | |
+| Sign-off | | | |
+
+## 9. Deliverables
+- Test Plan (this document)
+- Test Cases
+- Defect Reports
+- Test Summary Report`
+  },
+  {
+    id: 2,
+    title: "Test Strategy",
+    category: "test-documentation",
+    categoryLabel: "Test Documentation",
+    color: "blue",
+    description: "High-level testing strategy defining testing levels, automation approach, defect management, and quality gates.",
+    raw: `# Test Strategy — [Project/Program Name]
+
+## 1. Purpose
+This document defines the overall testing approach for [Project Name] across all releases and phases.
+
+## 2. Testing Levels
+
+### Project-Level Strategy
+| Level | Scope | Owner | Tools |
+|-------|-------|-------|-------|
+| Unit Testing | Individual functions/methods | Developers | JUnit/NUnit/Jest |
+| API Testing | Service endpoints, contracts | QE + SDET | Postman, RestAssured |
+| Integration Testing | Service-to-service flows | QE + Dev | Postman, Selenium |
+| E2E Testing | Full user journeys | QE | Selenium/Playwright |
+| Performance Testing | Load, stress, scalability | QE + Perf Eng | JMeter, BlazeMeter |
+
+### Release-Level Strategy
+| Release Phase | Testing Focus | Depth |
+|--------------|---------------|-------|
+| Sprint Testing | New features, bug fixes | Full coverage |
+| Regression | Existing functionality | Risk-based selection |
+| Smoke | Critical path validation | Top 10 scenarios |
+| Sanity | Targeted fix verification | Affected areas only |
+
+## 3. Automation Strategy
+- **Automate:** Smoke suite, API regression, data validations
+- **Keep Manual:** Exploratory, UX/usability, complex E2E edge cases
+- **Framework:** [Selenium/Playwright] with POM pattern
+- **CI/CD Integration:** Run smoke on every build, full regression nightly
+
+## 4. Defect Management
+- **Tool:** [Jira/ADO]
+- **Severity Levels:** P1 (Blocker), P2 (Critical), P3 (Major), P4 (Minor)
+- **SLA:** P1 = 4hrs, P2 = 24hrs, P3 = Sprint, P4 = Backlog
+- **Retest Policy:** Defect reporter retests within 24hrs of fix
+
+## 5. Test Data Strategy
+- Use anonymized production data where possible
+- Synthetic data for edge cases and boundary testing
+- Test data refresh schedule: [Weekly/Per Sprint]
+
+## 6. Environment Strategy
+- Dedicated QA environment per team
+- Staging mirrors production configuration
+- Environment lock policy during regression cycles
+
+## 7. Quality Gates
+| Gate | Criteria | Blocker? |
+|------|----------|----------|
+| Sprint Exit | All stories tested, no open P1/P2 | Yes |
+| Release Candidate | Full regression passed, perf baseline met | Yes |
+| Production Deploy | Smoke passed in staging, rollback plan ready | Yes |
+
+## 8. Reporting
+- Daily: Test execution progress
+- Sprint: Defect metrics, coverage summary
+- Release: Full test summary report with go/no-go recommendation`
+  },
+  {
+    id: 3,
+    title: "Test Summary Report",
+    category: "test-documentation",
+    categoryLabel: "Test Documentation",
+    color: "blue",
+    description: "End-of-cycle test summary with execution metrics, defect analysis, coverage, and go/no-go recommendation.",
+    raw: `# Test Summary Report — [Release/Sprint Name]
+
+## 1. Overview
+- **Release:** [X.X]
+- **Sprint:** [Sprint N]
+- **Test Period:** [Start Date] — [End Date]
+- **Prepared By:** [Name]
+- **Date:** [YYYY-MM-DD]
+
+## 2. Executive Summary
+[1-2 sentence summary: "Testing for Release X.X is complete. N critical defects were found and resolved. The release is recommended for production deployment."]
+
+## 3. Test Execution Summary
+| Metric | Count |
+|--------|-------|
+| Total Test Cases | |
+| Executed | |
+| Passed | |
+| Failed | |
+| Blocked | |
+| Not Executed | |
+| **Pass Rate** | **X%** |
+
+## 4. Defect Summary
+| Severity | Found | Fixed | Open | Deferred |
+|----------|-------|-------|------|----------|
+| P1 - Blocker | | | | |
+| P2 - Critical | | | | |
+| P3 - Major | | | | |
+| P4 - Minor | | | | |
+| **Total** | | | | |
+
+## 5. Test Coverage by Area
+| Module/Feature | Cases | Pass Rate | Risk Level |
+|---------------|-------|-----------|------------|
+| [Module 1] | | | Low/Med/High |
+| [Module 2] | | | |
+| [Module 3] | | | |
+
+## 6. Open Risks
+| Risk | Impact | Recommendation |
+|------|--------|---------------|
+| | | |
+
+## 7. Recommendation
+- [ ] **GO** — All exit criteria met, no open blockers
+- [ ] **CONDITIONAL GO** — Minor risks accepted, monitoring plan in place
+- [ ] **NO-GO** — Open blockers, insufficient coverage, or unresolved risks
+
+## 8. Lessons Learned
+- What went well:
+- What needs improvement:
+- Action items for next cycle:`
+  },
+
+  // ── Category 2: Daily QE Work ─────────────────────────────
+  {
+    id: 4,
+    title: "Test Case Template",
+    category: "daily-qe-work",
+    categoryLabel: "Daily QE Work",
+    color: "green",
+    description: "Standard test case format with good and bad examples to guide consistent, high-quality test writing.",
+    raw: `# Test Case Template
+
+## Format
+| Field | Description |
+|-------|-------------|
+| **TC-ID** | Unique identifier (e.g., TC-LOGIN-001) |
+| **Title** | Short, action-oriented (e.g., "Verify login with valid credentials") |
+| **Module** | Feature area |
+| **Priority** | P1 (Critical Path) / P2 (Important) / P3 (Nice to have) |
+| **Preconditions** | What must be true before execution |
+| **Steps** | Numbered, specific actions |
+| **Expected Result** | What should happen |
+| **Test Data** | Specific inputs needed |
+
+---
+
+## Good Test Case Example
+| Field | Value |
+|-------|-------|
+| **TC-ID** | TC-LOGIN-001 |
+| **Title** | Verify successful login with valid email and password |
+| **Module** | Authentication |
+| **Priority** | P1 |
+| **Preconditions** | User account exists with email: test@example.com |
+| **Steps** | 1. Navigate to /login 2. Enter email "test@example.com" 3. Enter password "ValidPass123!" 4. Click "Sign In" |
+| **Expected Result** | User is redirected to /dashboard, welcome message shows username |
+| **Test Data** | Email: test@example.com / Password: ValidPass123! |
+
+---
+
+## Bad Test Case Example (and why)
+| Field | Value | Problem |
+|-------|-------|---------|
+| **TC-ID** | TC-001 | No module context |
+| **Title** | Test login | Too vague — test what about login? |
+| **Preconditions** | None | Always has preconditions |
+| **Steps** | 1. Login to the app | Not specific — how? With what? |
+| **Expected Result** | It works | Not measurable or verifiable |
+| **Test Data** | N/A | Untestable without data |`
+  },
+  {
+    id: 5,
+    title: "Bug Report Template",
+    category: "daily-qe-work",
+    categoryLabel: "Daily QE Work",
+    color: "green",
+    description: "Structured bug report with severity guide, reproduction steps, and evidence checklist.",
+    raw: `# Bug Report Template
+
+## Required Fields
+| Field | Value |
+|-------|-------|
+| **Bug ID** | AUTO-GENERATED |
+| **Title** | [Action] + [Result] + [Context] (e.g., "Login button returns 500 error on mobile Safari") |
+| **Severity** | P1 / P2 / P3 / P4 (see guide below) |
+| **Environment** | QA / Staging / Prod + Browser/OS/Device |
+| **Build/Version** | [X.X.X] |
+| **Reporter** | [Name] |
+| **Assignee** | [Dev Name or Team] |
+
+## Severity Guide
+| Level | Name | Definition | Example |
+|-------|------|-----------|---------|
+| **P1** | Blocker | System unusable, no workaround | App crashes on launch, payment fails |
+| **P2** | Critical | Major feature broken, workaround exists | Search returns wrong results, can filter instead |
+| **P3** | Major | Feature works but with noticeable issues | UI misalignment, slow response (> 5s) |
+| **P4** | Minor | Cosmetic, typo, minor inconvenience | Wrong font size, tooltip typo |
+
+## Description
+### Steps to Reproduce
+1. [Specific step]
+2. [Specific step]
+3. [Specific step]
+
+### Expected Result
+[What should happen]
+
+### Actual Result
+[What actually happens]
+
+### Evidence
+- Screenshot/Video: [attached]
+- Console Errors: [if applicable]
+- API Response: [if applicable]
+- Logs: [if applicable]
+
+## Additional Context
+- **Reproducibility:** Always / Intermittent / Once
+- **Workaround:** [Yes — describe / No]
+- **Impact:** [Number of users/flows affected]`
+  },
+  {
+    id: 6,
+    title: "Sprint QE Checklist",
+    category: "daily-qe-work",
+    categoryLabel: "Daily QE Work",
+    color: "green",
+    description: "Phase-by-phase QE checklist covering planning, execution, regression, and sprint sign-off.",
+    raw: `# Sprint QE Checklist — Sprint [N]
+
+## Before Sprint (Planning)
+- [ ] Attended sprint planning
+- [ ] Reviewed and understood all user stories
+- [ ] Acceptance criteria are clear and testable
+- [ ] Test approach identified per story
+- [ ] Test data requirements identified
+- [ ] Dependencies flagged (API, environment, third-party)
+
+## During Sprint (Execution)
+- [ ] Test cases written/updated for each story
+- [ ] Functional testing completed per story
+- [ ] API validations completed (if applicable)
+- [ ] Cross-browser/device testing done (if applicable)
+- [ ] Accessibility checks performed
+- [ ] Bugs reported with proper severity and evidence
+- [ ] Bug retests completed within 24hrs of fix
+
+## Before Sprint Close (Regression)
+- [ ] Smoke suite passed on latest build
+- [ ] Regression suite executed (full or risk-based)
+- [ ] No open P1 or P2 defects
+- [ ] Test environment stable throughout execution
+- [ ] All blocked tests resolved or documented
+
+## Sprint Sign-off
+- [ ] Test summary shared with team
+- [ ] Defect metrics reported (found, fixed, open, deferred)
+- [ ] Coverage confidence communicated
+- [ ] Lessons learned captured
+- [ ] Test cases updated for future regression`
+  },
+  {
+    id: 7,
+    title: "Go/No-Go Decision Matrix",
+    category: "daily-qe-work",
+    categoryLabel: "Daily QE Work",
+    color: "green",
+    description: "Release decision matrix with weighted criteria, risk summary, and stakeholder sign-off section.",
+    raw: `# Go/No-Go Decision Matrix — [Release Name]
+
+## Release Information
+- **Release:** [X.X]
+- **Target Date:** [YYYY-MM-DD]
+- **Decision Date:** [YYYY-MM-DD]
+- **Decision Makers:** [Names/Roles]
+
+## Criteria Assessment
+| # | Criteria | Status | Weight | Notes |
+|---|---------|--------|--------|-------|
+| 1 | All P1/P2 defects resolved | GO / NO-GO | Critical | |
+| 2 | Test pass rate ≥ 95% | GO / NO-GO | Critical | |
+| 3 | Smoke suite passing | GO / NO-GO | Critical | |
+| 4 | Performance benchmarks met | GO / NO-GO | High | |
+| 5 | Security scan — no critical findings | GO / NO-GO | High | |
+| 6 | Rollback plan documented and tested | GO / NO-GO | High | |
+| 7 | Monitoring and alerts configured | GO / NO-GO | Medium | |
+| 8 | Stakeholder sign-off received | GO / NO-GO | Medium | |
+| 9 | Release notes prepared | GO / NO-GO | Low | |
+| 10 | Support team briefed | GO / NO-GO | Low | |
+
+## Risk Summary
+| Open Risk | Impact | Mitigation | Acceptable? |
+|-----------|--------|------------|-------------|
+| | | | Yes / No |
+
+## Decision
+- [ ] **GO** — All critical criteria met
+- [ ] **CONDITIONAL GO** — Accepted risks documented, monitoring plan active
+- [ ] **NO-GO** — Critical criteria not met (list blockers below)
+
+### Blockers (if NO-GO):
+1.
+2.
+
+### Signatures
+| Role | Name | Decision | Date |
+|------|------|----------|------|
+| QE Lead | | | |
+| Dev Lead | | | |
+| Product Owner | | | |
+| Release Manager | | | |`
+  },
+
+  // ── Category 3: Automation — SDET ────────────────────────
+  {
+    id: 8,
+    title: "Framework README Template",
+    category: "automation",
+    categoryLabel: "Automation",
+    color: "cyan",
+    description: "Complete README template for test automation frameworks covering tech stack, setup, usage, and contribution guidelines.",
+    raw: `# [Framework Name] — Test Automation Framework
+
+## Overview
+Brief description of what this framework automates and for which project/product.
+
+## Tech Stack
+| Component | Technology |
+|-----------|-----------|
+| Language | Java / JavaScript / Python / C# |
+| Framework | Selenium / Playwright / Cypress |
+| Test Runner | TestNG / JUnit / Mocha / NUnit |
+| Build Tool | Maven / Gradle / npm |
+| Reporting | Allure / ExtentReports / HTML |
+| CI/CD | Azure DevOps / Jenkins / GitHub Actions |
+
+## Project Structure
+\`\`\`
+src/
+├── main/
+│   ├── pages/          # Page Object classes
+│   ├── utils/          # Helper/utility classes
+│   ├── config/         # Configuration files
+│   └── data/           # Test data files
+├── test/
+│   ├── tests/          # Test classes
+│   ├── suites/         # Test suite definitions
+│   └── resources/      # Test resources
+├── reports/            # Generated reports
+├── pom.xml / package.json
+└── README.md
+\`\`\`
+
+## Getting Started
+### Prerequisites
+- [Language] version X.X+
+- [Build tool] installed
+- Chrome/Firefox browser
+
+### Setup
+1. Clone the repository: \`git clone [repo-url]\`
+2. Install dependencies: \`[command]\`
+3. Configure environment: Copy \`.env.example\` to \`.env\`
+4. Run smoke tests: \`[command]\`
+
+## Running Tests
+| Command | Description |
+|---------|-------------|
+| \`[cmd]\` | Run all tests |
+| \`[cmd]\` | Run smoke suite |
+| \`[cmd]\` | Run regression suite |
+| \`[cmd]\` | Run specific test class |
+| \`[cmd]\` | Run with specific browser |
+
+## Configuration
+| Variable | Description | Default |
+|----------|-------------|---------|
+| BASE_URL | Application URL | http://localhost:3000 |
+| BROWSER | Target browser | chrome |
+| HEADLESS | Run headless mode | false |
+| TIMEOUT | Default wait (seconds) | 10 |
+
+## Writing New Tests
+1. Create Page Object in \`pages/\` (extend BasePage)
+2. Create Test class in \`tests/\` (extend BaseTest)
+3. Add to appropriate suite in \`suites/\`
+4. Follow naming: \`[Feature]Page.java\` / \`[Feature]Test.java\`
+
+## Contributing
+- Branch from \`main\`, prefix: \`test/[ticket-id]-description\`
+- Follow existing POM patterns
+- Add to smoke suite if critical path
+- PR requires 1 approval from SDET team
+
+## Troubleshooting
+| Issue | Solution |
+|-------|----------|
+| Element not found | Check locator, add explicit wait |
+| Flaky test | Review waits, check test data isolation |
+| CI failure | Check environment, review logs |`
+  },
+  {
+    id: 9,
+    title: "POM Starter Structure",
+    category: "automation",
+    categoryLabel: "Automation",
+    color: "cyan",
+    description: "Page Object Model starter with directory layout, BasePage pattern, and key rules for maintainable automation.",
+    raw: `# Page Object Model — Starter Structure
+
+## Directory Layout
+\`\`\`
+framework/
+├── src/
+│   ├── pages/
+│   │   ├── BasePage.java           # Common methods (click, type, wait, etc.)
+│   │   ├── LoginPage.java          # Login page elements & actions
+│   │   ├── DashboardPage.java      # Dashboard page elements & actions
+│   │   └── components/
+│   │       ├── HeaderComponent.java # Shared header nav
+│   │       └── ModalComponent.java  # Reusable modal handler
+│   ├── tests/
+│   │   ├── BaseTest.java           # Setup, teardown, driver init
+│   │   ├── LoginTest.java
+│   │   └── DashboardTest.java
+│   ├── utils/
+│   │   ├── DriverFactory.java      # Browser driver management
+│   │   ├── ConfigReader.java       # Read config properties
+│   │   └── WaitHelper.java         # Custom explicit waits
+│   ├── data/
+│   │   ├── testdata.json           # Test data files
+│   │   └── users.csv               # User credentials
+│   └── config/
+│       ├── config.properties       # Environment config
+│       └── log4j.properties        # Logging config
+├── suites/
+│   ├── smoke.xml                   # Smoke test suite
+│   └── regression.xml              # Full regression suite
+└── pom.xml / package.json
+\`\`\`
+
+## BasePage Pattern
+\`\`\`java
+public class BasePage {
+    protected WebDriver driver;
+    protected WebDriverWait wait;
+
+    public BasePage(WebDriver driver) {
+        this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    }
+
+    protected void click(By locator) {
+        wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
+    }
+
+    protected void type(By locator, String text) {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        element.clear();
+        element.sendKeys(text);
+    }
+
+    protected String getText(By locator) {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).getText();
+    }
+
+    protected boolean isDisplayed(By locator) {
+        try {
+            return driver.findElement(locator).isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+}
+\`\`\`
+
+## Page Object Pattern
+\`\`\`java
+public class LoginPage extends BasePage {
+    // Locators
+    private final By emailField = By.id("email");
+    private final By passwordField = By.id("password");
+    private final By loginButton = By.cssSelector("[data-testid='login-btn']");
+    private final By errorMessage = By.className("error-message");
+
+    public LoginPage(WebDriver driver) {
+        super(driver);
+    }
+
+    // Actions
+    public DashboardPage loginAs(String email, String password) {
+        type(emailField, email);
+        type(passwordField, password);
+        click(loginButton);
+        return new DashboardPage(driver);
+    }
+
+    // Verifications
+    public String getErrorMessage() {
+        return getText(errorMessage);
+    }
+}
+\`\`\`
+
+## Key Rules
+1. **One class per page** — never mix page elements
+2. **No assertions in Page Objects** — return data, assert in tests
+3. **Use meaningful locator strategies** — prefer id > css > xpath
+4. **Return next page object** from navigation actions
+5. **Components for reusable sections** — headers, footers, modals`
+  },
+  {
+    id: 10,
+    title: "CI/CD Pipeline YAML Templates",
+    category: "automation",
+    categoryLabel: "Automation",
+    color: "cyan",
+    description: "Ready-to-use pipeline configs for smoke (per build), regression (nightly), and API tests (per PR).",
+    raw: `# CI/CD Pipeline Templates for Test Automation
+
+---
+
+## Smoke Suite — Run on Every Build
+\`\`\`yaml
+# Azure DevOps / GitHub Actions pattern
+trigger:
+  branches:
+    include: [main, develop, release/*]
+
+stages:
+  - stage: Smoke
+    jobs:
+      - job: RunSmoke
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+          - task: UseJavaVersion@1
+            inputs:
+              version: '17'
+          - script: |
+              mvn clean test -Dsuite=smoke -Dbrowser=chrome-headless
+            displayName: 'Run Smoke Suite'
+          - task: PublishTestResults@2
+            inputs:
+              testResultsFormat: 'JUnit'
+              testResultsFiles: '**/surefire-reports/*.xml'
+            condition: always()
+\`\`\`
+
+---
+
+## Regression Suite — Nightly or Pre-Release
+\`\`\`yaml
+schedules:
+  - cron: "0 2 * * 1-5"  # 2 AM weekdays
+    branches:
+      include: [main]
+
+stages:
+  - stage: Regression
+    jobs:
+      - job: RunRegression
+        pool:
+          vmImage: 'ubuntu-latest'
+        timeoutInMinutes: 120
+        steps:
+          - script: |
+              mvn clean test -Dsuite=regression -Dbrowser=chrome-headless -Dthreads=4
+            displayName: 'Run Full Regression (parallel)'
+          - task: PublishTestResults@2
+            inputs:
+              testResultsFormat: 'JUnit'
+              testResultsFiles: '**/surefire-reports/*.xml'
+            condition: always()
+          - script: |
+              mvn allure:report
+            displayName: 'Generate Allure Report'
+            condition: always()
+          - task: PublishBuildArtifacts@1
+            inputs:
+              pathToPublish: 'target/allure-report'
+              artifactName: 'test-report'
+            condition: always()
+\`\`\`
+
+---
+
+## API Test Suite — Run on PR
+\`\`\`yaml
+trigger: none
+pr:
+  branches:
+    include: [main, develop]
+
+stages:
+  - stage: APITests
+    jobs:
+      - job: RunAPITests
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+          - script: |
+              npm install -g newman
+              newman run collection.json \\
+                --environment env/qa.json \\
+                --reporters cli,junit \\
+                --reporter-junit-export results.xml
+            displayName: 'Run API Tests (Newman)'
+          - task: PublishTestResults@2
+            inputs:
+              testResultsFormat: 'JUnit'
+              testResultsFiles: 'results.xml'
+            condition: always()
+\`\`\``
+  },
+
+  // ── Category 4: Process & Governance ─────────────────────
+  {
+    id: 11,
+    title: "Definition of Ready / Definition of Done",
+    category: "process-governance",
+    categoryLabel: "Process & Governance",
+    color: "yellow",
+    description: "DoR and DoD checklists for user stories covering requirements, dependencies, testing, and deployment gates.",
+    raw: `# Definition of Ready (DoR) & Definition of Done (DoD)
+
+---
+
+## Definition of Ready (DoR)
+A user story is ready for sprint when ALL of these are true:
+
+### Requirements
+- [ ] User story is clearly written (As a... I want... So that...)
+- [ ] Acceptance criteria are defined and testable
+- [ ] Business rules are documented
+- [ ] UI/UX designs are available (if applicable)
+
+### Dependencies
+- [ ] External dependencies identified and resolved (or plan in place)
+- [ ] API contracts/specs available (if applicable)
+- [ ] Test environment access confirmed
+- [ ] Test data requirements identified
+
+### Estimation
+- [ ] Story is estimated by the team
+- [ ] Story fits within sprint capacity
+- [ ] QE effort is included in the estimate
+
+### QE Readiness
+- [ ] QE has reviewed the story and acceptance criteria
+- [ ] Test approach is identified (manual, automated, or both)
+- [ ] Risks and edge cases discussed
+
+---
+
+## Definition of Done (DoD)
+A user story is done when ALL of these are true:
+
+### Development
+- [ ] Code is complete and peer-reviewed
+- [ ] Unit tests written and passing
+- [ ] Code merged to main branch
+- [ ] No critical SonarQube/linting issues
+
+### Testing
+- [ ] All acceptance criteria verified
+- [ ] Functional testing completed
+- [ ] Regression impact assessed and tested
+- [ ] No open P1 or P2 defects
+- [ ] Accessibility basic checks passed
+- [ ] Cross-browser testing done (if applicable)
+
+### Automation
+- [ ] Smoke test cases automated (if critical path)
+- [ ] Existing automation suite still passing
+- [ ] Test data cleanup handled
+
+### Deployment
+- [ ] Deployed to staging environment
+- [ ] Smoke test passed in staging
+- [ ] Release notes updated
+- [ ] Stakeholders notified`
+  },
+  {
+    id: 12,
+    title: "Risk Assessment Matrix",
+    category: "process-governance",
+    categoryLabel: "Process & Governance",
+    color: "yellow",
+    description: "Risk scoring framework with likelihood/impact scales, risk register, and visual risk matrix.",
+    raw: `# Risk Assessment Matrix — [Project/Feature Name]
+
+## How to Use
+1. Identify risks during planning
+2. Rate Likelihood (1-5) and Impact (1-5)
+3. Risk Score = Likelihood x Impact
+4. Prioritize testing based on risk score
+
+## Risk Scoring
+| Score | Level | Testing Approach |
+|-------|-------|-----------------|
+| 20-25 | Critical | Full coverage, multiple test types, daily monitoring |
+| 12-19 | High | Comprehensive testing, regression included |
+| 6-11 | Medium | Standard testing, risk-based selection |
+| 1-5 | Low | Basic positive path, minimal edge cases |
+
+## Likelihood Scale
+| Rating | Label | Meaning |
+|--------|-------|---------|
+| 5 | Almost Certain | Has happened before, will likely happen |
+| 4 | Likely | More probable than not |
+| 3 | Possible | Could go either way |
+| 2 | Unlikely | Not expected but possible |
+| 1 | Rare | Highly improbable |
+
+## Impact Scale
+| Rating | Label | Meaning |
+|--------|-------|---------|
+| 5 | Critical | System down, data loss, security breach |
+| 4 | Major | Key feature broken, significant user impact |
+| 3 | Moderate | Feature degraded, workaround available |
+| 2 | Minor | Cosmetic issues, minor inconvenience |
+| 1 | Negligible | No user impact |
+
+## Risk Register
+| # | Risk Description | Likelihood (1-5) | Impact (1-5) | Score | Mitigation | Test Priority |
+|---|-----------------|-------------------|---------------|-------|------------|---------------|
+| 1 | Payment processing fails under load | 4 | 5 | 20 | Load testing, circuit breakers | Critical |
+| 2 | Third-party API timeout | 3 | 4 | 12 | Retry logic, fallback UI | High |
+| 3 | Browser compatibility issues | 3 | 3 | 9 | Cross-browser testing matrix | Medium |
+| 4 | Tooltip text truncation | 2 | 1 | 2 | Visual spot check | Low |
+
+## Risk Matrix Visual
+|  | Impact 1 | Impact 2 | Impact 3 | Impact 4 | Impact 5 |
+|---|---------|---------|---------|---------|---------|
+| **Likelihood 5** | 5 | 10 | 15 | 20 | 25 |
+| **Likelihood 4** | 4 | 8 | 12 | 16 | 20 |
+| **Likelihood 3** | 3 | 6 | 9 | 12 | 15 |
+| **Likelihood 2** | 2 | 4 | 6 | 8 | 10 |
+| **Likelihood 1** | 1 | 2 | 3 | 4 | 5 |`
+  },
+  {
+    id: 13,
+    title: "Test Estimation Template",
+    category: "process-governance",
+    categoryLabel: "Process & Governance",
+    color: "yellow",
+    description: "Algorithmic and probabilistic estimation approaches with buffer calculations and estimation checklist.",
+    raw: `# Test Estimation Template — [Feature/Sprint Name]
+
+## Estimation Approaches
+
+### Approach 1: Algorithmic (for predictable work)
+Use when: well-defined requirements, similar to past work
+
+| Story/Feature | # Test Cases | Complexity (1-3) | Hours per Case | Estimated Hours |
+|--------------|-------------|-------------------|----------------|-----------------|
+| Login flow | 8 | 1 | 0.5 | 4 |
+| Payment processing | 15 | 3 | 1.5 | 22.5 |
+| User profile CRUD | 12 | 2 | 0.75 | 9 |
+| **Subtotal** | **35** | | | **35.5** |
+
+**Add buffers:**
+| Buffer | Percentage | Hours |
+|--------|-----------|-------|
+| Bug retesting | 20% | 7.1 |
+| Environment issues | 10% | 3.55 |
+| Meetings & reporting | 15% | 5.33 |
+| **Total Estimate** | | **51.5 hrs** |
+
+---
+
+### Approach 2: Probabilistic (for ambiguous features)
+Use when: new technology, unclear requirements, high uncertainty
+
+| Scenario | Estimate | Confidence |
+|----------|----------|------------|
+| Best case (everything goes smoothly) | 32 hrs | 10% likely |
+| Most likely (normal issues and blockers) | 48 hrs | 60% likely |
+| Worst case (major blockers, rework) | 72 hrs | 30% likely |
+
+**Weighted estimate:** (32 x 0.1) + (48 x 0.6) + (72 x 0.3) = **53.6 hrs**
+
+**Communicate as a range:** "We estimate 48-72 hours, most likely around 54 hours."
+
+---
+
+## Estimation Checklist
+- [ ] All user stories reviewed
+- [ ] Complexity rated per story
+- [ ] Test types identified (functional, regression, API, E2E)
+- [ ] Automation scope defined
+- [ ] Dependencies and risks considered
+- [ ] Buffer added for retesting and environment issues
+- [ ] Estimate communicated as a range, not a single number`
+  },
+  {
+    id: 14,
+    title: "QE Retrospective Template",
+    category: "process-governance",
+    categoryLabel: "Process & Governance",
+    color: "yellow",
+    description: "Sprint/release retrospective with metrics snapshot, action items tracking, and previous-retro follow-up.",
+    raw: `# QE Retrospective — [Sprint/Release Name]
+
+## Meeting Info
+- **Date:** [YYYY-MM-DD]
+- **Participants:** [Names]
+- **Facilitator:** [Name]
+- **Sprint/Release:** [Name]
+
+## Metrics Snapshot
+| Metric | This Sprint | Previous Sprint | Trend |
+|--------|------------|----------------|-------|
+| Total Defects Found | | | |
+| Defect Leakage (found in prod) | | | |
+| Defect Reopen Rate | | | |
+| Test Pass Rate | | | |
+| Automation Coverage | | | |
+| Avg Bug Resolution Time | | | |
+
+## What Went Well
+1.
+2.
+3.
+
+## What Didn't Go Well
+1.
+2.
+3.
+
+## What Was Confusing or Blocked Us
+1.
+2.
+3.
+
+## Action Items
+| Action | Owner | Due Date | Status |
+|--------|-------|----------|--------|
+| | | | |
+| | | | |
+| | | | |
+
+## Improvements from Last Retro
+| Previous Action | Status | Impact |
+|----------------|--------|--------|
+| | Done / In Progress / Not Started | |
+| | | |
+
+## Key Takeaway
+[One sentence summary of the most important learning from this sprint]`
+  }
+];
+
+// ============================================================
+// MARKDOWN RENDERER (simple, purpose-built)
+// ============================================================
+function renderMarkdown(raw) {
+    const lines = raw.split('\n');
+    let html = '';
+    let inTable = false;
+    let inCodeBlock = false;
+    let codeContent = '';
+    let inList = false;
+    let inChecklist = false;
+
+    function closeList() {
+        if (inChecklist) { html += '</ul>'; inChecklist = false; }
+        if (inList) { html += '</ul>'; inList = false; }
+    }
+
+    function escapeHtml(s) {
+        return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    function inlineFormat(text) {
+        // bold
+        text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+        // inline code
+        text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+        return text;
+    }
+
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+
+        // Code blocks
+        if (line.trim().startsWith('```')) {
+            if (inCodeBlock) {
+                html += '<pre><code>' + escapeHtml(codeContent.trim()) + '</code></pre>';
+                codeContent = '';
+                inCodeBlock = false;
+            } else {
+                closeList();
+                if (inTable) { html += '</table>'; inTable = false; }
+                inCodeBlock = true;
+            }
+            continue;
+        }
+        if (inCodeBlock) {
+            codeContent += line + '\n';
+            continue;
+        }
+
+        const trimmed = line.trim();
+
+        // Empty line
+        if (trimmed === '') {
+            closeList();
+            if (inTable) { html += '</table>'; inTable = false; }
+            continue;
+        }
+
+        // HR
+        if (trimmed === '---') {
+            closeList();
+            if (inTable) { html += '</table>'; inTable = false; }
+            html += '<hr>';
+            continue;
+        }
+
+        // Headings
+        if (trimmed.startsWith('# ')) {
+            closeList();
+            if (inTable) { html += '</table>'; inTable = false; }
+            html += '<h1>' + inlineFormat(trimmed.slice(2)) + '</h1>';
+            continue;
+        }
+        if (trimmed.startsWith('## ')) {
+            closeList();
+            if (inTable) { html += '</table>'; inTable = false; }
+            html += '<h2>' + inlineFormat(trimmed.slice(3)) + '</h2>';
+            continue;
+        }
+        if (trimmed.startsWith('### ')) {
+            closeList();
+            if (inTable) { html += '</table>'; inTable = false; }
+            html += '<h3>' + inlineFormat(trimmed.slice(4)) + '</h3>';
+            continue;
+        }
+
+        // Table
+        if (trimmed.startsWith('|')) {
+            closeList();
+            // separator row
+            if (/^\|[\s\-:|]+\|$/.test(trimmed)) continue;
+
+            const cells = trimmed.split('|').filter((c, idx, arr) => idx > 0 && idx < arr.length - 1).map(c => c.trim());
+
+            if (!inTable) {
+                inTable = true;
+                html += '<table><tr>' + cells.map(c => '<th>' + inlineFormat(c) + '</th>').join('') + '</tr>';
+            } else {
+                html += '<tr>' + cells.map(c => '<td>' + inlineFormat(c) + '</td>').join('') + '</tr>';
+            }
+            continue;
+        } else if (inTable) {
+            html += '</table>';
+            inTable = false;
+        }
+
+        // Checkbox list
+        if (trimmed.startsWith('- [ ] ') || trimmed.startsWith('- [x] ')) {
+            if (inList && !inChecklist) { html += '</ul>'; inList = false; }
+            if (!inChecklist) { html += '<ul class="checklist">'; inChecklist = true; }
+            html += '<li>' + inlineFormat(trimmed.slice(6)) + '</li>';
+            continue;
+        }
+
+        // Bullet list
+        if (trimmed.startsWith('- ')) {
+            if (inChecklist) { html += '</ul>'; inChecklist = false; }
+            if (!inList) { html += '<ul>'; inList = true; }
+            html += '<li>' + inlineFormat(trimmed.slice(2)) + '</li>';
+            continue;
+        }
+
+        // Numbered list
+        if (/^\d+\.\s/.test(trimmed)) {
+            closeList();
+            if (!inList) { html += '<ol>'; inList = true; }
+            html += '<li>' + inlineFormat(trimmed.replace(/^\d+\.\s/, '')) + '</li>';
+            continue;
+        } else if (inList) {
+            // Check if it was an ol
+            closeList();
+        }
+
+        // Paragraph
+        closeList();
+        html += '<p>' + inlineFormat(trimmed) + '</p>';
+    }
+
+    closeList();
+    if (inTable) html += '</table>';
+    if (inCodeBlock) html += '<pre><code>' + escapeHtml(codeContent.trim()) + '</code></pre>';
+
+    return html;
+}
+
+// ============================================================
+// RENDER CARDS
+// ============================================================
+const grid = document.getElementById('templatesGrid');
+
+templates.forEach(t => {
+    const card = document.createElement('div');
+    card.className = 'template-card';
+    card.dataset.category = t.category;
+    card.dataset.title = t.title.toLowerCase();
+
+    card.innerHTML = `
+        <div class="card-accent ${t.color}"></div>
+        <div class="card-header">
+            <span class="card-badge ${t.color}">${t.categoryLabel}</span>
+            <div class="card-title">${t.title}</div>
+            <div class="card-desc">${t.description}</div>
+        </div>
+        <div class="card-actions">
+            <button class="btn btn-preview" onclick="togglePreview(this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                Preview
+            </button>
+            <button class="btn btn-copy" data-id="${t.id}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                Copy Template
+            </button>
+        </div>
+        <div class="card-preview md">${renderMarkdown(t.raw)}</div>
+    `;
+
+    grid.appendChild(card);
+});
+
+// ============================================================
+// INTERACTIONS
+// ============================================================
+
+// Toggle Preview
+function togglePreview(btn) {
+    const card = btn.closest('.template-card');
+    const preview = card.querySelector('.card-preview');
+    const isOpen = preview.classList.contains('open');
+    preview.classList.toggle('open');
+    btn.classList.toggle('active');
+    btn.innerHTML = isOpen
+        ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Preview'
+        : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg> Collapse';
+}
+
+// Copy to clipboard
+document.querySelectorAll('.btn-copy').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const id = parseInt(btn.dataset.id);
+        const template = templates.find(t => t.id === id);
+        if (!template) return;
+        navigator.clipboard.writeText(template.raw).then(() => {
+            showToast();
+        });
+    });
+});
+
+// Toast
+function showToast() {
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+// Category filter
+document.querySelectorAll('.filter-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        filterCards();
+    });
+});
+
+// Search
+document.getElementById('searchInput').addEventListener('input', filterCards);
+
+function filterCards() {
+    const activeCategory = document.querySelector('.filter-tab.active').dataset.category;
+    const search = document.getElementById('searchInput').value.toLowerCase();
+
+    document.querySelectorAll('.template-card').forEach(card => {
+        const matchCat = activeCategory === 'all' || card.dataset.category === activeCategory;
+        const matchSearch = !search || card.dataset.title.includes(search);
+        card.classList.toggle('hidden', !(matchCat && matchSearch));
+    });
+}
+
+// Expand All / Collapse All
+const expandAllBtn = document.getElementById('expandAllBtn');
+let allExpanded = false;
+expandAllBtn.addEventListener('click', () => {
+    allExpanded = !allExpanded;
+    document.querySelectorAll('.template-card:not(.hidden)').forEach(card => {
+        const preview = card.querySelector('.card-preview');
+        const btn = card.querySelector('.btn-preview');
+        if (allExpanded) {
+            preview.classList.add('open');
+            btn.classList.add('active');
+            btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg> Collapse';
+        } else {
+            preview.classList.remove('open');
+            btn.classList.remove('active');
+            btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Preview';
+        }
+    });
+    expandAllBtn.textContent = allExpanded ? 'Collapse All' : 'Expand All';
+});
+</script>
+
+</body>
+</html>

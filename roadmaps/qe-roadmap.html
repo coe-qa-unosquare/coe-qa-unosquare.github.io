@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SDET Roadmap — QE Center of Excellence</title>
+    <title>Quality Engineer Roadmap — QE Center of Excellence</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
@@ -1314,18 +1314,18 @@
 <body>
 
 <div class="nav-bar">
-    <a href="roadmaps.html" class="nav-back">
+    <a href="index.html" class="nav-back">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
         Back to Roadmaps
     </a>
-    <span class="nav-title">SDET Roadmap</span>
-    <img src="logos/unicorn.png" alt="Unosquare" class="nav-logo" style="width: 160px; height: 26px; object-fit: contain; object-position: right;">
+    <span class="nav-title">Quality Engineer Roadmap</span>
+    <img src="../assets/logos/unicorn.png" alt="Unosquare" class="nav-logo" style="width: 160px; height: 26px; object-fit: contain; object-position: right;">
 </div>
 
     <div class="diagram-container">
         <div class="diagram-header">
-            <h2 style="color: var(--blue-light);">Software Development Engineer in Test - Roadmap</h2>
-            <p>Career roadmap for automation engineering, framework development, and AI-powered testing</p>
+            <h2 style="color: var(--blue-light);">Software Quality Assurance Roadmap</h2>
+            <p>Career roadmap for testing strategy, process excellence, and AI-augmented QA</p>
         </div>
 
         <div class="legend">
@@ -1334,359 +1334,319 @@
             <div class="legend-item"><div class="legend-dot" style="background:var(--red);"></div> Senior 1-2</div>
         </div>
 
-        <!-- NEW SDET ROADMAP DESIGN -->
-        <div class="roadmap-new sdet-roadmap">
+        <!-- NEW ROADMAP DESIGN -->
+        <div class="roadmap-new">
             <!-- JUNIOR LEVEL -->
             <div class="level-section junior">
                 <div class="level-header">
                     <div class="level-badge">Junior</div>
                 </div>
                 <div class="modules-grid">
-                    <!-- Front-end Automation (Fundamentals) -->
+                    <!-- Black Box Techniques -->
                     <div class="module-card left">
-                        <h3 class="module-title">Front-end Automation (Fundamentals)</h3>
+                        <h3 class="module-title">Black Box Techniques (Fundamentals)</h3>
                         <div class="subtopic">
-                            <div class="subtopic-title">Framework Awareness</div>
+                            <div class="subtopic-title">Equivalence Partition</div>
                             <ul class="subtopic-children">
-                                <li>Understand Selenium vs Playwright differences</li>
-                                <li>Set up and run first automated test in both</li>
+                                <li>Divide inputs into valid/invalid partitions</li>
+                                <li>One test case per partition</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Handling Web Elements</div>
+                            <div class="subtopic-title">Boundary Value Analysis</div>
                             <ul class="subtopic-children">
-                                <li>Locate using id, name, css, xpath</li>
-                                <li>Interact with inputs, buttons, dropdowns, alerts</li>
-                                <li>Extract/validate text, attributes, visibility</li>
+                                <li>Test min, min+1, max-1, max values</li>
+                                <li>Test below/above boundaries</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Synchronization</div>
+                            <div class="subtopic-title">Decision Table</div>
                             <ul class="subtopic-children">
-                                <li>Why timing issues cause failures</li>
-                                <li>Apply explicit waits for dynamic elements</li>
-                                <li>Replace hardcoded sleeps with wait strategies</li>
+                                <li>Map conditions to outcomes</li>
+                                <li>Spot missing rules</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Exceptions and Debugging</div>
+                            <div class="subtopic-title">State Transition</div>
                             <ul class="subtopic-children">
-                                <li>Handle NoSuchElement, StaleElement, Timeout</li>
-                                <li>Read stack traces, use DevTools</li>
-                                <li>Capture screenshots on failure</li>
+                                <li>Map valid/invalid transitions</li>
+                                <li>Draw state diagrams</li>
                             </ul>
                         </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Assertions</div>
-                            <ul class="subtopic-children">
-                                <li>Assert presence, text, attributes, navigation</li>
-                                <li>Write meaningful assertion messages</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Script Organization</div>
-                            <ul class="subtopic-children">
-                                <li>Separate locators, actions, assertions</li>
-                                <li>Apply basic POM structure</li>
-                                <li>Write reusable methods</li>
-                            </ul>
-                        </div>
+                        <ul class="items">
+                            <li>Error Guessing</li>
+                            <li>Use Case Testing</li>
+                            <li>Exploratory Testing</li>
+                        </ul>
                     </div>
 
-                    <!-- Programming (Fundamentals) -->
+                    <!-- API Fundamentals -->
                     <div class="module-card right">
-                        <h3 class="module-title">Programming (Fundamentals)</h3>
+                        <h3 class="module-title">API (Fundamentals)</h3>
                         <div class="subtopic">
-                            <div class="subtopic-title">OOP Basics</div>
+                            <div class="subtopic-title">REST Architecture</div>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">HTTP Methods</div>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">HTTP Status Codes</div>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Data Formats</div>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Request/Response Structure</div>
                             <ul class="subtopic-children">
-                                <li>Create classes/objects for test components</li>
-                                <li>Use constructors to initialize test objects</li>
-                                <li>Apply access modifiers to protect members</li>
+                                <li>Headers, body, query parameters, path parameters</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Inheritance and Polymorphism</div>
+                            <div class="subtopic-title">Authentication Basics</div>
                             <ul class="subtopic-children">
-                                <li>Extend base class to share common behavior</li>
-                                <li>Override methods per page/component</li>
-                                <li>Abstract classes vs interfaces</li>
+                                <li>API Keys, Bearer tokens (conceptual)</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Error Handling</div>
+                            <div class="subtopic-title">JSON Structure</div>
                             <ul class="subtopic-children">
-                                <li>Try/catch/finally for graceful failures</li>
-                                <li>Throw meaningful exceptions</li>
-                                <li>Expected vs unexpected exceptions</li>
+                                <li>Objects, arrays, nesting, reading JSON</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Data Structures</div>
+                            <div class="subtopic-title">Common Headers</div>
                             <ul class="subtopic-children">
-                                <li>Lists and arrays for test data collections</li>
-                                <li>Maps for key-value configurations</li>
-                                <li>Choose right structure for the task</li>
+                                <li>Content-Type, Authorization, Accept</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Working with Libraries and Packages</div>
+                            <div class="subtopic-title">API Documentation Reading</div>
                             <ul class="subtopic-children">
-                                <li>Manage dependencies (npm, Maven, NuGet, pip)</li>
-                                <li>Import and use external libraries</li>
-                                <li>Understand versioning in shared projects</li>
+                                <li>How to read Swagger/OpenAPI specs</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Code Organization</div>
+                            <div class="subtopic-title">Error Responses</div>
                             <ul class="subtopic-children">
-                                <li>Structure into logical folders/modules</li>
-                                <li>Write readable, self-documenting code</li>
-                                <li>Break logic into reusable helper methods</li>
+                                <li>Understanding error payloads</li>
                             </ul>
                         </div>
                     </div>
 
-                    <!-- API Automation (Basics) -->
+                    <!-- SQL Fundamentals -->
                     <div class="module-card left">
-                        <h3 class="module-title">API Automation (Basics)</h3>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Bridge: Postman to Code</div>
-                            <ul class="subtopic-children">
-                                <li>Reproduce Postman request in code</li>
-                                <li>Read/navigate JSON response</li>
-                                <li>Print/filter response fields</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Writing Your First API Test</div>
-                            <ul class="subtopic-children">
-                                <li>GET request &amp; assert status</li>
-                                <li>POST request with JSON body</li>
-                                <li>Validate response field</li>
-                                <li>Chain two requests</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Making Tests Reusable</div>
-                            <ul class="subtopic-children">
-                                <li>Extract base URL to config</li>
-                                <li>Reuse headers across tests</li>
-                                <li>Read body from JSON file</li>
-                                <li>Read data from CSV file</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Working Without a Backend</div>
-                            <ul class="subtopic-children">
-                                <li>Set up Postman mock server</li>
-                                <li>Write tests against mock</li>
-                                <li>Simulate error responses</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- SQL (Fundamentals) -->
-                    <div class="module-card right">
                         <h3 class="module-title">SQL (Fundamentals)</h3>
                         <div class="subtopic">
-                            <div class="subtopic-title">DDL &amp; Schema Understanding</div>
+                            <div class="subtopic-title">SELECT statement</div>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">COUNT keyword</div>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">WHERE Clause Operators</div>
                             <ul class="subtopic-children">
-                                <li>CREATE, ALTER, DROP</li>
-                                <li>Understanding table design</li>
+                                <li>AND, OR, IN, BETWEEN, LIKE</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">All JOIN Types</div>
+                            <div class="subtopic-title">Basic Joins Explained</div>
                             <ul class="subtopic-children">
-                                <li>INNER, LEFT, RIGHT, FULL OUTER</li>
-                                <li>CROSS, SELF</li>
+                                <li>INNER JOIN, LEFT JOIN (visual understanding)</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Complex WHERE Clauses</div>
+                            <div class="subtopic-title">ORDER BY &amp; LIMIT</div>
                             <ul class="subtopic-children">
-                                <li>Compound conditions</li>
-                                <li>Subqueries in WHERE</li>
+                                <li>Sorting and pagination</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Aggregate Functions &amp; GROUP BY</div>
+                            <div class="subtopic-title">Aliases</div>
                             <ul class="subtopic-children">
-                                <li>COUNT, SUM, AVG with grouping</li>
-                                <li>HAVING clause</li>
+                                <li>Table and column aliases</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Database Connectivity from Code</div>
+                            <div class="subtopic-title">NULL Values</div>
                             <ul class="subtopic-children">
-                                <li>JDBC, ADO.NET, database drivers</li>
+                                <li>Understanding NULL behavior</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Parameterized Queries</div>
+                            <div class="subtopic-title">Aggregate Functions Intro</div>
                             <ul class="subtopic-children">
-                                <li>Preventing SQL injection</li>
-                                <li>Prepared statements</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Transaction Basics</div>
-                            <ul class="subtopic-children">
-                                <li>BEGIN, COMMIT, ROLLBACK from code</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Result Set Handling</div>
-                            <ul class="subtopic-children">
-                                <li>Mapping query results to objects</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Database Schema Navigation</div>
-                            <ul class="subtopic-children">
-                                <li>Understanding ERDs</li>
-                                <li>Foreign keys, relationships</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Indexes Awareness</div>
-                            <ul class="subtopic-children">
-                                <li>What they are, why they matter</li>
+                                <li>COUNT, SUM, AVG, MIN, MAX</li>
                             </ul>
                         </div>
                     </div>
 
-                    <!-- Code Versioning (Fundamentals) -->
-                    <div class="module-card left">
-                        <h3 class="module-title">Code Versioning (Fundamentals)</h3>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Version Control Fundamentals</div>
-                            <ul class="subtopic-children">
-                                <li>Why version control matters</li>
-                                <li>Centralized vs distributed</li>
-                                <li>Clone, add, commit, push, pull</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">GIT Basics</div>
-                            <ul class="subtopic-children">
-                                <li>Set up GIT &amp; connect remote</li>
-                                <li>Track and stage changes</li>
-                                <li>Meaningful commit messages</li>
-                                <li>git log and git diff</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Branching and Merging</div>
-                            <ul class="subtopic-children">
-                                <li>Create/switch feature branches</li>
-                                <li>Merge &amp; resolve conflicts</li>
-                                <li>Merge vs rebase concepts</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Collaboration Basics</div>
-                            <ul class="subtopic-children">
-                                <li>Fork and clone repos</li>
-                                <li>Open pull requests</li>
-                                <li>Apply code review feedback</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- CI / CD (Fundamentals) -->
+                    <!-- API Testing Fundamentals -->
                     <div class="module-card right">
-                        <h3 class="module-title">CI / CD (Fundamentals)</h3>
+                        <h3 class="module-title">API Testing (Fundamentals)</h3>
                         <div class="subtopic">
-                            <div class="subtopic-title">Core Concepts</div>
+                            <div class="subtopic-title">Postman</div>
                             <ul class="subtopic-children">
-                                <li>CI vs CD (delivery vs deployment)</li>
-                                <li>Where automation fits in pipeline</li>
-                                <li>Read basic YAML pipeline files</li>
+                                <li>Collections</li>
+                                <li>Requests</li>
+                                <li>Variables</li>
+                            </ul>
+                        </div>
+                        <ul class="items">
+                            <li>Status Code Validation</li>
+                            <li>Payload &amp; Schema Validation</li>
+                            <li>Header Verification</li>
+                        </ul>
+                    </div>
+
+                    <!-- Software Testing Fundamentals -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Software Testing (Fundamentals)</h3>
+                        <ul class="items">
+                            <li>Software Testing Lifecycle</li>
+                        </ul>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Testing Approaches</div>
+                            <ul class="subtopic-children">
+                                <li>Dynamic Testing</li>
+                                <li>Static Testing</li>
+                            </ul>
+                        </div>
+                        <ul class="items">
+                            <li>Bug Lifecycle</li>
+                            <li>Psychology of Testing</li>
+                        </ul>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Types of Testing</div>
+                            <ul class="subtopic-children">
+                                <li>Regression / Smoke / E2E</li>
+                                <li>Sanity / Ad-hoc</li>
+                                <li>Functional / Integration</li>
+                            </ul>
+                        </div>
+                        <ul class="items">
+                            <li>Test Case Design</li>
+                            <li>Principles of Testing</li>
+                        </ul>
+                    </div>
+
+                    <!-- Programming Basics -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Programming (Fundamentals)</h3>
+                        <ul class="items">
+                            <li>OOP Fundamentals</li>
+                        </ul>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Variables &amp; Constants</div>
+                            <ul class="subtopic-children">
+                                <li>Declaration, scope, naming conventions</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Working with Pipelines</div>
+                            <div class="subtopic-title">Operators</div>
                             <ul class="subtopic-children">
-                                <li>Trigger pipelines manually/push</li>
-                                <li>Read logs to identify failures</li>
-                                <li>Pipeline vs test failure</li>
+                                <li>Arithmetic, comparison, logical</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Running Tests in CI</div>
+                            <div class="subtopic-title">Functions/Methods</div>
                             <ul class="subtopic-children">
-                                <li>Configure job for test suite</li>
-                                <li>Environment variables</li>
-                                <li>Publish test reports</li>
+                                <li>Parameters, return values, reusability</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Arrays &amp; Lists</div>
+                            <ul class="subtopic-children">
+                                <li>Basic collections</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Loops</div>
+                            <ul class="subtopic-children">
+                                <li>For, while, foreach (practical examples)</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Conditionals</div>
+                            <ul class="subtopic-children">
+                                <li>If/else, switch statements</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Basic Debugging</div>
+                            <ul class="subtopic-children">
+                                <li>Reading error messages, print debugging</li>
                             </ul>
                         </div>
                     </div>
 
-                    <!-- AI for Developers -->
+                    <!-- AI Fundamentals -->
                     <div class="module-card left">
-                        <h3 class="module-title">AI for Developers</h3>
+                        <h3 class="module-title">AI (Fundamentals)</h3>
                         <div class="subtopic">
                             <div class="subtopic-title">What is AI</div>
                             <ul class="subtopic-children">
                                 <li>ML vs Deep Learning</li>
-                                <li>LLMs &amp; Code Generation</li>
+                                <li>What are LLMs</li>
+                                <li>How AI Models are Trained</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">AI Coding Assistants</div>
+                            <div class="subtopic-title">AI Tools Overview</div>
                             <ul class="subtopic-children">
-                                <li>GitHub Copilot Setup</li>
-                                <li>VS Code AI Extensions</li>
+                                <li>ChatGPT / Claude / Gemini</li>
+                                <li>GitHub Copilot</li>
+                                <li>AI Testing Tools</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">AI Safety</div>
+                            <div class="subtopic-title">AI Limitations</div>
                             <ul class="subtopic-children">
-                                <li>Reviewing AI-Generated Code</li>
-                                <li>Security &amp; License Concerns</li>
+                                <li>Hallucinations</li>
+                                <li>Bias in AI</li>
                             </ul>
                         </div>
                     </div>
 
                     <!-- Prompt Engineering Basics -->
                     <div class="module-card right">
-                        <h3 class="module-title">Prompt Engineering Basics</h3>
+                        <h3 class="module-title">Prompt Engineering (Fundamentals)</h3>
                         <div class="subtopic">
-                            <div class="subtopic-title">Writing Prompts for Code</div>
+                            <div class="subtopic-title">Anatomy of a Good Prompt</div>
                             <ul class="subtopic-children">
-                                <li>Describing needs</li>
-                                <li>Specifying language/framework</li>
+                                <li>Clear Instructions</li>
+                                <li>Specific Requests</li>
+                                <li>Expected Output Format</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Basic Patterns</div>
+                            <div class="subtopic-title">Basic Prompt Patterns</div>
                             <ul class="subtopic-children">
-                                <li>"Write a function that..."</li>
-                                <li>"Explain/Fix this code..."</li>
+                                <li>Question Prompts</li>
+                                <li>Task Prompts</li>
+                                <li>Role Assignment</li>
                             </ul>
                         </div>
                         <ul class="items">
-                            <li>Learning from AI Suggestions</li>
+                            <li>Common Mistakes to Avoid</li>
                         </ul>
                     </div>
 
                     <!-- Context Engineering Basics -->
                     <div class="module-card left">
-                        <h3 class="module-title">Context Engineering Basics</h3>
+                        <h3 class="module-title">Context Engineering (Fundamentals)</h3>
                         <div class="subtopic">
-                            <div class="subtopic-title">Code Context Fundamentals</div>
+                            <div class="subtopic-title">What is Context in AI</div>
                             <ul class="subtopic-children">
-                                <li>What Context AI Needs</li>
-                                <li>File Structure Awareness</li>
-                                <li>Dependency Information</li>
+                                <li>Tokens Explained</li>
+                                <li>Context Window Limits</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Providing Code Context</div>
+                            <div class="subtopic-title">Providing Effective Context</div>
                             <ul class="subtopic-children">
-                                <li>Sharing Relevant Files</li>
-                                <li>Explaining Architecture</li>
+                                <li>Background Information</li>
+                                <li>Relevant Examples</li>
+                                <li>Constraints and Rules</li>
                             </ul>
                         </div>
                     </div>
@@ -1695,757 +1655,717 @@
                 </div>
             </div>
 
-            <!-- SDET INTERMEDIATE LEVEL -->
+            <!-- INTERMEDIATE LEVEL -->
             <div class="level-section intermediate">
                 <div class="level-header">
                     <div class="level-badge">Intermediate 1-4</div>
                 </div>
                 <div class="modules-grid">
-                    <!-- Design Patterns Fundamentals -->
+                    <!-- API Testing (Intermediate) -->
                     <div class="module-card left">
-                        <h3 class="module-title">Design Patterns Fundamentals</h3>
+                        <h3 class="module-title">API Testing (Intermediate)</h3>
                         <div class="subtopic">
-                            <div class="subtopic-title">Page Object Model</div>
+                            <div class="subtopic-title">Postman</div>
                             <ul class="subtopic-children">
-                                <li>Creation of Scripts (Established Framework)</li>
+                                <li>Newman CLI (Local Execution, JS Validations)</li>
+                                <li>Request Chaining &amp; Workflows</li>
+                                <li>Environment &amp; Variable Management</li>
+                                <li>Mock Servers</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Screen Play Pattern</div>
+                            <div class="subtopic-title">Negative &amp; Edge Case Testing</div>
                             <ul class="subtopic-children">
-                                <li>Creation of Scripts (Established Framework)</li>
+                                <li>Invalid Payloads &amp; Missing Fields</li>
+                                <li>Boundary Values on API Inputs</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Singleton</div>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Page Factory</div>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Testing Approaches</div>
+                            <div class="subtopic-title">Schema Validation</div>
                             <ul class="subtopic-children">
-                                <li>BDD</li>
-                                <li>TDD</li>
+                                <li>JSON Schema Response Validation</li>
                             </ul>
                         </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Testing Frameworks Implementation</div>
-                            <ul class="subtopic-children">
-                                <li>TestNG - JUnit</li>
-                                <li>NUnit - MsTest - Mocha</li>
-                                <li>Cucumber / Specflow</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Front-end Automation (Advanced) -->
-                    <div class="module-card right">
-                        <h3 class="module-title">Front-end Automation (Advanced)</h3>
                         <ul class="items">
-                            <li>Dynamic Xpath Strategies</li>
-                            <li>Chrome DevTools Protocol</li>
-                            <li>Waits/Retry Management</li>
-                            <li>Improved Debugging</li>
+                            <li>Swagger / OpenAPI Validation</li>
+                            <li>Data-Driven &amp; Parameterized Testing</li>
+                            <li>Auth &amp; RBAC</li>
+                            <li>API Monitoring Basics</li>
                         </ul>
+                    </div>
+
+                    <!-- Accessibility Testing -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Accessibility Testing (Intermediate)</h3>
                         <div class="subtopic">
-                            <div class="subtopic-title">Advanced Web Elements</div>
+                            <div class="subtopic-title">WCAG Principles</div>
                             <ul class="subtopic-children">
-                                <li>Shadow DOM / iFrames</li>
+                                <li>Perceivable / Operable</li>
+                                <li>Understandable / Robust</li>
+                                <li>Conformance Levels (A / AA / AAA)</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Multi-Framework Exposure</div>
+                            <div class="subtopic-title">Visual Accessibility</div>
                             <ul class="subtopic-children">
-                                <li>Selenium / Playwright / Cypress</li>
+                                <li>Color Contrast Ratios (4.5:1 / 3:1)</li>
+                                <li>Text Alternatives &amp; Alt Text</li>
+                                <li>Focus Indicators</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">ARIA Testing</div>
+                            <ul class="subtopic-children">
+                                <li>Roles, States &amp; Properties</li>
+                                <li>Landmarks &amp; Live Regions</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Keyboard Accessibility</div>
+                            <ul class="subtopic-children">
+                                <li>Tab Order &amp; Focus Management</li>
+                                <li>Skip Navigation</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Screen Reader Testing</div>
+                            <ul class="subtopic-children">
+                                <li>VoiceOver (macOS/iOS)</li>
+                                <li>NVDA / JAWS (Windows)</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Automated Tools</div>
+                            <ul class="subtopic-children">
+                                <li>axe DevTools / Lighthouse</li>
+                                <li>WAVE</li>
                             </ul>
                         </div>
                     </div>
 
-                    <!-- SQL (Intermediate) -->
+                    <!-- Mobile Testing -->
+                    <div class="module-card left">
+                        <h3 class="module-title">Mobile Testing (Intermediate)</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Testing Techniques</div>
+                            <ul class="subtopic-children">
+                                <li>Interruption (Calls, Notifications, Low Battery)</li>
+                                <li>Localization &amp; Internationalization</li>
+                                <li>Performance (Memory Leaks / CPU Usage)</li>
+                                <li>Network (Throttling / Offline Mode)</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Interaction Testing</div>
+                            <ul class="subtopic-children">
+                                <li>Gestures (Swipe, Pinch, Long Press)</li>
+                                <li>Deep Linking &amp; Universal Links</li>
+                                <li>Push Notifications</li>
+                                <li>App Permissions &amp; Privacy Prompts</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Mobile Cloud &amp; Distribution</div>
+                            <ul class="subtopic-children">
+                                <li>TestFlight / Firebase App Distribution</li>
+                                <li>Simulators vs Emulators vs Real Devices</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Platforms</div>
+                            <ul class="subtopic-children">
+                                <li>Native / Hybrid / Responsive Web</li>
+                                <li>iOS vs Android Differences</li>
+                                <li>Device Fragmentation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Programming -->
+                    <div class="module-card right">
+                        <h3 class="module-title">Programming - Extension</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">OOP Hands-On</div>
+                            <ul class="subtopic-children">
+                                <li>Abstraction / Encapsulation</li>
+                                <li>Inheritance / Polymorphism</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Collections &amp; Data Structures</div>
+                            <ul class="subtopic-children">
+                                <li>Lists, Maps, Sets, Arrays</li>
+                            </ul>
+                        </div>
+                        <ul class="items">
+                            <li>String Manipulation / Regex</li>
+                            <li>File I/O Operations</li>
+                            <li>Exception Handling</li>
+                            <li>Unit Testing Basics</li>
+                        </ul>
+                    </div>
+
+                    <!-- SQL Intermediate -->
                     <div class="module-card left">
                         <h3 class="module-title">SQL (Intermediate)</h3>
                         <div class="subtopic">
-                            <div class="subtopic-title">Window Functions</div>
+                            <div class="subtopic-title">Advanced Joins</div>
                             <ul class="subtopic-children">
-                                <li>ROW_NUMBER, RANK, DENSE_RANK, LEAD, LAG, PARTITION BY</li>
+                                <li>Right Join</li>
+                                <li>Full-outer Join</li>
+                                <li>Self Join</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Common Table Expressions (CTEs)</div>
+                            <div class="subtopic-title">Aggregations</div>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Subqueries</div>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Constraints</div>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">GROUP BY &amp; HAVING</div>
                             <ul class="subtopic-children">
-                                <li>Recursive and non-recursive</li>
+                                <li>Grouping with conditions</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Complex Subqueries</div>
+                            <div class="subtopic-title">CASE Statements</div>
                             <ul class="subtopic-children">
-                                <li>Correlated subqueries, EXISTS, IN vs JOIN</li>
+                                <li>Conditional logic in queries</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Database Testing</div>
+                            <div class="subtopic-title">UNION / INTERSECT / EXCEPT</div>
                             <ul class="subtopic-children">
-                                <li>Data integrity validation, test data management</li>
+                                <li>Combining result sets</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">NoSQL Awareness</div>
+                            <div class="subtopic-title">NULL Handling</div>
                             <ul class="subtopic-children">
-                                <li>When relational vs document/key-value stores</li>
+                                <li>COALESCE, NULLIF, IS NULL patterns</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Date/Time Functions</div>
+                            <ul class="subtopic-children">
+                                <li>Date manipulation, formatting</li>
                             </ul>
                         </div>
                     </div>
 
-                    <!-- API Automation (Intermediate) -->
+                    <!-- AI Deep Dive -->
                     <div class="module-card right">
-                        <h3 class="module-title">API Automation (Intermediate)</h3>
+                        <h3 class="module-title">AI Deep Dive</h3>
                         <div class="subtopic">
-                            <div class="subtopic-title">Serialization / Deserialization</div>
+                            <div class="subtopic-title">LLM Architecture</div>
                             <ul class="subtopic-children">
-                                <li>Map JSON to model objects</li>
-                                <li>Handle nested arrays</li>
-                                <li>Validate deserialized fields</li>
+                                <li>Transformers / Token Prediction</li>
+                                <li>Temperature Settings</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Data-Driven &amp; Auth</div>
+                            <div class="subtopic-title">Model Comparison</div>
                             <ul class="subtopic-children">
-                                <li>Parameterize from JSON/CSV</li>
-                                <li>Token retrieval &amp; refresh</li>
-                                <li>Role-based access testing</li>
+                                <li>GPT vs Claude vs Gemini</li>
+                                <li>Cost Considerations</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Non-Functional Testing</div>
+                            <div class="subtopic-title">Hands-on Tools</div>
                             <ul class="subtopic-children">
-                                <li>Performance &amp; response times</li>
-                                <li>Stress &amp; load testing</li>
-                                <li>Concurrent request validation</li>
+                                <li>Copilot / Claude Code</li>
+                                <li>AI Browser Extensions</li>
                             </ul>
                         </div>
-                        <ul class="items">
-                            <li>JSON Schema Validation</li>
-                            <li>API Test Organization</li>
-                            <li>CI/CD Pipeline Integration</li>
-                        </ul>
                     </div>
 
-                    <!-- Mobile Automation (Intermediate) -->
+                    <!-- Prompt Engineering Intermediate -->
                     <div class="module-card left">
-                        <h3 class="module-title">Mobile Automation (Intermediate)</h3>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Environment Setup</div>
-                            <ul class="subtopic-children">
-                                <li>Configure Appium server</li>
-                                <li>USB debugging &amp; emulators</li>
-                                <li>ADB commands</li>
-                                <li>Desired capabilities</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Locators &amp; Gestures</div>
-                            <ul class="subtopic-children">
-                                <li>Appium Inspector</li>
-                                <li>resource-id, accessibility-id</li>
-                                <li>Tap, swipe, pinch, zoom</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Mobile-Specific Scenarios</div>
-                            <ul class="subtopic-children">
-                                <li>Interrupts (calls, SMS)</li>
-                                <li>Network conditions</li>
-                                <li>Native/webview contexts</li>
-                            </ul>
-                        </div>
-                        <ul class="items">
-                            <li>Page Object Model for Mobile</li>
-                            <li>Screenshot on Failure</li>
-                        </ul>
-                    </div>
-
-                    <!-- Code Versioning (Intermediate) -->
-                    <div class="module-card right">
-                        <h3 class="module-title">Code Versioning (Intermediate)</h3>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Git Workflows</div>
-                            <ul class="subtopic-children">
-                                <li>Gitflow, trunk-based</li>
-                                <li>Branching conventions</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">History Management</div>
-                            <ul class="subtopic-children">
-                                <li>git revert, reset, reflog</li>
-                                <li>Cherry-picking commits</li>
-                                <li>Squashing &amp; rebase</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">PR &amp; Code Review</div>
-                            <ul class="subtopic-children">
-                                <li>Structure reviewable PRs</li>
-                                <li>Conflict resolution</li>
-                            </ul>
-                        </div>
-                        <ul class="items">
-                            <li>Tagging and Releases</li>
-                        </ul>
-                    </div>
-
-                    <!-- AI-Augmented Development -->
-                    <div class="module-card left">
-                        <h3 class="module-title">AI-Augmented Development</h3>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Advanced AI Tools</div>
-                            <ul class="subtopic-children">
-                                <li>Copilot Advanced Features</li>
-                                <li>Claude Code / Cursor IDE</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">AI for Test Automation</div>
-                            <ul class="subtopic-children">
-                                <li>Generating Test Scripts</li>
-                                <li>Creating Page Objects</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">AI-Assisted Debugging</div>
-                            <ul class="subtopic-children">
-                                <li>Error Analysis</li>
-                                <li>Log Interpretation</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Prompt Engineering (Intermediate) -->
-                    <div class="module-card right">
                         <h3 class="module-title">Prompt Engineering (Intermediate)</h3>
                         <div class="subtopic">
-                            <div class="subtopic-title">Code Generation Prompts</div>
+                            <div class="subtopic-title">Prompt Frameworks</div>
                             <ul class="subtopic-children">
-                                <li>Framework-Specific Prompts</li>
-                                <li>Test Pattern / Refactoring</li>
+                                <li>TRICE+ / RACE / CREATE</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Prompt Techniques</div>
+                            <div class="subtopic-title">Advanced Techniques</div>
                             <ul class="subtopic-children">
-                                <li>Few-Shot with Examples</li>
+                                <li>Few-Shot Prompting</li>
                                 <li>Chain of Thought</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">SDET-Specific Patterns</div>
+                            <div class="subtopic-title">QE-Specific Prompts</div>
                             <ul class="subtopic-children">
-                                <li>Test Framework Setup</li>
-                                <li>API/UI Automation Prompts</li>
-                                <li>CI/CD Configuration</li>
+                                <li>Test Case Generation</li>
+                                <li>Bug Report Writing</li>
+                                <li>Test Data Creation</li>
                             </ul>
                         </div>
                     </div>
 
                     <!-- Context Engineering Intermediate -->
-                    <div class="module-card left">
+                    <div class="module-card right">
                         <h3 class="module-title">Context Engineering (Intermediate)</h3>
                         <div class="subtopic">
-                            <div class="subtopic-title">Repository-Aware Prompting</div>
+                            <div class="subtopic-title">Context Optimization</div>
                             <ul class="subtopic-children">
-                                <li>Project Structure Context</li>
-                                <li>Existing Code Patterns</li>
+                                <li>Prioritizing Information</li>
+                                <li>Structured Templates</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Multi-File Context</div>
+                            <div class="subtopic-title">Multi-Turn Conversations</div>
                             <ul class="subtopic-children">
-                                <li>Related File References</li>
-                                <li>Test-Code Relationships</li>
+                                <li>Building on Responses</li>
+                                <li>When to Start Fresh</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Documentation as Context</div>
+                            <div class="subtopic-title">Context for QE Tasks</div>
                             <ul class="subtopic-children">
-                                <li>API Specs / Requirements</li>
+                                <li>Requirements Context</li>
+                                <li>Test Scenarios / Error Logs</li>
                             </ul>
                         </div>
                     </div>
-
-                    <div class="module-card right" style="visibility: hidden;"></div>
                 </div>
             </div>
 
-            <!-- SDET SENIOR LEVEL -->
+            <!-- SENIOR LEVEL -->
             <div class="level-section senior">
                 <div class="level-header">
                     <div class="level-badge">Senior 1-2</div>
                 </div>
                 <div class="modules-grid">
-                    <!-- Programming Advanced / Best Practices -->
+                    <!-- Software Automation -->
                     <div class="module-card left">
-                        <h3 class="module-title">Programming Advanced / Best Practices</h3>
+                        <h3 class="module-title">Software Automation</h3>
                         <div class="subtopic">
-                            <div class="subtopic-title">Data Structures and Algorithms</div>
+                            <div class="subtopic-title">Automation Strategy</div>
                             <ul class="subtopic-children">
-                                <li>Choose the right structure for test data management</li>
-                                <li>Optimize framework code using efficient algorithms</li>
-                                <li>Identify and resolve performance bottlenecks</li>
+                                <li>Define what should and should not be automated</li>
+                                <li>Identify the right automation level (UI, API, unit) per scenario</li>
+                                <li>Evaluate and recommend tools based on project needs</li>
+                                <li>Estimate automation effort and maintain coverage metrics</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Design Patterns</div>
+                            <div class="subtopic-title">Low Code Tools</div>
                             <ul class="subtopic-children">
-                                <li>SOLID — apply across page objects, helpers, layers</li>
-                                <li>Behavioral — Strategy, Observer, Command</li>
-                                <li>Structural — Decorator, Adapter, Facade</li>
-                                <li>Creational — Factory, Builder, Singleton</li>
+                                <li>Testim — create and maintain AI-assisted scripts using smart locators</li>
+                                <li>Mabl — record, maintain journeys and analyze auto-detected regressions</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Interfaces and Abstract Classes</div>
+                            <div class="subtopic-title">Selenium / Playwright</div>
                             <ul class="subtopic-children">
-                                <li>Define contracts between framework layers</li>
-                                <li>Decouple test logic from implementation</li>
+                                <li>Write stable locators that survive UI changes (id, css, xpath, accessibility)</li>
+                                <li>Write scripts covering happy path and edge cases</li>
+                                <li>Refactor and update scripts after UI changes</li>
+                                <li>Apply basic POM structure to organize scripts</li>
+                                <li>Use explicit waits and fix flaky tests caused by timing issues</li>
+                                <li>Catch common exceptions and add meaningful error messages</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Functional Programming</div>
+                            <div class="subtopic-title">Test Frameworks (Conceptual Awareness)</div>
                             <ul class="subtopic-children">
-                                <li>Lambdas and streams for test data</li>
-                                <li>Immutability for parallel run safety</li>
+                                <li>TestNG / JUnit / NUnit — suites, annotations, parallel execution</li>
+                                <li>Cucumber — feature files, step definitions and Gherkin scenarios</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Clean Code Principles</div>
+                            <div class="subtopic-title">Automation in the QE Process</div>
                             <ul class="subtopic-children">
-                                <li>Self-documenting code, consistent naming</li>
-                                <li>Refactor into single-purpose functions</li>
-                                <li>Lead maintainability-focused code reviews</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Test Driven Development</div>
-                            <ul class="subtopic-children">
-                                <li>Write failing tests before implementing helpers</li>
-                                <li>Apply TDD to framework utilities</li>
+                                <li>Triage failures and distinguish flaky tests from real bugs</li>
+                                <li>Report automation coverage and results to the team</li>
+                                <li>Integrate suites into CI/CD for smoke, sanity and regression runs</li>
                             </ul>
                         </div>
                     </div>
 
-                    <!-- Automation Design Pattern Development -->
+                    <!-- Performance Testing (Conceptual) -->
                     <div class="module-card right">
-                        <h3 class="module-title">Automation Design Pattern Development</h3>
+                        <h3 class="module-title">Performance Testing (Conceptual)</h3>
                         <div class="subtopic">
-                            <div class="subtopic-title">Framework Development</div>
+                            <div class="subtopic-title">Core Concepts</div>
                             <ul class="subtopic-children">
-                                <li>Design scalable architecture across projects</li>
-                                <li>Separate layers (drivers, pages, tests, utils)</li>
-                                <li>Build onboarding docs and contribution guides</li>
+                                <li>Differentiate Load, Stress, Volume, Soak and Scalability testing</li>
+                                <li>Define performance acceptance criteria and SLAs with the team</li>
+                                <li>Recognize common issues such as memory leaks, bottlenecks and timeouts</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">POM / Page Factory</div>
+                            <div class="subtopic-title">Test Design and Planning</div>
                             <ul class="subtopic-children">
-                                <li>Implement POM with inheritance for shared components</li>
-                                <li>Page Factory for lazy element loading</li>
-                                <li>Manage complex page hierarchies</li>
+                                <li>Identify critical user journeys worth performance testing</li>
+                                <li>Define realistic load patterns based on real usage data</li>
+                                <li>Document entry and exit criteria for performance test runs</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Screenplay Pattern / BDD</div>
+                            <div class="subtopic-title">Tools</div>
                             <ul class="subtopic-children">
-                                <li>Implement actor, task, interaction layers</li>
-                                <li>Integrate Screenplay with Cucumber</li>
+                                <li>JMeter — execute existing scripts, adjust thread count and interpret reports</li>
+                                <li>BlazeMeter — run cloud-based tests and share results with stakeholders</li>
+                                <li>LoadRunner — interpret results generated by the performance engineering team</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Design Patterns in Frameworks</div>
+                            <div class="subtopic-title">Results Analysis</div>
                             <ul class="subtopic-children">
-                                <li>Singleton — driver and config management</li>
-                                <li>Factory — dynamic driver/browser instances</li>
-                                <li>Builder — fluent test data construction</li>
-                                <li>Strategy — swap execution strategies</li>
-                                <li>Observer — event-based reporting/logging</li>
+                                <li>Identify response time degradation and error rate spikes</li>
+                                <li>Distinguish between frontend, backend and network bottlenecks</li>
+                                <li>Correlate results with infrastructure metrics (CPU, memory)</li>
+                                <li>Track performance trends across builds and releases</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Parallel Execution</div>
+                            <div class="subtopic-title">Collaboration and Process</div>
                             <ul class="subtopic-children">
-                                <li>Thread-safe page objects and utilities</li>
-                                <li>Test data isolation across threads</li>
-                                <li>Optimize suite distribution for fast feedback</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Framework Governance</div>
-                            <ul class="subtopic-children">
-                                <li>Define coding standards, enforce via linting</li>
-                                <li>Versioned releases with changelogs</li>
-                                <li>Lead framework adoption across teams</li>
+                                <li>Coordinate with developers and DevOps to resolve bottlenecks</li>
+                                <li>Advocate for performance testing as part of the definition of done</li>
+                                <li>Raise performance risks early based on architecture and load expectations</li>
                             </ul>
                         </div>
                     </div>
 
-                    <!-- Code Versioning (Advanced) -->
+                    <!-- Advanced Testing -->
                     <div class="module-card left">
-                        <h3 class="module-title">Code Versioning (Advanced)</h3>
+                        <h3 class="module-title">Testing Best Practices (Advanced)</h3>
                         <div class="subtopic">
-                            <div class="subtopic-title">Repository Architecture</div>
+                            <div class="subtopic-title">Risk-Based Testing</div>
                             <ul class="subtopic-children">
-                                <li>Structure a mono-repo for multiple automation frameworks</li>
-                                <li>Manage sub-modules for shared test libraries</li>
-                                <li>Define and enforce branching strategies across teams</li>
-                                <li>Set up branch protection rules and required reviewers</li>
+                                <li>Prioritize coverage using likelihood and impact per feature</li>
+                                <li>Adjust depth and scope based on risk level</li>
+                                <li>Document and communicate risk decisions to stakeholders</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Advanced History Management</div>
+                            <div class="subtopic-title">Dynamic Test Selection</div>
                             <ul class="subtopic-children">
-                                <li>Rewrite history across multiple commits with interactive rebase</li>
-                                <li>Split a large commit into smaller logical units</li>
-                                <li>Use git bisect to identify which commit introduced a bug</li>
-                                <li>Audit and clean up stale branches at scale</li>
+                                <li>Select regression tests based on scope of change</li>
+                                <li>Reduce execution time without sacrificing meaningful coverage</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Automation Framework Versioning</div>
+                            <div class="subtopic-title">Estimations</div>
                             <ul class="subtopic-children">
-                                <li>Version and publish shared automation libraries</li>
-                                <li>Manage dependency updates across multiple test projects</li>
-                                <li>Maintain changelogs aligned to app release versions</li>
-                                <li>Use semantic versioning for framework releases</li>
+                                <li>Break down effort by complexity and risk</li>
+                                <li>Apply algorithmic forecasting for predictable work</li>
+                                <li>Apply probabilistic forecasting for ambiguous features</li>
+                                <li>Communicate estimates with confidence ranges not single numbers</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Git Hooks and Automation</div>
+                            <div class="subtopic-title">Shift-Left Testing</div>
                             <ul class="subtopic-children">
-                                <li>Enforce code style and linting on pre-commit</li>
-                                <li>Run smoke tests before push with pre-push hooks</li>
-                                <li>Automate ticket references and commit message validation</li>
-                                <li>Share hooks across the team using a hooks manager</li>
+                                <li>Involve QE from requirements and design phases</li>
+                                <li>Challenge acceptance criteria before development starts</li>
+                                <li>Identify testability issues early to reduce cost of defects</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Governance and Best Practices</div>
+                            <div class="subtopic-title">Continuous Testing</div>
                             <ul class="subtopic-children">
-                                <li>Define and document GIT conventions for QE/SDET teams</li>
-                                <li>Conduct GIT training and onboarding for new team members</li>
-                                <li>Audit repository health (branch count, stale PRs, commit quality)</li>
-                                <li>Lead code review culture within the automation team</li>
+                                <li>Define quality gates that block pipeline progression on failure</li>
+                                <li>Monitor test results across builds and flag coverage gaps</li>
+                                <li>Balance fast feedback with meaningful test depth</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Feature Flags and Progressive Delivery</div>
+                            <ul class="subtopic-children">
+                                <li>Validate behavior when features are toggled on and off</li>
+                                <li>Test flag combinations and coordinate scope with canary releases</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Observability and Monitoring as Testing</div>
+                            <ul class="subtopic-children">
+                                <li>Use logs, traces and metrics to validate system behavior</li>
+                                <li>Correlate production incidents with gaps in test coverage</li>
+                                <li>Treat production monitoring as an extension of the test strategy</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Reporting and Metrics</div>
+                            <ul class="subtopic-children">
+                                <li>Defect Leakage, Defect-Reopen Rate, Test Coverage, DoR and DoD</li>
+                                <li>Present metrics as quality signals not just numbers</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Release Management</div>
+                            <ul class="subtopic-children">
+                                <li>Define testing scope, sign-off criteria and go/no-go recommendations</li>
+                                <li>Assess readiness based on metrics, risk and open defects</li>
                             </ul>
                         </div>
                     </div>
 
-                    <!-- CI/CD Advanced Topics -->
+                    <!-- Advanced SQL -->
                     <div class="module-card right">
-                        <h3 class="module-title">CI/CD (Advanced)</h3>
+                        <h3 class="module-title">SQL (Advanced)</h3>
                         <div class="subtopic">
-                            <div class="subtopic-title">YAML and Pipeline as Code</div>
+                            <div class="subtopic-title">Views</div>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Stored Procedures</div>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">SQL Injection</div>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Windows Functions</div>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Query Optimization &amp; Execution Plans</div>
                             <ul class="subtopic-children">
-                                <li>Write and maintain complex multi-stage pipeline definitions</li>
-                                <li>Use variables, conditions and templates to avoid duplication</li>
-                                <li>Parameterize pipelines to support multiple environments</li>
-                                <li>Version control pipelines alongside automation code</li>
+                                <li>Understanding EXPLAIN/ANALYZE to identify slow queries</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Docker in CI/CD</div>
+                            <div class="subtopic-title">Indexing Strategies</div>
                             <ul class="subtopic-children">
-                                <li>Build and maintain custom Docker images for test execution</li>
-                                <li>Run test suites inside containers for environment consistency</li>
-                                <li>Optimize image size and layer caching for faster builds</li>
-                                <li>Use Docker Compose to spin up app and dependencies locally</li>
+                                <li>When and how to use indexes effectively</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Multi-Stage Pipelines</div>
+                            <div class="subtopic-title">Transactions &amp; Locking</div>
                             <ul class="subtopic-children">
-                                <li>Design stages for build, test, report and deploy</li>
-                                <li>Run smoke, regression and API suites in parallel stages</li>
-                                <li>Configure stage dependencies and failure conditions</li>
-                                <li>Trigger specific test suites based on changed file paths</li>
+                                <li>ACID properties, deadlocks, isolation levels</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Artifact Management</div>
+                            <div class="subtopic-title">Database Performance Testing</div>
                             <ul class="subtopic-children">
-                                <li>Publish and version test reports as pipeline artifacts</li>
-                                <li>Share build artifacts between pipeline stages</li>
-                                <li>Manage and publish shared automation libraries</li>
-                                <li>Archive and retrieve historical test results</li>
+                                <li>Identifying bottlenecks, query profiling</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Infrastructure as Code</div>
+                            <div class="subtopic-title">Data Integrity Validation</div>
                             <ul class="subtopic-children">
-                                <li>Provision test environments using IaC tools</li>
-                                <li>Tear down and recreate environments on demand</li>
-                                <li>Manage environment variables and secrets securely</li>
-                                <li>Validate environment health before test execution</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Pipeline Optimization and Governance</div>
-                            <ul class="subtopic-children">
-                                <li>Identify and reduce bottlenecks in test execution time</li>
-                                <li>Configure retry strategies for flaky tests in pipeline</li>
-                                <li>Monitor pipeline health, failure trends and execution time</li>
-                                <li>Define and document CI/CD standards for QE/SDET teams</li>
+                                <li>Constraints verification, referential integrity checks</li>
                             </ul>
                         </div>
                     </div>
 
-                    <!-- API Automation (Advanced) -->
+                    <!-- API Testing (Advanced) -->
                     <div class="module-card left">
-                        <h3 class="module-title">API Automation (Advanced)</h3>
+                        <h3 class="module-title">API Testing (Advanced)</h3>
                         <div class="subtopic">
-                            <div class="subtopic-title">Contract Testing</div>
+                            <div class="subtopic-title">API Test Strategy</div>
                             <ul class="subtopic-children">
-                                <li>Consumer-driven contracts (Pact)</li>
-                                <li>Detect breaking changes</li>
+                                <li>Defining Coverage Across Endpoints (CRUD, Edge Cases, Security)</li>
+                                <li>Risk-Based API Test Prioritization</li>
+                                <li>Contract Testing Awareness (Pact, Spring Cloud Contract)</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Security &amp; Performance</div>
+                            <div class="subtopic-title">API Security Testing</div>
                             <ul class="subtopic-children">
-                                <li>OWASP top 10 automation</li>
-                                <li>SQL injection/XSS testing</li>
-                                <li>SLA assertions</li>
+                                <li>OWASP API Top 10 Awareness</li>
+                                <li>Evaluating Auth Flows (OAuth2, JWT, API Keys)</li>
+                                <li>Injection &amp; Broken Access Control Testing</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Framework Design</div>
+                            <div class="subtopic-title">API Governance &amp; Quality</div>
                             <ul class="subtopic-children">
-                                <li>Reusable API framework</li>
-                                <li>Shared clients/interceptors</li>
+                                <li>Reviewing API Documentation for Completeness</li>
+                                <li>Evaluating Versioning &amp; Deprecation Impact</li>
+                                <li>Cross-Team API Dependency Mapping</li>
                             </ul>
                         </div>
-                        <ul class="items">
-                            <li>API Mocking at Scale</li>
-                            <li>Observability &amp; Debugging</li>
-                        </ul>
+                        <div class="subtopic">
+                            <div class="subtopic-title">CI/CD Awareness</div>
+                            <ul class="subtopic-children">
+                                <li>Evaluating API Test Results in Pipelines</li>
+                                <li>Identifying Gaps in Automated API Coverage</li>
+                                <li>Collaborating with SDETs on Test Suite Health</li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <!-- Mobile Automation Advanced -->
+                    <!-- Accessibility Testing (Advanced) -->
                     <div class="module-card right">
-                        <h3 class="module-title">Mobile Automation (Advanced)</h3>
+                        <h3 class="module-title">Accessibility Testing (Advanced)</h3>
                         <div class="subtopic">
-                            <div class="subtopic-title">Parallel &amp; Multi-App</div>
+                            <div class="subtopic-title">Accessibility Test Strategy</div>
                             <ul class="subtopic-children">
-                                <li>Parallel device execution</li>
-                                <li>Multiple app contexts</li>
-                                <li>Test isolation</li>
+                                <li>Defining Org-Wide Standards (A vs AA targets)</li>
+                                <li>Risk-Based Accessibility Prioritization</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Cloud Device Farms</div>
+                            <div class="subtopic-title">CI/CD Awareness</div>
                             <ul class="subtopic-children">
-                                <li>SauceLabs / BrowserStack</li>
-                                <li>AWS Device Farm</li>
-                                <li>Cloud test analysis</li>
+                                <li>Understanding a11y Gates in Pipelines</li>
+                                <li>Evaluating Automated Scan Results (axe-core, Lighthouse)</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Performance &amp; Stability</div>
+                            <div class="subtopic-title">Accessibility Auditing</div>
                             <ul class="subtopic-children">
-                                <li>Memory/CPU monitoring</li>
-                                <li>App launch time metrics</li>
-                                <li>Flaky test strategies</li>
+                                <li>VPAT / ACR Documentation</li>
+                                <li>Third-Party Audit Coordination</li>
                             </ul>
                         </div>
-                        <ul class="items">
-                            <li>Device Virtualization</li>
-                            <li>CI/CD Integration</li>
-                        </ul>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Inclusive Design Advocacy</div>
+                            <ul class="subtopic-children">
+                                <li>Shift-Left Accessibility</li>
+                                <li>Developer &amp; QA Coaching</li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <!-- AI Architecture -->
+                    <!-- Mobile Testing (Advanced) -->
                     <div class="module-card left">
-                        <h3 class="module-title">AI Architecture</h3>
+                        <h3 class="module-title">Mobile Testing (Advanced)</h3>
                         <div class="subtopic">
-                            <div class="subtopic-title">LLM Integration</div>
+                            <div class="subtopic-title">Mobile Test Strategy</div>
                             <ul class="subtopic-children">
-                                <li>OpenAI / Anthropic APIs</li>
-                                <li>Azure AI / AWS Bedrock</li>
-                                <li>Self-Hosted (Ollama)</li>
+                                <li>Device Matrix Strategy</li>
+                                <li>Coverage vs Cost Trade-offs</li>
+                                <li>Cloud Device Farms (BrowserStack, Sauce Labs)</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">AI in Test Infrastructure</div>
+                            <div class="subtopic-title">Mobile Automation Fluency</div>
                             <ul class="subtopic-children">
-                                <li>AI-Powered Test Selection</li>
-                                <li>Intelligent Prioritization</li>
-                                <li>Self-Healing Locators</li>
+                                <li>Reading &amp; Evaluating Appium / XCUITest / Espresso</li>
+                                <li>Reviewing Automation Coverage Gaps</li>
+                                <li>Collaborating with SDETs on Framework Decisions</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Building AI Agents</div>
+                            <div class="subtopic-title">Mobile CI/CD Awareness</div>
                             <ul class="subtopic-children">
-                                <li>Autonomous Test Agents</li>
-                                <li>Multi-Agent Orchestration</li>
-                                <li>LangChain, etc.</li>
+                                <li>Understanding Build Pipelines (iOS &amp; Android)</li>
+                                <li>Evaluating Release Readiness</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Mobile Performance &amp; Security Evaluation</div>
+                            <ul class="subtopic-children">
+                                <li>Interpreting Profiler Results (Instruments / Android Profiler)</li>
+                                <li>Evaluating Certificate Pinning &amp; API Security Posture</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- AI Mastery -->
+                    <div class="module-card right">
+                        <h3 class="module-title">AI Mastery</h3>
+                        <div class="subtopic">
+                            <div class="subtopic-title">Advanced LLM Concepts</div>
+                            <ul class="subtopic-children">
+                                <li>Fine-Tuning vs Prompting</li>
+                                <li>RAG (Retrieval Augmented Gen)</li>
+                                <li>Embeddings &amp; Vector DBs</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">AI Integration</div>
+                            <ul class="subtopic-children">
+                                <li>API Access (OpenAI, Anthropic)</li>
+                                <li>AI in CI/CD Pipelines</li>
+                            </ul>
+                        </div>
+                        <div class="subtopic">
+                            <div class="subtopic-title">AI Governance</div>
+                            <ul class="subtopic-children">
+                                <li>Security &amp; Privacy</li>
+                                <li>AI Ethics in Testing</li>
                             </ul>
                         </div>
                     </div>
 
                     <!-- Prompt Engineering Advanced -->
-                    <div class="module-card right">
+                    <div class="module-card left">
                         <h3 class="module-title">Prompt Engineering (Advanced)</h3>
                         <div class="subtopic">
-                            <div class="subtopic-title">Complex Automation Prompts</div>
+                            <div class="subtopic-title">Complex Prompt Design</div>
                             <ul class="subtopic-children">
-                                <li>Generate framework scaffolding from specs</li>
-                                <li>Migrate test suites between frameworks</li>
+                                <li>Multi-Step Task Chains</li>
+                                <li>Self-Reflection Prompts</li>
+                                <li>Validation Prompts</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Meta Prompting</div>
+                            <div class="subtopic-title">Prompt Patterns Library</div>
                             <ul class="subtopic-children">
-                                <li>Prompts that generate/improve other prompts</li>
-                                <li>Self-refining loops with validation</li>
-                                <li>LLMs to evaluate prompt effectiveness</li>
+                                <li>Reusable Templates</li>
+                                <li>Version Control for Prompts</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Prompt Patterns</div>
+                            <div class="subtopic-title">Advanced QE Applications</div>
                             <ul class="subtopic-children">
-                                <li>Chain of thought — step by step reasoning</li>
-                                <li>Few-shot — examples to shape output</li>
-                                <li>Role prompting — expert personas</li>
-                                <li>Self-correcting — model fixes its output</li>
-                                <li>Validation chains — output feeds next prompt</li>
-                                <li>Tree of thought — explore multiple paths</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Multi-Model Orchestration</div>
-                            <ul class="subtopic-children">
-                                <li>Combine models for generation/validation</li>
-                                <li>Pipelines where models check each other</li>
-                                <li>Integrate into CI/CD for test generation</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Prompt Management</div>
-                            <ul class="subtopic-children">
-                                <li>Version control prompts with automation code</li>
-                                <li>Team prompt libraries and A/B testing</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">AI Agent Design</div>
-                            <ul class="subtopic-children">
-                                <li>Autonomous agents that explore/test features</li>
-                                <li>Goals, constraints, human-in-the-loop steps</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Evaluation and Quality Control</div>
-                            <ul class="subtopic-children">
-                                <li>Detect hallucinations in generated code</li>
-                                <li>Automated evaluators for test cases</li>
+                                <li>AI-Powered Test Planning</li>
+                                <li>Predictive Quality Metrics</li>
                             </ul>
                         </div>
                     </div>
 
                     <!-- Context Engineering Advanced -->
-                    <div class="module-card left">
+                    <div class="module-card right">
                         <h3 class="module-title">Context Engineering (Advanced)</h3>
                         <div class="subtopic">
                             <div class="subtopic-title">System Prompt Design</div>
                             <ul class="subtopic-children">
-                                <li>Custom AI Personas</li>
-                                <li>Framework-Specific Instructions</li>
+                                <li>Persona Configuration</li>
+                                <li>Behavioral Rules</li>
+                                <li>Output Formatting</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">RAG for Testing</div>
+                            <div class="subtopic-title">RAG Implementation</div>
                             <ul class="subtopic-children">
-                                <li>Test Doc Retrieval</li>
-                                <li>Codebase Knowledge Bases</li>
+                                <li>Document Retrieval</li>
+                                <li>Knowledge Base Integration</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Context Architecture</div>
+                            <div class="subtopic-title">Context for Complex QE</div>
                             <ul class="subtopic-children">
-                                <li>Dynamic Context Loading</li>
-                                <li>Token Optimization</li>
+                                <li>Project Context Management</li>
+                                <li>AI Memory Strategies</li>
                             </ul>
                         </div>
                     </div>
 
-                    <!-- AI-Powered Frameworks -->
-                    <div class="module-card right">
-                        <h3 class="module-title">AI-Powered Frameworks</h3>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Integrating LLMs</div>
-                            <ul class="subtopic-children">
-                                <li>AI Test Data Factories</li>
-                                <li>Dynamic Assertion Gen</li>
-                                <li>Natural Language Steps</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Intelligent Reporting</div>
-                            <ul class="subtopic-children">
-                                <li>AI-Generated Reports</li>
-                                <li>Failure Analysis</li>
-                                <li>Trend Prediction</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Self-Healing Automation</div>
-                            <ul class="subtopic-children">
-                                <li>Locator Recovery</li>
-                                <li>Test Self-Repair</li>
-                                <li>Adaptive Wait Strategies</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- SDET Practice Leadership -->
+                    <!-- Synthetic Data Generation -->
                     <div class="module-card left">
-                        <h3 class="module-title">SDET Practice Leadership</h3>
+                        <h3 class="module-title">Synthetic Data Generation</h3>
                         <div class="subtopic">
-                            <div class="subtopic-title">Technical Mentorship</div>
+                            <div class="subtopic-title">AI-Generated Test Data</div>
                             <ul class="subtopic-children">
-                                <li>Coaching Junior/Mid SDETs on Framework Design</li>
-                                <li>Running Code Review Culture &amp; Standards</li>
-                                <li>Knowledge Sharing Sessions &amp; Tech Talks</li>
+                                <li>Realistic Data Patterns</li>
+                                <li>Edge Case Generation</li>
+                                <li>Boundary Value Data</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Automation Strategy &amp; Governance</div>
+                            <div class="subtopic-title">Privacy-Safe Data</div>
                             <ul class="subtopic-children">
-                                <li>Org-Wide Automation Standards &amp; Tooling Decisions</li>
-                                <li>Building &amp; Maintaining Automation Playbooks</li>
-                                <li>Quality Gates &amp; DoD for Automation</li>
+                                <li>PII Anonymization</li>
+                                <li>Compliant Test Data</li>
                             </ul>
                         </div>
                         <div class="subtopic">
-                            <div class="subtopic-title">Cross-Team Influence</div>
+                            <div class="subtopic-title">Data Validation</div>
                             <ul class="subtopic-children">
-                                <li>Partnering with QE Leads on Test Strategy</li>
-                                <li>Advising Dev Teams on Testability</li>
-                                <li>Representing Automation in Architecture Reviews</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Framework Adoption &amp; Onboarding</div>
-                            <ul class="subtopic-children">
-                                <li>Onboarding Paths for New SDETs</li>
-                                <li>Documentation, Templates &amp; Starter Projects</li>
-                                <li>Measuring Adoption &amp; Developer Experience</li>
-                            </ul>
-                        </div>
-                        <div class="subtopic">
-                            <div class="subtopic-title">Metrics &amp; Continuous Improvement</div>
-                            <ul class="subtopic-children">
-                                <li>Automation Health Metrics (Coverage, Flakiness, Exec Time)</li>
-                                <li>Eliminating Technical Debt in Test Infrastructure</li>
-                                <li>Retrospectives on Automation Practices</li>
+                                <li>Verifying AI-Generated Data</li>
+                                <li>Quality Checks</li>
                             </ul>
                         </div>
                     </div>
@@ -2454,16 +2374,15 @@
                 </div>
             </div>
         </div>
-        <!-- END NEW SDET ROADMAP DESIGN -->
+        <!-- END NEW ROADMAP DESIGN -->
     </div>
-</div>
 
 <footer>
-    <img src="logos/LogotypeLightGrey.png" alt="Unosquare" class="footer-logo">
+    <img src="../assets/logos/LogotypeLightGrey.png" alt="Unosquare" class="footer-logo">
     <div class="sep"></div>
     <strong>QE Center of Excellence</strong>
     <div class="sep"></div>
-    <span>SDET Roadmap</span>
+    <span>Quality Engineer Roadmap</span>
 </footer>
 
 </body>
