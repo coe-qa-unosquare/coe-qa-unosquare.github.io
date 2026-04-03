@@ -1006,6 +1006,45 @@
             .shift-side.left { border-right: none; border-bottom: 1px solid var(--border); }
             .dashboard-layout { grid-template-columns: 1fr; }
         }
+
+        /* ===== NAV LOGO ===== */
+        .nav-logo {
+            height: 26px;
+            width: auto;
+            opacity: 0.7;
+            mix-blend-mode: screen;
+            transition: opacity 0.2s;
+        }
+        .nav-logo:hover { opacity: 1; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 24px;
+            color: var(--text-dim);
+            font-size: 0.72rem;
+            border-top: 1px solid var(--border);
+            letter-spacing: 0.5px;
+        }
+
+        footer strong {
+            color: var(--text-muted);
+        }
+
+        .footer-logo {
+            height: 16px;
+            width: auto;
+            opacity: 0.6;
+        }
+
+        footer .sep {
+            width: 1px;
+            height: 12px;
+            background: var(--border);
+        }
     </style>
 </head>
 <body>
@@ -1021,7 +1060,7 @@
         <button class="tab-btn" data-tab="metrics">Quality Metrics</button>
         <button class="tab-btn" data-tab="planning">Planning Frameworks</button>
     </div>
-    <div style="width: 120px;"></div>
+    <img src="logos/unicorn.png" alt="Unosquare" class="nav-logo" style="width: 120px; height: 26px; object-fit: contain; object-position: right;">
 </div>
 
 <!-- ============================================================ -->
@@ -2487,6 +2526,14 @@
         btn.addEventListener('click', () => switchTab(btn.dataset.tab));
     });
 </script>
+
+<footer>
+    <img src="logos/LogotypeLightGrey.png" alt="Unosquare" class="footer-logo">
+    <div class="sep"></div>
+    <strong>QE Center of Excellence</strong>
+    <div class="sep"></div>
+    <span>Playbooks &amp; Metrics</span>
+</footer>
 
 </body>
 </html>

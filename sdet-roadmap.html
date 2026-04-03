@@ -950,7 +950,10 @@
 
         /* ===== FOOTER ===== */
         footer {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             padding: 24px;
             color: var(--text-dim);
             font-size: 0.72rem;
@@ -961,6 +964,27 @@
         footer strong {
             color: var(--text-muted);
         }
+
+        .footer-logo {
+            height: 16px;
+            width: auto;
+            opacity: 0.6;
+        }
+
+        footer .sep {
+            width: 1px;
+            height: 12px;
+            background: var(--border);
+        }
+
+        .nav-logo {
+            height: 26px;
+            width: auto;
+            opacity: 0.7;
+            mix-blend-mode: screen;
+            transition: opacity 0.2s;
+        }
+        .nav-logo:hover { opacity: 1; }
 
         /* ===== NEW ROADMAP DESIGN ===== */
         .roadmap-new {
@@ -1295,7 +1319,7 @@
         Back to Roadmaps
     </a>
     <span class="nav-title">SDET Roadmap</span>
-    <div style="width: 160px;"></div>
+    <img src="logos/unicorn.png" alt="Unosquare" class="nav-logo" style="width: 160px; height: 26px; object-fit: contain; object-position: right;">
 </div>
 
     <div class="diagram-container">
@@ -2435,7 +2459,11 @@
 </div>
 
 <footer>
-    <strong>QE Center of Excellence</strong> &mdash; SDET Roadmap &mdash;
+    <img src="logos/LogotypeLightGrey.png" alt="Unosquare" class="footer-logo">
+    <div class="sep"></div>
+    <strong>QE Center of Excellence</strong>
+    <div class="sep"></div>
+    <span>SDET Roadmap</span>
 </footer>
 
 </body>

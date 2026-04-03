@@ -91,17 +91,37 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* ===== NAV LOGO ===== */
+        .nav-logo-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-right: auto;
+            padding-right: 16px;
+            border-right: 1px solid var(--border);
+        }
+        .nav-logo-icon {
+            height: 30px;
+            width: auto;
+            mix-blend-mode: screen;
+        }
+        .nav-logo-wordmark {
+            height: 18px;
+            width: auto;
+            opacity: 0.7;
+        }
+
         /* ===== TAB BAR ===== */
         .tab-bar {
             display: flex;
-            justify-content: center;
+            align-items: center;
             gap: 4px;
             background: var(--bg-card);
             border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
             z-index: 100;
-            padding: 8px;
+            padding: 8px 24px;
             backdrop-filter: blur(12px);
         }
 
@@ -950,7 +970,10 @@
 
         /* ===== FOOTER ===== */
         footer {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             padding: 24px;
             color: var(--text-dim);
             font-size: 0.72rem;
@@ -960,6 +983,18 @@
 
         footer strong {
             color: var(--text-muted);
+        }
+
+        .footer-logo {
+            height: 16px;
+            width: auto;
+            opacity: 0.6;
+        }
+
+        footer .sep {
+            width: 1px;
+            height: 12px;
+            background: var(--border);
         }
 
         /* ===== NEW ROADMAP DESIGN ===== */
@@ -1229,6 +1264,8 @@
             .hero h1 { font-size: 1.6rem; }
             .pillars { grid-template-columns: repeat(2, 1fr); }
             .tab-btn { padding: 12px 16px; font-size: 12px; }
+            .nav-logo-wordmark { display: none; }
+            .nav-logo-group { border-right: none; padding-right: 8px; }
             .mnemonic-grid { grid-template-columns: 1fr; }
         }
 
@@ -1241,6 +1278,10 @@
 
 <!-- TAB BAR -->
 <div class="tab-bar">
+    <div class="nav-logo-group">
+        <img src="logos/unicorn.png" alt="Unosquare" class="nav-logo-icon">
+        <img src="logos/LogotypeLightGrey.png" alt="Unosquare" class="nav-logo-wordmark">
+    </div>
     <button class="tab-btn active" data-tab="guide">Quality Engineering AI Guide</button>
     <a href="roadmaps.html" class="tab-btn" style="text-decoration:none;">Roadmaps →</a>
     <a href="playbooks.html" class="tab-btn" style="text-decoration:none;">Playbooks & Metrics →</a>
@@ -2169,7 +2210,11 @@ Business Rules: Minimum order $10, Max 50 items
 
 
 <footer>
-    <strong>QE Center of Excellence</strong> &mdash; Best Practices &mdash;
+    <img src="logos/LogotypeLightGrey.png" alt="Unosquare" class="footer-logo">
+    <div class="sep"></div>
+    <strong>QE Center of Excellence</strong>
+    <div class="sep"></div>
+    <span>Best Practices</span>
 </footer>
 
 <script>
