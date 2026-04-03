@@ -481,7 +481,7 @@
   - Data Handling Policies
   - AI Ethics in Testing
 
-### Module: Prompt Engineering Advanced
+### Module: Prompt Engineering (Advanced)
 - Complex Prompt Design
   - Multi-Step Task Chains
   - Self-Reflection Prompts
@@ -496,7 +496,7 @@
   - Predictive Quality Metrics
   - Risk Assessment with AI
 
-### Module: Context Engineering Advanced
+### Module: Context Engineering (Advanced)
 - System Prompt Design
   - Persona Configuration
   - Behavioral Rules
@@ -1136,3 +1136,25 @@
   - Locator Recovery
   - Test Self-Repair
   - Adaptive Wait Strategies
+
+### SDET Practice Leadership
+- Technical Mentorship
+  - Coaching Junior/Mid SDETs on Framework Design & Best Practices
+  - Running Code Review Culture & Standards
+  - Conducting Knowledge Sharing Sessions & Tech Talks
+- Automation Strategy & Governance
+  - Defining Org-Wide Automation Standards & Tooling Decisions
+  - Building & Maintaining Automation Playbooks
+  - Establishing Quality Gates & Definition of Done for Automation
+- Cross-Team Influence
+  - Partnering with QE Leads on Test Strategy Alignment
+  - Advising Development Teams on Testability & Design for Test
+  - Representing Automation in Architecture & Design Reviews
+- Framework Adoption & Onboarding
+  - Building Onboarding Paths for New SDETs
+  - Creating Documentation, Templates & Starter Projects
+  - Measuring Framework Adoption & Developer Experience
+- Metrics & Continuous Improvement
+  - Defining Automation Health Metrics (Coverage, Flakiness, Execution Time)
+  - Identifying & Eliminating Technical Debt in Test Infrastructure
+  - Running Retrospectives on Automation Practices
