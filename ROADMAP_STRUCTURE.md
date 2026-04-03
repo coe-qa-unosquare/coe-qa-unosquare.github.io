@@ -7,7 +7,7 @@
 
 ## Junior
 
-### Module: Black Box Techniques
+### Module: Black Box Techniques (Fundamentals) 
 
 - Equivalence Partition
   - Divide inputs into valid and invalid partitions
@@ -43,7 +43,7 @@
   - Document findings, observations and bugs during the session
   - Combine with other techniques to investigate suspicious areas
 
-### API Fundamentals
+### API (Fundamentals) 
 - REST Architecture
 - HTTP Methods
 - HTTP Status Codes
@@ -61,7 +61,7 @@
 - Error Responses 
   - Understanding error payloads
 
-### SQL Fundamentals
+### SQL (Fundamentals) 
 - SELECT statement
 - COUNT keyword
 - WHERE Clause Operators 
@@ -78,7 +78,7 @@
   - COUNT, SUM, AVG, MIN, MAX
 
 
-### API Testing Fundamentals
+### API Testing (Fundamentals)
 - Postman
   - Collections
   - Requests
@@ -87,7 +87,7 @@
 - Payload and Schema Validation
 - Header Verification
 
-### Software Testing Fundamentals
+### Software Testing (Fundamentals) 
 - Software Testing Lifecycle
 - Testing Approaches
   - Dynamic Testing
@@ -107,17 +107,24 @@
 - Test Maintenance
 - Principles of Testing
 
-### Programming Basics 
+### Programming (Fundamentals) 
 - OOP Fundamentals
-- Variables & Constants - Declaration, scope, naming conventions
-- Operators - Arithmetic, comparison, logical
-- Functions/Methods - Parameters, return values, reusability
-- Arrays & Lists - Basic collections
-- Loops - For, while, foreach (practical examples)
-- Conditionals - If/else, switch statements
-- Basic Debugging - Reading error messages, print debugging
+- Variables & Constants 
+  - Declaration, scope, naming conventions
+- Operators 
+  - Arithmetic, comparison, logical
+- Functions/Methods 
+  - Parameters, return values, reusability
+- Arrays & Lists 
+  - Basic collections
+- Loops 
+  - For, while, foreach (practical examples)
+- Conditionals 
+  - If/else, switch statements
+- Basic Debugging 
+  - Reading error messages, print debugging
 
-### Module: AI Fundamentals
+### Module: AI (Fundamentals)
 - What is Artificial Intelligence
   - Machine Learning vs Deep Learning
   - What are LLMs (Large Language Models)
@@ -131,7 +138,7 @@
   - Bias in AI
   - When NOT to Trust AI
 
-### Module: Prompt Engineering Basics
+### Module: Prompt Engineering (Fundamentals) 
 - Anatomy of a Good Prompt
   - Clear Instructions
   - Specific Requests
@@ -142,7 +149,7 @@
   - Role Assignment ("Act as a...")
 - Common Mistakes to Avoid
 
-### Module: Context Engineering Basics
+### Module: Context Engineering (Fundamentals)
 - What is Context in AI
   - Tokens Explained
   - Context Window Limits
@@ -155,40 +162,76 @@
 
 ## Intermediate 1-4
 
-### Advanced API Testing
+### API Testing (Intermediate)
 - Postman
-  - Newman
+  - Newman CLI
     - Executing Newman Locally
     - JavaScript Validations
-- Swagger
+  - Request Chaining & Workflows
+    - Passing Data Between Requests
+    - Pre-request & Test Scripts
+  - Environment & Variable Management
+    - Collection / Global / Environment Variables
+    - Managing Dev / Staging / Prod Configs
+  - Mock Servers
+- Swagger / OpenAPI Validation
 - Data-Driven & Parameterized Testing
+- Negative & Edge Case Testing
+  - Invalid Payloads & Missing Fields
+  - Boundary Values on API Inputs
+- Schema Validation
+  - JSON Schema Response Validation
 - Authentication & Role-Based Access Control
+- API Monitoring Basics
+  - Health Checks & Scheduled Runs
 
-### Accessibility Testing
+### Accessibility Testing (Intermediate)
 - WCAG Principles
-  - Level A
-  - Level AA
-  - Level AAA
-- Color Contrast
-- Text Alternatives
+  - Perceivable
+  - Operable
+  - Understandable
+  - Robust
+  - Conformance Levels (A / AA / AAA)
+- Visual Accessibility
+  - Color Contrast Ratios (4.5:1 / 3:1)
+  - Text Alternatives & Alt Text
+  - Focus Indicators
 - ARIA Testing
+  - Roles, States & Properties
+  - Landmarks & Live Regions
 - Keyboard Accessibility
+  - Tab Order & Focus Management
+  - Skip Navigation
+- Screen Reader Testing
+  - VoiceOver (macOS/iOS)
+  - NVDA / JAWS (Windows)
+- Automated Tools
+  - axe DevTools / Lighthouse
+  - WAVE
 
-### Mobile Testing
+### Mobile Testing (Intermediate)
 - Mobile Testing Techniques
-  - Interruption
-  - Localization
-  - Performance
+  - Interruption Testing
+    - Calls, Notifications, Low Battery
+  - Localization & Internationalization
+  - Performance Profiling
+    - Memory Leaks / CPU Usage
   - Network Testing
-- Mobile Cloud
-  - Testflight
-  - Simulators
+    - Throttling / Offline Mode
+- Interaction Testing
+  - Gestures (Swipe, Pinch, Long Press)
+  - Deep Linking & Universal Links
+  - Push Notifications
+  - App Permissions & Privacy Prompts
+- Mobile Cloud & Distribution
+  - TestFlight / Firebase App Distribution
+  - Simulators vs Emulators vs Real Devices
 - Platforms
-  - Native/Hybrid/Responsive
-  - Real Devices
-  - Emulators
+  - Native / Hybrid / Responsive Web
+  - iOS vs Android Differences
+  - Device Fragmentation
 
-### Programming
+### Programming - Extension
 - Hands-On Experience
   - Abstraction
   - Encapsulation
@@ -211,7 +254,7 @@
   - Understanding existing code
   - Using debuggers
 
-### SQL Intermediate
+### SQL (Intermediate)
 - Advanced Joins
   - Right Join
   - Full-outer Join
@@ -244,7 +287,7 @@
   - Claude Code
   - AI Browser Extensions
 
-### Module: Prompt Engineering Intermediate
+### Module: Prompt Engineering (Intermediate)
 - Prompt Frameworks
   - TRICE+ (Task, Role, Instructions, Context, Examples)
   - RACE (Role, Action, Context, Execute)
@@ -259,7 +302,7 @@
   - Requirements Analysis
   - Test Data Creation
 
-### Module: Context Engineering Intermediate
+### Module: Context Engineering (Intermediate)
 - Context Optimization
   - Prioritizing Information
   - Trimming Irrelevant Data
@@ -325,7 +368,7 @@
   - Advocate for performance testing as part of the definition of done
   - Raise performance risks early based on architecture and load expectations
 
-### Advanced Testing
+### Testing Best Practices (Advanced)
 - Risk-Based Testing
   - Prioritize coverage using likelihood and impact per feature
   - Adjust depth and scope based on risk level
@@ -360,7 +403,7 @@
   - Define testing scope, sign-off criteria and go/no-go recommendations
   - Assess readiness based on metrics, risk and open defects
 
-### Advanced SQL
+### SQL (Advanced)
 - Views
 - Stored Procedures
 - SQL Injection
@@ -375,6 +418,54 @@
   - Identifying bottlenecks, query profiling
 - Data Integrity Validation - Constraints verification, referential integrity checks
 
+
+### API Testing (Advanced)
+- API Test Strategy
+  - Defining Coverage Across Endpoints (CRUD, Edge Cases, Security)
+  - Risk-Based API Test Prioritization
+  - Contract Testing Awareness (Pact, Spring Cloud Contract)
+- API Security Testing
+  - OWASP API Top 10 Awareness
+  - Evaluating Auth Flows (OAuth2, JWT, API Keys)
+  - Injection & Broken Access Control Testing
+- API Governance & Quality
+  - Reviewing API Documentation for Completeness
+  - Evaluating Versioning & Deprecation Impact
+  - Cross-Team API Dependency Mapping
+- CI/CD Awareness
+  - Evaluating API Test Results in Pipelines
+  - Identifying Gaps in Automated API Coverage
+  - Collaborating with SDETs on Test Suite Health
+
+### Accessibility Testing (Advanced)
+- Accessibility Test Strategy
+  - Defining Org-Wide Standards (A vs AA targets)
+  - Risk-Based Accessibility Prioritization
+- CI/CD Awareness
+  - Understanding a11y Gates in Pipelines
+  - Evaluating Automated Scan Results (axe-core, Lighthouse)
+- Accessibility Auditing
+  - VPAT / ACR Documentation
+  - Third-Party Audit Coordination
+- Inclusive Design Advocacy
+  - Shift-Left Accessibility
+  - Developer & QA Coaching
+
+### Mobile Testing (Advanced)
+- Mobile Test Strategy
+  - Device Matrix Strategy
+  - Coverage vs Cost Trade-offs
+  - Cloud Device Farms (BrowserStack, Sauce Labs)
+- Mobile Automation Fluency
+  - Reading & Evaluating Appium / XCUITest / Espresso
+  - Reviewing Automation Coverage Gaps
+  - Collaborating with SDETs on Framework Decisions
+- Mobile CI/CD Awareness
+  - Understanding Build Pipelines (iOS & Android)
+  - Evaluating Release Readiness
+- Mobile Performance & Security Evaluation
+  - Interpreting Profiler Results (Instruments / Android Profiler)
+  - Evaluating Certificate Pinning & API Security Posture
 
 ### Module: AI Mastery
 - Advanced LLM Concepts
